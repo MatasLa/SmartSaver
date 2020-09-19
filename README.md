@@ -6,3 +6,4 @@ Komandos nariai:
 Arnas Rimkus, Deividas Kučinskas, Matas Lazdauskas, Gytis Bečalis
 
 eks dee
+finger bum
