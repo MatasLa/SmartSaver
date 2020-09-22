@@ -1,0 +1,15 @@
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\bin\Debug\netcoreapp3.1\SmartSaver.exe
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\bin\Debug\netcoreapp3.1\SmartSaver.deps.json
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\bin\Debug\netcoreapp3.1\SmartSaver.runtimeconfig.json
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\bin\Debug\netcoreapp3.1\SmartSaver.runtimeconfig.dev.json
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\bin\Debug\netcoreapp3.1\SmartSaver.dll
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\bin\Debug\netcoreapp3.1\SmartSaver.pdb
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.csprojAssemblyReference.cache
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.Form1.resources
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.csproj.GenerateResource.cache
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.AssemblyInfoInputs.cache
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.AssemblyInfo.cs
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.csproj.CoreCompileInputs.cache
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.dll
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.pdb
+C:\Users\cilia\OneDrive\Documents\VU\3_Semester\PSI1\psi-4gr-1pgr\SmartSaver\obj\Debug\netcoreapp3.1\SmartSaver.genruntimeconfig.cache
