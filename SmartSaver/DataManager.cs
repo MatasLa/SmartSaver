@@ -2,37 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace DataManager
 {
 	class DataEntry
 	{
-		/*Fields*/
-		private int id, amount;
-		private string title;
 
 		/*Constructor*/
 		public DataEntry(int id, int amount, string title)
 		{
-			this.id = id;
-			this.amount = amount;
-			this.title = title;
+			ID = id;
+			Amount = amount;
+			Title = title;
 		}
 
 		/*Getters and Setters*/
 		public string Title
 		{
-			get => title;
-			set => title = value;
+			get;
+			set;
 		}
 		public int Amount
 		{
-			get => amount;
-			set => amount = value;
+			get;
+			set;
 		}
 		public int ID
 		{
-			get => id; //Only setter, since we don't want to allow to modify id
+			get; //Only setter, since we don't want to allow to modify id
 		}
 	}
 
@@ -59,44 +57,24 @@ namespace DataManager
 		}
 		public bool EditIncomeItem(int id, int value)/*Returns true if success(item found), and false if failure*/
 		{
-			for(int i=0; i<income.Count;i++)
-			{
-				var temp = income[i];
-				if(temp.ID == id)
-				{
-					temp.Amount = value;
-					return true;
-				}
-			}
-			return false;
+			var temp = income.FirstOrDefault(x => x.ID == id);
+			temp.Amount = value;
+			return true;
+			//return false;
 		}
 		public bool EditIncomeItem(int id, string value)
 		{
-			for (int i = 0; i < income.Count; i++)
-			{
-				var temp = income[i];
-				if (temp.ID == id)
-				{
-					temp.Title = value;
-					return true;
-				}
-			}
-			return false;
+			var temp = income.FirstOrDefault(x => x.ID == id);
+			temp.Title = value;
+			return true;
 		}
 
 		public bool EditIncomeItem(int id, string value, int amount)
 		{
-			for (int i = 0; i < income.Count; i++)
-			{
-				var temp = income[i];
-				if (temp.ID == id)
-				{
-					temp.Title = value;
-					temp.Amount = amount;
-					return true;
-				}
-			}
-			return false;
+			var temp = income.FirstOrDefault(x => x.ID == id);
+			temp.Title = value;
+			temp.Amount = amount;
+			return true;
 		}
 		public void WriteIncomeToFile()
 		{
@@ -122,7 +100,7 @@ namespace DataManager
 			}
 		}
 
-		public void WriteExpensesToFile()
+		public void WriteExpensesToFile()/*Nereikia json*/
 		{
 			File.WriteAllText("userExpenses.json", "");
 			using (StreamWriter sw = File.AppendText("userExpenses.json"))
