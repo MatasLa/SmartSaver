@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace DataManager
 {
@@ -38,7 +41,7 @@ namespace DataManager
 	public class Data
 	{
 		/*Lists to store all user's incomes and expenses*/
-		private List<DataEntry> income = new List<DataEntry>();//Both need a getter
+		private List<DataEntry> incomes = new List<DataEntry>();//Both need a getter
 		private List<DataEntry> expenses = new List<DataEntry>();
 
 		/*Methods that creates new instance of class and adds to List*/
@@ -46,7 +49,7 @@ namespace DataManager
 		{
 			Random rnd = new Random();//Since no database, IDs randomized between 100 and 201
 			DataEntry newIncome = new DataEntry(rnd.Next(100, 201), value, title);
-			income.Add(newIncome);
+			incomes.Add(newIncome);
 		}
 
 		public void AddExpense(int value, string title)
@@ -57,21 +60,21 @@ namespace DataManager
 		}
 		public bool EditIncomeItem(int id, int value)/*Returns true if success(item found), and false if failure*/
 		{
-			var temp = income.FirstOrDefault(x => x.ID == id);
+			var temp = incomes.FirstOrDefault(x => x.ID == id);
 			temp.Amount = value;
 			return true;
 			//return false;
 		}
 		public bool EditIncomeItem(int id, string value)
 		{
-			var temp = income.FirstOrDefault(x => x.ID == id);
+			var temp = incomes.FirstOrDefault(x => x.ID == id);
 			temp.Title = value;
 			return true;
 		}
 
 		public bool EditIncomeItem(int id, string value, int amount)
 		{
-			var temp = income.FirstOrDefault(x => x.ID == id);
+			var temp = incomes.FirstOrDefault(x => x.ID == id);
 			temp.Title = value;
 			temp.Amount = amount;
 			return true;
@@ -82,50 +85,91 @@ namespace DataManager
 			using (StreamWriter sw = File.AppendText("userIncome.json"))
 			{
 				string output;
-				bool firstIteration = true;
-				foreach (DataEntry data in income)
+				foreach (DataEntry data in incomes)
 				{
-					if (firstIteration)
-					{
-						firstIteration = false;
-						output = "";
-					}
-					else
-					{
-						output = ",\n";
-					}
-					output = output + "{\n\t\"id\": \"" + data.ID + "\",\n\t\"title\": \"" + data.Title + "\",\n\t\"value\": \"" + data.Amount + "\"\n}";
-					sw.Write(output);
+					output = JsonSerializer.Serialize(data);
+					
+					sw.Write(output +"\n");
 				}
 			}
 		}
 
-		public void WriteExpensesToFile()/*Nereikia json*/
+
+
+		public void WriteExpensesToFile()
 		{
 			File.WriteAllText("userExpenses.json", "");
 			using (StreamWriter sw = File.AppendText("userExpenses.json"))
 			{
 				string output;
-				bool firstIteration = true;
-				foreach (DataEntry data in expenses)
+				foreach (DataEntry data in incomes)
 				{
-					if (firstIteration)
-					{
-						firstIteration = false;
-						output = "";
-					}
-					else
-					{
-						output = ",\n";
-					}
-					output = output + "{\n\t\"id\": \"" + data.ID + "\",\n\t\"title\": \"" + data.Title + "\",\n\t\"value\": \"" + data.Amount + "\"\n}";
-					sw.Write(output);
+					output = JsonSerializer.Serialize(data);
+
+					sw.Write(output + "\n");
 				}
 			}
 		}
 
-		public void ReadIncomeFromFile()/*JSON.NET?????     https://www.newtonsoft.com/json */
+		public void ReadIncomeFromFile()
 		{
+			string line;
+			try
+			{
+				System.IO.StreamReader file = new System.IO.StreamReader("userIncome.json");
+
+				while ((line = file.ReadLine()) != null)
+				{
+					try
+					{
+						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
+						incomes.Add(dataEntry);
+					}catch(Exception e)
+					{
+						Debug.Write(e);
+					}
+
+				}
+
+				file.Close();
+			}
+			catch(FileNotFoundException f)
+			{
+				Debug.Write(f);
+			}
+			
+
+		}
+
+		public void ReadExpensesFromFile()
+		{
+			string line;
+			try
+			{
+				System.IO.StreamReader file = new System.IO.StreamReader("userExpenses.json");
+				while ((line = file.ReadLine()) != null)
+				{
+
+					try
+					{
+						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
+						expenses.Add(dataEntry);
+					}
+					catch (Exception e)
+					{
+						Debug.Write(e);
+					}
+				}
+
+				file.Close();
+			}
+			catch (FileNotFoundException f)
+			{
+				Debug.Write(f);
+			}
+			
+
+			
 
 		}
 
