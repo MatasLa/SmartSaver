@@ -46,16 +46,16 @@
             this.buttonBudget = new System.Windows.Forms.Button();
             this.buttonFinances = new System.Windows.Forms.Button();
             this.panelMenuLogo = new System.Windows.Forms.Panel();
-            this.pictureBoxMenuLogo = new System.Windows.Forms.PictureBox();
             this.panelMain = new System.Windows.Forms.Panel();
             this.pictureBoxMainLogo = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSideMenu.SuspendLayout();
             this.panelReportsSubMenu.SuspendLayout();
             this.panelFinancesSubMenu.SuspendLayout();
             this.panelMenuLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMenuLogo)).BeginInit();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMainLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSideMenu
@@ -139,7 +139,6 @@
             this.panelReportsSubMenu.Name = "panelReportsSubMenu";
             this.panelReportsSubMenu.Size = new System.Drawing.Size(250, 160);
             this.panelReportsSubMenu.TabIndex = 2;
-            this.panelReportsSubMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelReportsSubMenu_Paint);
             // 
             // buttonGoalReport
             // 
@@ -242,7 +241,6 @@
             this.panelFinancesSubMenu.Name = "panelFinancesSubMenu";
             this.panelFinancesSubMenu.Size = new System.Drawing.Size(250, 160);
             this.panelFinancesSubMenu.TabIndex = 2;
-            this.panelFinancesSubMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelFinancesSubMenu_Paint);
             // 
             // buttonGoals
             // 
@@ -335,27 +333,13 @@
             // 
             // panelMenuLogo
             // 
-            this.panelMenuLogo.Controls.Add(this.pictureBoxMenuLogo);
+            this.panelMenuLogo.Controls.Add(this.pictureBox1);
             this.panelMenuLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelMenuLogo.Location = new System.Drawing.Point(0, 0);
             this.panelMenuLogo.Margin = new System.Windows.Forms.Padding(0);
             this.panelMenuLogo.Name = "panelMenuLogo";
             this.panelMenuLogo.Size = new System.Drawing.Size(250, 125);
             this.panelMenuLogo.TabIndex = 0;
-            // 
-            // pictureBoxMenuLogo
-            // 
-            this.pictureBoxMenuLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(137)))), ((int)(((byte)(205)))));
-            this.pictureBoxMenuLogo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBoxMenuLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMenuLogo.Image")));
-            this.pictureBoxMenuLogo.Location = new System.Drawing.Point(0, 0);
-            this.pictureBoxMenuLogo.Margin = new System.Windows.Forms.Padding(0);
-            this.pictureBoxMenuLogo.Name = "pictureBoxMenuLogo";
-            this.pictureBoxMenuLogo.Size = new System.Drawing.Size(250, 125);
-            this.pictureBoxMenuLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxMenuLogo.TabIndex = 0;
-            this.pictureBoxMenuLogo.TabStop = false;
-            this.pictureBoxMenuLogo.Click += new System.EventHandler(this.pictureBoxMenuLogo_Click);
             // 
             // panelMain
             // 
@@ -379,6 +363,18 @@
             this.pictureBoxMainLogo.TabIndex = 1;
             this.pictureBoxMainLogo.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(250, 125);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.MenuLogo_Click);
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1360, 901);
@@ -388,16 +384,15 @@
             this.MinimumSize = new System.Drawing.Size(1378, 782);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.panelSideMenu.ResumeLayout(false);
             this.panelSideMenu.PerformLayout();
             this.panelReportsSubMenu.ResumeLayout(false);
             this.panelFinancesSubMenu.ResumeLayout(false);
             this.panelMenuLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMenuLogo)).EndInit();
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMainLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -421,9 +416,9 @@
         private System.Windows.Forms.Button buttonSpending;
         private System.Windows.Forms.Button buttonReports;
         private System.Windows.Forms.TextBox textBoxCopyright;
-        private System.Windows.Forms.PictureBox pictureBoxMenuLogo;
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.PictureBox pictureBoxMainLogo;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
