@@ -48,11 +48,14 @@
             this.panelMenuLogo = new System.Windows.Forms.Panel();
             this.pictureBoxMenuLogo = new System.Windows.Forms.PictureBox();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.pictureBoxMainLogo = new System.Windows.Forms.PictureBox();
             this.panelSideMenu.SuspendLayout();
             this.panelReportsSubMenu.SuspendLayout();
             this.panelFinancesSubMenu.SuspendLayout();
             this.panelMenuLogo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMenuLogo)).BeginInit();
+            this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMainLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSideMenu
@@ -346,6 +349,7 @@
             this.pictureBoxMenuLogo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxMenuLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMenuLogo.Image")));
             this.pictureBoxMenuLogo.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxMenuLogo.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBoxMenuLogo.Name = "pictureBoxMenuLogo";
             this.pictureBoxMenuLogo.Size = new System.Drawing.Size(250, 125);
             this.pictureBoxMenuLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -355,12 +359,25 @@
             // 
             // panelMain
             // 
+            this.panelMain.BackColor = System.Drawing.Color.White;
+            this.panelMain.Controls.Add(this.pictureBoxMainLogo);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(250, 0);
-            this.panelMain.Margin = new System.Windows.Forms.Padding(0);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1110, 901);
             this.panelMain.TabIndex = 1;
+            // 
+            // pictureBoxMainLogo
+            // 
+            this.pictureBoxMainLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBoxMainLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMainLogo.Image")));
+            this.pictureBoxMainLogo.Location = new System.Drawing.Point(261, 350);
+            this.pictureBoxMainLogo.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBoxMainLogo.Name = "pictureBoxMainLogo";
+            this.pictureBoxMainLogo.Size = new System.Drawing.Size(600, 195);
+            this.pictureBoxMainLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBoxMainLogo.TabIndex = 1;
+            this.pictureBoxMainLogo.TabStop = false;
             // 
             // Form1
             // 
@@ -378,6 +395,9 @@
             this.panelFinancesSubMenu.ResumeLayout(false);
             this.panelMenuLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMenuLogo)).EndInit();
+            this.panelMain.ResumeLayout(false);
+            this.panelMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMainLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -403,6 +423,7 @@
         private System.Windows.Forms.TextBox textBoxCopyright;
         private System.Windows.Forms.PictureBox pictureBoxMenuLogo;
         private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.PictureBox pictureBoxMainLogo;
     }
 }
 
