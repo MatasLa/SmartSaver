@@ -55,8 +55,7 @@ namespace SmartSaver
 
         private void ButtonLogOut_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(sender.ToString());
-
+            Application.Exit();
         }
 
         private void PanelFinancesSubMenu_Paint(object sender, PaintEventArgs e)
@@ -141,8 +140,12 @@ namespace SmartSaver
         private void OpenBudget()
         {
 
+
         }
 
-        
+        private void pictureBoxMenuLogo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

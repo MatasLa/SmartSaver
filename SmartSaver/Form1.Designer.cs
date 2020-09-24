@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panelSideMenu = new System.Windows.Forms.Panel();
             this.textBoxCopyright = new System.Windows.Forms.TextBox();
-            this.panelCollapse = new System.Windows.Forms.Panel();
-            this.buttonCollapse = new System.Windows.Forms.Button();
             this.buttonLogOut = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.panelReportsSubMenu = new System.Windows.Forms.Panel();
@@ -46,26 +45,28 @@
             this.buttonIncome = new System.Windows.Forms.Button();
             this.buttonBudget = new System.Windows.Forms.Button();
             this.buttonFinances = new System.Windows.Forms.Button();
-            this.panelLogo = new System.Windows.Forms.Panel();
+            this.panelMenuLogo = new System.Windows.Forms.Panel();
+            this.pictureBoxMenuLogo = new System.Windows.Forms.PictureBox();
+            this.panelMain = new System.Windows.Forms.Panel();
             this.panelSideMenu.SuspendLayout();
-            this.panelCollapse.SuspendLayout();
             this.panelReportsSubMenu.SuspendLayout();
             this.panelFinancesSubMenu.SuspendLayout();
+            this.panelMenuLogo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMenuLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelSideMenu
             // 
             this.panelSideMenu.AutoScroll = true;
-            this.panelSideMenu.BackColor = System.Drawing.Color.MidnightBlue;
+            this.panelSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.panelSideMenu.Controls.Add(this.textBoxCopyright);
-            this.panelSideMenu.Controls.Add(this.panelCollapse);
             this.panelSideMenu.Controls.Add(this.buttonLogOut);
             this.panelSideMenu.Controls.Add(this.buttonHelp);
             this.panelSideMenu.Controls.Add(this.panelReportsSubMenu);
             this.panelSideMenu.Controls.Add(this.buttonReports);
             this.panelSideMenu.Controls.Add(this.panelFinancesSubMenu);
             this.panelSideMenu.Controls.Add(this.buttonFinances);
-            this.panelSideMenu.Controls.Add(this.panelLogo);
+            this.panelSideMenu.Controls.Add(this.panelMenuLogo);
             this.panelSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSideMenu.Location = new System.Drawing.Point(0, 0);
             this.panelSideMenu.Name = "panelSideMenu";
@@ -74,12 +75,12 @@
             // 
             // textBoxCopyright
             // 
-            this.textBoxCopyright.BackColor = System.Drawing.Color.MidnightBlue;
+            this.textBoxCopyright.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.textBoxCopyright.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCopyright.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.textBoxCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxCopyright.ForeColor = System.Drawing.Color.Azure;
-            this.textBoxCopyright.Location = new System.Drawing.Point(0, 716);
+            this.textBoxCopyright.Location = new System.Drawing.Point(0, 841);
             this.textBoxCopyright.Multiline = true;
             this.textBoxCopyright.Name = "textBoxCopyright";
             this.textBoxCopyright.ReadOnly = true;
@@ -88,33 +89,6 @@
             this.textBoxCopyright.Text = "Copyright Vilnius Universtity 2020";
             this.textBoxCopyright.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // panelCollapse
-            // 
-            this.panelCollapse.Controls.Add(this.buttonCollapse);
-            this.panelCollapse.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelCollapse.Location = new System.Drawing.Point(0, 776);
-            this.panelCollapse.Name = "panelCollapse";
-            this.panelCollapse.Size = new System.Drawing.Size(250, 125);
-            this.panelCollapse.TabIndex = 4;
-            // 
-            // buttonCollapse
-            // 
-            this.buttonCollapse.BackColor = System.Drawing.Color.DarkSlateBlue;
-            this.buttonCollapse.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonCollapse.FlatAppearance.BorderSize = 0;
-            this.buttonCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonCollapse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonCollapse.ForeColor = System.Drawing.Color.Azure;
-            this.buttonCollapse.Location = new System.Drawing.Point(125, 0);
-            this.buttonCollapse.Name = "buttonCollapse";
-            this.buttonCollapse.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.buttonCollapse.Size = new System.Drawing.Size(125, 125);
-            this.buttonCollapse.TabIndex = 1;
-            this.buttonCollapse.Text = "Min";
-            this.buttonCollapse.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCollapse.UseVisualStyleBackColor = false;
-            this.buttonCollapse.Click += new System.EventHandler(this.ButtonCollapse_Click);
-            // 
             // buttonLogOut
             // 
             this.buttonLogOut.Dock = System.Windows.Forms.DockStyle.Top;
@@ -122,7 +96,7 @@
             this.buttonLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLogOut.ForeColor = System.Drawing.Color.Azure;
-            this.buttonLogOut.Location = new System.Drawing.Point(0, 557);
+            this.buttonLogOut.Location = new System.Drawing.Point(0, 580);
             this.buttonLogOut.Name = "buttonLogOut";
             this.buttonLogOut.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.buttonLogOut.Size = new System.Drawing.Size(250, 45);
@@ -139,7 +113,7 @@
             this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonHelp.ForeColor = System.Drawing.Color.Azure;
-            this.buttonHelp.Location = new System.Drawing.Point(0, 512);
+            this.buttonHelp.Location = new System.Drawing.Point(0, 535);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.buttonHelp.Size = new System.Drawing.Size(250, 45);
@@ -151,21 +125,22 @@
             // 
             // panelReportsSubMenu
             // 
-            this.panelReportsSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
+            this.panelReportsSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.panelReportsSubMenu.Controls.Add(this.buttonGoalReport);
             this.panelReportsSubMenu.Controls.Add(this.buttonIncomevExpenses);
             this.panelReportsSubMenu.Controls.Add(this.buttonNetWorth);
             this.panelReportsSubMenu.Controls.Add(this.buttonSpending);
             this.panelReportsSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelReportsSubMenu.Location = new System.Drawing.Point(0, 351);
+            this.panelReportsSubMenu.Location = new System.Drawing.Point(0, 375);
+            this.panelReportsSubMenu.Margin = new System.Windows.Forms.Padding(0);
             this.panelReportsSubMenu.Name = "panelReportsSubMenu";
-            this.panelReportsSubMenu.Size = new System.Drawing.Size(250, 161);
+            this.panelReportsSubMenu.Size = new System.Drawing.Size(250, 160);
             this.panelReportsSubMenu.TabIndex = 2;
             this.panelReportsSubMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelReportsSubMenu_Paint);
             // 
             // buttonGoalReport
             // 
-            this.buttonGoalReport.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.buttonGoalReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.buttonGoalReport.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonGoalReport.FlatAppearance.BorderSize = 0;
             this.buttonGoalReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -183,7 +158,7 @@
             // 
             // buttonIncomevExpenses
             // 
-            this.buttonIncomevExpenses.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.buttonIncomevExpenses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.buttonIncomevExpenses.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonIncomevExpenses.FlatAppearance.BorderSize = 0;
             this.buttonIncomevExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -201,7 +176,7 @@
             // 
             // buttonNetWorth
             // 
-            this.buttonNetWorth.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.buttonNetWorth.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.buttonNetWorth.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonNetWorth.FlatAppearance.BorderSize = 0;
             this.buttonNetWorth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -219,7 +194,7 @@
             // 
             // buttonSpending
             // 
-            this.buttonSpending.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.buttonSpending.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.buttonSpending.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonSpending.FlatAppearance.BorderSize = 0;
             this.buttonSpending.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -242,7 +217,7 @@
             this.buttonReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonReports.ForeColor = System.Drawing.Color.Azure;
-            this.buttonReports.Location = new System.Drawing.Point(0, 306);
+            this.buttonReports.Location = new System.Drawing.Point(0, 330);
             this.buttonReports.Name = "buttonReports";
             this.buttonReports.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.buttonReports.Size = new System.Drawing.Size(250, 45);
@@ -254,21 +229,21 @@
             // 
             // panelFinancesSubMenu
             // 
-            this.panelFinancesSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
+            this.panelFinancesSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.panelFinancesSubMenu.Controls.Add(this.buttonGoals);
             this.panelFinancesSubMenu.Controls.Add(this.buttonExpenses);
             this.panelFinancesSubMenu.Controls.Add(this.buttonIncome);
             this.panelFinancesSubMenu.Controls.Add(this.buttonBudget);
             this.panelFinancesSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelFinancesSubMenu.Location = new System.Drawing.Point(0, 145);
+            this.panelFinancesSubMenu.Location = new System.Drawing.Point(0, 170);
             this.panelFinancesSubMenu.Name = "panelFinancesSubMenu";
-            this.panelFinancesSubMenu.Size = new System.Drawing.Size(250, 161);
+            this.panelFinancesSubMenu.Size = new System.Drawing.Size(250, 160);
             this.panelFinancesSubMenu.TabIndex = 2;
             this.panelFinancesSubMenu.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelFinancesSubMenu_Paint);
             // 
             // buttonGoals
             // 
-            this.buttonGoals.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.buttonGoals.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.buttonGoals.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonGoals.FlatAppearance.BorderSize = 0;
             this.buttonGoals.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -286,7 +261,7 @@
             // 
             // buttonExpenses
             // 
-            this.buttonExpenses.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.buttonExpenses.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.buttonExpenses.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonExpenses.FlatAppearance.BorderSize = 0;
             this.buttonExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -304,7 +279,7 @@
             // 
             // buttonIncome
             // 
-            this.buttonIncome.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.buttonIncome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.buttonIncome.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonIncome.FlatAppearance.BorderSize = 0;
             this.buttonIncome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -322,7 +297,7 @@
             // 
             // buttonBudget
             // 
-            this.buttonBudget.BackColor = System.Drawing.Color.DarkSlateBlue;
+            this.buttonBudget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
             this.buttonBudget.Dock = System.Windows.Forms.DockStyle.Top;
             this.buttonBudget.FlatAppearance.BorderSize = 0;
             this.buttonBudget.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -345,7 +320,7 @@
             this.buttonFinances.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonFinances.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonFinances.ForeColor = System.Drawing.Color.Azure;
-            this.buttonFinances.Location = new System.Drawing.Point(0, 100);
+            this.buttonFinances.Location = new System.Drawing.Point(0, 125);
             this.buttonFinances.Name = "buttonFinances";
             this.buttonFinances.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.buttonFinances.Size = new System.Drawing.Size(250, 45);
@@ -355,17 +330,42 @@
             this.buttonFinances.UseVisualStyleBackColor = true;
             this.buttonFinances.Click += new System.EventHandler(this.ButtonFinances_Click);
             // 
-            // panelLogo
+            // panelMenuLogo
             // 
-            this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelLogo.Location = new System.Drawing.Point(0, 0);
-            this.panelLogo.Name = "panelLogo";
-            this.panelLogo.Size = new System.Drawing.Size(250, 100);
-            this.panelLogo.TabIndex = 0;
+            this.panelMenuLogo.Controls.Add(this.pictureBoxMenuLogo);
+            this.panelMenuLogo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelMenuLogo.Location = new System.Drawing.Point(0, 0);
+            this.panelMenuLogo.Margin = new System.Windows.Forms.Padding(0);
+            this.panelMenuLogo.Name = "panelMenuLogo";
+            this.panelMenuLogo.Size = new System.Drawing.Size(250, 125);
+            this.panelMenuLogo.TabIndex = 0;
+            // 
+            // pictureBoxMenuLogo
+            // 
+            this.pictureBoxMenuLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(137)))), ((int)(((byte)(205)))));
+            this.pictureBoxMenuLogo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBoxMenuLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMenuLogo.Image")));
+            this.pictureBoxMenuLogo.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxMenuLogo.Name = "pictureBoxMenuLogo";
+            this.pictureBoxMenuLogo.Size = new System.Drawing.Size(250, 125);
+            this.pictureBoxMenuLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxMenuLogo.TabIndex = 0;
+            this.pictureBoxMenuLogo.TabStop = false;
+            this.pictureBoxMenuLogo.Click += new System.EventHandler(this.pictureBoxMenuLogo_Click);
+            // 
+            // panelMain
+            // 
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(250, 0);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(1110, 901);
+            this.panelMain.TabIndex = 1;
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1360, 901);
+            this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelSideMenu);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.MinimumSize = new System.Drawing.Size(1378, 782);
@@ -374,9 +374,10 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panelSideMenu.ResumeLayout(false);
             this.panelSideMenu.PerformLayout();
-            this.panelCollapse.ResumeLayout(false);
             this.panelReportsSubMenu.ResumeLayout(false);
             this.panelFinancesSubMenu.ResumeLayout(false);
+            this.panelMenuLogo.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMenuLogo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -384,7 +385,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panelSideMenu;
-        private System.Windows.Forms.Panel panelLogo;
+        private System.Windows.Forms.Panel panelMenuLogo;
         private System.Windows.Forms.Panel panelFinancesSubMenu;
         private System.Windows.Forms.Button buttonGoals;
         private System.Windows.Forms.Button buttonExpenses;
@@ -400,8 +401,8 @@
         private System.Windows.Forms.Button buttonSpending;
         private System.Windows.Forms.Button buttonReports;
         private System.Windows.Forms.TextBox textBoxCopyright;
-        private System.Windows.Forms.Panel panelCollapse;
-        private System.Windows.Forms.Button buttonCollapse;
+        private System.Windows.Forms.PictureBox pictureBoxMenuLogo;
+        private System.Windows.Forms.Panel panelMain;
     }
 }
 
