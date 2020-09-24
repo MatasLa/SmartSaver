@@ -10,22 +10,23 @@ using System.Windows.Forms;
 
 namespace SmartSaver
 {
-
     public partial class Form1 : Form
     {
+        private readonly int collapsedMenuWidth = 75;
+        private readonly int expandedMenuWidth = 250;
         public Form1()
         {
             InitializeComponent();
-            customizeDesign();
+            CustomizeDesign();
         }
 
-        private void customizeDesign()
+        private void CustomizeDesign()
         {
             panelFinancesSubMenu.Visible = false;
             panelReportsSubMenu.Visible = false;
         }
 
-        private void showSubMenu(Panel subMenu)
+        private void ShowSubMenu(Panel subMenu)
         {
             if (subMenu.Visible == false)
             {
@@ -36,51 +37,51 @@ namespace SmartSaver
             }
         }
 
-        private void buttonFinances_Click(object sender, EventArgs e)
+        private void ButtonFinances_Click(object sender, EventArgs e)
         {
-            showSubMenu(panelFinancesSubMenu);
+            ShowSubMenu(panelFinancesSubMenu);
         }
 
-        private void buttonReports_Click(object sender, EventArgs e)
+        private void ButtonReports_Click(object sender, EventArgs e)
         {
-            showSubMenu(panelReportsSubMenu);
+            ShowSubMenu(panelReportsSubMenu);
         }
 
-        private void buttonHelp_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(sender.ToString());
-
-        }
-
-        private void buttonLogOut_Click(object sender, EventArgs e)
+        private void ButtonHelp_Click(object sender, EventArgs e)
         {
             MessageBox.Show(sender.ToString());
 
         }
 
-        private void panelFinancesSubMenu_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void buttonBudget_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(sender.ToString());
-            openBudget();
-        }
-
-        private void buttonIncome_Click(object sender, EventArgs e)
+        private void ButtonLogOut_Click(object sender, EventArgs e)
         {
             MessageBox.Show(sender.ToString());
 
         }
 
-        private void panelReportsSubMenu_Paint(object sender, PaintEventArgs e)
+        private void PanelFinancesSubMenu_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void buttonSpending_Click(object sender, EventArgs e)
+        private void ButtonBudget_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+            OpenBudget();
+        }
+
+        private void ButtonIncome_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+
+        }
+
+        private void PanelReportsSubMenu_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ButtonSpending_Click(object sender, EventArgs e)
         {
 
             MessageBox.Show(sender.ToString());
@@ -91,42 +92,53 @@ namespace SmartSaver
 
         }
 
-        private void buttonExpenses_Click(object sender, EventArgs e)
+        private void ButtonExpenses_Click(object sender, EventArgs e)
         {
 
             MessageBox.Show(sender.ToString());
         }
 
-        private void buttonGoals_Click(object sender, EventArgs e)
+        private void ButtonGoals_Click(object sender, EventArgs e)
         {
 
             MessageBox.Show(sender.ToString());
         }
 
-        private void buttonNetWorth_Click(object sender, EventArgs e)
+        private void ButtonNetWorth_Click(object sender, EventArgs e)
         {
 
             MessageBox.Show(sender.ToString());
         }
 
-        private void buttonIncomevExpenses_Click(object sender, EventArgs e)
+        private void ButtonIncomevExpenses_Click(object sender, EventArgs e)
         {
             MessageBox.Show(sender.ToString());
 
         }
 
-        private void buttonGoalReport_Click(object sender, EventArgs e)
+        private void ButtonGoalReport_Click(object sender, EventArgs e)
         {
             MessageBox.Show(sender.ToString());
 
         }
 
-        private void openHelp()
+        private void ButtonCollapse_Click(object sender, EventArgs e)
+        {
+            if (panelSideMenu.Size.Width == expandedMenuWidth)
+            {
+                panelSideMenu.Size = new Size(collapsedMenuWidth, panelSideMenu.Size.Height);
+            } else
+            {
+                panelSideMenu.Size = new Size(expandedMenuWidth, panelSideMenu.Size.Height);
+            }
+        }
+
+        private void OpenHelp()
         {
 
         }
 
-        private void openBudget()
+        private void OpenBudget()
         {
 
         }
