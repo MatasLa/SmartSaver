@@ -10,52 +10,127 @@ using System.Windows.Forms;
 
 namespace SmartSaver
 {
+
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
+            customizeDesign();
         }
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void customizeDesign()
+        {
+            panelFinancesSubMenu.Visible = false;
+            panelReportsSubMenu.Visible = false;
+        }
+
+        private void showSubMenu(Panel subMenu)
+        {
+            if (subMenu.Visible == false)
+            {
+                subMenu.Visible = true;
+            } else
+            {
+                subMenu.Visible = false;
+            }
+        }
+
+        private void buttonFinances_Click(object sender, EventArgs e)
+        {
+            showSubMenu(panelFinancesSubMenu);
+        }
+
+        private void buttonReports_Click(object sender, EventArgs e)
+        {
+            showSubMenu(panelReportsSubMenu);
+        }
+
+        private void buttonHelp_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+
+        }
+
+        private void buttonLogOut_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+
+        }
+
+        private void panelFinancesSubMenu_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void buttonBudget_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+            openBudget();
+        }
+
+        private void buttonIncome_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+
+        }
+
+        private void panelReportsSubMenu_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        private void buttonSpending_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show(sender.ToString());
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void buttonExpenses_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show(sender.ToString());
+        }
+
+        private void buttonGoals_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show(sender.ToString());
+        }
+
+        private void buttonNetWorth_Click(object sender, EventArgs e)
+        {
+
+            MessageBox.Show(sender.ToString());
+        }
+
+        private void buttonIncomevExpenses_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+
+        }
+
+        private void buttonGoalReport_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sender.ToString());
+
+        }
+
+        private void openHelp()
         {
 
         }
 
-        private void mainContainer_Panel1_Paint(object sender, PaintEventArgs e)
+        private void openBudget()
         {
 
         }
 
-        private void menuView_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
-            textBox1.Text = menuView.SelectedNode.Text;
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
     }
 }
