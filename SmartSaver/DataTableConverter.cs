@@ -8,7 +8,11 @@ namespace SmartSaver
 {
     class DataTableConverter
     {
-        private Data Data { get; }
+        private Data data;
+        public DataTableConverter(Data data)
+        {
+            this.data = data;
+        }
 
         public DataTable incomeTable()
         {
@@ -20,7 +24,7 @@ namespace SmartSaver
             dt.Columns.Add(dc2);
             dt.Columns.Add(dc3);
 
-            var temp = Data.Income;
+            var temp = data.Income;
             foreach(DataEntry data in temp)
             {
                 dt.Rows.Add(data.ID, data.Title, data.Amount);
@@ -38,7 +42,7 @@ namespace SmartSaver
             dt.Columns.Add(dc2);
             dt.Columns.Add(dc3);
 
-            var temp = Data.Expenses;
+            var temp = data.Expenses;
             foreach (DataEntry data in temp)
             {
                 dt.Rows.Add(data.ID, data.Title, data.Amount);
