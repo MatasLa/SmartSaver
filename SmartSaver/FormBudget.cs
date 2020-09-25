@@ -43,7 +43,7 @@ namespace SmartSaver
         {
             Data data = new Data();
             data.ReadIncomeFromFile();
-            List<DataEntry> incomes = data.Incomes;
+            List<DataEntry> incomes = data.Income;
             foreach (var income in incomes)
             {
 
