@@ -48,6 +48,7 @@ namespace DataManager
 	/*Main data processing class*/
 	public class Data
 	{
+		/*Lists that store income and expenses*/
 		public List<DataEntry> Income { get; } = new List<DataEntry>();
         public List<DataEntry> Expenses { get; } = new List<DataEntry>();
 
@@ -65,6 +66,8 @@ namespace DataManager
 			DataEntry newExpense = new DataEntry(rnd.Next(100, 201), value, title);
 			Expenses.Add(newExpense);
 		}
+
+		/*Methods that allows to edit different parts of already existing entrys*/
 		public bool EditIncomeItem(int id, double value)/*Returns true if success(item found), and false if failure*/
 		{
 			var temp = Income.FirstOrDefault(x => x.ID == id);
@@ -86,6 +89,28 @@ namespace DataManager
 			temp.Amount = amount;
 			return true;
 		}
+		public bool EditExpensesItem(int id, double value)/*Returns true if success(item found), and false if failure*/
+		{
+			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			temp.Amount = value;
+			return true;
+		}
+		public bool EditExpensesItem(int id, string value)
+		{
+			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			temp.Title = value;
+			return true;
+		}
+
+		public bool EditExpensesItem(int id, string value, double amount)
+		{
+			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			temp.Title = value;
+			temp.Amount = amount;
+			return true;
+		}
+
+		/*Writing/reading JSON files*/
 		public void WriteIncomeToFile()
 		{
 			File.WriteAllText("userIncome.json", "");
