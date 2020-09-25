@@ -43,7 +43,7 @@ namespace TimeManager
 
         private void DisplayDate()
         {
-            textBoxCurrentMonth.Text = displayedTime.ToString("MMMM");
+            textBoxCurrentMonth.Text = displayedTime.ToString("MMM");
             textBoxCurrentYear.Text = displayedTime.Year.ToString();
         }
 
@@ -108,6 +108,16 @@ namespace TimeManager
         private void ButtonPreviousYear_MouseLeave(object sender, EventArgs e)
         {
             buttonPreviousYear.Image = unSelectedLessButton;
+        }
+
+        private void textBoxCurrentMonth_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBoxCurrentYear_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

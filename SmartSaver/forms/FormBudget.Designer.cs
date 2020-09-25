@@ -68,7 +68,7 @@
             this.buttonNextYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonNextYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNextYear.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextYear.Image")));
-            this.buttonNextYear.Location = new System.Drawing.Point(642, 12);
+            this.buttonNextYear.Location = new System.Drawing.Point(570, 12);
             this.buttonNextYear.Name = "buttonNextYear";
             this.buttonNextYear.Size = new System.Drawing.Size(45, 45);
             this.buttonNextYear.TabIndex = 2;
@@ -85,7 +85,7 @@
             this.buttonPreviousYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonPreviousYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPreviousYear.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousYear.Image")));
-            this.buttonPreviousYear.Location = new System.Drawing.Point(398, 12);
+            this.buttonPreviousYear.Location = new System.Drawing.Point(456, 12);
             this.buttonPreviousYear.Name = "buttonPreviousYear";
             this.buttonPreviousYear.Size = new System.Drawing.Size(45, 45);
             this.buttonPreviousYear.TabIndex = 1;
@@ -96,15 +96,20 @@
             // textBoxCurrentYear
             // 
             this.textBoxCurrentYear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxCurrentYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCurrentYear.Location = new System.Drawing.Point(471, 21);
+            this.textBoxCurrentYear.BackColor = System.Drawing.Color.White;
+            this.textBoxCurrentYear.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxCurrentYear.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBoxCurrentYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCurrentYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.textBoxCurrentYear.Location = new System.Drawing.Point(483, 20);
             this.textBoxCurrentYear.Name = "textBoxCurrentYear";
             this.textBoxCurrentYear.ReadOnly = true;
-            this.textBoxCurrentYear.Size = new System.Drawing.Size(151, 26);
+            this.textBoxCurrentYear.Size = new System.Drawing.Size(101, 31);
             this.textBoxCurrentYear.TabIndex = 0;
-            this.textBoxCurrentYear.Text = "Current Year";
+            this.textBoxCurrentYear.Text = "YEAR";
             this.textBoxCurrentYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxCurrentYear.Click += new System.EventHandler(this.TestClick);
+            this.textBoxCurrentYear.TextChanged += new System.EventHandler(this.textBoxCurrentYear_TextChanged);
             // 
             // buttonNextMonth
             // 
@@ -117,7 +122,7 @@
             this.buttonNextMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNextMonth.ForeColor = System.Drawing.SystemColors.ControlText;
             this.buttonNextMonth.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextMonth.Image")));
-            this.buttonNextMonth.Location = new System.Drawing.Point(642, 64);
+            this.buttonNextMonth.Location = new System.Drawing.Point(564, 66);
             this.buttonNextMonth.Name = "buttonNextMonth";
             this.buttonNextMonth.Size = new System.Drawing.Size(45, 45);
             this.buttonNextMonth.TabIndex = 2;
@@ -134,7 +139,7 @@
             this.buttonPreviousMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonPreviousMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPreviousMonth.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousMonth.Image")));
-            this.buttonPreviousMonth.Location = new System.Drawing.Point(398, 64);
+            this.buttonPreviousMonth.Location = new System.Drawing.Point(460, 66);
             this.buttonPreviousMonth.Name = "buttonPreviousMonth";
             this.buttonPreviousMonth.Size = new System.Drawing.Size(45, 45);
             this.buttonPreviousMonth.TabIndex = 1;
@@ -145,15 +150,20 @@
             // textBoxCurrentMonth
             // 
             this.textBoxCurrentMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxCurrentMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCurrentMonth.Location = new System.Drawing.Point(471, 73);
+            this.textBoxCurrentMonth.BackColor = System.Drawing.Color.White;
+            this.textBoxCurrentMonth.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxCurrentMonth.Cursor = System.Windows.Forms.Cursors.Default;
+            this.textBoxCurrentMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCurrentMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.textBoxCurrentMonth.Location = new System.Drawing.Point(483, 73);
             this.textBoxCurrentMonth.Name = "textBoxCurrentMonth";
             this.textBoxCurrentMonth.ReadOnly = true;
-            this.textBoxCurrentMonth.Size = new System.Drawing.Size(151, 26);
+            this.textBoxCurrentMonth.Size = new System.Drawing.Size(101, 31);
             this.textBoxCurrentMonth.TabIndex = 0;
-            this.textBoxCurrentMonth.Text = "Current Month";
+            this.textBoxCurrentMonth.Text = "MON";
             this.textBoxCurrentMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBoxCurrentMonth.Click += new System.EventHandler(this.TestClick);
+            this.textBoxCurrentMonth.TextChanged += new System.EventHandler(this.textBoxCurrentMonth_TextChanged);
             // 
             // splitContainer
             // 
