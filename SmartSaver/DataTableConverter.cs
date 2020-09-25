@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data;
-using DataManager;
 
-namespace SmartSaver
+namespace DataManager
 {
     class DataTableConverter
     {
@@ -22,8 +21,7 @@ namespace SmartSaver
             dt.Columns.Add("Amount", typeof(double));
             dt.Columns.Add("Date", typeof(DateTime));
 
-            var temp = data.Income;
-            foreach(DataEntry data in temp)
+            foreach(DataEntry data in data.Income)
             {
                 dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date);
             }
@@ -38,8 +36,7 @@ namespace SmartSaver
             dt.Columns.Add("Amount", typeof(double));
             dt.Columns.Add("Date", typeof(DateTime));
 
-            var temp = data.Expenses;
-            foreach (DataEntry data in temp)
+            foreach (DataEntry data in data.Expenses)
             {
                 dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date);
             }
