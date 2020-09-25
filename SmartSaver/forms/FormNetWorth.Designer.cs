@@ -1,4 +1,4 @@
-﻿namespace TimeManager
+﻿namespace SmartSaver
 {
     partial class FormNetWorth
     {

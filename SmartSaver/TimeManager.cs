@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TimeManager
+namespace SmartSaver
 {
     class TimeManager
     {

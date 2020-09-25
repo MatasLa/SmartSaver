@@ -7,10 +7,10 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
-using TimeManager;
 
-namespace TimeManager
+namespace SmartSaver
 {
+    //reikes padaryti
     public partial class FormBudget : Form
     {
         private DateTime displayedTime = DateTime.Now;
@@ -110,14 +110,5 @@ namespace TimeManager
             buttonPreviousYear.Image = unSelectedLessButton;
         }
 
-        private void textBoxCurrentMonth_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBoxCurrentYear_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
