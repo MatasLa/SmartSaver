@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBudget));
             this.panelTop = new System.Windows.Forms.Panel();
             this.buttonNextYear = new System.Windows.Forms.Button();
             this.buttonPreviousYear = new System.Windows.Forms.Button();
@@ -62,30 +63,41 @@
             // buttonNextYear
             // 
             this.buttonNextYear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonNextYear.Location = new System.Drawing.Point(643, 29);
+            this.buttonNextYear.FlatAppearance.BorderSize = 0;
+            this.buttonNextYear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonNextYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonNextYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNextYear.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextYear.Image")));
+            this.buttonNextYear.Location = new System.Drawing.Point(642, 12);
             this.buttonNextYear.Name = "buttonNextYear";
-            this.buttonNextYear.Size = new System.Drawing.Size(30, 26);
+            this.buttonNextYear.Size = new System.Drawing.Size(45, 45);
             this.buttonNextYear.TabIndex = 2;
-            this.buttonNextYear.Text = ">";
             this.buttonNextYear.UseVisualStyleBackColor = true;
             this.buttonNextYear.Click += new System.EventHandler(this.ButtonNextYear_Click);
+            this.buttonNextYear.MouseEnter += new System.EventHandler(this.ButtonNextYear_MouseEnter);
+            this.buttonNextYear.MouseLeave += new System.EventHandler(this.ButtonNextYear_MouseLeave);
             // 
             // buttonPreviousYear
             // 
             this.buttonPreviousYear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonPreviousYear.Location = new System.Drawing.Point(422, 29);
+            this.buttonPreviousYear.FlatAppearance.BorderSize = 0;
+            this.buttonPreviousYear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonPreviousYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonPreviousYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPreviousYear.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousYear.Image")));
+            this.buttonPreviousYear.Location = new System.Drawing.Point(398, 12);
             this.buttonPreviousYear.Name = "buttonPreviousYear";
-            this.buttonPreviousYear.Size = new System.Drawing.Size(30, 26);
+            this.buttonPreviousYear.Size = new System.Drawing.Size(45, 45);
             this.buttonPreviousYear.TabIndex = 1;
-            this.buttonPreviousYear.Text = "<";
-            this.buttonPreviousYear.UseVisualStyleBackColor = true;
             this.buttonPreviousYear.Click += new System.EventHandler(this.ButtonPreviousYear_Click);
+            this.buttonPreviousYear.MouseEnter += new System.EventHandler(this.ButtonPreviousYear_MouseEnter);
+            this.buttonPreviousYear.MouseLeave += new System.EventHandler(this.ButtonPreviousYear_MouseLeave);
             // 
             // textBoxCurrentYear
             // 
             this.textBoxCurrentYear.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBoxCurrentYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCurrentYear.Location = new System.Drawing.Point(471, 29);
+            this.textBoxCurrentYear.Location = new System.Drawing.Point(471, 21);
             this.textBoxCurrentYear.Name = "textBoxCurrentYear";
             this.textBoxCurrentYear.ReadOnly = true;
             this.textBoxCurrentYear.Size = new System.Drawing.Size(151, 26);
@@ -97,30 +109,44 @@
             // buttonNextMonth
             // 
             this.buttonNextMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonNextMonth.Location = new System.Drawing.Point(643, 61);
+            this.buttonNextMonth.BackColor = System.Drawing.Color.Transparent;
+            this.buttonNextMonth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonNextMonth.FlatAppearance.BorderSize = 0;
+            this.buttonNextMonth.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonNextMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonNextMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNextMonth.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonNextMonth.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextMonth.Image")));
+            this.buttonNextMonth.Location = new System.Drawing.Point(642, 64);
             this.buttonNextMonth.Name = "buttonNextMonth";
-            this.buttonNextMonth.Size = new System.Drawing.Size(30, 26);
+            this.buttonNextMonth.Size = new System.Drawing.Size(45, 45);
             this.buttonNextMonth.TabIndex = 2;
-            this.buttonNextMonth.Text = ">";
-            this.buttonNextMonth.UseVisualStyleBackColor = true;
+            this.buttonNextMonth.UseVisualStyleBackColor = false;
             this.buttonNextMonth.Click += new System.EventHandler(this.ButtonNextMonth_Click);
+            this.buttonNextMonth.MouseEnter += new System.EventHandler(this.buttonNextMonth_MouseEnter);
+            this.buttonNextMonth.MouseLeave += new System.EventHandler(this.ButtonNextMonth_MouseLeave);
             // 
             // buttonPreviousMonth
             // 
             this.buttonPreviousMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonPreviousMonth.Location = new System.Drawing.Point(422, 61);
+            this.buttonPreviousMonth.FlatAppearance.BorderSize = 0;
+            this.buttonPreviousMonth.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonPreviousMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonPreviousMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPreviousMonth.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousMonth.Image")));
+            this.buttonPreviousMonth.Location = new System.Drawing.Point(398, 64);
             this.buttonPreviousMonth.Name = "buttonPreviousMonth";
-            this.buttonPreviousMonth.Size = new System.Drawing.Size(30, 26);
+            this.buttonPreviousMonth.Size = new System.Drawing.Size(45, 45);
             this.buttonPreviousMonth.TabIndex = 1;
-            this.buttonPreviousMonth.Text = "<";
-            this.buttonPreviousMonth.UseVisualStyleBackColor = true;
             this.buttonPreviousMonth.Click += new System.EventHandler(this.ButtonPreviousMonth_Click);
+            this.buttonPreviousMonth.MouseEnter += new System.EventHandler(this.ButtonPreviousMonth_MouseEnter);
+            this.buttonPreviousMonth.MouseLeave += new System.EventHandler(this.ButtonPreviousMonth_MouseLeave);
             // 
             // textBoxCurrentMonth
             // 
             this.textBoxCurrentMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBoxCurrentMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCurrentMonth.Location = new System.Drawing.Point(471, 61);
+            this.textBoxCurrentMonth.Location = new System.Drawing.Point(471, 73);
             this.textBoxCurrentMonth.Name = "textBoxCurrentMonth";
             this.textBoxCurrentMonth.ReadOnly = true;
             this.textBoxCurrentMonth.Size = new System.Drawing.Size(151, 26);

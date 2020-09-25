@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,12 @@ namespace TimeManager
     public partial class FormBudget : Form
     {
         private DateTime displayedTime = DateTime.Now;
+        // This will get the current PROJECT directory
+        private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
+        private Image selectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonSelected.png");
+        private Image selectedMorebutton = Image.FromFile(resourceDirectory + @"\moreButtonSelected.png");
+        private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
+        private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
 
         public FormBudget()
         {
@@ -22,6 +29,7 @@ namespace TimeManager
 
         private void TestClick(object sender, EventArgs e)
         {
+            MessageBox.Show(resourceDirectory);
             Data data = new Data();
             data.ReadIncomeFromFile();
             List<DataEntry> incomes = data.Income;
@@ -37,7 +45,6 @@ namespace TimeManager
         {
             textBoxCurrentMonth.Text = displayedTime.ToString("MMMM");
             textBoxCurrentYear.Text = displayedTime.Year.ToString();
-
         }
 
         private void ButtonNextYear_Click(object sender, EventArgs e)
@@ -62,6 +69,45 @@ namespace TimeManager
         {
             this.displayedTime = TimeManager.MoveToPreviousMonth(displayedTime);
             DisplayDate();
+        }
+        private void buttonNextMonth_MouseEnter(object sender, EventArgs e)
+        {
+            buttonNextMonth.Image = selectedMorebutton;
+        }
+
+        private void ButtonNextMonth_MouseLeave(object sender, EventArgs e)
+        {
+            buttonNextMonth.Image = unSelectedMoreButton;
+        }
+
+        private void ButtonPreviousMonth_MouseEnter(object sender, EventArgs e)
+        {
+            buttonPreviousMonth.Image = selectedLessButton;
+        }
+
+        private void ButtonPreviousMonth_MouseLeave(object sender, EventArgs e)
+        {
+            buttonPreviousMonth.Image = unSelectedLessButton;
+        }
+
+        private void ButtonNextYear_MouseEnter(object sender, EventArgs e)
+        {
+            buttonNextYear.Image = selectedMorebutton;
+        }
+
+        private void ButtonNextYear_MouseLeave(object sender, EventArgs e)
+        {
+            buttonNextYear.Image = unSelectedMoreButton;
+        }
+
+        private void ButtonPreviousYear_MouseEnter(object sender, EventArgs e)
+        {
+            buttonPreviousYear.Image = selectedLessButton;
+        }
+
+        private void ButtonPreviousYear_MouseLeave(object sender, EventArgs e)
+        {
+            buttonPreviousYear.Image = unSelectedLessButton;
         }
     }
 }
