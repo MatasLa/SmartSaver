@@ -17,17 +17,15 @@ namespace SmartSaver
         public DataTable incomeTable()
         {
             var dt = new DataTable();
-            var dc1 = new DataColumn("ID", typeof(int));
-            var dc2 = new DataColumn("Title", typeof(string));
-            var dc3 = new DataColumn("Amount", typeof(double));
-            dt.Columns.Add(dc1);
-            dt.Columns.Add(dc2);
-            dt.Columns.Add(dc3);
+            dt.Columns.Add("ID", typeof(int));
+            dt.Columns.Add("Title", typeof(string));
+            dt.Columns.Add("Amount", typeof(double));
+            dt.Columns.Add("Date", typeof(DateTime));
 
             var temp = data.Income;
             foreach(DataEntry data in temp)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount);
+                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date);
             }
             return dt;
         }
@@ -35,17 +33,15 @@ namespace SmartSaver
         public DataTable expensesTable()
         {
             var dt = new DataTable();
-            var dc1 = new DataColumn("ID", typeof(int));
-            var dc2 = new DataColumn("Title", typeof(string));
-            var dc3 = new DataColumn("Amount", typeof(double));
-            dt.Columns.Add(dc1);
-            dt.Columns.Add(dc2);
-            dt.Columns.Add(dc3);
+            dt.Columns.Add("ID", typeof(int));
+            dt.Columns.Add("Title", typeof(string));
+            dt.Columns.Add("Amount", typeof(double));
+            dt.Columns.Add("Date", typeof(DateTime));
 
             var temp = data.Expenses;
             foreach (DataEntry data in temp)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount);
+                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date);
             }
             return dt;
         }
