@@ -110,6 +110,31 @@ namespace DataManager
 			return true;
 		}
 
+		public double CheckBalance()
+        {
+			double sum = 0;
+			foreach(DataEntry data in Income)
+            {
+                sum += data.Amount;
+            }
+			foreach (DataEntry data in Expenses)
+			{
+				sum -= data.Amount;
+			}
+			return sum;
+        }
+		public bool IsBalancePositive()
+        {
+			if(CheckBalance() >= 0)
+            {
+				return true;
+            }
+            else
+            {
+				return false;
+            }
+        }
+
 		/*Writing/reading JSON files*/
 		public void WriteIncomeToFile()
 		{
