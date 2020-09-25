@@ -1,4 +1,4 @@
-﻿namespace SmartSaver
+﻿namespace TimeManager
 {
     partial class FormExpenses
     {

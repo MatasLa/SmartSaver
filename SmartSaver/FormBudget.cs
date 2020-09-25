@@ -6,38 +6,19 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
+using TimeManager;
 
-namespace SmartSaver
+namespace TimeManager
 {
     public partial class FormBudget : Form
     {
-        private DateTime currentTime = DateTime.Now;
-        private DateTime dateTimeNow = DateTime.Today;
+        private DateTime displayedTime = DateTime.Now;
+
         public FormBudget()
         {
             InitializeComponent();
-            SetDate();
+            DisplayDate();
         }
-
-        private void SetDate()
-        {
-            
-            SetMonths();
-        }
-
-        private void SetMonths()
-        {
-            textBoxCurrentMonth.Text = dateTimeNow.ToString("MMMM");
-            buttonPreviousMonth.Text = "tets1";
-            buttonNextMonth.Text = "tets1";
-
-        }
-
-        private void ChangeMonth()
-        {
-
-        }
-
 
         private void TestClick(object sender, EventArgs e)
         {
@@ -52,9 +33,35 @@ namespace SmartSaver
 
         }
 
-        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        private void DisplayDate()
         {
+            textBoxCurrentMonth.Text = displayedTime.ToString("MMMM");
+            textBoxCurrentYear.Text = displayedTime.Year.ToString();
 
+        }
+
+        private void ButtonNextYear_Click(object sender, EventArgs e)
+        {
+            this.displayedTime = TimeManager.MoveToNextYear(displayedTime);
+            DisplayDate();
+        }
+
+        private void ButtonPreviousYear_Click(object sender, EventArgs e)
+        {
+            this.displayedTime = TimeManager.MoveToPreviousYear(displayedTime);
+            DisplayDate();
+        }
+
+        private void ButtonNextMonth_Click(object sender, EventArgs e)
+        {
+            this.displayedTime = TimeManager.MoveToNextMonth(displayedTime);
+            DisplayDate();
+        }
+
+        private void ButtonPreviousMonth_Click(object sender, EventArgs e)
+        {
+            this.displayedTime = TimeManager.MoveToPreviousMonth(displayedTime);
+            DisplayDate();
         }
     }
 }

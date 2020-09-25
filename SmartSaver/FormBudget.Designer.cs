@@ -1,4 +1,4 @@
-﻿namespace SmartSaver
+﻿namespace TimeManager
 {
     partial class FormBudget
     {
@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.panelTop = new System.Windows.Forms.Panel();
+            this.buttonNextYear = new System.Windows.Forms.Button();
+            this.buttonPreviousYear = new System.Windows.Forms.Button();
+            this.textBoxCurrentYear = new System.Windows.Forms.TextBox();
             this.buttonNextMonth = new System.Windows.Forms.Button();
             this.buttonPreviousMonth = new System.Windows.Forms.Button();
             this.textBoxCurrentMonth = new System.Windows.Forms.TextBox();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.textBoxCurrentYear = new System.Windows.Forms.TextBox();
-            this.buttonPreviousYear = new System.Windows.Forms.Button();
-            this.buttonNextYear = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -59,25 +59,62 @@
             this.panelTop.Size = new System.Drawing.Size(1110, 125);
             this.panelTop.TabIndex = 0;
             // 
+            // buttonNextYear
+            // 
+            this.buttonNextYear.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonNextYear.Location = new System.Drawing.Point(643, 29);
+            this.buttonNextYear.Name = "buttonNextYear";
+            this.buttonNextYear.Size = new System.Drawing.Size(30, 26);
+            this.buttonNextYear.TabIndex = 2;
+            this.buttonNextYear.Text = ">";
+            this.buttonNextYear.UseVisualStyleBackColor = true;
+            this.buttonNextYear.Click += new System.EventHandler(this.ButtonNextYear_Click);
+            // 
+            // buttonPreviousYear
+            // 
+            this.buttonPreviousYear.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonPreviousYear.Location = new System.Drawing.Point(422, 29);
+            this.buttonPreviousYear.Name = "buttonPreviousYear";
+            this.buttonPreviousYear.Size = new System.Drawing.Size(30, 26);
+            this.buttonPreviousYear.TabIndex = 1;
+            this.buttonPreviousYear.Text = "<";
+            this.buttonPreviousYear.UseVisualStyleBackColor = true;
+            this.buttonPreviousYear.Click += new System.EventHandler(this.ButtonPreviousYear_Click);
+            // 
+            // textBoxCurrentYear
+            // 
+            this.textBoxCurrentYear.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBoxCurrentYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCurrentYear.Location = new System.Drawing.Point(471, 29);
+            this.textBoxCurrentYear.Name = "textBoxCurrentYear";
+            this.textBoxCurrentYear.ReadOnly = true;
+            this.textBoxCurrentYear.Size = new System.Drawing.Size(151, 26);
+            this.textBoxCurrentYear.TabIndex = 0;
+            this.textBoxCurrentYear.Text = "Current Year";
+            this.textBoxCurrentYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCurrentYear.Click += new System.EventHandler(this.TestClick);
+            // 
             // buttonNextMonth
             // 
-            this.buttonNextMonth.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.buttonNextMonth.Location = new System.Drawing.Point(724, 61);
+            this.buttonNextMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonNextMonth.Location = new System.Drawing.Point(643, 61);
             this.buttonNextMonth.Name = "buttonNextMonth";
-            this.buttonNextMonth.Size = new System.Drawing.Size(160, 26);
+            this.buttonNextMonth.Size = new System.Drawing.Size(30, 26);
             this.buttonNextMonth.TabIndex = 2;
-            this.buttonNextMonth.Text = "Next Month";
+            this.buttonNextMonth.Text = ">";
             this.buttonNextMonth.UseVisualStyleBackColor = true;
+            this.buttonNextMonth.Click += new System.EventHandler(this.ButtonNextMonth_Click);
             // 
             // buttonPreviousMonth
             // 
-            this.buttonPreviousMonth.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.buttonPreviousMonth.Location = new System.Drawing.Point(252, 61);
+            this.buttonPreviousMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonPreviousMonth.Location = new System.Drawing.Point(422, 61);
             this.buttonPreviousMonth.Name = "buttonPreviousMonth";
-            this.buttonPreviousMonth.Size = new System.Drawing.Size(136, 26);
+            this.buttonPreviousMonth.Size = new System.Drawing.Size(30, 26);
             this.buttonPreviousMonth.TabIndex = 1;
-            this.buttonPreviousMonth.Text = "Previous Month";
+            this.buttonPreviousMonth.Text = "<";
             this.buttonPreviousMonth.UseVisualStyleBackColor = true;
+            this.buttonPreviousMonth.Click += new System.EventHandler(this.ButtonPreviousMonth_Click);
             // 
             // textBoxCurrentMonth
             // 
@@ -124,39 +161,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(750, 776);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.Text = "dataGridView1";
-            // 
-            // textBoxCurrentYear
-            // 
-            this.textBoxCurrentYear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxCurrentYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCurrentYear.Location = new System.Drawing.Point(471, 29);
-            this.textBoxCurrentYear.Name = "textBoxCurrentYear";
-            this.textBoxCurrentYear.ReadOnly = true;
-            this.textBoxCurrentYear.Size = new System.Drawing.Size(151, 26);
-            this.textBoxCurrentYear.TabIndex = 0;
-            this.textBoxCurrentYear.Text = "Current Year";
-            this.textBoxCurrentYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxCurrentYear.Click += new System.EventHandler(this.TestClick);
-            // 
-            // buttonPreviousYear
-            // 
-            this.buttonPreviousYear.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.buttonPreviousYear.Location = new System.Drawing.Point(252, 29);
-            this.buttonPreviousYear.Name = "buttonPreviousYear";
-            this.buttonPreviousYear.Size = new System.Drawing.Size(136, 26);
-            this.buttonPreviousYear.TabIndex = 1;
-            this.buttonPreviousYear.Text = "Previous Year";
-            this.buttonPreviousYear.UseVisualStyleBackColor = true;
-            // 
-            // buttonNextYear
-            // 
-            this.buttonNextYear.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.buttonNextYear.Location = new System.Drawing.Point(724, 29);
-            this.buttonNextYear.Name = "buttonNextYear";
-            this.buttonNextYear.Size = new System.Drawing.Size(160, 26);
-            this.buttonNextYear.TabIndex = 2;
-            this.buttonNextYear.Text = "Next Year";
-            this.buttonNextYear.UseVisualStyleBackColor = true;
             // 
             // FormBudget
             // 

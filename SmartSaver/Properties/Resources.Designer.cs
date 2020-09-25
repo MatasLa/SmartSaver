@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartSaver.Properties {
+namespace TimeManager.Properties {
     using System;
     
     
