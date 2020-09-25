@@ -29,34 +29,68 @@
         private void InitializeComponent()
         {
             this.panelTop = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonNextMonth = new System.Windows.Forms.Button();
+            this.buttonPreviousMonth = new System.Windows.Forms.Button();
+            this.textBoxCurrentMonth = new System.Windows.Forms.TextBox();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.textBoxCurrentYear = new System.Windows.Forms.TextBox();
+            this.buttonPreviousYear = new System.Windows.Forms.Button();
+            this.buttonNextYear = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
+            this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.White;
-            this.panelTop.Controls.Add(this.textBox1);
+            this.panelTop.Controls.Add(this.buttonNextYear);
+            this.panelTop.Controls.Add(this.buttonPreviousYear);
+            this.panelTop.Controls.Add(this.textBoxCurrentYear);
+            this.panelTop.Controls.Add(this.buttonNextMonth);
+            this.panelTop.Controls.Add(this.buttonPreviousMonth);
+            this.panelTop.Controls.Add(this.textBoxCurrentMonth);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(1110, 125);
             this.panelTop.TabIndex = 0;
             // 
-            // textBox1
+            // buttonNextMonth
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.Location = new System.Drawing.Point(415, 45);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(251, 45);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = "PLACEHOLDER MONTH";
-            this.textBox1.Click += new System.EventHandler(this.TestClick);
+            this.buttonNextMonth.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.buttonNextMonth.Location = new System.Drawing.Point(724, 61);
+            this.buttonNextMonth.Name = "buttonNextMonth";
+            this.buttonNextMonth.Size = new System.Drawing.Size(160, 26);
+            this.buttonNextMonth.TabIndex = 2;
+            this.buttonNextMonth.Text = "Next Month";
+            this.buttonNextMonth.UseVisualStyleBackColor = true;
+            // 
+            // buttonPreviousMonth
+            // 
+            this.buttonPreviousMonth.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.buttonPreviousMonth.Location = new System.Drawing.Point(252, 61);
+            this.buttonPreviousMonth.Name = "buttonPreviousMonth";
+            this.buttonPreviousMonth.Size = new System.Drawing.Size(136, 26);
+            this.buttonPreviousMonth.TabIndex = 1;
+            this.buttonPreviousMonth.Text = "Previous Month";
+            this.buttonPreviousMonth.UseVisualStyleBackColor = true;
+            // 
+            // textBoxCurrentMonth
+            // 
+            this.textBoxCurrentMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBoxCurrentMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCurrentMonth.Location = new System.Drawing.Point(471, 61);
+            this.textBoxCurrentMonth.Name = "textBoxCurrentMonth";
+            this.textBoxCurrentMonth.ReadOnly = true;
+            this.textBoxCurrentMonth.Size = new System.Drawing.Size(151, 26);
+            this.textBoxCurrentMonth.TabIndex = 0;
+            this.textBoxCurrentMonth.Text = "Current Month";
+            this.textBoxCurrentMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCurrentMonth.Click += new System.EventHandler(this.TestClick);
             // 
             // splitContainer
             // 
@@ -68,6 +102,7 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainer.Panel1.Controls.Add(this.dataGridView1);
             this.splitContainer.Panel1MinSize = 600;
             // 
             // splitContainer.Panel2
@@ -78,6 +113,50 @@
             this.splitContainer.SplitterDistance = 750;
             this.splitContainer.TabIndex = 1;
             this.splitContainer.Text = "splitContainer1";
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.Size = new System.Drawing.Size(750, 776);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Text = "dataGridView1";
+            // 
+            // textBoxCurrentYear
+            // 
+            this.textBoxCurrentYear.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.textBoxCurrentYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxCurrentYear.Location = new System.Drawing.Point(471, 29);
+            this.textBoxCurrentYear.Name = "textBoxCurrentYear";
+            this.textBoxCurrentYear.ReadOnly = true;
+            this.textBoxCurrentYear.Size = new System.Drawing.Size(151, 26);
+            this.textBoxCurrentYear.TabIndex = 0;
+            this.textBoxCurrentYear.Text = "Current Year";
+            this.textBoxCurrentYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxCurrentYear.Click += new System.EventHandler(this.TestClick);
+            // 
+            // buttonPreviousYear
+            // 
+            this.buttonPreviousYear.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.buttonPreviousYear.Location = new System.Drawing.Point(252, 29);
+            this.buttonPreviousYear.Name = "buttonPreviousYear";
+            this.buttonPreviousYear.Size = new System.Drawing.Size(136, 26);
+            this.buttonPreviousYear.TabIndex = 1;
+            this.buttonPreviousYear.Text = "Previous Year";
+            this.buttonPreviousYear.UseVisualStyleBackColor = true;
+            // 
+            // buttonNextYear
+            // 
+            this.buttonNextYear.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.buttonNextYear.Location = new System.Drawing.Point(724, 29);
+            this.buttonNextYear.Name = "buttonNextYear";
+            this.buttonNextYear.Size = new System.Drawing.Size(160, 26);
+            this.buttonNextYear.TabIndex = 2;
+            this.buttonNextYear.Text = "Next Year";
+            this.buttonNextYear.UseVisualStyleBackColor = true;
             // 
             // FormBudget
             // 
@@ -91,8 +170,10 @@
             this.Text = "FormBudget";
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
+            this.splitContainer.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -100,7 +181,13 @@
         #endregion
 
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxCurrentMonth;
         private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button buttonNextMonth;
+        private System.Windows.Forms.Button buttonPreviousMonth;
+        private System.Windows.Forms.Button buttonNextYear;
+        private System.Windows.Forms.Button buttonPreviousYear;
+        private System.Windows.Forms.TextBox textBoxCurrentYear;
     }
 }

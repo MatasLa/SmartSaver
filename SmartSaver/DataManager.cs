@@ -9,15 +9,23 @@ using System.Text.Json.Serialization;
 
 namespace DataManager
 {
-	class DataEntry
+	public class DataEntry
 	{
 
 		/*Constructor*/
-		public DataEntry(int id, int amount, string title)
+		public DataEntry(int id, double amount, string title)
 		{
 			ID = id;
 			Amount = amount;
 			Title = title;
+		}
+
+		public DataEntry()
+		{
+			ID = 0;
+			Amount = 0;
+			Title = "unnamed";
+
 		}
 
 		/*Getters and Setters*/
@@ -26,7 +34,7 @@ namespace DataManager
 			get;
 			set;
 		}
-		public int Amount
+		public double Amount
 		{
 			get;
 			set;
@@ -45,20 +53,20 @@ namespace DataManager
 		private List<DataEntry> expenses = new List<DataEntry>();
 
 		/*Methods that creates new instance of class and adds to List*/
-		public void AddIncome(int value, string title)
+		public void AddIncome(double value, string title)
 		{
 			Random rnd = new Random();//Since no database, IDs randomized between 100 and 201
 			DataEntry newIncome = new DataEntry(rnd.Next(100, 201), value, title);
 			incomes.Add(newIncome);
 		}
 
-		public void AddExpense(int value, string title)
+		public void AddExpense(double value, string title)
 		{
 			Random rnd = new Random();
 			DataEntry newExpense = new DataEntry(rnd.Next(100, 201), value, title);
 			expenses.Add(newExpense);
 		}
-		public bool EditIncomeItem(int id, int value)/*Returns true if success(item found), and false if failure*/
+		public bool EditIncomeItem(int id, double value)/*Returns true if success(item found), and false if failure*/
 		{
 			var temp = incomes.FirstOrDefault(x => x.ID == id);
 			temp.Amount = value;
@@ -72,7 +80,7 @@ namespace DataManager
 			return true;
 		}
 
-		public bool EditIncomeItem(int id, string value, int amount)
+		public bool EditIncomeItem(int id, string value, double amount)
 		{
 			var temp = incomes.FirstOrDefault(x => x.ID == id);
 			temp.Title = value;
@@ -88,8 +96,8 @@ namespace DataManager
 				foreach (DataEntry data in incomes)
 				{
 					output = JsonSerializer.Serialize(data);
-					
-					sw.Write(output +"\n");
+
+					sw.Write(output + "\n");
 				}
 			}
 		}
@@ -124,7 +132,8 @@ namespace DataManager
 					{
 						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
 						incomes.Add(dataEntry);
-					}catch(Exception e)
+					}
+					catch (Exception e)
 					{
 						Debug.Write(e);
 					}
@@ -133,11 +142,11 @@ namespace DataManager
 
 				file.Close();
 			}
-			catch(FileNotFoundException f)
+			catch (FileNotFoundException f)
 			{
 				Debug.Write(f);
 			}
-			
+
 
 		}
 
@@ -167,10 +176,20 @@ namespace DataManager
 			{
 				Debug.Write(f);
 			}
-			
 
-			
 
+
+
+		}
+
+		public List<DataEntry> Incomes
+		{
+			get { return incomes; }
+		}
+		public List<DataEntry> Expenses
+		{
+
+			get { return expenses; }
 		}
 
 		//Only for testing purposes, DELETE AFTER DONE TESTING!
