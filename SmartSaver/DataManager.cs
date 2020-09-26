@@ -14,12 +14,14 @@ namespace DataManager
 	{
 
 		/*Constructor*/
-		public DataEntry(int id, double amount, string title, DateTime date)
+		public DataEntry(int id, double amount, string title, DateTime date, bool isMonthly)
 		{
 			ID = id;
 			Amount = amount;
 			Title = title;
 			Date = date;
+			IsMonthly = isMonthly;
+
 		}
 
 		public DataEntry()
@@ -28,6 +30,7 @@ namespace DataManager
 			Amount = 0;
 			Title = "unnamed";
 			Date = DateTime.Now;
+			IsMonthly = false;
 
 		}
 
@@ -51,6 +54,11 @@ namespace DataManager
 			get;
 			set;
 		}
+		public bool IsMonthly
+		{
+			get;
+			set;
+		}
 	}
 
 	/*Main data processing class*/
@@ -61,17 +69,17 @@ namespace DataManager
 		public List<DataEntry> Expenses { get; } = new List<DataEntry>();
 
 		/*Methods that creates new instance of class and adds to List*/
-		public void AddIncome(double value, string title, DateTime date)
+		public void AddIncome(double value, string title, DateTime date, bool isMonthly)
 		{
 			Random rnd = new Random();//Since no database, IDs randomized between 100 and 201
-			DataEntry newIncome = new DataEntry(rnd.Next(100, 201), value, title, date);
+			DataEntry newIncome = new DataEntry(rnd.Next(100, 201), value, title, date, isMonthly);
 			Income.Add(newIncome);
 		}
 
-		public void AddExpense(double value, string title, DateTime date)
+		public void AddExpense(double value, string title, DateTime date, bool isMonthly)
 		{
 			Random rnd = new Random();
-			DataEntry newExpense = new DataEntry(rnd.Next(100, 201), value, title, date);
+			DataEntry newExpense = new DataEntry(rnd.Next(100, 201), value, title, date, isMonthly);
 			Expenses.Add(newExpense);
 		}
 
@@ -97,12 +105,13 @@ namespace DataManager
 			return true;
 		}
 
-		public bool EditIncomeItem(int id, string value, double amount, DateTime date)
+		public bool EditIncomeItem(int id, string value, double amount, DateTime date, bool isMonthly)
 		{
 			var temp = Income.FirstOrDefault(x => x.ID == id);
 			temp.Title = value;
 			temp.Amount = amount;
 			temp.Date = date;
+			temp.IsMonthly = isMonthly;
 			return true;
 		}
 		
@@ -125,12 +134,13 @@ namespace DataManager
 			return true;
 		}
 
-		public bool EditExpensesItem(int id, string value, double amount, DateTime date)
+		public bool EditExpensesItem(int id, string value, double amount, DateTime date, bool isMonthly)
 		{
 			var temp = Expenses.FirstOrDefault(x => x.ID == id);
 			temp.Title = value;
 			temp.Amount = amount;
-			temp.Date = date; 
+			temp.Date = date;
+			temp.IsMonthly = isMonthly;
 			return true;
 		}
 
@@ -158,6 +168,8 @@ namespace DataManager
 				return false;
             }
         }
+
+	
 
 		/*Writing/reading JSON files*/
 		public void WriteIncomeToFile()
@@ -254,15 +266,6 @@ namespace DataManager
 
 
 		}
-
-		//Only for testing purposes, DELETE AFTER DONE TESTING!
-		/*public void test()    
-		{
-			Data data = new Data();
-            data.AddIncome(600, "Salary");
-            data.AddIncome(150, "Stocks");
-            data.WriteIncomeToFile();
-		}*/
 
 	}
 
