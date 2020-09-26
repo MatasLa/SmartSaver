@@ -33,10 +33,14 @@ namespace SmartSaver
         public void init()
         {
             data.ReadIncomeFromFile();
-            DataTableConverter converter = new DataTableConverter(data);
-            incomeTable = converter.incomeTable();
+            DataTableConverter dataTableConverter = new DataTableConverter(data);
+            incomeTable = dataTableConverter.incomeTable();
             dataGridView.DataSource = incomeTable;
+            dataGridView.Columns[0].Visible = false;
+            
+
         }
+
 
         private void TestClick(object sender, EventArgs e)
         {
