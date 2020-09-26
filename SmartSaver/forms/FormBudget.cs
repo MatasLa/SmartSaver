@@ -21,23 +21,25 @@ namespace SmartSaver
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
 
+        Data data = new Data();
+        DataTable incomeTable;
         public FormBudget()
         {
             InitializeComponent();
             DisplayDate();
+            init();
+        }
+
+        public void init()
+        {
+            data.ReadIncomeFromFile();
+            DataTableConverter converter = new DataTableConverter(data);
+            incomeTable = converter.incomeTable();
+            dataGridView.DataSource = incomeTable;
         }
 
         private void TestClick(object sender, EventArgs e)
         {
-            MessageBox.Show(resourceDirectory);
-            Data data = new Data();
-            data.ReadIncomeFromFile();
-            List<DataEntry> incomes = data.Income;
-            foreach (var income in incomes)
-            {
-
-                MessageBox.Show(income.Title.ToString());
-            }
 
         }
 

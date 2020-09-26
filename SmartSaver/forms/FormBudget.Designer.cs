@@ -38,12 +38,24 @@
             this.textBoxCurrentYear = new System.Windows.Forms.TextBox();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
+            // 
+            // dataGridView
+            // 
+            dataGridView.BackgroundColor = System.Drawing.Color.White;
+            dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataGridView.Location = new System.Drawing.Point(0, 0);
+            dataGridView.Name = "dataGridView";
+            dataGridView.RowHeadersWidth = 51;
+            dataGridView.Size = new System.Drawing.Size(750, 776);
+            dataGridView.TabIndex = 0;
+            dataGridView.Text = "dataGridView1";
             // 
             // panelTop
             // 
@@ -172,7 +184,7 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainer.Panel1.Controls.Add(this.dataGridView);
+            this.splitContainer.Panel1.Controls.Add(dataGridView);
             this.splitContainer.Panel1MinSize = 600;
             // 
             // splitContainer.Panel2
@@ -184,19 +196,6 @@
             this.splitContainer.TabIndex = 1;
             this.splitContainer.Text = "splitContainer1";
             // 
-            // dataGridView
-            // 
-            this.dataGridView.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowHeadersWidth = 51;
-            this.dataGridView.Size = new System.Drawing.Size(750, 776);
-            this.dataGridView.TabIndex = 0;
-            this.dataGridView.Text = "dataGridView1";
-            // 
             // FormBudget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -207,12 +206,12 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormBudget";
             this.Text = "FormBudget";
+            ((System.ComponentModel.ISupportInitialize)(dataGridView)).EndInit();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -222,11 +221,11 @@
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.TextBox textBoxCurrentMonth;
         private System.Windows.Forms.SplitContainer splitContainer;
-        private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonNextMonth;
         private System.Windows.Forms.Button buttonPreviousMonth;
         private System.Windows.Forms.Button buttonNextYear;
         private System.Windows.Forms.Button buttonPreviousYear;
         private System.Windows.Forms.TextBox textBoxCurrentYear;
+        private System.Windows.Forms.DataGridView dataGridView;
     }
 }
