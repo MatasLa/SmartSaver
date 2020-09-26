@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SmartSaver.Properties {
+namespace SmartSaver.forms.Properties {
     using System;
     
     

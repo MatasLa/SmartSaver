@@ -1,4 +1,4 @@
-﻿namespace SmartSaver
+﻿namespace SmartSaver.forms
 {
     partial class FormGoals
     {

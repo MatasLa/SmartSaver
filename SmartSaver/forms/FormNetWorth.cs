@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SmartSaver
+namespace SmartSaver.forms
 {
     public partial class FormNetWorth : Form
     {

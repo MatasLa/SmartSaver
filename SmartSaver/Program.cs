@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataManager;
 
-namespace SmartSaver
+namespace SmartSaver.forms
 {
     static class Program
     {
@@ -18,7 +18,7 @@ namespace SmartSaver
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new FormMain());
         }
     }
 }

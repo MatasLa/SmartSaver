@@ -1,4 +1,4 @@
-﻿namespace SmartSaver
+﻿namespace SmartSaver.forms
 {
     partial class FormBudget
     {
@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBudget));
             this.panelTop = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonAddExpense = new System.Windows.Forms.Button();
+            this.buttonAddIncome = new System.Windows.Forms.Button();
             this.buttonNextYear = new System.Windows.Forms.Button();
             this.buttonPreviousYear = new System.Windows.Forms.Button();
             this.buttonNextMonth = new System.Windows.Forms.Button();
@@ -48,6 +51,9 @@
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelTop.Controls.Add(this.textBox1);
+            this.panelTop.Controls.Add(this.buttonAddExpense);
+            this.panelTop.Controls.Add(this.buttonAddIncome);
             this.panelTop.Controls.Add(this.buttonNextYear);
             this.panelTop.Controls.Add(this.buttonPreviousYear);
             this.panelTop.Controls.Add(this.buttonNextMonth);
@@ -59,6 +65,34 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(1110, 125);
             this.panelTop.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(830, 73);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(125, 27);
+            this.textBox1.TabIndex = 5;
+            this.textBox1.Text = "TOTAL";
+            // 
+            // buttonAddExpense
+            // 
+            this.buttonAddExpense.Location = new System.Drawing.Point(660, 73);
+            this.buttonAddExpense.Name = "buttonAddExpense";
+            this.buttonAddExpense.Size = new System.Drawing.Size(153, 29);
+            this.buttonAddExpense.TabIndex = 4;
+            this.buttonAddExpense.Text = "Add Expense";
+            this.buttonAddExpense.UseVisualStyleBackColor = true;
+            this.buttonAddExpense.Click += new System.EventHandler(this.ButtonAddExpense_Click);
+            // 
+            // buttonAddIncome
+            // 
+            this.buttonAddIncome.Location = new System.Drawing.Point(68, 66);
+            this.buttonAddIncome.Name = "buttonAddIncome";
+            this.buttonAddIncome.Size = new System.Drawing.Size(120, 29);
+            this.buttonAddIncome.TabIndex = 3;
+            this.buttonAddIncome.Text = "Add Income";
+            this.buttonAddIncome.UseVisualStyleBackColor = true;
+            this.buttonAddIncome.Click += new System.EventHandler(this.ButtonAddIncome_Click);
             // 
             // buttonNextYear
             // 
@@ -231,5 +265,8 @@
         private System.Windows.Forms.TextBox textBoxCurrentYear;
         private System.Windows.Forms.DataGridView dataGridView
             ;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttonAddExpense;
+        private System.Windows.Forms.Button buttonAddIncome;
     }
 }

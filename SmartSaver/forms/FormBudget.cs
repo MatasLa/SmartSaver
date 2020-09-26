@@ -7,13 +7,14 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
+using SmartSaver.forms.forms;
 
-namespace SmartSaver
+namespace SmartSaver.forms
 {
     //reikes padaryti
     public partial class FormBudget : Form
     {
-        private DateTime displayedTime = DateTime.Now;
+        private DateTime DisplayedTime { get; set; } = DateTime.Now;
         // This will get the current PROJECT directory
         private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
         private Image selectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonSelected.png");
@@ -21,26 +22,33 @@ namespace SmartSaver
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
 
-        Data data = new Data();
-        DataTable incomeTable;
+        private Data Data { get; } = new Data();
+        private DataTable incomeTable;
+        private DataTableConverter dataTableConverter;
+        private DataFilter dataFilter;
         public FormBudget()
         {
             InitializeComponent();
             DisplayDate();
-            init();
+            Init();
         }
 
-        public void init()
+        public void Init()
         {
-            data.ReadIncomeFromFile();
-            DataTableConverter dataTableConverter = new DataTableConverter(data);
-            incomeTable = dataTableConverter.incomeTable();
+            Data.ReadIncomeFromFile();
+            dataTableConverter = new DataTableConverter(Data);
+            dataFilter = new DataFilter(Data);
+            DisplayTable();
+
+        }
+
+        public void DisplayTable()
+        {
+            incomeTable = dataTableConverter.CustomTable(dataFilter.GetIncomeByDate(DisplayedTime));
             dataGridView.DataSource = incomeTable;
             dataGridView.Columns[0].Visible = false;
-            
-
+            //MessageBox.Show(dataFilter.GetIncomeByDate(DisplayedTime).Count.ToString());
         }
-
 
         private void TestClick(object sender, EventArgs e)
         {
@@ -49,33 +57,40 @@ namespace SmartSaver
 
         private void DisplayDate()
         {
-            textBoxCurrentMonth.Text = displayedTime.ToString("MMM");
-            textBoxCurrentYear.Text = displayedTime.Year.ToString();
+            textBoxCurrentMonth.Text = DisplayedTime.ToString("MMM");
+            textBoxCurrentYear.Text = DisplayedTime.Year.ToString();
         }
 
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
-            this.displayedTime = TimeManager.MoveToNextYear(displayedTime);
+            this.DisplayedTime = TimeManager.MoveToNextYear(DisplayedTime);
             DisplayDate();
+            DisplayTable();
         }
 
         private void ButtonPreviousYear_Click(object sender, EventArgs e)
         {
-            this.displayedTime = TimeManager.MoveToPreviousYear(displayedTime);
+            this.DisplayedTime = TimeManager.MoveToPreviousYear(DisplayedTime);
             DisplayDate();
+            DisplayTable();
         }
 
         private void ButtonNextMonth_Click(object sender, EventArgs e)
         {
-            this.displayedTime = TimeManager.MoveToNextMonth(displayedTime);
+            this.DisplayedTime = TimeManager.MoveToNextMonth(DisplayedTime);
             DisplayDate();
+            DisplayTable();
         }
 
         private void ButtonPreviousMonth_Click(object sender, EventArgs e)
         {
-            this.displayedTime = TimeManager.MoveToPreviousMonth(displayedTime);
+            this.DisplayedTime = TimeManager.MoveToPreviousMonth(DisplayedTime);
             DisplayDate();
+            DisplayTable();
         }
+
+        #region button logic
+
         private void buttonNextMonth_MouseEnter(object sender, EventArgs e)
         {
             buttonNextMonth.Image = selectedMorebutton;
@@ -116,5 +131,18 @@ namespace SmartSaver
             buttonPreviousYear.Image = unSelectedLessButton;
         }
 
+        #endregion
+
+        private void ButtonAddIncome_Click(object sender, EventArgs e)
+        {
+            FormAddIncome formAddIncome = new FormAddIncome(Data, DisplayedTime);
+
+            formAddIncome.Show();
+        }
+
+        private void ButtonAddExpense_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
