@@ -7,7 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DataManager;
 
-namespace SmartSaver.forms.forms
+namespace SmartSaver.forms
 {
     public partial class FormAddIncome : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace SmartSaver.forms.forms
+﻿namespace SmartSaver.forms
 {
     partial class FormAddIncome
     {

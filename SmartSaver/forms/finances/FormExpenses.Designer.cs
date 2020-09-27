@@ -1,6 +1,6 @@
-﻿namespace SmartSaver.forms
+﻿namespace FormExpenses
 {
-    partial class FormBudget
+    partial class FormExpenses
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBudget));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormExpenses));
             this.panelTop = new System.Windows.Forms.Panel();
             this.textBoxBalance = new System.Windows.Forms.TextBox();
             this.buttonAddExpense = new System.Windows.Forms.Button();
-            this.buttonAddIncome = new System.Windows.Forms.Button();
             this.buttonNextYear = new System.Windows.Forms.Button();
             this.buttonPreviousYear = new System.Windows.Forms.Button();
             this.buttonNextMonth = new System.Windows.Forms.Button();
@@ -40,13 +39,11 @@
             this.textBoxCurrentMonth = new System.Windows.Forms.TextBox();
             this.textBoxCurrentYear = new System.Windows.Forms.TextBox();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,7 +52,6 @@
             this.panelTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelTop.Controls.Add(this.textBoxBalance);
             this.panelTop.Controls.Add(this.buttonAddExpense);
-            this.panelTop.Controls.Add(this.buttonAddIncome);
             this.panelTop.Controls.Add(this.buttonNextYear);
             this.panelTop.Controls.Add(this.buttonPreviousYear);
             this.panelTop.Controls.Add(this.buttonNextMonth);
@@ -86,16 +82,6 @@
             this.buttonAddExpense.Text = "Add Expense";
             this.buttonAddExpense.UseVisualStyleBackColor = true;
             this.buttonAddExpense.Click += new System.EventHandler(this.ButtonAddExpense_Click);
-            // 
-            // buttonAddIncome
-            // 
-            this.buttonAddIncome.Location = new System.Drawing.Point(68, 66);
-            this.buttonAddIncome.Name = "buttonAddIncome";
-            this.buttonAddIncome.Size = new System.Drawing.Size(120, 29);
-            this.buttonAddIncome.TabIndex = 3;
-            this.buttonAddIncome.Text = "Add Income";
-            this.buttonAddIncome.UseVisualStyleBackColor = true;
-            this.buttonAddIncome.Click += new System.EventHandler(this.ButtonAddIncome_Click);
             // 
             // buttonNextYear
             // 
@@ -181,7 +167,6 @@
             this.textBoxCurrentMonth.TabIndex = 0;
             this.textBoxCurrentMonth.Text = "MON";
             this.textBoxCurrentMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxCurrentMonth.Click += new System.EventHandler(this.TestClick);
             // 
             // textBoxCurrentYear
             // 
@@ -209,7 +194,6 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.Color.White;
-            this.splitContainer.Panel1.Controls.Add(this.dataGridView1);
             this.splitContainer.Panel1.Controls.Add(this.dataGridView);
             this.splitContainer.Panel1MinSize = 600;
             // 
@@ -222,25 +206,6 @@
             this.splitContainer.TabIndex = 1;
             this.splitContainer.Text = "splitContainer1";
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.GridColor = System.Drawing.Color.White;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 300);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(750, 476);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.Text = "dataGridView1";
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
-            this.dataGridView1.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView_UserAddedRow);
-            // 
             // dataGridView
             // 
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -248,7 +213,7 @@
             this.dataGridView.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.GridColor = System.Drawing.Color.White;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
             this.dataGridView.MultiSelect = false;
@@ -256,13 +221,13 @@
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(750, 300);
+            this.dataGridView.Size = new System.Drawing.Size(750, 776);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Text = "dataGridView";
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             this.dataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView_UserAddedRow);
             // 
-            // FormBudget
+            // FormExpenses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -270,14 +235,13 @@
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormBudget";
+            this.Name = "FormExpenses";
             this.Text = "FormBudget";
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -297,7 +261,5 @@
             ;
         private System.Windows.Forms.TextBox textBoxBalance;
         private System.Windows.Forms.Button buttonAddExpense;
-        private System.Windows.Forms.Button buttonAddIncome;
-        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

@@ -36,18 +36,18 @@ namespace SmartSaver.forms
 
         private void ButtonBudget_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormBudget());
+            OpenChildForm(new FormBudget.FormBudget());
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormIncome());
+            OpenChildForm(new FormIncome.FormIncome());
 
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormExpenses());
+            OpenChildForm(new FormExpenses.FormExpenses());
         }
 
         private void ButtonGoals_Click(object sender, EventArgs e)
