@@ -26,6 +26,20 @@ namespace DataManager
 			return temp;
 		}
 
+		public double GetBalanceByDate(DateTime dateTime)
+        {
+			double sum = 0;
+			foreach (DataEntry data in GetIncomeByDate(dateTime))
+			{
+				sum += data.Amount;
+			}
+			foreach (DataEntry data in GetExpensesByDate(dateTime))
+			{
+				sum -= data.Amount;
+			}
+			return sum;
+		}
+
 		public List<DataEntry> GetIncomeByDate(DateTime dateTime)
 		{
 			List<DataEntry> temp = data.Income.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();
