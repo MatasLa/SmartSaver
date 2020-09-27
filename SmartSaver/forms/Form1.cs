@@ -106,7 +106,7 @@ namespace SmartSaver
 
         //we need to store the previous form to close it to open the new form
         private Form activeForm = null;
-        private void openChildForm (Form childForm)
+        private void openChildForm(Form childForm)
         {
             if (activeForm != null)
             {

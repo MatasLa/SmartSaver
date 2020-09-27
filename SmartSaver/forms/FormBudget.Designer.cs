@@ -144,7 +144,6 @@
             this.textBoxCurrentMonth.TabIndex = 0;
             this.textBoxCurrentMonth.Text = "MON";
             this.textBoxCurrentMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxCurrentMonth.Click += new System.EventHandler(this.TestClick);
             // 
             // textBoxCurrentYear
             // 

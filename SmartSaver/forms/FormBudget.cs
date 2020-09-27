@@ -10,7 +10,6 @@ using DataManager;
 
 namespace SmartSaver
 {
-    //reikes padaryti
     public partial class FormBudget : Form
     {
         private DateTime displayedTime = DateTime.Now;
@@ -27,26 +26,11 @@ namespace SmartSaver
             DisplayDate();
         }
 
-        private void TestClick(object sender, EventArgs e)
-        {
-            MessageBox.Show(resourceDirectory);
-            Data data = new Data();
-            data.ReadIncomeFromFile();
-            List<DataEntry> incomes = data.Income;
-            foreach (var income in incomes)
-            {
-
-                MessageBox.Show(income.Title.ToString());
-            }
-
-        }
-
         private void DisplayDate()
         {
             textBoxCurrentMonth.Text = displayedTime.ToString("MMM");
             textBoxCurrentYear.Text = displayedTime.Year.ToString();
         }
-
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
             this.displayedTime = TimeManager.MoveToNextYear(displayedTime);
