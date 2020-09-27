@@ -6,7 +6,7 @@ using System.Linq;
 namespace DataManager
 {
 	/*Requires datamanager object, methods filter data by provided criteria*/
-    class DataFilter
+    public class DataFilter
     {
         private Data data;
         public DataFilter(Data data)
