@@ -7,15 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataManager;
+using SmartSaver.forms;
 
 namespace SmartSaver.forms
 {
     public partial class FormMain : Form
     {
+        public DataHandler DataHandler { get; }
+
         public FormMain()
         {
             InitializeComponent();
             CustomizeDesign();
+            DataHandler = new DataHandler();
         }
 
         private void CustomizeDesign()
@@ -36,18 +41,18 @@ namespace SmartSaver.forms
 
         private void ButtonBudget_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormBudget.FormBudget());
+            OpenChildForm(new FormBudget.FormBudget(DataHandler));
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormIncome.FormIncome());
+            OpenChildForm(new FormIncome.FormIncome(DataHandler));
 
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormExpenses.FormExpenses());
+            OpenChildForm(new FormExpenses.FormExpenses(DataHandler));
         }
 
         private void ButtonGoals_Click(object sender, EventArgs e)
@@ -135,4 +140,6 @@ namespace SmartSaver.forms
             }
         }
     }
+    
+   
 }

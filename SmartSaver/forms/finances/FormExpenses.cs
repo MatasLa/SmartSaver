@@ -11,9 +11,8 @@ using SmartSaver.forms;
 
 namespace FormExpenses
 {
-    public partial class FormExpenses : Form
+    public partial class FormExpenses : DataForm
     {
-        private DateTime DisplayedTime { get; set; } = DateTime.Now;
         // This will get the current PROJECT directory
         private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
         private Image selectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonSelected.png");
@@ -21,20 +20,14 @@ namespace FormExpenses
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
 
-        private Data Data { get; } = new Data();
         private DataTable expenseTable;
-        private DataTableConverter dataTableConverter;
-        private DataFilter dataFilter;
-        public FormExpenses()
+        public FormExpenses(DataHandler dataHandler) : base(dataHandler)
         {
             InitializeComponent();
             Init();
         }
         public void Init()
         {
-            Data.ReadExpensesFromFile();
-            dataTableConverter = new DataTableConverter(Data);
-            dataFilter = new DataFilter(Data);
             UpdateDisplay();
 
         }
@@ -42,7 +35,7 @@ namespace FormExpenses
         #region Experimental
         private void dataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
-            using (FormAddIncome formAddIncome = new FormAddIncome(Data, DisplayedTime))
+            using (FormAddIncome formAddIncome = new FormAddIncome(data, DataHandler.Time))
             {
                 if (formAddIncome.ShowDialog() == DialogResult.OK)
                 {
@@ -63,32 +56,32 @@ namespace FormExpenses
 
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
-            this.DisplayedTime = TimeManager.MoveToNextYear(DisplayedTime);
+            DataHandler.Time = TimeManager.MoveToNextYear(DataHandler.Time);
             UpdateDisplay();
         }
 
         private void ButtonPreviousYear_Click(object sender, EventArgs e)
         {
-            this.DisplayedTime = TimeManager.MoveToPreviousYear(DisplayedTime);
+            DataHandler.Time = TimeManager.MoveToPreviousYear(DataHandler.Time);
             UpdateDisplay();
         }
 
         private void ButtonNextMonth_Click(object sender, EventArgs e)
         {
-            this.DisplayedTime = TimeManager.MoveToNextMonth(DisplayedTime);
+            DataHandler.Time = TimeManager.MoveToNextMonth(DataHandler.Time);
             UpdateDisplay();
         }
 
         private void ButtonPreviousMonth_Click(object sender, EventArgs e)
         {
-            this.DisplayedTime = TimeManager.MoveToPreviousMonth(DisplayedTime);
+            DataHandler.Time = TimeManager.MoveToPreviousMonth(DataHandler.Time);
             UpdateDisplay();
         }
 
 
         private void ButtonAddIncome_Click(object sender, EventArgs e)
         {
-            using (FormAddIncome formAddIncome = new FormAddIncome(Data, DisplayedTime))
+            using (FormAddIncome formAddIncome = new FormAddIncome(data, DataHandler.Time))
             {
                 if (formAddIncome.ShowDialog() == DialogResult.OK)
                 {
@@ -115,7 +108,7 @@ namespace FormExpenses
 
         public void DisplayTables()
         {
-            expenseTable = dataTableConverter.CustomTable(dataFilter.GetExpensesByDate(DisplayedTime));
+            expenseTable = dataTableConverter.CustomTable(dataFilter.GetExpensesByDate(DataHandler.Time));
             dataGridView.DataSource = expenseTable;
 
             dataGridView.Columns[0].Visible = false;
@@ -132,9 +125,9 @@ namespace FormExpenses
 
         private void DisplayBalance()
         {
-            var balance = dataFilter.GetBalanceByDate(DisplayedTime);
+            var balance = dataFilter.GetBalanceByDate(DataHandler.Time);
             textBoxBalance.BackColor = textBoxBalance.BackColor;
-            if (Data.IsBalancePositive())
+            if (data.IsBalancePositive())
             {
                 textBoxBalance.ForeColor = Color.Green;
             }
@@ -147,8 +140,8 @@ namespace FormExpenses
 
         private void DisplayDate()
         {
-            textBoxCurrentMonth.Text = DisplayedTime.ToString("MMM");
-            textBoxCurrentYear.Text = DisplayedTime.Year.ToString();
+            textBoxCurrentMonth.Text = DataHandler.Time.ToString("MMM");
+            textBoxCurrentYear.Text = DataHandler.Time.Year.ToString();
         }
         #endregion
 
