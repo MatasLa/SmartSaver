@@ -29,7 +29,6 @@ namespace SmartSaver.forms
         public FormBudget()
         {
             InitializeComponent();
-            DisplayDate();
             Init();
         }
 
@@ -38,20 +37,47 @@ namespace SmartSaver.forms
             Data.ReadIncomeFromFile();
             dataTableConverter = new DataTableConverter(Data);
             dataFilter = new DataFilter(Data);
-            DisplayTable();
+            UpdateDisplay();
 
         }
 
         public void DisplayTable()
         {
+
             incomeTable = dataTableConverter.CustomTable(dataFilter.GetIncomeByDate(DisplayedTime));
             dataGridView.DataSource = incomeTable;
+
             dataGridView.Columns[0].Visible = false;
+;
+            dataGridView1.DataSource = incomeTable;
+
+            dataGridView1.Columns[0].Visible = false;
             //MessageBox.Show(dataFilter.GetIncomeByDate(DisplayedTime).Count.ToString());
         }
 
         private void TestClick(object sender, EventArgs e)
         {
+
+        }
+
+        public void UpdateDisplay()
+        {
+            DisplayDate();
+            DisplayTable();
+            DisplayBalance();
+        }
+
+        private void DisplayBalance()
+        {
+            var balance = Data.CheckBalance();
+            Color color;
+            if(Data.IsBalancePositive())
+            {
+                color = Color.Green;
+            } else
+            {
+                color = Color.Red;
+            }
 
         }
 
@@ -64,29 +90,25 @@ namespace SmartSaver.forms
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
             this.DisplayedTime = TimeManager.MoveToNextYear(DisplayedTime);
-            DisplayDate();
-            DisplayTable();
+            UpdateDisplay();
         }
 
         private void ButtonPreviousYear_Click(object sender, EventArgs e)
         {
             this.DisplayedTime = TimeManager.MoveToPreviousYear(DisplayedTime);
-            DisplayDate();
-            DisplayTable();
+            UpdateDisplay();
         }
 
         private void ButtonNextMonth_Click(object sender, EventArgs e)
         {
             this.DisplayedTime = TimeManager.MoveToNextMonth(DisplayedTime);
-            DisplayDate();
-            DisplayTable();
+            UpdateDisplay();
         }
 
         private void ButtonPreviousMonth_Click(object sender, EventArgs e)
         {
             this.DisplayedTime = TimeManager.MoveToPreviousMonth(DisplayedTime);
-            DisplayDate();
-            DisplayTable();
+            UpdateDisplay();
         }
 
         #region button logic
@@ -135,14 +157,37 @@ namespace SmartSaver.forms
 
         private void ButtonAddIncome_Click(object sender, EventArgs e)
         {
-            FormAddIncome formAddIncome = new FormAddIncome(Data, DisplayedTime);
+            using(FormAddIncome formAddIncome = new FormAddIncome(Data, DisplayedTime))
+            {
+                if(formAddIncome.ShowDialog() == DialogResult.OK)
+                {
+                    DisplayTable();
+                }
+            }
 
-            formAddIncome.Show();
         }
 
         private void ButtonAddExpense_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            using (FormAddIncome formAddIncome = new FormAddIncome(Data, DisplayedTime))
+            {
+                if (formAddIncome.ShowDialog() == DialogResult.OK)
+                {
+                    DisplayTable();
+                }
+                DisplayTable();
+            }
+
+        }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show(dataGridView.SelectedRows[0].Cells["ID"].Value.ToString());
         }
     }
 }

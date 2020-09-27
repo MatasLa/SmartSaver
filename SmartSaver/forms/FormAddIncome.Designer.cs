@@ -32,7 +32,7 @@
             this.textBoxTitle = new System.Windows.Forms.TextBox();
             this.textBoxValue = new System.Windows.Forms.TextBox();
             this.checkBoxMonthly = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAdd = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxTitle
@@ -56,33 +56,38 @@
             // checkBoxMonthly
             // 
             this.checkBoxMonthly.AutoSize = true;
-            this.checkBoxMonthly.Location = new System.Drawing.Point(634, 95);
+            this.checkBoxMonthly.Location = new System.Drawing.Point(559, 98);
             this.checkBoxMonthly.Name = "checkBoxMonthly";
             this.checkBoxMonthly.Size = new System.Drawing.Size(85, 24);
             this.checkBoxMonthly.TabIndex = 2;
             this.checkBoxMonthly.Text = "Monthly";
             this.checkBoxMonthly.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonAdd
             // 
-            this.button1.Location = new System.Drawing.Point(382, 290);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonAdd.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonAdd.Location = new System.Drawing.Point(324, 167);
+            this.buttonAdd.Name = "buttonAdd";
+            this.buttonAdd.Size = new System.Drawing.Size(94, 29);
+            this.buttonAdd.TabIndex = 3;
+            this.buttonAdd.Text = "Add";
+            this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormAddIncome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(721, 228);
+            this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.checkBoxMonthly);
             this.Controls.Add(this.textBoxValue);
             this.Controls.Add(this.textBoxTitle);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormAddIncome";
             this.Text = "Add Income";
             this.ResumeLayout(false);
@@ -95,6 +100,6 @@
         private System.Windows.Forms.TextBox textBoxTitle;
         private System.Windows.Forms.TextBox textBoxValue;
         private System.Windows.Forms.CheckBox checkBoxMonthly;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAdd;
     }
 }

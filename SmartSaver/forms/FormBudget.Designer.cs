@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBudget));
             this.panelTop = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxBalance = new System.Windows.Forms.TextBox();
             this.buttonAddExpense = new System.Windows.Forms.Button();
             this.buttonAddIncome = new System.Windows.Forms.Button();
             this.buttonNextYear = new System.Windows.Forms.Button();
@@ -40,18 +40,20 @@
             this.textBoxCurrentMonth = new System.Windows.Forms.TextBox();
             this.textBoxCurrentYear = new System.Windows.Forms.TextBox();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelTop.Controls.Add(this.textBox1);
+            this.panelTop.Controls.Add(this.textBoxBalance);
             this.panelTop.Controls.Add(this.buttonAddExpense);
             this.panelTop.Controls.Add(this.buttonAddIncome);
             this.panelTop.Controls.Add(this.buttonNextYear);
@@ -66,13 +68,14 @@
             this.panelTop.Size = new System.Drawing.Size(1110, 125);
             this.panelTop.TabIndex = 0;
             // 
-            // textBox1
+            // textBoxBalance
             // 
-            this.textBox1.Location = new System.Drawing.Point(830, 73);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 27);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.Text = "TOTAL";
+            this.textBoxBalance.Location = new System.Drawing.Point(830, 73);
+            this.textBoxBalance.Name = "textBoxBalance";
+            this.textBoxBalance.ReadOnly = true;
+            this.textBoxBalance.Size = new System.Drawing.Size(125, 27);
+            this.textBoxBalance.TabIndex = 5;
+            this.textBoxBalance.Text = "Balance";
             // 
             // buttonAddExpense
             // 
@@ -206,6 +209,7 @@
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.BackColor = System.Drawing.Color.White;
+            this.splitContainer.Panel1.Controls.Add(this.dataGridView1);
             this.splitContainer.Panel1.Controls.Add(this.dataGridView);
             this.splitContainer.Panel1MinSize = 600;
             // 
@@ -218,20 +222,45 @@
             this.splitContainer.TabIndex = 1;
             this.splitContainer.Text = "splitContainer1";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.GridColor = System.Drawing.Color.White;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 300);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(750, 476);
+            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Text = "dataGridView1";
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
+            this.dataGridView1.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView_UserAddedRow);
+            // 
             // dataGridView
             // 
             this.dataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView.BackgroundColor = System.Drawing.Color.White;
             this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView.GridColor = System.Drawing.Color.White;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersWidth = 51;
-            this.dataGridView.Size = new System.Drawing.Size(750, 776);
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView.Size = new System.Drawing.Size(750, 300);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Text = "dataGridView";
+            this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
+            this.dataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView_UserAddedRow);
             // 
             // FormBudget
             // 
@@ -248,6 +277,7 @@
             this.splitContainer.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -265,8 +295,9 @@
         private System.Windows.Forms.TextBox textBoxCurrentYear;
         private System.Windows.Forms.DataGridView dataGridView
             ;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxBalance;
         private System.Windows.Forms.Button buttonAddExpense;
         private System.Windows.Forms.Button buttonAddIncome;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
