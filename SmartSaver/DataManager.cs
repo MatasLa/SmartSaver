@@ -47,7 +47,8 @@ namespace DataManager
 		}
 		public int ID
 		{
-			get; //Only setter, since we don't want to allow to modify id
+			get;
+			set;
 		}
         public DateTime Date
 		{
@@ -72,7 +73,7 @@ namespace DataManager
 		public void AddIncome(double value, string title, DateTime date, bool isMonthly)
 		{
 			Random rnd = new Random();//Since no database, IDs randomized between 100 and 201
-			DataEntry newIncome = new DataEntry(rnd.Next(100, 201), value, title, date, isMonthly);
+			DataEntry newIncome = new DataEntry(rnd.Next(100, 200), value, title, date, isMonthly);
 			Income.Add(newIncome);
 		}
 
