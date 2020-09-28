@@ -11,7 +11,7 @@ using SmartSaver.forms;
 
 namespace FormExpenses
 {
-    public partial class FormExpenses : DataForm
+    public partial class FormExpenses : Form
     {
         // This will get the current PROJECT directory
         private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
@@ -19,11 +19,19 @@ namespace FormExpenses
         private Image selectedMorebutton = Image.FromFile(resourceDirectory + @"\moreButtonSelected.png");
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
+        private DataHandler DataHandler { get; }
+        protected Data data;
+        protected DataTableConverter dataTableConverter;
+        protected DataFilter dataFilter;
 
         private DataTable expenseTable;
-        public FormExpenses(DataHandler dataHandler) : base(dataHandler)
+        public FormExpenses(DataHandler dataHandler)
         {
             InitializeComponent();
+            DataHandler = dataHandler;
+            data = dataHandler.Data;
+            dataTableConverter = dataHandler.DataTableConverter;
+            dataFilter = dataHandler.DataFilter;
             Init();
         }
         public void Init()

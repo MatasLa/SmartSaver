@@ -6,7 +6,7 @@ using DataManager;
 
 namespace SmartSaver.forms
 {
-    abstract public class DataForm : Form
+     public class DataForm : Form
     {
         public DataHandler DataHandler { get;}
         protected Data data;
@@ -19,6 +19,11 @@ namespace SmartSaver.forms
             data = dataHandler.Data;
             dataTableConverter = dataHandler.DataTableConverter;
             dataFilter = dataHandler.DataFilter;
+        }
+
+        private DataForm()
+        {
+            
         }
     }
 }

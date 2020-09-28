@@ -12,7 +12,7 @@ using SmartSaver.forms;
 namespace FormIncome
 {
     //reikes padaryti
-    public partial class FormIncome : DataForm
+    public partial class FormIncome : Form
     {
         // This will get the current PROJECT directory
         private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
@@ -20,12 +20,20 @@ namespace FormIncome
         private Image selectedMorebutton = Image.FromFile(resourceDirectory + @"\moreButtonSelected.png");
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
+        private DataHandler DataHandler { get; }
+        protected Data data;
+        protected DataTableConverter dataTableConverter;
+        protected DataFilter dataFilter;
 
         private DataTable incomeTable;
 
-        public FormIncome(DataHandler dataHandler) : base(dataHandler)
+        public FormIncome(DataHandler dataHandler)
         {
             InitializeComponent();
+            DataHandler = dataHandler;
+            data = dataHandler.Data;
+            dataTableConverter = dataHandler.DataTableConverter;
+            dataFilter = dataHandler.DataFilter;
             Init();
         }
 
