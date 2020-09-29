@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataManager;
 
-namespace DataManager
+namespace SmartSaver
 {
     static class Program
     {
