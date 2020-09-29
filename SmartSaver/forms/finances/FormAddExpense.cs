@@ -6,33 +6,34 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
+using Utilities;
 
-namespace SmartSaver.forms
+namespace Forms
 {
     public partial class FormAddExpense : Form
     {
         //butu fainai padaryti inheretence normalesni, bet designeris neveikia
 
-        private DataHandler dataHandler;
+        private Handler handler;
         private double value;
         private string title;
         private string errorMessage;
         private string badTitleErrorMessage = "Please enter a title";
         private string badNumberErrorMessage = "Please enter a valid number";
 
-        public FormAddExpense(DataHandler dataHandler)
+        public FormAddExpense(Handler handler)
         {
             InitializeComponent();
             Select();
-            this.dataHandler = dataHandler;
+            this.handler = handler;
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             if (IsInputValid())
             {
-                dataHandler.Data.AddExpense(value, title, date: dataHandler.Time, isMonthly: checkBoxMonthly.Checked);
-                dataHandler.Data.WriteExpensesToFile();
+                handler.Data.AddExpense(value, title, date: handler.Time, isMonthly: checkBoxMonthly.Checked);
+                handler.Data.WriteExpensesToFile();
                 DialogResult = DialogResult.OK;
             }
             else

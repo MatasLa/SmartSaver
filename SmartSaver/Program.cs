@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataManager;
+using Forms;
+using Utilities;
 
 namespace SmartSaver.forms
 {
@@ -22,7 +24,7 @@ namespace SmartSaver.forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DataHandler dataHandler = new DataHandler();
+            Handler dataHandler = new Handler();
             Application.Run(new FormMain(dataHandler));
         }
     }

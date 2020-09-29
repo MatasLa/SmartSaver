@@ -1,5 +1,5 @@
-﻿namespace SmartSaver.forms
-{
+﻿namespace Forms
+{ 
     partial class FormStart
     {
         /// <summary>

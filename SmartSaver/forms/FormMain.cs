@@ -10,14 +10,14 @@ using System.Windows.Forms;
 using DataManager;
 using SmartSaver.forms;
 
-namespace SmartSaver.forms
+namespace Forms
 {
    
     public partial class FormMain : Form
     {
-        public DataHandler DataHandler { get; }
+        public Handler DataHandler { get; }
 
-        public FormMain(DataHandler dataHandler)
+        public FormMain(Handler dataHandler)
         {
             InitializeComponent();
             CustomizeDesign();

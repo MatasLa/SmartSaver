@@ -1,4 +1,4 @@
-﻿namespace SmartSaver.forms
+﻿namespace Forms
 {
     partial class FormSpending
     {

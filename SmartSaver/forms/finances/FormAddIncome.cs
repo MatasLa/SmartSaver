@@ -6,33 +6,34 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
+using Utilities;
 
-namespace SmartSaver.forms
+namespace Forms
 {
     public partial class FormAddIncome : Form
     {
         //butu fainai padaryti inheretence normalesni, bet designeris neveikia
 
-        private DataHandler dataHandler;
+        private Handler handler;
         private double value;
         private string title;
         private string errorMessage;
         private string badTitleErrorMessage = "Please enter a title";
         private string badNumberErrorMessage = "Please enter a valid number";
 
-        public FormAddIncome(DataHandler dataHandler)
+        public FormAddIncome(Handler handler)
         {
             InitializeComponent();
             Select();
-            this.dataHandler = dataHandler;
+            this.handler = handler;
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             if (IsInputValid())
             {
-                dataHandler.Data.AddIncome(value, title, date: dataHandler.Time, isMonthly: checkBoxMonthly.Checked);
-                dataHandler.Data.WriteIncomeToFile();
+                handler.Data.AddIncome(value, title, date: handler.Time, isMonthly: checkBoxMonthly.Checked);
+                handler.Data.WriteIncomeToFile();
                 DialogResult = DialogResult.OK;
             }
             else

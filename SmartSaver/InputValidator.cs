@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SmartSaver
+namespace Utilities
 {
     public class InputValidator
     {

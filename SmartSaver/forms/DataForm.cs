@@ -4,16 +4,16 @@ using System.Text;
 using System.Windows.Forms;
 using DataManager;
 
-namespace SmartSaver.forms
+namespace Forms
 {
      public class DataForm : Form
     {
-        public DataHandler DataHandler { get;}
+        public Handler DataHandler { get;}
         protected Data data;
         protected DataTableConverter dataTableConverter;
         protected DataFilter dataFilter;
 
-        public DataForm(DataHandler dataHandler)
+        public DataForm(Handler dataHandler)
         {
             DataHandler = dataHandler;
             data = dataHandler.Data;

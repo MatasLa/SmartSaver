@@ -7,7 +7,8 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
-using SmartSaver.forms;
+using Forms;
+using Utilities;
 
 namespace FormBudget
 {
@@ -20,19 +21,19 @@ namespace FormBudget
         private Image selectedMorebutton = Image.FromFile(resourceDirectory + @"\moreButtonSelected.png");
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
-        private DataHandler DataHandler { get; }
+        private Handler Handler { get; }
         private Data data;
         private DataTableConverter dataTableConverter;
         private DataFilter dataFilter;
 
         private DataTable expenseTable;
-        public FormBudget(DataHandler dataHandler)
+        public FormBudget(Handler handler)
         {
             InitializeComponent();
-            DataHandler = dataHandler;
-            data = dataHandler.Data;
-            dataTableConverter = dataHandler.DataTableConverter;
-            dataFilter = dataHandler.DataFilter;
+            Handler = handler;
+            data = handler.Data;
+            dataTableConverter = handler.DataTableConverter;
+            dataFilter = handler.DataFilter;
             Init();
         }
         public void Init()
@@ -51,31 +52,31 @@ namespace FormBudget
 
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
-            DataHandler.Time = TimeManager.MoveToNextYear(DataHandler.Time);
+            Handler.Time = TimeManager.MoveToNextYear(Handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonPreviousYear_Click(object sender, EventArgs e)
         {
-            DataHandler.Time = TimeManager.MoveToPreviousYear(DataHandler.Time);
+            Handler.Time = TimeManager.MoveToPreviousYear(Handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonNextMonth_Click(object sender, EventArgs e)
         {
-            DataHandler.Time = TimeManager.MoveToNextMonth(DataHandler.Time);
+            Handler.Time = TimeManager.MoveToNextMonth(Handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonPreviousMonth_Click(object sender, EventArgs e)
         {
-            DataHandler.Time = TimeManager.MoveToPreviousMonth(DataHandler.Time);
+            Handler.Time = TimeManager.MoveToPreviousMonth(Handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonAddIncome_Click(object sender, EventArgs e)
         {
-            if ((new FormAddIncome(DataHandler)).ShowDialog() == DialogResult.OK)
+            if ((new FormAddIncome(Handler)).ShowDialog() == DialogResult.OK)
             {
                 DisplayTable();
                 DisplayBalance();
@@ -84,7 +85,7 @@ namespace FormBudget
 
         private void ButtonAddExpense_Click(object sender, EventArgs e)
         {
-            if((new FormAddExpense(DataHandler)).ShowDialog() == DialogResult.OK)
+            if((new FormAddExpense(Handler)).ShowDialog() == DialogResult.OK)
             {
                 DisplayTable();
                 DisplayBalance();
@@ -102,16 +103,16 @@ namespace FormBudget
 
         public void DisplayTable()
         {
-            expenseTable = dataTableConverter.CustomTable(dataFilter.GetExpensesByDate(DataHandler.Time));
+            expenseTable = dataTableConverter.CustomTable(dataFilter.GetExpensesByDate(Handler.Time));
             dataGridView.DataSource = expenseTable;
             dataGridView.Columns[0].Visible = false;
         }
 
         private void DisplayBalance()
         {
-            var balance = dataFilter.GetBalanceByDate(DataHandler.Time);
+            var balance = dataFilter.GetBalanceByDate(Handler.Time);
             textBoxBalance.BackColor = textBoxBalance.BackColor;
-            if (dataFilter.IsBalancePositiveByDate(DataHandler.Time))
+            if (dataFilter.IsBalancePositiveByDate(Handler.Time))
             {
                 textBoxBalance.ForeColor = Color.Green;
             }
@@ -124,8 +125,8 @@ namespace FormBudget
 
         private void DisplayDate()
         {
-            textBoxCurrentMonth.Text = DataHandler.Time.ToString("MMM");
-            textBoxCurrentYear.Text = DataHandler.Time.Year.ToString();
+            textBoxCurrentMonth.Text = Handler.Time.ToString("MMM");
+            textBoxCurrentYear.Text = Handler.Time.Year.ToString();
         }
         #endregion
 

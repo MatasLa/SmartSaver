@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SmartSaver.forms
+namespace Forms
 {
     public partial class FormLogIn : Form
 
