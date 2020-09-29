@@ -8,9 +8,9 @@ using SmartSaver;
 
 namespace SmartSaver.Migrations
 {
-    [DbContext(typeof(UserContext))]
-    [Migration("20200927151552_Users1")]
-    partial class Users1
+    [DbContext(typeof(DatabaseContext))]
+    [Migration("20200928163856_Users")]
+    partial class Users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
