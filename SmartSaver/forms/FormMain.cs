@@ -12,6 +12,7 @@ using SmartSaver.forms;
 
 namespace SmartSaver.forms
 {
+   
     public partial class FormMain : Form
     {
         public DataHandler DataHandler { get; }
@@ -47,7 +48,6 @@ namespace SmartSaver.forms
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
             OpenChildForm(new FormIncome.FormIncome(DataHandler));
-
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
@@ -141,5 +141,4 @@ namespace SmartSaver.forms
         }
     }
     
-   
 }

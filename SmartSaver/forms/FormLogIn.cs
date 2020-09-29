@@ -9,6 +9,7 @@ using System.Windows.Forms;
 namespace SmartSaver.forms
 {
     public partial class FormLogIn : Form
+
     {
         public FormLogIn()
         {
