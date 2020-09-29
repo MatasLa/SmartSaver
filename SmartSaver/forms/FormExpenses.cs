@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DataManager
+namespace SmartSaver
 {
     public partial class FormExpenses : Form
     {
