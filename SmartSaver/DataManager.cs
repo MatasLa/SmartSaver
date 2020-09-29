@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -66,7 +67,7 @@ namespace DataManager
 	{
 		/*Lists that store income and expenses*/
 		public List<DataEntry> Income { get; } = new List<DataEntry>();
-        public List<DataEntry> Expenses { get; } = new List<DataEntry>();
+		public List<DataEntry> Expenses { get; } = new List<DataEntry>();
 
 		/*Methods that creates new instance of class and adds to List*/
 		public void AddIncome(double value, string title, DateTime date, bool isMonthly)
@@ -181,8 +182,8 @@ namespace DataManager
 				foreach (DataEntry data in Income)
 				{
 					output = JsonSerializer.Serialize(data);
-					
-					sw.Write(output +"\n");
+
+					sw.Write(output + "\n");
 				}
 			}
 		}
@@ -217,7 +218,8 @@ namespace DataManager
 					{
 						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
 						Income.Add(dataEntry);
-					}catch(Exception e)
+					}
+					catch (Exception e)
 					{
 						Debug.Write(e);
 					}
@@ -226,11 +228,11 @@ namespace DataManager
 
 				file.Close();
 			}
-			catch(FileNotFoundException f)
+			catch (FileNotFoundException f)
 			{
 				Debug.Write(f);
 			}
-			
+
 
 		}
 
@@ -260,9 +262,9 @@ namespace DataManager
 			{
 				Debug.Write(f);
 			}
-			
 
-			
+
+
 
 		}
 
