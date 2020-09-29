@@ -39,7 +39,7 @@ namespace DataManager
 			using (StreamWriter sw = File.AppendText("userExpenses.json"))
 			{
 				string output;
-				foreach (DataEntry data in data.Income)
+				foreach (DataEntry data in data.Expenses)
 				{
 					output = JsonSerializer.Serialize(data);
 
