@@ -21,9 +21,9 @@ namespace FormBudget
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
         private DataHandler DataHandler { get; }
-        protected Data data;
-        protected DataTableConverter dataTableConverter;
-        protected DataFilter dataFilter;
+        private Data data;
+        private DataTableConverter dataTableConverter;
+        private DataFilter dataFilter;
 
         private DataTable expenseTable;
         public FormBudget(DataHandler dataHandler)
@@ -38,23 +38,9 @@ namespace FormBudget
         public void Init()
         {
             UpdateDisplay();
-            
         }
 
         #region Experimental
-        private void dataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            using (FormAddIncome formAddIncome = new FormAddIncome(data, DataHandler.Time))
-            {
-                if (formAddIncome.ShowDialog() == DialogResult.OK)
-                {
-                    DisplayTables();
-                }
-                DisplayTables();
-            }
-
-        }
-
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             MessageBox.Show(dataGridView.SelectedRows[0].Cells["ID"].Value.ToString());
@@ -87,23 +73,22 @@ namespace FormBudget
             UpdateDisplay();
         }
 
-
         private void ButtonAddIncome_Click(object sender, EventArgs e)
         {
-            using (FormAddIncome formAddIncome = new FormAddIncome(data, DataHandler.Time))
+            if ((new FormAddIncome(DataHandler)).ShowDialog() == DialogResult.OK)
             {
-                if (formAddIncome.ShowDialog() == DialogResult.OK)
-                {
-                    DisplayTables();
-                    DisplayBalance();
-                }
+                DisplayTable();
+                DisplayBalance();
             }
-
         }
 
         private void ButtonAddExpense_Click(object sender, EventArgs e)
         {
-
+            if((new FormAddExpense(DataHandler)).ShowDialog() == DialogResult.OK)
+            {
+                DisplayTable();
+                DisplayBalance();
+            }
         }
         #endregion
 
@@ -111,31 +96,22 @@ namespace FormBudget
         public void UpdateDisplay()
         {
             DisplayDate();
-            DisplayTables();
+            DisplayTable();
             DisplayBalance();
         }
 
-        public void DisplayTables()
+        public void DisplayTable()
         {
             expenseTable = dataTableConverter.CustomTable(dataFilter.GetExpensesByDate(DataHandler.Time));
             dataGridView.DataSource = expenseTable;
             dataGridView.Columns[0].Visible = false;
         }
 
-        public void DisplayIncomes()
-        {
-
-        }
-        public void DisplayExpenses()
-        {
-
-        }
-
         private void DisplayBalance()
         {
             var balance = dataFilter.GetBalanceByDate(DataHandler.Time);
             textBoxBalance.BackColor = textBoxBalance.BackColor;
-            if (data.IsBalancePositive())
+            if (dataFilter.IsBalancePositiveByDate(DataHandler.Time))
             {
                 textBoxBalance.ForeColor = Color.Green;
             }

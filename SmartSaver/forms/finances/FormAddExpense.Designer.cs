@@ -1,6 +1,6 @@
 ﻿namespace SmartSaver.forms
 {
-    partial class FormAddIncome
+    partial class FormAddExpense
     {
         /// <summary>
         /// Required designer variable.
@@ -90,7 +90,7 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // FormAddIncome
+            // FormAddExpense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -106,9 +106,9 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormAddIncome";
+            this.Name = "FormAddExpense";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Add Income";
+            this.Text = "Add Expense";
             this.ResumeLayout(false);
             this.PerformLayout();
 

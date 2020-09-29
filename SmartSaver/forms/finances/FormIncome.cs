@@ -21,9 +21,9 @@ namespace FormIncome
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
         private DataHandler DataHandler { get; }
-        protected Data data;
-        protected DataTableConverter dataTableConverter;
-        protected DataFilter dataFilter;
+        private Data data;
+        private DataTableConverter dataTableConverter;
+        private DataFilter dataFilter;
 
         private DataTable incomeTable;
 
@@ -43,18 +43,6 @@ namespace FormIncome
         }
 
         #region Experimental
-        private void dataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
-            using (FormAddIncome formAddIncome = new FormAddIncome(data, DataHandler.Time))
-            {
-                if (formAddIncome.ShowDialog() == DialogResult.OK)
-                {
-                    DisplayTable();
-                }
-                DisplayTable();
-            }
-
-        }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -92,15 +80,11 @@ namespace FormIncome
 
         private void ButtonAddIncome_Click(object sender, EventArgs e)
         {
-            using (FormAddIncome formAddIncome = new FormAddIncome(data, DataHandler.Time))
+            if ((new FormAddIncome(DataHandler)).ShowDialog() == DialogResult.OK)
             {
-                if (formAddIncome.ShowDialog() == DialogResult.OK)
-                {
-                    DisplayTable();
-                    DisplayBalance();
-                }
+                DisplayTable();
+                DisplayBalance();
             }
-
         }
 
         private void ButtonAddExpense_Click(object sender, EventArgs e)
@@ -129,7 +113,7 @@ namespace FormIncome
         {
             var balance = dataFilter.GetBalanceByDate(DataHandler.Time);
             textBoxBalance.BackColor = textBoxBalance.BackColor;
-            if (data.IsBalancePositive())
+            if (dataFilter.IsBalancePositiveByDate(DataHandler.Time))
             {
                 textBoxBalance.ForeColor = Color.Green;
             }

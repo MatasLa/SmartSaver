@@ -196,7 +196,7 @@ namespace DataManager
 			using (StreamWriter sw = File.AppendText("userExpenses.json"))
 			{
 				string output;
-				foreach (DataEntry data in Income)
+				foreach (DataEntry data in Expenses)
 				{
 					output = JsonSerializer.Serialize(data);
 

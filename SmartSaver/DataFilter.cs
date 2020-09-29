@@ -40,6 +40,18 @@ namespace DataManager
 			return sum;
 		}
 
+		public bool IsBalancePositiveByDate(DateTime dateTime)
+        {
+			if(GetBalanceByDate(dateTime) >= 0)
+            {
+				return true;
+            }
+			else
+            {
+				return false;
+            }
+        }
+
 		public List<DataEntry> GetIncomeByDate(DateTime dateTime)
 		{
 			List<DataEntry> temp = data.Income.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();

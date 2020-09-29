@@ -238,7 +238,6 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Text = "dataGridView";
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
-            this.dataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.dataGridView_UserAddedRow);
             // 
             // FormExpenses
             // 

@@ -9,7 +9,7 @@ using DataManager;
 
 namespace SmartSaver.forms
 {
-    public partial class FormAddIncome : Form
+    public partial class FormAddExpense : Form
     {
         //butu fainai padaryti inheretence normalesni, bet designeris neveikia
 
@@ -20,7 +20,7 @@ namespace SmartSaver.forms
         private string badTitleErrorMessage = "Please enter a title";
         private string badNumberErrorMessage = "Please enter a valid number";
 
-        public FormAddIncome(DataHandler dataHandler)
+        public FormAddExpense(DataHandler dataHandler)
         {
             InitializeComponent();
             Select();
@@ -31,8 +31,8 @@ namespace SmartSaver.forms
         {
             if (IsInputValid())
             {
-                dataHandler.Data.AddIncome(value, title, date: dataHandler.Time, isMonthly: checkBoxMonthly.Checked);
-                dataHandler.Data.WriteIncomeToFile();
+                dataHandler.Data.AddExpense(value, title, date: dataHandler.Time, isMonthly: checkBoxMonthly.Checked);
+                dataHandler.Data.WriteExpensesToFile();
                 DialogResult = DialogResult.OK;
             }
             else

@@ -17,11 +17,11 @@ namespace SmartSaver.forms
     {
         public DataHandler DataHandler { get; }
 
-        public FormMain()
+        public FormMain(DataHandler dataHandler)
         {
             InitializeComponent();
             CustomizeDesign();
-            DataHandler = new DataHandler();
+            DataHandler = dataHandler;
         }
 
         private void CustomizeDesign()
