@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Globalization;
 
 namespace Utilities
 {
@@ -8,7 +9,7 @@ namespace Utilities
     {
         public static bool IsNumberValid(string str, out double value)
         {
-            if (Double.TryParse(str, out value))
+            if (Double.TryParse(str, NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out value))
             {
                 return true;
             }

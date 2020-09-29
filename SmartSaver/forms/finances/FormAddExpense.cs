@@ -58,7 +58,7 @@ namespace Forms
 
         private void TakeInput()
         {
-            value = Double.Parse(textBoxValue.Text);
+            value = Double.Parse(textBoxValue.Text, System.Globalization.CultureInfo.CurrentCulture);
             title = textBoxTitle.Text;
         }
 

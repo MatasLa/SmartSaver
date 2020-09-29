@@ -58,7 +58,7 @@ namespace Forms
 
         private void TakeInput()
         {
-            value = Double.Parse(textBoxValue.Text);
+            value = Double.Parse(textBoxValue.Text, System.Globalization.CultureInfo.CurrentCulture);
             title = textBoxTitle.Text;
         }
 
@@ -88,7 +88,7 @@ namespace Forms
 
         private void TextBoxValue_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && (e.KeyChar != ','))
             {
                 e.Handled = true;
             }
