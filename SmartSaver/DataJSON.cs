@@ -13,6 +13,8 @@ namespace DataManager
 			this.data = data;
 		}
 
+		private ExceptionHandler exceptionHandler = new ExceptionHandler();
+
 		/*Writing/reading JSON files*/
 		public void WriteIncomeToFile()
 		{
@@ -62,7 +64,7 @@ namespace DataManager
 					}
 					catch (Exception e)
 					{
-						Debug.Write(e);
+						exceptionHandler.Log(e.ToString() + "\n");
 					}
 
 				}
@@ -71,7 +73,7 @@ namespace DataManager
 			}
 			catch (FileNotFoundException f)
 			{
-				Debug.Write(f);
+				exceptionHandler.Log(f.ToString() + "\n");
 			}
 
 
@@ -93,7 +95,7 @@ namespace DataManager
 					}
 					catch (Exception e)
 					{
-						Debug.Write(e);
+						exceptionHandler.Log(e.ToString() + "\n");
 					}
 				}
 
@@ -101,7 +103,7 @@ namespace DataManager
 			}
 			catch (FileNotFoundException f)
 			{
-				Debug.Write(f);
+				exceptionHandler.Log(f.ToString() + "\n");
 			}
 
 
