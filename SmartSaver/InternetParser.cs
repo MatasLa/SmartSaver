@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SmartSaver
+namespace DataManager
 {
     class InternetParser
     {
@@ -17,14 +17,13 @@ namespace SmartSaver
          * Task.Run(() => InternetParser.GetHTMLAsync()).Wait();
         */
 
-
-        public static async Task GetHTMLAsync()
+        public static async Task GetHTMLAsync(string itemName)
         {
-            var url = "https://uk.camelcamelcamel.com/search?sq=iphone+11";
+            //var url = "https://uk.camelcamelcamel.com/search?sq=iphone+11";
+            var url = "https://uk.camelcamelcamel.com/search?sq=" + itemName;
             var httpClient = new HttpClient();
 
             httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
-           // httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip, deflate");
             httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
             httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
 
@@ -40,31 +39,14 @@ namespace SmartSaver
 
             var name = productListItems[0].Descendants("strong").FirstOrDefault().InnerText;
             name = name.Remove(name.Length - 13);
-            /*<span class="green">£729.00</span>*/
 
             var pricestr = productListItems[0].Descendants("span").Where(node => node.GetAttributeValue("class", "")
             .Equals("green")).FirstOrDefault().InnerText;
             pricestr = pricestr.Substring(1).Trim();
 
-            try
-            {
-                var price = Convert.ToDouble(pricestr, System.Globalization.CultureInfo.InvariantCulture);
-                File.WriteAllText("testWeb.txt", name +"\n"+ price);
-            }
-            catch(Exception e)
-            {
-                Debug.Write(e);
-            }
             
-
-
-
+            File.WriteAllText("priceInfo.txt", name +"\n"+ pricestr);
             
-            // File.WriteAllText("testWeb.txt", htmlDocument.ParsedText);
-           // File.WriteAllText("testWeb.txt", productListItems[0].InnerHtml);
-            //var productsList = productHTML[0].Descendants
-
-
         }
     }
 }

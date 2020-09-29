@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataManager;
 
@@ -15,7 +14,6 @@ namespace SmartSaver
         [STAThread]
         static void Main()
         {
-            Task.Run(() => InternetParser.GetHTMLAsync()).Wait();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
