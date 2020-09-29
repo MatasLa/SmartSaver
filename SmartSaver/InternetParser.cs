@@ -32,38 +32,39 @@ namespace SmartSaver
 
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(html);
-            var productHTML = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "")
+            var productHTML = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "")/*Everything on the page*/
                 .Equals("row column search_results")).ToList();
 
-           // File.WriteAllText("testWeb.txt", htmlDocument.ParsedText);
-            File.WriteAllText("testWeb.txt", productHTML[0].InnerText);
+            var productListItems = productHTML[0].Descendants("div").Where(node => node.GetAttributeValue("class", "")
+            .Equals("row")).ToList();
+
+            var name = productListItems[0].Descendants("strong").FirstOrDefault().InnerText;
+            name = name.Remove(name.Length - 13);
+            /*<span class="green">£729.00</span>*/
+
+            var pricestr = productListItems[0].Descendants("span").Where(node => node.GetAttributeValue("class", "")
+            .Equals("green")).FirstOrDefault().InnerText;
+            pricestr = pricestr.Substring(1).Trim();
+
+            try
+            {
+                var price = Convert.ToDouble(pricestr, System.Globalization.CultureInfo.InvariantCulture);
+                File.WriteAllText("testWeb.txt", name +"\n"+ price);
+            }
+            catch(Exception e)
+            {
+                Debug.Write(e);
+            }
+            
+
+
+
+            
+            // File.WriteAllText("testWeb.txt", htmlDocument.ParsedText);
+           // File.WriteAllText("testWeb.txt", productListItems[0].InnerHtml);
             //var productsList = productHTML[0].Descendants
 
 
-
-            //return html.Result;
         }
-        /*static readonly HttpClient client = new HttpClient();
-
-        public static async Task GetWebHTML()
-        {
-            
-            // Call asynchronous network methods in a try/catch block to handle exceptions.
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync("");
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                // Above three lines can be replaced with new helper method below
-                // string responseBody = await client.GetStringAsync(uri);
-               
-                File.WriteAllText("testWeb.txt", responseBody);
-            }
-            catch (HttpRequestException e)
-            {
-                File.WriteAllText("testWeb.txt", "\nException Caught!");
-               // File.WriteAllText("testWeb.txt", e.Message);
-            }
-        }*/
     }
 }

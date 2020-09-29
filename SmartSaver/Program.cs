@@ -15,6 +15,7 @@ namespace SmartSaver
         [STAThread]
         static void Main()
         {
+            Task.Run(() => InternetParser.GetHTMLAsync()).Wait();
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
