@@ -35,10 +35,10 @@ namespace FormExpenses
             dataFilter = handler.DataFilter;
             Init();
         }
+
         public void Init()
         {
             UpdateDisplay();
-
         }
 
         #region Experimental
