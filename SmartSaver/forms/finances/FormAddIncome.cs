@@ -33,7 +33,7 @@ namespace Forms
             if (IsInputValid())
             {
                 handler.Data.AddIncome(value, title, date: handler.Time, isMonthly: checkBoxMonthly.Checked);
-                handler.Data.WriteIncomeToFile();
+                handler.DataJSON.WriteIncomeToFile();
                 DialogResult = DialogResult.OK;
             }
             else

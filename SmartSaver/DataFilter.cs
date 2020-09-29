@@ -22,7 +22,7 @@ namespace DataManager
 
 		public List<DataEntry> GetExpensesHigherThan(double amount)
 		{
-			List<DataEntry> temp = data.Income.Where(x => x.Amount >= amount).ToList();
+			List<DataEntry> temp = data.Expenses.Where(x => x.Amount >= amount).ToList();
 			return temp;
 		}
 
@@ -41,16 +41,16 @@ namespace DataManager
 		}
 
 		public bool IsBalancePositiveByDate(DateTime dateTime)
-        {
-			if(GetBalanceByDate(dateTime) >= 0)
-            {
+		{
+			if (GetBalanceByDate(dateTime) >= 0)
+			{
 				return true;
-            }
+			}
 			else
-            {
+			{
 				return false;
-            }
-        }
+			}
+		}
 
 		public List<DataEntry> GetIncomeByDate(DateTime dateTime)
 		{

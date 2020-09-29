@@ -12,14 +12,17 @@ namespace DataManager
         public DataTableConverter DataTableConverter { get; }
         public DataFilter DataFilter { get; }
 
+        public DataJSON DataJSON { get; }
+
         public Handler()
         {
             Time = DateTime.Now;
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
-            Data.ReadIncomeFromFile();
-            Data.ReadExpensesFromFile();
+            DataJSON = new DataJSON(Data);
+            DataJSON.ReadIncomeFromFile();
+            DataJSON.ReadExpensesFromFile();
         }
 
     }
