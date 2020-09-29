@@ -1,11 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace DataManager
 {
@@ -83,6 +79,16 @@ namespace DataManager
 			Expenses.Add(newExpense);
 		}
 
+		public void RemoveIncome(int id)
+		{
+			Income.RemoveAt(id - 1);
+		}
+
+		public void RemoveExpense(int id)
+		{
+			Expenses.RemoveAt(id - 1);
+		}
+
 		/*Methods that allows to edit different parts of already existing entrys*/
 		public bool EditIncomeItem(int id, double value)/*Returns true if success(item found), and false if failure*/
 		{
@@ -144,128 +150,7 @@ namespace DataManager
 			return true;
 		}
 
-		public double CheckBalance()
-        {
-			double sum = 0;
-			foreach(DataEntry data in Income)
-            {
-                sum += data.Amount;
-            }
-			foreach (DataEntry data in Expenses)
-			{
-				sum -= data.Amount;
-			}
-			return sum;
-        }
-		public bool IsBalancePositive()
-        {
-			if(CheckBalance() >= 0)
-            {
-				return true;
-            }
-            else
-            {
-				return false;
-            }
-        }
-
 	
-
-		/*Writing/reading JSON files*/
-		public void WriteIncomeToFile()
-		{
-			File.WriteAllText("userIncome.json", "");
-			using (StreamWriter sw = File.AppendText("userIncome.json"))
-			{
-				string output;
-				foreach (DataEntry data in Income)
-				{
-					output = JsonSerializer.Serialize(data);
-					
-					sw.Write(output +"\n");
-				}
-			}
-		}
-
-
-
-		public void WriteExpensesToFile()
-		{
-			File.WriteAllText("userExpenses.json", "");
-			using (StreamWriter sw = File.AppendText("userExpenses.json"))
-			{
-				string output;
-				foreach (DataEntry data in Income)
-				{
-					output = JsonSerializer.Serialize(data);
-
-					sw.Write(output + "\n");
-				}
-			}
-		}
-
-		public void ReadIncomeFromFile()
-		{
-			string line;
-			try
-			{
-				System.IO.StreamReader file = new System.IO.StreamReader("userIncome.json");
-
-				while ((line = file.ReadLine()) != null)
-				{
-					try
-					{
-						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
-						Income.Add(dataEntry);
-					}catch(Exception e)
-					{
-						Debug.Write(e);
-					}
-
-				}
-
-				file.Close();
-			}
-			catch(FileNotFoundException f)
-			{
-				Debug.Write(f);
-			}
-			
-
-		}
-
-		public void ReadExpensesFromFile()
-		{
-			string line;
-			try
-			{
-				System.IO.StreamReader file = new System.IO.StreamReader("userExpenses.json");
-				while ((line = file.ReadLine()) != null)
-				{
-
-					try
-					{
-						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
-						Expenses.Add(dataEntry);
-					}
-					catch (Exception e)
-					{
-						Debug.Write(e);
-					}
-				}
-
-				file.Close();
-			}
-			catch (FileNotFoundException f)
-			{
-				Debug.Write(f);
-			}
-			
-
-			
-
-		}
-
 	}
 
 

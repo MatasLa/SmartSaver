@@ -1,4 +1,4 @@
-﻿namespace SmartSaver
+﻿namespace DataManager
 {
     partial class Form1
     {
