@@ -6,7 +6,7 @@ using System.Linq;
 namespace DataManager
 {
 	/*Requires datamanager object, methods filter data by provided criteria*/
-    class DataFilter
+    public class DataFilter
     {
         private Data data;
         public DataFilter(Data data)
@@ -24,6 +24,20 @@ namespace DataManager
 		{
 			List<DataEntry> temp = data.Income.Where(x => x.Amount >= amount).ToList();
 			return temp;
+		}
+
+		public double GetBalanceByDate(DateTime dateTime)
+        {
+			double sum = 0;
+			foreach (DataEntry data in GetIncomeByDate(dateTime))
+			{
+				sum += data.Amount;
+			}
+			foreach (DataEntry data in GetExpensesByDate(dateTime))
+			{
+				sum -= data.Amount;
+			}
+			return sum;
 		}
 
 		public List<DataEntry> GetIncomeByDate(DateTime dateTime)

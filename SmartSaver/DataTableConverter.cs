@@ -5,7 +5,7 @@ using System.Data;
 
 namespace DataManager
 {
-    class DataTableConverter
+    public class DataTableConverter
     {
         private Data data;
         public DataTableConverter(Data data)

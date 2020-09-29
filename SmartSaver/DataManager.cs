@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -46,7 +47,8 @@ namespace DataManager
 		}
 		public int ID
 		{
-			get; //Only setter, since we don't want to allow to modify id
+			get;
+			set;
 		}
         public DateTime Date
 		{
@@ -65,13 +67,13 @@ namespace DataManager
 	{
 		/*Lists that store income and expenses*/
 		public List<DataEntry> Income { get; } = new List<DataEntry>();
-        public List<DataEntry> Expenses { get; } = new List<DataEntry>();
+		public List<DataEntry> Expenses { get; } = new List<DataEntry>();
 
 		/*Methods that creates new instance of class and adds to List*/
 		public void AddIncome(double value, string title, DateTime date, bool isMonthly)
 		{
 			Random rnd = new Random();//Since no database, IDs randomized between 100 and 201
-			DataEntry newIncome = new DataEntry(rnd.Next(100, 201), value, title, date, isMonthly);
+			DataEntry newIncome = new DataEntry(rnd.Next(100, 200), value, title, date, isMonthly);
 			Income.Add(newIncome);
 		}
 
@@ -180,8 +182,8 @@ namespace DataManager
 				foreach (DataEntry data in Income)
 				{
 					output = JsonSerializer.Serialize(data);
-					
-					sw.Write(output +"\n");
+
+					sw.Write(output + "\n");
 				}
 			}
 		}
@@ -216,7 +218,8 @@ namespace DataManager
 					{
 						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
 						Income.Add(dataEntry);
-					}catch(Exception e)
+					}
+					catch (Exception e)
 					{
 						Debug.Write(e);
 					}
@@ -225,11 +228,11 @@ namespace DataManager
 
 				file.Close();
 			}
-			catch(FileNotFoundException f)
+			catch (FileNotFoundException f)
 			{
 				Debug.Write(f);
 			}
-			
+
 
 		}
 
@@ -259,9 +262,9 @@ namespace DataManager
 			{
 				Debug.Write(f);
 			}
-			
 
-			
+
+
 
 		}
 
