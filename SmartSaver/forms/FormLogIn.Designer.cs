@@ -28,124 +28,176 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.label4 = new System.Windows.Forms.Label();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.emailInput = new System.Windows.Forms.TextBox();
+            this.passwordInput = new System.Windows.Forms.TextBox();
+            this.emailLabel = new System.Windows.Forms.Label();
+            this.passwordLabel = new System.Windows.Forms.Label();
+            this.forgotPassLink = new System.Windows.Forms.LinkLabel();
+            this.noAccLable = new System.Windows.Forms.Label();
+            this.noAccLink = new System.Windows.Forms.LinkLabel();
+            this.qouteText = new System.Windows.Forms.Label();
+            this.signInText = new System.Windows.Forms.Label();
+            this.logoPic = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.logoPic)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // loginButton
             // 
-            this.button1.Location = new System.Drawing.Point(360, 286);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.loginButton.Location = new System.Drawing.Point(249, 284);
+            this.loginButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(75, 23);
+            this.loginButton.TabIndex = 0;
+            this.loginButton.Text = "Login";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
-            // textBox1
+            // emailInput
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(292, 144);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(206, 23);
-            this.textBox1.TabIndex = 1;
+            this.emailInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.emailInput.Location = new System.Drawing.Point(184, 151);
+            this.emailInput.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.emailInput.Name = "emailInput";
+            this.emailInput.Size = new System.Drawing.Size(206, 23);
+            this.emailInput.TabIndex = 1;
             // 
-            // textBox2
+            // passwordInput
             // 
-            this.textBox2.Location = new System.Drawing.Point(292, 215);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(206, 23);
-            this.textBox2.TabIndex = 2;
+            this.passwordInput.Location = new System.Drawing.Point(184, 215);
+            this.passwordInput.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.passwordInput.Name = "passwordInput";
+            this.passwordInput.PasswordChar = '•';
+            this.passwordInput.Size = new System.Drawing.Size(206, 23);
+            this.passwordInput.TabIndex = 2;
             // 
-            // label1
+            // emailLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(367, 117);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 15);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "E-mail";
+            this.emailLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.emailLabel.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.emailLabel.Location = new System.Drawing.Point(184, 129);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(47, 19);
+            this.emailLabel.TabIndex = 3;
+            this.emailLabel.Text = "E-mail";
             // 
-            // label2
+            // passwordLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(361, 188);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 15);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Password";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.passwordLabel.AutoSize = true;
+            this.passwordLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.passwordLabel.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.passwordLabel.Location = new System.Drawing.Point(184, 193);
+            this.passwordLabel.Name = "passwordLabel";
+            this.passwordLabel.Size = new System.Drawing.Size(67, 19);
+            this.passwordLabel.TabIndex = 4;
+            this.passwordLabel.Text = "Password";
+            this.passwordLabel.Click += new System.EventHandler(this.label2_Click);
             // 
-            // linkLabel1
+            // forgotPassLink
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(398, 252);
-            this.linkLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(100, 15);
-            this.linkLabel1.TabIndex = 5;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Forgot Password?";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.forgotPassLink.AutoSize = true;
+            this.forgotPassLink.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.forgotPassLink.LinkColor = System.Drawing.Color.Silver;
+            this.forgotPassLink.Location = new System.Drawing.Point(301, 250);
+            this.forgotPassLink.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.forgotPassLink.Name = "forgotPassLink";
+            this.forgotPassLink.Size = new System.Drawing.Size(100, 15);
+            this.forgotPassLink.TabIndex = 5;
+            this.forgotPassLink.TabStop = true;
+            this.forgotPassLink.Text = "Forgot Password?";
+            this.forgotPassLink.VisitedLinkColor = System.Drawing.Color.Silver;
+            this.forgotPassLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // label3
+            // noAccLable
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(292, 337);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(131, 15);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Don\'t have an account?";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.noAccLable.AutoSize = true;
+            this.noAccLable.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.noAccLable.ForeColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.noAccLable.Location = new System.Drawing.Point(171, 334);
+            this.noAccLable.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.noAccLable.Name = "noAccLable";
+            this.noAccLable.Size = new System.Drawing.Size(153, 19);
+            this.noAccLable.TabIndex = 6;
+            this.noAccLable.Text = "Don\'t have an account?";
             // 
-            // linkLabel2
+            // noAccLink
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(450, 337);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(48, 15);
-            this.linkLabel2.TabIndex = 7;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Sign Up";
+            this.noAccLink.AutoSize = true;
+            this.noAccLink.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.noAccLink.LinkColor = System.Drawing.Color.Silver;
+            this.noAccLink.Location = new System.Drawing.Point(340, 332);
+            this.noAccLink.Name = "noAccLink";
+            this.noAccLink.Size = new System.Drawing.Size(61, 20);
+            this.noAccLink.TabIndex = 7;
+            this.noAccLink.TabStop = true;
+            this.noAccLink.Text = "Sign Up";
+            this.noAccLink.VisitedLinkColor = System.Drawing.Color.Silver;
+            this.noAccLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.noAccLink_LinkClicked);
             // 
-            // label4
+            // qouteText
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(388, 403);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Qoute";
+            this.qouteText.AutoSize = true;
+            this.qouteText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.qouteText.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.qouteText.Location = new System.Drawing.Point(111, 407);
+            this.qouteText.Name = "qouteText";
+            this.qouteText.Size = new System.Drawing.Size(39, 15);
+            this.qouteText.TabIndex = 8;
+            this.qouteText.Text = "Qoute";
+            this.qouteText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // signInText
+            // 
+            this.signInText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.signInText.AutoSize = true;
+            this.signInText.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.signInText.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.signInText.Location = new System.Drawing.Point(242, 91);
+            this.signInText.Name = "signInText";
+            this.signInText.Size = new System.Drawing.Size(84, 30);
+            this.signInText.TabIndex = 9;
+            this.signInText.Text = "Sign In";
+            // 
+            // logoPic
+            // 
+            this.logoPic.InitialImage = null;
+            this.logoPic.Location = new System.Drawing.Point(145, 19);
+            this.logoPic.Name = "logoPic";
+            this.logoPic.Size = new System.Drawing.Size(268, 69);
+            this.logoPic.TabIndex = 10;
+            this.logoPic.TabStop = false;
             // 
             // FormLogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 450);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.ClientSize = new System.Drawing.Size(567, 461);
+            this.Controls.Add(this.logoPic);
+            this.Controls.Add(this.signInText);
+            this.Controls.Add(this.qouteText);
+            this.Controls.Add(this.noAccLink);
+            this.Controls.Add(this.noAccLable);
+            this.Controls.Add(this.forgotPassLink);
+            this.Controls.Add(this.passwordLabel);
+            this.Controls.Add(this.emailLabel);
+            this.Controls.Add(this.passwordInput);
+            this.Controls.Add(this.emailInput);
+            this.Controls.Add(this.loginButton);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "FormLogIn";
-            this.Text = "Forgot Password?";
+            this.Text = "ePiggy";
             this.Load += new System.EventHandler(this.FormLogIn_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.logoPic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,14 +205,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.TextBox emailInput;
+        private System.Windows.Forms.TextBox passwordInput;
+        private System.Windows.Forms.Label emailLabel;
+        private System.Windows.Forms.Label passwordLabel;
+        private System.Windows.Forms.LinkLabel forgotPassLink;
+        private System.Windows.Forms.Label noAccLable;
+        private System.Windows.Forms.LinkLabel noAccLink;
+        private System.Windows.Forms.Label qouteText;
+        private System.Windows.Forms.Label signInText;
+        private System.Windows.Forms.PictureBox logoPic;
     }
 }
