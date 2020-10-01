@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
@@ -13,10 +14,14 @@ namespace Forms
     public partial class FormRegister : Form
     {
         public Handler DataHandler { get; }
+        private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
+        private Image selectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonSelected.png");
+        private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         public FormRegister(Handler dataHandler)
         {
             InitializeComponent();
             DataHandler = dataHandler;
+            backToLoginButton.Image = unSelectedLessButton;
         }
 
         private void registerButton_Click(object sender, EventArgs e)
@@ -36,6 +41,7 @@ namespace Forms
             {
                 //print that pass did not match
             }
+
         }
 
         private void backToLoginButton_Click(object sender, EventArgs e)
@@ -45,5 +51,19 @@ namespace Forms
             login.ShowDialog();
             this.Close();
         }
+
+        private void backToLoginButton_MouseEnter(object sender, EventArgs e)
+        {
+            backToLoginButton.Image = selectedLessButton;
+        }
+
+        private void BackToLoginButton_MouseLeave(object sender, EventArgs e)
+        {
+            backToLoginButton.Image = unSelectedLessButton;
+        }
+
+        
     }
+
+        
 }

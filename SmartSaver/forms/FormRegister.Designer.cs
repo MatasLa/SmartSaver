@@ -128,11 +128,13 @@
             // 
             // backToLoginButton
             // 
-            this.backToLoginButton.Location = new System.Drawing.Point(33, 56);
+            this.backToLoginButton.FlatAppearance.BorderSize = 0;
+            this.backToLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backToLoginButton.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.backToLoginButton.Location = new System.Drawing.Point(27, 29);
             this.backToLoginButton.Name = "backToLoginButton";
-            this.backToLoginButton.Size = new System.Drawing.Size(45, 36);
+            this.backToLoginButton.Size = new System.Drawing.Size(40, 39);
             this.backToLoginButton.TabIndex = 6;
-            this.backToLoginButton.Text = "<";
             this.backToLoginButton.UseVisualStyleBackColor = true;
             this.backToLoginButton.Click += new System.EventHandler(this.backToLoginButton_Click);
             // 
