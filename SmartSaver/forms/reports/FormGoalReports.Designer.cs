@@ -1,6 +1,6 @@
-﻿namespace SmartSaver
+﻿namespace Forms
 {
-    partial class FormExpenses
+    partial class FormGoalReports
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // FormExpenses
+            // FormGoalReports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.GreenYellow;
             this.ClientSize = new System.Drawing.Size(1110, 901);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormExpenses";
-            this.Text = "FormExpenses";
+            this.Name = "FormGoalReports";
+            this.Text = "FormGoalReports";
             this.ResumeLayout(false);
 
         }

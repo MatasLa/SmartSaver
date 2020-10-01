@@ -7,15 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DataManager;
+using Forms;
+using Utilities;
 
-namespace SmartSaver
+namespace Forms
 {
-    public partial class Form1 : Form
+   
+    public partial class FormMain : Form
     {
-        public Form1()
+        public Handler DataHandler { get; }
+
+        public FormMain(Handler dataHandler)
         {
             InitializeComponent();
             CustomizeDesign();
+            DataHandler = dataHandler;
         }
 
         private void CustomizeDesign()
@@ -36,49 +43,48 @@ namespace SmartSaver
 
         private void ButtonBudget_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormBudget());
+            OpenChildForm(new FormBudget.FormBudget(DataHandler));
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormIncome());
-
+            OpenChildForm(new FormIncome.FormIncome(DataHandler));
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormExpenses());
+            OpenChildForm(new FormExpenses.FormExpenses(DataHandler));
         }
 
         private void ButtonGoals_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormGoals());
+            OpenChildForm(new FormGoals());
         }
 
         private void ButtonSpending_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormSpending());
+            OpenChildForm(new FormSpending());
         }
 
 
         private void ButtonNetWorth_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormNetWorth());
+            OpenChildForm(new FormNetWorth());
         }
 
         private void ButtonIncomevExpenses_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormIncomevExpenses());
+            OpenChildForm(new FormIncomevExpenses());
         }
 
         private void ButtonGoalReport_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormGoalReports());
+            OpenChildForm(new FormGoalReports());
         }
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormHelp());
+            OpenChildForm(new FormHelp());
         }
 
         private void ButtonLogOut_Click(object sender, EventArgs e)
@@ -106,7 +112,7 @@ namespace SmartSaver
 
         //we need to store the previous form to close it to open the new form
         private Form activeForm = null;
-        private void openChildForm(Form childForm)
+        private void OpenChildForm(Form childForm)
         {
             if (activeForm != null)
             {
@@ -135,4 +141,5 @@ namespace SmartSaver
             }
         }
     }
+    
 }

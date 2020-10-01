@@ -6,11 +6,12 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SmartSaver
+namespace Forms
 {
-    public partial class FormExpenses : Form
+    public partial class FormLogIn : Form
+
     {
-        public FormExpenses()
+        public FormLogIn()
         {
             InitializeComponent();
         }

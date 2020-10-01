@@ -8,11 +8,21 @@ using System.Windows.Forms;
 
 namespace Forms
 {
-    public partial class FormHelp : Form
+    public partial class FormStart : Form
     {
-        public FormHelp()
+        public FormStart()
         {
             InitializeComponent();
+        }
+
+        private void buttonLogIn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonRegister_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

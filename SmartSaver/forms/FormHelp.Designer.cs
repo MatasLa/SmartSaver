@@ -1,4 +1,4 @@
-﻿namespace SmartSaver
+﻿namespace Forms
 {
     partial class FormHelp
     {

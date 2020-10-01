@@ -6,13 +6,18 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SmartSaver
+namespace Forms
 {
-    public partial class FormIncome : Form
+    public partial class FormRegister : Form
     {
-        public FormIncome()
+        public FormRegister()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
