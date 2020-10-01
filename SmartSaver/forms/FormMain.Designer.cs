@@ -360,24 +360,24 @@
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(250, 0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1110, 901);
+            this.panelMain.Size = new System.Drawing.Size(1112, 901);
             this.panelMain.TabIndex = 1;
             // 
             // pictureBoxMainLogo
             // 
             this.pictureBoxMainLogo.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBoxMainLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMainLogo.Image")));
-            this.pictureBoxMainLogo.Location = new System.Drawing.Point(261, 350);
+            this.pictureBoxMainLogo.Location = new System.Drawing.Point(160, 41);
             this.pictureBoxMainLogo.Margin = new System.Windows.Forms.Padding(0);
             this.pictureBoxMainLogo.Name = "pictureBoxMainLogo";
-            this.pictureBoxMainLogo.Size = new System.Drawing.Size(600, 195);
+            this.pictureBoxMainLogo.Size = new System.Drawing.Size(768, 768);
             this.pictureBoxMainLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxMainLogo.TabIndex = 1;
             this.pictureBoxMainLogo.TabStop = false;
             // 
             // FormMain
             // 
-            this.ClientSize = new System.Drawing.Size(1360, 901);
+            this.ClientSize = new System.Drawing.Size(1362, 901);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelSideMenu);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
