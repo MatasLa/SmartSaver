@@ -8,6 +8,8 @@ namespace SmartSaver
     public class DatabaseContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Expenses> Expenses { get; set; }
+        public DbSet<Incomes> Incomes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
