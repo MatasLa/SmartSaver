@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
@@ -15,11 +16,16 @@ namespace Forms
 
     {
         public Handler DataHandler { get; }
+        /*Add when new logo exists
+        private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
+        private Image logo = Image.FromFile(resourceDirectory + @"\logo inverted.png");*/
         public FormLogIn(Handler dataHandler)
         {
             InitializeComponent();
             DataHandler = dataHandler;
             SetQoute();
+            errorMessage.Text = "";
+           // logoPic.Image = logo;
         }
 
         private void SetQoute()
@@ -43,19 +49,7 @@ namespace Forms
         }
 
 
-        private void loginButton_Click(object sender, EventArgs e)
-        {
-            var email = emailInput.Text;
-            var pass = passwordInput.Text;
-            if(UserAuth.Login(email, pass))
-            {
-                this.Hide();
-                FormMain main = new FormMain(DataHandler);
-                main.ShowDialog();
-                this.Close();
-            }
-            
-        }
+       
 
 
         private void noAccLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -64,6 +58,23 @@ namespace Forms
             FormRegister register = new FormRegister(DataHandler);
             register.ShowDialog();
             this.Close();
+        }
+
+        private void loginButton_Click(object sender, EventArgs e)
+        {
+            var email = emailInput.Text;
+            var pass = passwordInput.Text;
+            if (UserAuth.Login(email, pass))
+            {
+                this.Hide();
+                FormMain main = new FormMain(DataHandler);
+                main.ShowDialog();
+                this.Close();
+            }
+            else
+            {
+                errorMessage.Text = "Wrong e-mail or password!";
+            }
         }
     }
     

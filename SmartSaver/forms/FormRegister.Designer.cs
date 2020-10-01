@@ -37,6 +37,7 @@
             this.passwordLabel2 = new System.Windows.Forms.Label();
             this.registerButton = new System.Windows.Forms.Button();
             this.backToLoginButton = new System.Windows.Forms.Button();
+            this.errorMessage = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // registerLabel
@@ -44,7 +45,7 @@
             this.registerLabel.AutoSize = true;
             this.registerLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.registerLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.registerLabel.Location = new System.Drawing.Point(221, 78);
+            this.registerLabel.Location = new System.Drawing.Point(221, 67);
             this.registerLabel.Name = "registerLabel";
             this.registerLabel.Size = new System.Drawing.Size(94, 30);
             this.registerLabel.TabIndex = 0;
@@ -58,7 +59,7 @@
             this.emailLabel.AutoSize = true;
             this.emailLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.emailLabel.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.emailLabel.Location = new System.Drawing.Point(170, 137);
+            this.emailLabel.Location = new System.Drawing.Point(171, 119);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(47, 19);
             this.emailLabel.TabIndex = 3;
@@ -70,7 +71,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.emailInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.emailInput.Location = new System.Drawing.Point(171, 159);
+            this.emailInput.Location = new System.Drawing.Point(171, 141);
             this.emailInput.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.emailInput.Name = "emailInput";
             this.emailInput.Size = new System.Drawing.Size(206, 23);
@@ -81,7 +82,7 @@
             this.passwordLabel1.AutoSize = true;
             this.passwordLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.passwordLabel1.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.passwordLabel1.Location = new System.Drawing.Point(170, 209);
+            this.passwordLabel1.Location = new System.Drawing.Point(170, 187);
             this.passwordLabel1.Name = "passwordLabel1";
             this.passwordLabel1.Size = new System.Drawing.Size(67, 19);
             this.passwordLabel1.TabIndex = 4;
@@ -89,7 +90,7 @@
             // 
             // passwordInput1
             // 
-            this.passwordInput1.Location = new System.Drawing.Point(170, 231);
+            this.passwordInput1.Location = new System.Drawing.Point(170, 209);
             this.passwordInput1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.passwordInput1.Name = "passwordInput1";
             this.passwordInput1.PasswordChar = '•';
@@ -98,7 +99,7 @@
             // 
             // passwordInput2
             // 
-            this.passwordInput2.Location = new System.Drawing.Point(170, 312);
+            this.passwordInput2.Location = new System.Drawing.Point(170, 272);
             this.passwordInput2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.passwordInput2.Name = "passwordInput2";
             this.passwordInput2.PasswordChar = '•';
@@ -110,7 +111,7 @@
             this.passwordLabel2.AutoSize = true;
             this.passwordLabel2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.passwordLabel2.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.passwordLabel2.Location = new System.Drawing.Point(170, 290);
+            this.passwordLabel2.Location = new System.Drawing.Point(170, 250);
             this.passwordLabel2.Name = "passwordLabel2";
             this.passwordLabel2.Size = new System.Drawing.Size(120, 19);
             this.passwordLabel2.TabIndex = 4;
@@ -118,7 +119,7 @@
             // 
             // registerButton
             // 
-            this.registerButton.Location = new System.Drawing.Point(240, 373);
+            this.registerButton.Location = new System.Drawing.Point(231, 369);
             this.registerButton.Name = "registerButton";
             this.registerButton.Size = new System.Drawing.Size(75, 23);
             this.registerButton.TabIndex = 5;
@@ -138,12 +139,24 @@
             this.backToLoginButton.UseVisualStyleBackColor = true;
             this.backToLoginButton.Click += new System.EventHandler(this.backToLoginButton_Click);
             // 
+            // errorMessage
+            // 
+            this.errorMessage.AutoSize = true;
+            this.errorMessage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.errorMessage.ForeColor = System.Drawing.Color.Red;
+            this.errorMessage.Location = new System.Drawing.Point(170, 335);
+            this.errorMessage.Name = "errorMessage";
+            this.errorMessage.Size = new System.Drawing.Size(45, 19);
+            this.errorMessage.TabIndex = 7;
+            this.errorMessage.Text = "label1";
+            // 
             // FormRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(534, 461);
+            this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.backToLoginButton);
             this.Controls.Add(this.registerButton);
             this.Controls.Add(this.passwordLabel2);
@@ -174,5 +187,6 @@
         private System.Windows.Forms.Label passwordLabel2;
         private System.Windows.Forms.Button registerButton;
         private System.Windows.Forms.Button backToLoginButton;
+        private System.Windows.Forms.Label errorMessage;
     }
 }

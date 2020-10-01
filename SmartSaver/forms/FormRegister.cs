@@ -17,11 +17,13 @@ namespace Forms
         private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
         private Image selectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonSelected.png");
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
+
         public FormRegister(Handler dataHandler)
         {
             InitializeComponent();
             DataHandler = dataHandler;
             backToLoginButton.Image = unSelectedLessButton;
+            errorMessage.Text = "";
         }
 
         private void registerButton_Click(object sender, EventArgs e)
@@ -29,6 +31,16 @@ namespace Forms
             var email = emailInput.Text;
             var pass = passwordInput1.Text;
             var passConfirm = passwordInput2.Text;
+            if (!UserAuth.IsValidEmail(email))
+            {
+                errorMessage.Text = "Provided e-mail is not valid!";
+                return;
+            }
+            if (pass.Length < 8)
+            {
+                errorMessage.Text = "Password must be atleast 8 characters long";
+                return;
+            }
             if (pass.Equals(passConfirm))
             {
                 UserAuth.Registration(email: email, pass: pass);
@@ -39,7 +51,7 @@ namespace Forms
             }
             else
             {
-                //print that pass did not match
+                errorMessage.Text = "Passwords did not match!";
             }
 
         }

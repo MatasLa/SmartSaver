@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.loginButton = new System.Windows.Forms.Button();
             this.emailInput = new System.Windows.Forms.TextBox();
             this.passwordInput = new System.Windows.Forms.TextBox();
             this.emailLabel = new System.Windows.Forms.Label();
@@ -39,19 +38,10 @@
             this.forgotPassLink = new System.Windows.Forms.LinkLabel();
             this.noAccLink = new System.Windows.Forms.LinkLabel();
             this.noAccLable = new System.Windows.Forms.Label();
+            this.errorMessage = new System.Windows.Forms.Label();
+            this.loginButton = new ePOSOne.btnProduct.Button_WOC();
             ((System.ComponentModel.ISupportInitialize)(this.logoPic)).BeginInit();
             this.SuspendLayout();
-            // 
-            // loginButton
-            // 
-            this.loginButton.Location = new System.Drawing.Point(240, 284);
-            this.loginButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.Size = new System.Drawing.Size(75, 23);
-            this.loginButton.TabIndex = 0;
-            this.loginButton.Text = "Login";
-            this.loginButton.UseVisualStyleBackColor = true;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
             // 
             // emailInput
             // 
@@ -140,7 +130,7 @@
             this.forgotPassLink.AutoSize = true;
             this.forgotPassLink.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.forgotPassLink.LinkColor = System.Drawing.Color.Silver;
-            this.forgotPassLink.Location = new System.Drawing.Point(277, 251);
+            this.forgotPassLink.Location = new System.Drawing.Point(277, 241);
             this.forgotPassLink.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.forgotPassLink.Name = "forgotPassLink";
             this.forgotPassLink.Size = new System.Drawing.Size(100, 15);
@@ -176,12 +166,48 @@
             this.noAccLable.TabIndex = 6;
             this.noAccLable.Text = "Don\'t have an account?";
             // 
+            // errorMessage
+            // 
+            this.errorMessage.AutoSize = true;
+            this.errorMessage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.errorMessage.ForeColor = System.Drawing.Color.Red;
+            this.errorMessage.Location = new System.Drawing.Point(182, 305);
+            this.errorMessage.Name = "errorMessage";
+            this.errorMessage.Size = new System.Drawing.Size(45, 19);
+            this.errorMessage.TabIndex = 11;
+            this.errorMessage.Text = "label1";
+            // 
+            // loginButton
+            // 
+            this.loginButton.BackColor = System.Drawing.Color.Transparent;
+            this.loginButton.BorderColor = System.Drawing.Color.Transparent;
+            this.loginButton.ButtonColor = System.Drawing.Color.MintCream;
+            this.loginButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.loginButton.FlatAppearance.BorderSize = 0;
+            this.loginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.loginButton.ForeColor = System.Drawing.Color.Transparent;
+            this.loginButton.Location = new System.Drawing.Point(212, 269);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.loginButton.OnHoverButtonColor = System.Drawing.Color.LightCyan;
+            this.loginButton.OnHoverTextColor = System.Drawing.Color.SteelBlue;
+            this.loginButton.Size = new System.Drawing.Size(117, 33);
+            this.loginButton.TabIndex = 12;
+            this.loginButton.Text = "Login";
+            this.loginButton.TextColor = System.Drawing.Color.SteelBlue;
+            this.loginButton.UseVisualStyleBackColor = false;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
             // FormLogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(534, 461);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.logoPic);
             this.Controls.Add(this.signInText);
             this.Controls.Add(this.qouteText);
@@ -192,7 +218,6 @@
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.passwordInput);
             this.Controls.Add(this.emailInput);
-            this.Controls.Add(this.loginButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
@@ -207,8 +232,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.TextBox emailInput;
         private System.Windows.Forms.TextBox passwordInput;
         private System.Windows.Forms.Label emailLabel;
@@ -219,5 +242,7 @@
         private System.Windows.Forms.LinkLabel forgotPassLink;
         private System.Windows.Forms.LinkLabel noAccLink;
         private System.Windows.Forms.Label noAccLable;
+        private System.Windows.Forms.Label errorMessage;
+        private ePOSOne.btnProduct.Button_WOC loginButton;
     }
 }
