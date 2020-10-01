@@ -61,7 +61,7 @@ namespace Forms
         private void noAccLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
-            FormRegister register = new FormRegister();
+            FormRegister register = new FormRegister(DataHandler);
             register.ShowDialog();
             this.Close();
         }
