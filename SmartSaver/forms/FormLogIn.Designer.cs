@@ -34,7 +34,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.signInText = new System.Windows.Forms.Label();
             this.logoPic = new System.Windows.Forms.PictureBox();
-            this.qouteText = new System.Windows.Forms.Label();
+            this.quoteText = new System.Windows.Forms.Label();
             this.forgotPassLink = new System.Windows.Forms.LinkLabel();
             this.noAccLink = new System.Windows.Forms.LinkLabel();
             this.noAccLable = new System.Windows.Forms.Label();
@@ -112,16 +112,16 @@
             this.logoPic.TabIndex = 10;
             this.logoPic.TabStop = false;
             // 
-            // qouteText
+            // quoteText
             // 
-            this.qouteText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.qouteText.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.qouteText.Location = new System.Drawing.Point(22, 410);
-            this.qouteText.Name = "qouteText";
-            this.qouteText.Size = new System.Drawing.Size(490, 15);
-            this.qouteText.TabIndex = 8;
-            this.qouteText.Text = "Qoute";
-            this.qouteText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.quoteText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.quoteText.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.quoteText.Location = new System.Drawing.Point(22, 410);
+            this.quoteText.Name = "quoteText";
+            this.quoteText.Size = new System.Drawing.Size(490, 15);
+            this.quoteText.TabIndex = 8;
+            this.quoteText.Text = "Qoute";
+            this.quoteText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // forgotPassLink
             // 
@@ -209,7 +209,7 @@
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.logoPic);
             this.Controls.Add(this.signInText);
-            this.Controls.Add(this.qouteText);
+            this.Controls.Add(this.quoteText);
             this.Controls.Add(this.noAccLink);
             this.Controls.Add(this.noAccLable);
             this.Controls.Add(this.forgotPassLink);
@@ -237,7 +237,7 @@
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.Label signInText;
         private System.Windows.Forms.PictureBox logoPic;
-        private System.Windows.Forms.Label qouteText;
+        private System.Windows.Forms.Label quoteText;
         private System.Windows.Forms.LinkLabel forgotPassLink;
         private System.Windows.Forms.LinkLabel noAccLink;
         private System.Windows.Forms.Label noAccLable;

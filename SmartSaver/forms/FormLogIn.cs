@@ -19,6 +19,8 @@ namespace Forms
         /*Add when new logo exists
         private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
         private Image logo = Image.FromFile(resourceDirectory + @"\logo inverted.png");*/
+
+        private static readonly string resourceDirectoryQuotes = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\quotes.txt";
         public FormLogIn(Handler dataHandler)
         {
             InitializeComponent();
@@ -30,7 +32,20 @@ namespace Forms
 
         private void SetQoute()
         {
-            qouteText.Text = "“Money is a terrible master but an excellent servant.” —P.T.Barnum";
+            int amount;
+            try
+            {
+                string[] lines = File.ReadAllLines(resourceDirectoryQuotes);
+                amount = Int32.Parse(lines[0]);
+                var rand = new Random();
+                quoteText.Text = lines[rand.Next(1, amount + 1)];
+            }
+            catch(Exception e)
+            {
+                Debug.Write("\n" + e + "\n");
+            }
+
+            
         }
 
 
