@@ -8,8 +8,11 @@ namespace DataManager
     public class Handler
     {
         public DateTime Time { get; set; }
+
         public Data Data { get; }
+
         public DataTableConverter DataTableConverter { get; }
+
         public DataFilter DataFilter { get; }
 
         public DataJSON DataJSON { get; }

@@ -23,7 +23,6 @@ namespace Forms
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
 
         private Handler handler;
-        private EntryType entryType;
         private Data data;
         private DataTableConverter dataTableConverter;
         private DataFilter dataFilter;
@@ -33,20 +32,35 @@ namespace Forms
         private readonly string addIncomeButtonTitle = "Add Income";
         private readonly string addExpensesButtonTitle = "Add Expense";
 
+        //public EntryType EntryType { get; set; }
+        private EntryType _entryType;
+        public EntryType EntryType 
+        { 
+            get 
+            {
+                return _entryType;
+            } 
+            set 
+            {
+                _entryType = value;
+                UpdateDisplay();
+            } 
+        }
+
         private DataTable dataTable;
 
         public FinanceForm(Handler handler, EntryType entryType)
         {
             InitializeComponent();
             this.handler = handler;
-            this.entryType = entryType;
             data = handler.Data;
             dataTableConverter = handler.DataTableConverter;
             dataFilter = handler.DataFilter;
+            this._entryType = entryType;
             Init();
         }
 
-        public void Init()
+        private void Init()
         {
             SetTitles();
             UpdateDisplay();
@@ -54,7 +68,7 @@ namespace Forms
 
         public void SetTitles()
         {
-            switch(entryType)
+            switch(_entryType)
             {
                 case EntryType.Income:
                     this.Text = incomeFormTitle;
@@ -66,6 +80,7 @@ namespace Forms
                     break;
             }
         }
+
 
         #region Experimental
 
@@ -81,9 +96,9 @@ namespace Forms
         private void ButtonAddEntry_Click(object sender, EventArgs e)
         {
             DataEntry dataEntry = new DataEntry();
-            if (new AddEntryForm(dataEntry, this.entryType).ShowDialog() == DialogResult.OK)
+            if (new AddEntryForm(dataEntry, this._entryType).ShowDialog() == DialogResult.OK)
             {
-                switch (entryType)
+                switch (_entryType)
                 {
                     case EntryType.Income:
                         data.AddIncome(dataEntry.Amount, dataEntry.Title, handler.Time, dataEntry.IsMonthly);
@@ -111,7 +126,7 @@ namespace Forms
 
         public void DisplayTable()
         {
-            switch(entryType)
+            switch(EntryType)
             {
                 case EntryType.Income:
                     dataTable = dataTableConverter.CustomTable(dataFilter.GetIncomeByDate(handler.Time));

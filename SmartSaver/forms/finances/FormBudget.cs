@@ -77,26 +77,26 @@ namespace FormBudget
 
         private void ButtonAddIncome_Click(object sender, EventArgs e)
         {
-            DataEntry dataEntry = new DataEntry();
-            if (new AddEntryForm(dataEntry, "Add Income").ShowDialog() == DialogResult.OK)
-            {
-                data.AddIncome(dataEntry.Amount, dataEntry.Title, Handler.Time, dataEntry.IsMonthly);
-                Handler.DataJSON.WriteIncomeToFile();
-                DisplayTable();
-                DisplayBalance();
-            }
+            //DataEntry dataEntry = new DataEntry();
+            //if (new AddEntryForm(dataEntry, "Add Income").ShowDialog() == DialogResult.OK)
+            //{
+            //    data.AddIncome(dataEntry.Amount, dataEntry.Title, Handler.Time, dataEntry.IsMonthly);
+            //    Handler.DataJSON.WriteIncomeToFile();
+            //    DisplayTable();
+            //    DisplayBalance();
+            //}
         }
 
         private void ButtonAddExpense_Click(object sender, EventArgs e)
         {
-            DataEntry dataEntry = new DataEntry();
-            if(new AddEntryForm(dataEntry, "Add Expense").ShowDialog() == DialogResult.OK)
-            {
-                data.AddExpense(dataEntry.Amount, dataEntry.Title, Handler.Time, dataEntry.IsMonthly);
-                Handler.DataJSON.WriteExpensesToFile();
-                DisplayTable();
-                DisplayBalance();
-            }
+            //DataEntry dataEntry = new DataEntry();
+            //if(new AddEntryForm(dataEntry, "Add Expense").ShowDialog() == DialogResult.OK)
+            //{
+            //    data.AddExpense(dataEntry.Amount, dataEntry.Title, Handler.Time, dataEntry.IsMonthly);
+            //    Handler.DataJSON.WriteExpensesToFile();
+            //    DisplayTable();
+            //    DisplayBalance();
+            //}
         }
         #endregion
 

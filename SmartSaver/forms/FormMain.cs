@@ -44,19 +44,38 @@ namespace Forms
 
         private void ButtonBudget_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            if (activeForm is FinanceForm form)
+            {
+                form.EntryType = EntryType.Expense;
+            }
+            else
+            {
+                OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            }
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new FormIncome.FormIncome(DataHandler));
-            OpenChildForm(new FinanceForm(DataHandler, EntryType.Income));
+            if (activeForm is FinanceForm form)
+            {
+                form.EntryType = EntryType.Income;
+            }
+            else
+            {
+                OpenChildForm(new FinanceForm(DataHandler, EntryType.Income));
+            }
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(new FormExpenses.FormExpenses(DataHandler));
-            OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            if (activeForm is FinanceForm form)
+            {
+                form.EntryType = EntryType.Expense;
+            }
+            else
+            {
+                OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            }
         }
 
         private void ButtonGoals_Click(object sender, EventArgs e)
@@ -121,18 +140,36 @@ namespace Forms
             {
                 activeForm.Close();
             }
-            activeForm = childForm;
-            //it will behave like a control
-            childForm.TopLevel = false;
-            // make the form the up the whole panel
-            childForm.Dock = DockStyle.Fill;
-            //add the form to the list of the controls in the container panel
-            panelMain.Controls.Add(childForm);
-            // associate the form with the container panel
-            panelMain.Tag = childForm;
-            // to hide the logo
-            childForm.BringToFront();
-            childForm.Show();
+            else
+            {
+                if (!IsSameFormAlreadyOpen(childForm))
+                {
+                    activeForm = childForm;
+                    //it will behave like a control
+                    childForm.TopLevel = false;
+                    // make the form the up the whole panel
+                    childForm.Dock = DockStyle.Fill;
+                    //add the form to the list of the controls in the container panel
+                    panelMain.Controls.Add(childForm);
+                    // associate the form with the container panel
+                    panelMain.Tag = childForm;
+                    // to hide the logo
+                    childForm.BringToFront();
+                    childForm.Show();
+                }
+            }
+        }
+
+        private bool IsSameFormAlreadyOpen(Form form)
+        {
+            if(activeForm.GetType() == form.GetType())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void CloseChildForm()
