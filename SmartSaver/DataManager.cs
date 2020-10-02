@@ -84,12 +84,14 @@ namespace DataManager
 
 		public void RemoveIncome(int id)
 		{
-			Income.RemoveAt(id - 1);
+				var index = Income.FindIndex(x => x.ID == id);
+				Income.RemoveAt(index);
 		}
 
 		public void RemoveExpense(int id)
 		{
-			Expenses.RemoveAt(id - 1);
+			var index = Expenses.FindIndex(x => x.ID == id);
+			Income.RemoveAt(index);
 		}
 
 		/*Methods that allows to edit different parts of already existing entrys*/
