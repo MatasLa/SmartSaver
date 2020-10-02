@@ -28,6 +28,30 @@ namespace Forms
 
         private void registerButton_Click(object sender, EventArgs e)
         {
+            
+
+        }
+
+        private void backToLoginButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            FormLogIn login = new FormLogIn(DataHandler);
+            login.ShowDialog();
+            this.Close();
+        }
+
+        private void backToLoginButton_MouseEnter(object sender, EventArgs e)
+        {
+            backToLoginButton.Image = selectedLessButton;
+        }
+
+        private void backToLoginButton_MouseLeave(object sender, EventArgs e)
+        {
+            backToLoginButton.Image = unSelectedLessButton;
+        }
+
+        private void registerButton_Click_1(object sender, EventArgs e)
+        {
             var email = emailInput.Text;
             var pass = passwordInput1.Text;
             var passConfirm = passwordInput2.Text;
@@ -53,28 +77,7 @@ namespace Forms
             {
                 errorMessage.Text = "Passwords did not match!";
             }
-
         }
-
-        private void backToLoginButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            FormLogIn login = new FormLogIn(DataHandler);
-            login.ShowDialog();
-            this.Close();
-        }
-
-        private void backToLoginButton_MouseEnter(object sender, EventArgs e)
-        {
-            backToLoginButton.Image = selectedLessButton;
-        }
-
-        private void BackToLoginButton_MouseLeave(object sender, EventArgs e)
-        {
-            backToLoginButton.Image = unSelectedLessButton;
-        }
-
-        
     }
 
         

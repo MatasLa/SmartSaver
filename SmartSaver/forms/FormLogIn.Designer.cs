@@ -88,7 +88,6 @@
             this.passwordLabel.Size = new System.Drawing.Size(67, 19);
             this.passwordLabel.TabIndex = 4;
             this.passwordLabel.Text = "Password";
-            this.passwordLabel.Click += new System.EventHandler(this.label2_Click);
             // 
             // signInText
             // 
@@ -115,12 +114,11 @@
             // 
             // qouteText
             // 
-            this.qouteText.AutoSize = true;
             this.qouteText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.qouteText.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.qouteText.Location = new System.Drawing.Point(111, 407);
+            this.qouteText.Location = new System.Drawing.Point(22, 410);
             this.qouteText.Name = "qouteText";
-            this.qouteText.Size = new System.Drawing.Size(39, 15);
+            this.qouteText.Size = new System.Drawing.Size(490, 15);
             this.qouteText.TabIndex = 8;
             this.qouteText.Text = "Qoute";
             this.qouteText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -168,14 +166,14 @@
             // 
             // errorMessage
             // 
-            this.errorMessage.AutoSize = true;
             this.errorMessage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.errorMessage.ForeColor = System.Drawing.Color.Red;
-            this.errorMessage.Location = new System.Drawing.Point(182, 305);
+            this.errorMessage.Location = new System.Drawing.Point(171, 310);
             this.errorMessage.Name = "errorMessage";
-            this.errorMessage.Size = new System.Drawing.Size(45, 19);
+            this.errorMessage.Size = new System.Drawing.Size(212, 19);
             this.errorMessage.TabIndex = 11;
             this.errorMessage.Text = "label1";
+            this.errorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // loginButton
             // 
@@ -184,6 +182,7 @@
             this.loginButton.ButtonColor = System.Drawing.Color.MintCream;
             this.loginButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.loginButton.FlatAppearance.BorderSize = 0;
+            this.loginButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.loginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loginButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);

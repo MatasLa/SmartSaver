@@ -35,9 +35,9 @@
             this.passwordInput1 = new System.Windows.Forms.TextBox();
             this.passwordInput2 = new System.Windows.Forms.TextBox();
             this.passwordLabel2 = new System.Windows.Forms.Label();
-            this.registerButton = new System.Windows.Forms.Button();
             this.backToLoginButton = new System.Windows.Forms.Button();
             this.errorMessage = new System.Windows.Forms.Label();
+            this.registerButton = new ePOSOne.btnProduct.Button_WOC();
             this.SuspendLayout();
             // 
             // registerLabel
@@ -45,11 +45,11 @@
             this.registerLabel.AutoSize = true;
             this.registerLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.registerLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.registerLabel.Location = new System.Drawing.Point(221, 67);
+            this.registerLabel.Location = new System.Drawing.Point(164, 65);
             this.registerLabel.Name = "registerLabel";
-            this.registerLabel.Size = new System.Drawing.Size(94, 30);
+            this.registerLabel.Size = new System.Drawing.Size(221, 30);
             this.registerLabel.TabIndex = 0;
-            this.registerLabel.Text = "Sign Up";
+            this.registerLabel.Text = "Welcome to ePiggy!";
             // 
             // emailLabel
             // 
@@ -117,19 +117,11 @@
             this.passwordLabel2.TabIndex = 4;
             this.passwordLabel2.Text = "Confirm Password";
             // 
-            // registerButton
-            // 
-            this.registerButton.Location = new System.Drawing.Point(231, 369);
-            this.registerButton.Name = "registerButton";
-            this.registerButton.Size = new System.Drawing.Size(75, 23);
-            this.registerButton.TabIndex = 5;
-            this.registerButton.Text = "Register";
-            this.registerButton.UseVisualStyleBackColor = true;
-            this.registerButton.Click += new System.EventHandler(this.registerButton_Click);
-            // 
             // backToLoginButton
             // 
             this.backToLoginButton.FlatAppearance.BorderSize = 0;
+            this.backToLoginButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.backToLoginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.backToLoginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backToLoginButton.ForeColor = System.Drawing.SystemColors.Highlight;
             this.backToLoginButton.Location = new System.Drawing.Point(27, 29);
@@ -138,17 +130,43 @@
             this.backToLoginButton.TabIndex = 6;
             this.backToLoginButton.UseVisualStyleBackColor = true;
             this.backToLoginButton.Click += new System.EventHandler(this.backToLoginButton_Click);
+            this.backToLoginButton.MouseEnter += new System.EventHandler(this.backToLoginButton_MouseEnter);
+            this.backToLoginButton.MouseLeave += new System.EventHandler(this.backToLoginButton_MouseLeave);
             // 
             // errorMessage
             // 
-            this.errorMessage.AutoSize = true;
             this.errorMessage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.errorMessage.ForeColor = System.Drawing.Color.Red;
-            this.errorMessage.Location = new System.Drawing.Point(170, 335);
+            this.errorMessage.Location = new System.Drawing.Point(146, 307);
             this.errorMessage.Name = "errorMessage";
-            this.errorMessage.Size = new System.Drawing.Size(45, 19);
+            this.errorMessage.Size = new System.Drawing.Size(250, 19);
             this.errorMessage.TabIndex = 7;
             this.errorMessage.Text = "label1";
+            this.errorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // registerButton
+            // 
+            this.registerButton.BackColor = System.Drawing.Color.Transparent;
+            this.registerButton.BorderColor = System.Drawing.Color.Transparent;
+            this.registerButton.ButtonColor = System.Drawing.Color.MintCream;
+            this.registerButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.registerButton.FlatAppearance.BorderSize = 0;
+            this.registerButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.registerButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.registerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.registerButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.registerButton.ForeColor = System.Drawing.Color.Transparent;
+            this.registerButton.Location = new System.Drawing.Point(209, 329);
+            this.registerButton.Name = "registerButton";
+            this.registerButton.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.registerButton.OnHoverButtonColor = System.Drawing.Color.LightCyan;
+            this.registerButton.OnHoverTextColor = System.Drawing.Color.SteelBlue;
+            this.registerButton.Size = new System.Drawing.Size(117, 33);
+            this.registerButton.TabIndex = 12;
+            this.registerButton.Text = "Register";
+            this.registerButton.TextColor = System.Drawing.Color.SteelBlue;
+            this.registerButton.UseVisualStyleBackColor = false;
+            this.registerButton.Click += new System.EventHandler(this.registerButton_Click_1);
             // 
             // FormRegister
             // 
@@ -156,9 +174,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
             this.ClientSize = new System.Drawing.Size(534, 461);
+            this.Controls.Add(this.registerButton);
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.backToLoginButton);
-            this.Controls.Add(this.registerButton);
             this.Controls.Add(this.passwordLabel2);
             this.Controls.Add(this.passwordInput2);
             this.Controls.Add(this.passwordInput1);
@@ -185,8 +203,8 @@
         private System.Windows.Forms.TextBox passwordInput1;
         private System.Windows.Forms.TextBox passwordInput2;
         private System.Windows.Forms.Label passwordLabel2;
-        private System.Windows.Forms.Button registerButton;
         private System.Windows.Forms.Button backToLoginButton;
         private System.Windows.Forms.Label errorMessage;
+        private ePOSOne.btnProduct.Button_WOC registerButton;
     }
 }

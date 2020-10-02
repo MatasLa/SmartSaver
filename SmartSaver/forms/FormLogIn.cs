@@ -33,10 +33,6 @@ namespace Forms
             qouteText.Text = "“Money is a terrible master but an excellent servant.” —P.T.Barnum";
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -76,6 +72,7 @@ namespace Forms
                 errorMessage.Text = "Wrong e-mail or password!";
             }
         }
+
     }
     
 }
