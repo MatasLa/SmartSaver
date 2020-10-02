@@ -104,84 +104,170 @@ namespace DataManager
 		public bool EditIncomeItem(int id, double value)/*Returns true if success(item found), and false if failure*/
 		{
 			var temp = Income.FirstOrDefault(x => x.ID == id);
-			temp.Amount = value;
-			return true;
-			//return false;
+			if (temp != null)
+			{
+				temp.Amount = value;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		public bool EditIncomeItem(int id, string value)
 		{
 			var temp = Income.FirstOrDefault(x => x.ID == id);
-			temp.Title = value;
-			return true;
+			if (temp != null)
+			{
+				temp.Title = value;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		public bool EditIncomeItem(int id, DateTime date)
 		{
 			var temp = Income.FirstOrDefault(x => x.ID == id);
-			temp.Date = date;
-			return true;
+			if (temp != null)
+			{
+				temp.Date = date;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		public bool EditIncomeItem(int id, bool isMonthly)
 		{
 			var temp = Income.FirstOrDefault(x => x.ID == id);
-			temp.IsMonthly = isMonthly;
-			return true;
+			if (temp != null)
+			{
+				temp.IsMonthly = isMonthly;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		public bool EditIncomeItem(int id, int importance)
         {
 			var temp = Income.FirstOrDefault(x => x.ID == id);
-			temp.Importance = importance;
-			return true;
+			if (temp != null)
+			{
+				temp.Importance = importance;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
 		}
 		public bool EditIncomeItem(int id, string value, double amount, DateTime date, bool isMonthly, int importance)
 		{
 			var temp = Income.FirstOrDefault(x => x.ID == id);
-			temp.Title = value;
-			temp.Amount = amount;
-			temp.Date = date;
-			temp.IsMonthly = isMonthly;
-			temp.Importance = importance;
-			return true;
+			if (temp != null)
+			{
+				temp.Title = value;
+				temp.Amount = amount;
+				temp.Date = date;
+				temp.IsMonthly = isMonthly;
+				temp.Importance = importance;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		
 		public bool EditExpensesItem(int id, double value)/*Returns true if success(item found), and false if failure*/
 		{
 			var temp = Expenses.FirstOrDefault(x => x.ID == id);
-			temp.Amount = value;
-			return true;
+			if (temp != null)
+			{
+				temp.Amount = value;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		public bool EditExpensesItem(int id, string value)
 		{
 			var temp = Expenses.FirstOrDefault(x => x.ID == id);
-			temp.Title = value;
-			return true;
+			if (temp != null)
+			{
+				temp.Title = value;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
 		}
 		public bool EditExpensesItem(int id, DateTime date)
 		{
 			var temp = Expenses.FirstOrDefault(x => x.ID == id);
-			temp.Date = date;
-			return true;
+			if (temp != null)
+			{
+				temp.Date = date;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		public bool EditExpensesItem(int id, bool isMonthly)
 		{
 			var temp = Expenses.FirstOrDefault(x => x.ID == id);
-			temp.IsMonthly = isMonthly;
-			return true;
+			if (temp != null)
+			{
+				temp.IsMonthly = isMonthly;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		public bool EditExpensesItem(int id, int importance)
 		{
 			var temp = Expenses.FirstOrDefault(x => x.ID == id);
-			temp.Importance = importance;
-			return true;
+			if (temp != null)
+			{
+				temp.Importance = importance;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		public bool EditExpensesItem(int id, string value, double amount, DateTime date, bool isMonthly, int importance)
 		{
 			var temp = Expenses.FirstOrDefault(x => x.ID == id);
-			temp.Title = value;
-			temp.Amount = amount;
-			temp.Date = date;
-			temp.IsMonthly = isMonthly;
-			temp.Importance = importance;
-			return true;
+			if (temp != null)
+			{
+				temp.Title = value;
+				temp.Amount = amount;
+				temp.Date = date;
+				temp.IsMonthly = isMonthly;
+				temp.Importance = importance;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+			
 		}
 
 	}
