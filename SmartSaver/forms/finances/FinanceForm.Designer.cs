@@ -1,6 +1,6 @@
-﻿namespace FormExpenses
+﻿namespace Forms
 {
-    partial class FormExpenses
+    partial class FinanceForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormExpenses));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinanceForm));
             this.panelTop = new System.Windows.Forms.Panel();
             this.textBoxBalance = new System.Windows.Forms.TextBox();
-            this.buttonAddExpense = new System.Windows.Forms.Button();
+            this.buttonAddEntry = new System.Windows.Forms.Button();
             this.buttonNextYear = new System.Windows.Forms.Button();
             this.buttonPreviousYear = new System.Windows.Forms.Button();
             this.buttonNextMonth = new System.Windows.Forms.Button();
@@ -51,7 +51,7 @@
             // 
             this.panelTop.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelTop.Controls.Add(this.textBoxBalance);
-            this.panelTop.Controls.Add(this.buttonAddExpense);
+            this.panelTop.Controls.Add(this.buttonAddEntry);
             this.panelTop.Controls.Add(this.buttonNextYear);
             this.panelTop.Controls.Add(this.buttonPreviousYear);
             this.panelTop.Controls.Add(this.buttonNextMonth);
@@ -68,7 +68,7 @@
             // textBoxBalance
             // 
             this.textBoxBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBalance.Location = new System.Drawing.Point(726, 55);
+            this.textBoxBalance.Location = new System.Drawing.Point(659, 36);
             this.textBoxBalance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxBalance.Name = "textBoxBalance";
             this.textBoxBalance.ReadOnly = true;
@@ -76,17 +76,16 @@
             this.textBoxBalance.TabIndex = 5;
             this.textBoxBalance.Text = "Balance";
             // 
-            // buttonAddExpense
+            // buttonAddEntry
             // 
-            this.buttonAddExpense.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonAddExpense.Location = new System.Drawing.Point(578, 55);
-            this.buttonAddExpense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonAddExpense.Name = "buttonAddExpense";
-            this.buttonAddExpense.Size = new System.Drawing.Size(134, 22);
-            this.buttonAddExpense.TabIndex = 4;
-            this.buttonAddExpense.Text = "Add Expense";
-            this.buttonAddExpense.UseVisualStyleBackColor = true;
-            this.buttonAddExpense.Click += new System.EventHandler(this.ButtonAddExpense_Click);
+            this.buttonAddEntry.Location = new System.Drawing.Point(60, 50);
+            this.buttonAddEntry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAddEntry.Name = "buttonAddEntry";
+            this.buttonAddEntry.Size = new System.Drawing.Size(105, 22);
+            this.buttonAddEntry.TabIndex = 3;
+            this.buttonAddEntry.Text = "Add Entry";
+            this.buttonAddEntry.UseVisualStyleBackColor = true;
+            this.buttonAddEntry.Click += new System.EventHandler(this.ButtonAddEntry_Click);
             // 
             // buttonNextYear
             // 
@@ -239,7 +238,7 @@
             this.dataGridView.Text = "dataGridView";
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             // 
-            // FormExpenses
+            // FinanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -248,7 +247,7 @@
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "FormExpenses";
+            this.Name = "FinanceForm";
             this.Text = "FormBudget";
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
@@ -273,6 +272,6 @@
         private System.Windows.Forms.DataGridView dataGridView
             ;
         private System.Windows.Forms.TextBox textBoxBalance;
-        private System.Windows.Forms.Button buttonAddExpense;
+        private System.Windows.Forms.Button buttonAddEntry;
     }
 }

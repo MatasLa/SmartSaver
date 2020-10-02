@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataManager;
 using Forms;
+using SmartSaver;
 using Utilities;
 
 namespace Forms
@@ -43,17 +44,19 @@ namespace Forms
 
         private void ButtonBudget_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormBudget.FormBudget(DataHandler));
+            OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormIncome.FormIncome(DataHandler));
+            //OpenChildForm(new FormIncome.FormIncome(DataHandler));
+            OpenChildForm(new FinanceForm(DataHandler, EntryType.Income));
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormExpenses.FormExpenses(DataHandler));
+            //OpenChildForm(new FormExpenses.FormExpenses(DataHandler));
+            OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
         }
 
         private void ButtonGoals_Click(object sender, EventArgs e)

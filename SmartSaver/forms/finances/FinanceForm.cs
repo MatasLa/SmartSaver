@@ -7,13 +7,13 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
-using Forms;
 using Utilities;
+using SmartSaver;
 
-namespace FormIncome
+namespace Forms
 {
     //reikes padaryti
-    public partial class FormIncome : Form
+    public partial class FinanceForm : Form
     {
         // This will get the current PROJECT directory
         private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
@@ -21,17 +21,25 @@ namespace FormIncome
         private Image selectedMorebutton = Image.FromFile(resourceDirectory + @"\moreButtonSelected.png");
         private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
         private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
-        private Handler Handler { get; }
+
+        private Handler handler;
+        private EntryType entryType;
         private Data data;
         private DataTableConverter dataTableConverter;
         private DataFilter dataFilter;
 
-        private DataTable incomeTable;
+        private readonly string incomeFormTitle = "Income";
+        private readonly string expensesFormTitle = "Expenses";
+        private readonly string addIncomeButtonTitle = "Add Income";
+        private readonly string addExpensesButtonTitle = "Add Expense";
 
-        public FormIncome(Handler handler)
+        private DataTable dataTable;
+
+        public FinanceForm(Handler handler, EntryType entryType)
         {
             InitializeComponent();
-            Handler = handler;
+            this.handler = handler;
+            this.entryType = entryType;
             data = handler.Data;
             dataTableConverter = handler.DataTableConverter;
             dataFilter = handler.DataFilter;
@@ -40,7 +48,23 @@ namespace FormIncome
 
         public void Init()
         {
+            SetTitles();
             UpdateDisplay();
+        }
+
+        public void SetTitles()
+        {
+            switch(entryType)
+            {
+                case EntryType.Income:
+                    this.Text = incomeFormTitle;
+                    buttonAddEntry.Text = addIncomeButtonTitle;
+                    break;
+                case EntryType.Expense:
+                    this.Text = expensesFormTitle;
+                    buttonAddEntry.Text = addExpensesButtonTitle;
+                    break;
+            }
         }
 
         #region Experimental
@@ -53,45 +77,28 @@ namespace FormIncome
 
         #region Button Logic
 
-        private void ButtonNextYear_Click(object sender, EventArgs e)
+
+        private void ButtonAddEntry_Click(object sender, EventArgs e)
         {
-            Handler.Time = TimeManager.MoveToNextYear(Handler.Time);
-            UpdateDisplay();
-        }
-
-
-        private void ButtonPreviousYear_Click(object sender, EventArgs e)
-        {
-            Handler.Time = TimeManager.MoveToPreviousYear(Handler.Time);
-            UpdateDisplay();
-        }
-
-        private void ButtonNextMonth_Click(object sender, EventArgs e)
-        {
-            Handler.Time = TimeManager.MoveToNextMonth(Handler.Time);
-            UpdateDisplay();
-        }
-
-        private void ButtonPreviousMonth_Click(object sender, EventArgs e)
-        {
-            Handler.Time = TimeManager.MoveToPreviousMonth(Handler.Time);
-            UpdateDisplay();
-        }
-
-
-        private void ButtonAddIncome_Click(object sender, EventArgs e)
-        {
-            if ((new FormAddIncome(Handler)).ShowDialog() == DialogResult.OK)
+            DataEntry dataEntry = new DataEntry();
+            if (new AddEntryForm(dataEntry, this.entryType).ShowDialog() == DialogResult.OK)
             {
+                switch (entryType)
+                {
+                    case EntryType.Income:
+                        data.AddIncome(dataEntry.Amount, dataEntry.Title, handler.Time, dataEntry.IsMonthly);
+                        handler.DataJSON.WriteIncomeToFile();
+                        break;
+                    case EntryType.Expense:
+                        data.AddExpense(dataEntry.Amount, dataEntry.Title, handler.Time, dataEntry.IsMonthly);
+                        handler.DataJSON.WriteExpensesToFile();
+                        break;
+                }
                 DisplayTable();
                 DisplayBalance();
             }
         }
 
-        private void ButtonAddExpense_Click(object sender, EventArgs e)
-        {
-
-        }
         #endregion
 
         #region Data Display
@@ -104,17 +111,24 @@ namespace FormIncome
 
         public void DisplayTable()
         {
-            incomeTable = dataTableConverter.CustomTable(dataFilter.GetIncomeByDate(Handler.Time));
-            dataGridView.DataSource = incomeTable;
-
+            switch(entryType)
+            {
+                case EntryType.Income:
+                    dataTable = dataTableConverter.CustomTable(dataFilter.GetIncomeByDate(handler.Time));
+                    break;
+                case EntryType.Expense:
+                    dataTable = dataTableConverter.CustomTable(dataFilter.GetExpensesByDate(handler.Time));
+                    break;
+            }
+            dataGridView.DataSource = dataTable;
             dataGridView.Columns[0].Visible = false;
         }
-
+    
         private void DisplayBalance()
         {
-            var balance = dataFilter.GetBalanceByDate(Handler.Time);
+            var balance = Math.Round(dataFilter.GetBalanceByDate(handler.Time), 2);
             textBoxBalance.BackColor = textBoxBalance.BackColor;
-            if (dataFilter.IsBalancePositiveByDate(Handler.Time))
+            if (dataFilter.IsBalancePositiveByDate(handler.Time))
             {
                 textBoxBalance.ForeColor = Color.Green;
             }
@@ -127,10 +141,37 @@ namespace FormIncome
 
         private void DisplayDate()
         {
-            textBoxCurrentMonth.Text = Handler.Time.ToString("MMM");
-            textBoxCurrentYear.Text = Handler.Time.Year.ToString();
-            #endregion
+            textBoxCurrentMonth.Text = handler.Time.ToString("MMM");
+            textBoxCurrentYear.Text = handler.Time.Year.ToString();
         }
+        #endregion
+
+        #region Time Button Logic
+        private void ButtonNextYear_Click(object sender, EventArgs e)
+        {
+            handler.Time = TimeManager.MoveToNextYear(handler.Time);
+            UpdateDisplay();
+        }
+
+        private void ButtonPreviousYear_Click(object sender, EventArgs e)
+        {
+            handler.Time = TimeManager.MoveToPreviousYear(handler.Time);
+            UpdateDisplay();
+        }
+
+        private void ButtonNextMonth_Click(object sender, EventArgs e)
+        {
+            handler.Time = TimeManager.MoveToNextMonth(handler.Time);
+            UpdateDisplay();
+        }
+
+        private void ButtonPreviousMonth_Click(object sender, EventArgs e)
+        {
+            handler.Time = TimeManager.MoveToPreviousMonth(handler.Time);
+            UpdateDisplay();
+        }
+        #endregion
+
         #region Button Image Swapping
 
         private void buttonNextMonth_MouseEnter(object sender, EventArgs e)

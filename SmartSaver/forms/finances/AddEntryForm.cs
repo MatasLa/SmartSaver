@@ -6,38 +6,54 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataManager;
+using SmartSaver;
 using Utilities;
 
 namespace Forms
 {
-    public partial class FormAddIncome : Form
+    public partial class AddEntryForm : Form
     {
-        //butu fainai padaryti inheretence normalesni, bet designeris neveikia
-
-        private Handler handler;
-        private double value;
-        private string title;
+        private DataEntry dataEntry;
+        private EntryType entryType;
         private string errorMessage;
-        private string badTitleErrorMessage = "Please enter a title";
-        private string badNumberErrorMessage = "Please enter a valid number";
+        private readonly string badTitleErrorMessage = "Please enter a title";
+        private readonly string badNumberErrorMessage = "Please enter a valid number";
+        private readonly string incomeTitle = "Add Income";
+        private readonly string expenseTitle = "Add Expense";
 
-        public FormAddIncome(Handler handler)
+        public AddEntryForm(DataEntry dataEntry, EntryType entryType)
         {
             InitializeComponent();
+            this.dataEntry = dataEntry;
+            this.entryType = entryType;
+            SetTitle();
             Select();
-            this.handler = handler;
+        }
+
+        private void SetTitle()
+        {
+            switch (entryType)
+            {
+                case EntryType.Income:
+                    this.Text = incomeTitle;
+                    break;
+                case EntryType.Expense:
+                    this.Text = expenseTitle;
+                    break;
+            }
+
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             if (IsInputValid())
             {
-                handler.Data.AddIncome(value, title, date: handler.Time, isMonthly: checkBoxMonthly.Checked);
-                handler.DataJSON.WriteIncomeToFile();
+                TakeInput();
                 DialogResult = DialogResult.OK;
             }
             else
             {
+                CreateErrorMessage();
                 MessageBox.Show(errorMessage);
             }
         }
@@ -46,20 +62,19 @@ namespace Forms
         {
             if (InputValidator.IsNameValid(textBoxTitle.Text) && InputValidator.IsNameValid(textBoxValue.Text))
             {
-                TakeInput();
                 return true;
             }
             else 
             {
-                CreateErrorMessage();
                 return false;
             }
         }
 
         private void TakeInput()
         {
-            value = Double.Parse(textBoxValue.Text);
-            title = textBoxTitle.Text;
+            dataEntry.Amount = Math.Round(Double.Parse(textBoxValue.Text), 2);
+            dataEntry.Title = textBoxTitle.Text;
+            dataEntry.IsMonthly = checkBoxMonthly.Checked;
         }
 
         private void CreateErrorMessage()
@@ -84,6 +99,8 @@ namespace Forms
             {
                 textBoxValue.Text = "";
             }
+            //duodam regex chekeriui stringa ir nauja chara, 
+            //jeigu geras charas stringa keiciam, jeigu negeras nekeiciam
         }
 
         private void TextBoxValue_KeyPress(object sender, KeyPressEventArgs e)

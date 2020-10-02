@@ -10,7 +10,15 @@ namespace Utilities
         {
             if (Double.TryParse(str, out value))
             {
-                return true;
+                if (Math.Round(value, 2) == value)
+                {
+                    return true;
+                    //Too many decimals
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {

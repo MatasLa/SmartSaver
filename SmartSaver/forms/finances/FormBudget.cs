@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using DataManager;
 using Forms;
 using Utilities;
+using System.Drawing.Text;
 
 namespace FormBudget
 {
@@ -76,8 +77,11 @@ namespace FormBudget
 
         private void ButtonAddIncome_Click(object sender, EventArgs e)
         {
-            if ((new FormAddIncome(Handler)).ShowDialog() == DialogResult.OK)
+            DataEntry dataEntry = new DataEntry();
+            if (new AddEntryForm(dataEntry, "Add Income").ShowDialog() == DialogResult.OK)
             {
+                data.AddIncome(dataEntry.Amount, dataEntry.Title, Handler.Time, dataEntry.IsMonthly);
+                Handler.DataJSON.WriteIncomeToFile();
                 DisplayTable();
                 DisplayBalance();
             }
@@ -85,8 +89,11 @@ namespace FormBudget
 
         private void ButtonAddExpense_Click(object sender, EventArgs e)
         {
-            if((new FormAddExpense(Handler)).ShowDialog() == DialogResult.OK)
+            DataEntry dataEntry = new DataEntry();
+            if(new AddEntryForm(dataEntry, "Add Expense").ShowDialog() == DialogResult.OK)
             {
+                data.AddExpense(dataEntry.Amount, dataEntry.Title, Handler.Time, dataEntry.IsMonthly);
+                Handler.DataJSON.WriteExpensesToFile();
                 DisplayTable();
                 DisplayBalance();
             }
