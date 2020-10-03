@@ -7,12 +7,12 @@ namespace Utilities
 {
     public class NumberFormatter
     {
-        public static string FormatCurrency(double value)
+        public static string FormatCurrency(decimal value)
         {
             var cultureInfo = CultureInfo.CurrentCulture;
             var numberFormat = cultureInfo.NumberFormat;
             string pattern = null;
-            if (value >= 0)
+            if (value >= Decimal.Zero)
             {
                 switch (numberFormat.CurrencyPositivePattern)
                 {

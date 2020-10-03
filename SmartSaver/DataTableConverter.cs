@@ -51,7 +51,7 @@ namespace DataManager
             var dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("Title", typeof(string));
-            dt.Columns.Add("Amount", typeof(double));
+            dt.Columns.Add("Amount", typeof(decimal));
             dt.Columns.Add("Date", typeof(DateTime));
             dt.Columns.Add("Recurring", typeof(bool));
             return dt;
@@ -62,7 +62,7 @@ namespace DataManager
             var dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("Title", typeof(string));
-            dt.Columns.Add("Amount", typeof(double));
+            dt.Columns.Add("Amount", typeof(decimal));
             dt.Columns.Add("Date", typeof(DateTime));
             dt.Columns.Add("Recurring", typeof(bool));
 
@@ -78,7 +78,7 @@ namespace DataManager
             var dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("Title", typeof(string));
-            dt.Columns.Add("Amount", typeof(double));
+            dt.Columns.Add("Amount", typeof(decimal));
             dt.Columns.Add("Date", typeof(DateTime));
             dt.Columns.Add("Recurring", typeof(bool));
 

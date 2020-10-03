@@ -38,6 +38,8 @@ namespace Forms
             Select();
         }
 
+
+        #region Initialization
         private void SetUpAddOrEdit()
         {
             if (dataEntry.ID == 0)
@@ -74,7 +76,7 @@ namespace Forms
                     Text = editExpenseTitle;
                     break;
             }
-            Text += " \"" + dataEntry.Title + "\""; 
+            Text += " \"" + dataEntry.Title + "\"";
             textBoxTitle.Text = dataEntry.Title;
             textBoxValue.Text = dataEntry.Amount.ToString();
             checkBoxMonthly.Checked = dataEntry.IsMonthly;
@@ -93,14 +95,16 @@ namespace Forms
                 MessageBox.Show(errorMessage);
             }
         }
+        #endregion
 
+        #region Input Handling
         private bool IsInputValid()
         {
             if (InputValidator.IsCurrencyInputValid(textBoxValue.Text) && InputValidator.IsNameValid(textBoxValue.Text))
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
@@ -108,17 +112,17 @@ namespace Forms
 
         private void TakeInput()
         {
-            dataEntry.Amount = Math.Round(Double.Parse(textBoxValue.Text), 2);
+            dataEntry.Amount = Decimal.Round(Decimal.Parse(textBoxValue.Text), 2);
             dataEntry.Title = textBoxTitle.Text;
             dataEntry.IsMonthly = checkBoxMonthly.Checked;
         }
 
         private void CreateErrorMessage()
         {
-            if(InputValidator.IsNameValid(textBoxTitle.Text))
+            if (InputValidator.IsNameValid(textBoxTitle.Text))
             {
                 errorMessage = badNumberErrorMessage;
-            } 
+            }
             else if (InputValidator.IsCurrencyInputValid(textBoxValue.Text))
             {
                 errorMessage = badTitleErrorMessage;
@@ -127,8 +131,10 @@ namespace Forms
             {
                 errorMessage = badTitleErrorMessage + "\n" + badNumberErrorMessage;
             }
-        }
+        } 
+        #endregion
 
+        #region Event Handlers
         private void TextBoxValue_TextChanged(object sender, EventArgs e)
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(textBoxValue.Text, "  ^ [0-9]"))
@@ -153,10 +159,12 @@ namespace Forms
 
         private void EntryForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char) Keys.Escape)
+            if (e.KeyChar == (char)Keys.Escape)
             {
                 buttonCancel.PerformClick();
             }
-        }
+        } 
+        #endregion
+
     }
 }

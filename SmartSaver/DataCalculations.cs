@@ -8,9 +8,9 @@
             this.data = data;
         }
 
-        public double CheckBalance()
+        public decimal CheckBalance()
         {
-            double sum = 0;
+            decimal sum = 0;
             foreach (DataEntry data in data.Income)
             {
                 sum += data.Amount;

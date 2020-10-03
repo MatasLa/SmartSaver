@@ -62,20 +62,6 @@ namespace Forms
             UpdateDisplay();
         }
 
-        public void SetTitles()
-        {
-            switch(_entryType)
-            {
-                case EntryType.Income:
-                    this.Text = incomeFormTitle;
-                    buttonAddEntry.Text = addIncomeButtonTitle;
-                    break;
-                case EntryType.Expense:
-                    this.Text = expensesFormTitle;
-                    buttonAddEntry.Text = addExpensesButtonTitle;
-                    break;
-            }
-        }
 
 
         #region Experimental
@@ -148,6 +134,7 @@ namespace Forms
         #endregion
 
         #region Data Display
+
         public void UpdateDisplay()
         {
             DisplayDate();
@@ -177,7 +164,7 @@ namespace Forms
         {
             var balance = dataFilter.GetBalanceByDate(handler.Time);
             textBoxBalance.BackColor = textBoxBalance.BackColor;
-            if (balance >= 0)
+            if (balance >= Decimal.Zero)
             {
                 textBoxBalance.ForeColor = Color.Green;
             }
@@ -192,6 +179,21 @@ namespace Forms
         {
             textBoxCurrentMonth.Text = handler.Time.ToString("MMM");
             textBoxCurrentYear.Text = handler.Time.Year.ToString();
+        }
+
+        public void SetTitles()
+        {
+            switch (_entryType)
+            {
+                case EntryType.Income:
+                    this.Text = incomeFormTitle;
+                    buttonAddEntry.Text = addIncomeButtonTitle;
+                    break;
+                case EntryType.Expense:
+                    this.Text = expensesFormTitle;
+                    buttonAddEntry.Text = addExpensesButtonTitle;
+                    break;
+            }
         }
         #endregion
 

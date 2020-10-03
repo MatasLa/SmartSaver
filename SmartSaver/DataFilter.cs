@@ -14,21 +14,21 @@ namespace DataManager
             this.data = data;
         }
 
-		public List<DataEntry> GetIncomeHigherThan(double amount)
+		public List<DataEntry> GetIncomeHigherThan(decimal amount)
 		{
 			List<DataEntry> temp = data.Income.Where(x => x.Amount >= amount).ToList();
 			return temp;
 		}
 
-		public List<DataEntry> GetExpensesHigherThan(double amount)
+		public List<DataEntry> GetExpensesHigherThan(decimal amount)
 		{
 			List<DataEntry> temp = data.Expenses.Where(x => x.Amount >= amount).ToList();
 			return temp;
 		}
 
-		public double GetBalanceByDate(DateTime dateTime)
+		public decimal GetBalanceByDate(DateTime dateTime)
         {
-			double sum = 0;
+			decimal sum = 0;
 			foreach (DataEntry data in GetIncomeByDate(dateTime))
 			{
 				sum += data.Amount;

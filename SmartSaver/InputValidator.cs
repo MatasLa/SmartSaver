@@ -9,10 +9,10 @@ namespace Utilities
     {
         public static bool IsCurrencyInputValid(string str)
         {
-            double value;
-            if (Double.TryParse(str, NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out value))
+            decimal value;
+            if (Decimal.TryParse(str, NumberStyles.Any, CultureInfo.CurrentCulture, out value))
             {
-                if (Math.Round(value, 2) == value)
+                if (Decimal.Round(value, 2) == value)
                 {
                     return true;
                     //Too many decimals
