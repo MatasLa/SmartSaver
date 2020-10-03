@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using DataManager;
 using Utilities;
 using EPiggy;
+using ePiggy;
+using System.Globalization;
 
 namespace Forms
 {
@@ -40,7 +42,7 @@ namespace Forms
             set 
             {
                 _entryType = value;
-                UpdateDisplay();
+                Init();
             } 
         }
 
@@ -136,7 +138,10 @@ namespace Forms
     
         private void DisplayBalance()
         {
-            var balance = Math.Round(dataFilter.GetBalanceByDate(handler.Time), 2);
+
+
+            var balance = dataFilter.GetBalanceByDate(handler.Time);
+            
             textBoxBalance.BackColor = textBoxBalance.BackColor;
             if (dataFilter.IsBalancePositiveByDate(handler.Time))
             {
@@ -146,7 +151,7 @@ namespace Forms
             {
                 textBoxBalance.ForeColor = Color.Red;
             }
-            textBoxBalance.Text = balance.ToString();
+            textBoxBalance.Text = NumberFormatter.FormatCurrency(balance);
         }
 
         private void DisplayDate()
