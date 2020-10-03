@@ -385,7 +385,7 @@
             this.MinimumSize = new System.Drawing.Size(1378, 782);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Smart Saver";
+            this.Text = "ePiggy";
             this.panelSideMenu.ResumeLayout(false);
             this.panelSideMenu.PerformLayout();
             this.panelReportsSubMenu.ResumeLayout(false);

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 
 
-namespace SmartSaver
+namespace EPiggy
 {
     public class User
     {

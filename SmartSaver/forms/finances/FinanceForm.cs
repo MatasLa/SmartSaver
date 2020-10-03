@@ -8,31 +8,28 @@ using System.Text;
 using System.Windows.Forms;
 using DataManager;
 using Utilities;
-using SmartSaver;
+using EPiggy;
 
 namespace Forms
 {
-    //reikes padaryti
     public partial class FinanceForm : Form
     {
-        // This will get the current PROJECT directory
-        private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
-        private Image selectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonSelected.png");
-        private Image selectedMorebutton = Image.FromFile(resourceDirectory + @"\moreButtonSelected.png");
-        private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
-        private Image unSelectedMoreButton = Image.FromFile(resourceDirectory + @"\moreButtonUnselected.png");
+        private readonly Handler handler;
+        private readonly Data data;
+        private readonly DataTableConverter dataTableConverter;
+        private readonly DataFilter dataFilter;
+        private DataTable dataTable;
 
-        private Handler handler;
-        private Data data;
-        private DataTableConverter dataTableConverter;
-        private DataFilter dataFilter;
+        private readonly Image selectedLessButton = new Bitmap(ePiggy.Properties.Resources.lessButtonSelected);
+        private readonly Image selectedMorebutton = new Bitmap(ePiggy.Properties.Resources.moreButtonSelected);
+        private readonly Image unSelectedLessButton = new Bitmap(ePiggy.Properties.Resources.lessButtonUnselected);
+        private readonly Image unSelectedMoreButton = new Bitmap(ePiggy.Properties.Resources.moreButtonUnselected);
 
         private readonly string incomeFormTitle = "Income";
         private readonly string expensesFormTitle = "Expenses";
         private readonly string addIncomeButtonTitle = "Add Income";
         private readonly string addExpensesButtonTitle = "Add Expense";
 
-        //public EntryType EntryType { get; set; }
         private EntryType _entryType;
         public EntryType EntryType 
         { 
@@ -46,8 +43,6 @@ namespace Forms
                 UpdateDisplay();
             } 
         }
-
-        private DataTable dataTable;
 
         public FinanceForm(Handler handler, EntryType entryType)
         {

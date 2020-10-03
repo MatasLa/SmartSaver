@@ -7,7 +7,7 @@ using DataManager;
 using Forms;
 using Utilities;
 
-namespace SmartSaver.forms
+namespace EPiggy
 {
     static class Program
     {

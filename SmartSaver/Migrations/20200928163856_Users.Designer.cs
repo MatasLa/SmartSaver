@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SmartSaver;
+using EPiggy;
 
-namespace SmartSaver.Migrations
+namespace EPiggy.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20200928163856_Users")]

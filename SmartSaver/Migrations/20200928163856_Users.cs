@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SmartSaver.Migrations
+namespace EPiggy.Migrations
 {
     public partial class Users : Migration
     {

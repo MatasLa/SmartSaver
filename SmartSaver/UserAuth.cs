@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace SmartSaver
+namespace EPiggy
 {
     public class UserAuth
     {

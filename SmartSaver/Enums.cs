@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SmartSaver
+namespace EPiggy
 {
     public enum EntryType
     {

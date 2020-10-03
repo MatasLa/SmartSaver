@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 
-namespace SmartSaver
+namespace EPiggy
 {
     public class DatabaseContext : DbContext
     {
