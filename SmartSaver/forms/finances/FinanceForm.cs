@@ -9,8 +9,7 @@ using System.Windows.Forms;
 using DataManager;
 using Utilities;
 using EPiggy;
-using ePiggy;
-using System.Globalization;
+using System.Linq;
 
 namespace Forms
 {
@@ -83,7 +82,42 @@ namespace Forms
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show(dataGridView.SelectedRows[0].Cells["ID"].Value.ToString());
+            var value = dataGridView.SelectedRows[0].Cells["ID"].Value;
+            if (value is DBNull)
+            {
+                return;
+            }
+
+            int id = (int)value;
+
+            DataEntry dataEntry;
+            switch (EntryType)
+            {
+                case EntryType.Income:
+                    dataEntry = data.Income.FirstOrDefault(x => x.ID == id);
+                    break;
+                case EntryType.Expense:
+                default:
+                    dataEntry = data.Expenses.FirstOrDefault(x => x.ID == id);
+                    break;
+            }
+
+            if (new EntryForm(dataEntry, EntryType).ShowDialog() == DialogResult.OK)
+            {
+                switch (EntryType)
+                {
+                    case EntryType.Income:
+                        data.EditIncomeItem(dataEntry.ID,  dataEntry.Title, dataEntry.Amount, handler.Time, dataEntry.IsMonthly);
+                        handler.DataJSON.WriteIncomeToFile();
+                        break;
+                    case EntryType.Expense:
+                        data.EditExpensesItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, handler.Time, dataEntry.IsMonthly);
+                        handler.DataJSON.WriteExpensesToFile();
+                        break;
+                }
+                DisplayTable();
+                DisplayBalance();
+            }
         }
         #endregion
 
@@ -93,9 +127,9 @@ namespace Forms
         private void ButtonAddEntry_Click(object sender, EventArgs e)
         {
             DataEntry dataEntry = new DataEntry();
-            if (new AddEntryForm(dataEntry, this._entryType).ShowDialog() == DialogResult.OK)
+            if (new EntryForm(dataEntry, EntryType).ShowDialog() == DialogResult.OK)
             {
-                switch (_entryType)
+                switch (EntryType)
                 {
                     case EntryType.Income:
                         data.AddIncome(dataEntry.Amount, dataEntry.Title, handler.Time, dataEntry.IsMonthly);
@@ -134,16 +168,16 @@ namespace Forms
             }
             dataGridView.DataSource = dataTable;
             dataGridView.Columns[0].Visible = false;
+
+            dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
+            dataGridView.Columns["Date"].DefaultCellStyle.Format = "dd (dddd)";
         }
     
         private void DisplayBalance()
         {
-
-
             var balance = dataFilter.GetBalanceByDate(handler.Time);
-            
             textBoxBalance.BackColor = textBoxBalance.BackColor;
-            if (dataFilter.IsBalancePositiveByDate(handler.Time))
+            if (balance >= 0)
             {
                 textBoxBalance.ForeColor = Color.Green;
             }

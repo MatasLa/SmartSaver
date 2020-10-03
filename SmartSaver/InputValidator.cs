@@ -7,8 +7,9 @@ namespace Utilities
 {
     public class InputValidator
     {
-        public static bool IsNumberValid(string str, out double value)
+        public static bool IsCurrencyInputValid(string str)
         {
+            double value;
             if (Double.TryParse(str, NumberStyles.Any, System.Globalization.CultureInfo.CurrentCulture, out value))
             {
                 if (Math.Round(value, 2) == value)

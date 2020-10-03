@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
 
-namespace ePiggy
+namespace Utilities
 {
     public class NumberFormatter
     {

@@ -11,37 +11,73 @@ using Utilities;
 
 namespace Forms
 {
-    public partial class AddEntryForm : Form
+    //kol kas padaryta taip, kad jei perduodi null arba tuscia DataEntry, tai kurs nauja, o jei nera tuscias (t.y. id != 0), tada editins
+    public partial class EntryForm : Form
     {
         private DataEntry dataEntry;
         private EntryType entryType;
+
         private string errorMessage;
         private readonly string badTitleErrorMessage = "Please enter a title";
         private readonly string badNumberErrorMessage = "Please enter a valid number";
-        private readonly string incomeTitle = "Add Income";
-        private readonly string expenseTitle = "Add Expense";
+        private readonly string addIncomeTitle = "Add Income";
+        private readonly string addExpenseTitle = "Add Expense";
+        private readonly string editIncomeTitle = "Edit Income";
+        private readonly string editExpenseTitle = "Edit Expense";
 
-        public AddEntryForm(DataEntry dataEntry, EntryType entryType)
+        public EntryForm(DataEntry dataEntry, EntryType entryType)
         {
             InitializeComponent();
+            if (dataEntry is null)
+            {
+                throw new Exception("Given null data entry");
+            }
             this.dataEntry = dataEntry;
             this.entryType = entryType;
-            SetTitle();
+            SetUpAddOrEdit();
             Select();
         }
 
-        private void SetTitle()
+        private void SetUpAddOrEdit()
+        {
+            if (dataEntry.ID == 0)
+            {
+                SetUpAdd();
+            }
+            else
+            {
+                SetUpEdit();
+            }
+        }
+
+        private void SetUpAdd()
         {
             switch (entryType)
             {
                 case EntryType.Income:
-                    this.Text = incomeTitle;
+                    Text = addIncomeTitle;
                     break;
                 case EntryType.Expense:
-                    this.Text = expenseTitle;
+                    Text = addExpenseTitle;
                     break;
             }
+        }
 
+        private void SetUpEdit()
+        {
+            switch (entryType)
+            {
+                case EntryType.Income:
+                    Text = editIncomeTitle;
+                    break;
+                case EntryType.Expense:
+                    Text = editExpenseTitle;
+                    break;
+            }
+            Text += " \"" + dataEntry.Title + "\""; 
+            textBoxTitle.Text = dataEntry.Title;
+            textBoxValue.Text = dataEntry.Amount.ToString();
+            checkBoxMonthly.Checked = dataEntry.IsMonthly;
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
@@ -60,7 +96,7 @@ namespace Forms
 
         private bool IsInputValid()
         {
-            if (InputValidator.IsNameValid(textBoxTitle.Text) && InputValidator.IsNameValid(textBoxValue.Text))
+            if (InputValidator.IsCurrencyInputValid(textBoxValue.Text) && InputValidator.IsNameValid(textBoxValue.Text))
             {
                 return true;
             }
@@ -83,7 +119,7 @@ namespace Forms
             {
                 errorMessage = badNumberErrorMessage;
             } 
-            else if (InputValidator.IsNameValid(textBoxValue.Text))
+            else if (InputValidator.IsCurrencyInputValid(textBoxValue.Text))
             {
                 errorMessage = badTitleErrorMessage;
             }
@@ -105,9 +141,21 @@ namespace Forms
 
         private void TextBoxValue_KeyPress(object sender, KeyPressEventArgs e)
         {
+            if (e.KeyChar == (char)Keys.Escape)
+            {
+                Select();
+            }
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
+            }
+        }
+
+        private void EntryForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char) Keys.Escape)
+            {
+                buttonCancel.PerformClick();
             }
         }
     }
