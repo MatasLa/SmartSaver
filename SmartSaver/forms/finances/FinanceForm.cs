@@ -51,7 +51,7 @@ namespace Forms
             data = handler.Data;
             dataTableConverter = handler.DataTableConverter;
             dataFilter = handler.DataFilter;
-            this._entryType = entryType;
+            _entryType = entryType;
             Init();
         }
 
@@ -225,5 +225,6 @@ namespace Forms
         }
 
         #endregion
+
     }
 }

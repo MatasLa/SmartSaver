@@ -52,7 +52,8 @@ namespace Forms
             {
                 if (IsSameFormAlreadyOpen(childForm))
                 {
-                    if (activeForm is FinanceForm form)
+                    if (activeForm is FinanceForm form 
+                        && form.EntryType != ((FinanceForm)childForm).EntryType)
                     {
                         form.EntryType = ((FinanceForm)childForm).EntryType;
                     }

@@ -60,28 +60,25 @@
             this.panelTop.Controls.Add(this.textBoxCurrentYear);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
-            this.panelTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(971, 94);
+            this.panelTop.Size = new System.Drawing.Size(1110, 125);
             this.panelTop.TabIndex = 0;
             // 
             // textBoxBalance
             // 
             this.textBoxBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBalance.Location = new System.Drawing.Point(659, 36);
-            this.textBoxBalance.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxBalance.Location = new System.Drawing.Point(753, 48);
             this.textBoxBalance.Name = "textBoxBalance";
             this.textBoxBalance.ReadOnly = true;
-            this.textBoxBalance.Size = new System.Drawing.Size(110, 23);
+            this.textBoxBalance.Size = new System.Drawing.Size(125, 27);
             this.textBoxBalance.TabIndex = 5;
             this.textBoxBalance.Text = "Balance";
             // 
             // buttonAddEntry
             // 
-            this.buttonAddEntry.Location = new System.Drawing.Point(60, 50);
-            this.buttonAddEntry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAddEntry.Location = new System.Drawing.Point(69, 67);
             this.buttonAddEntry.Name = "buttonAddEntry";
-            this.buttonAddEntry.Size = new System.Drawing.Size(105, 22);
+            this.buttonAddEntry.Size = new System.Drawing.Size(120, 29);
             this.buttonAddEntry.TabIndex = 3;
             this.buttonAddEntry.Text = "Add Entry";
             this.buttonAddEntry.UseVisualStyleBackColor = true;
@@ -94,11 +91,11 @@
             this.buttonNextYear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.buttonNextYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonNextYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonNextYear.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.buttonNextYear.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextYear.Image")));
-            this.buttonNextYear.Location = new System.Drawing.Point(489, 1);
-            this.buttonNextYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonNextYear.Location = new System.Drawing.Point(559, 1);
             this.buttonNextYear.Name = "buttonNextYear";
-            this.buttonNextYear.Size = new System.Drawing.Size(45, 45);
+            this.buttonNextYear.Size = new System.Drawing.Size(51, 60);
             this.buttonNextYear.TabIndex = 2;
             this.buttonNextYear.UseVisualStyleBackColor = true;
             this.buttonNextYear.Click += new System.EventHandler(this.ButtonNextYear_Click);
@@ -112,11 +109,11 @@
             this.buttonPreviousYear.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.buttonPreviousYear.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonPreviousYear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPreviousYear.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.buttonPreviousYear.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousYear.Image")));
-            this.buttonPreviousYear.Location = new System.Drawing.Point(396, 1);
-            this.buttonPreviousYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonPreviousYear.Location = new System.Drawing.Point(453, 1);
             this.buttonPreviousYear.Name = "buttonPreviousYear";
-            this.buttonPreviousYear.Size = new System.Drawing.Size(45, 45);
+            this.buttonPreviousYear.Size = new System.Drawing.Size(51, 60);
             this.buttonPreviousYear.TabIndex = 1;
             this.buttonPreviousYear.Click += new System.EventHandler(this.ButtonPreviousYear_Click);
             this.buttonPreviousYear.MouseEnter += new System.EventHandler(this.ButtonPreviousYear_MouseEnter);
@@ -131,12 +128,11 @@
             this.buttonNextMonth.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.buttonNextMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonNextMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonNextMonth.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonNextMonth.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.buttonNextMonth.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextMonth.Image")));
-            this.buttonNextMonth.Location = new System.Drawing.Point(489, 45);
-            this.buttonNextMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonNextMonth.Location = new System.Drawing.Point(559, 60);
             this.buttonNextMonth.Name = "buttonNextMonth";
-            this.buttonNextMonth.Size = new System.Drawing.Size(45, 45);
+            this.buttonNextMonth.Size = new System.Drawing.Size(51, 60);
             this.buttonNextMonth.TabIndex = 2;
             this.buttonNextMonth.UseVisualStyleBackColor = false;
             this.buttonNextMonth.Click += new System.EventHandler(this.ButtonNextMonth_Click);
@@ -150,11 +146,11 @@
             this.buttonPreviousMonth.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.buttonPreviousMonth.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.buttonPreviousMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPreviousMonth.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.buttonPreviousMonth.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousMonth.Image")));
-            this.buttonPreviousMonth.Location = new System.Drawing.Point(396, 45);
-            this.buttonPreviousMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonPreviousMonth.Location = new System.Drawing.Point(453, 60);
             this.buttonPreviousMonth.Name = "buttonPreviousMonth";
-            this.buttonPreviousMonth.Size = new System.Drawing.Size(45, 45);
+            this.buttonPreviousMonth.Size = new System.Drawing.Size(51, 60);
             this.buttonPreviousMonth.TabIndex = 1;
             this.buttonPreviousMonth.Click += new System.EventHandler(this.ButtonPreviousMonth_Click);
             this.buttonPreviousMonth.MouseEnter += new System.EventHandler(this.ButtonPreviousMonth_MouseEnter);
@@ -168,11 +164,10 @@
             this.textBoxCurrentMonth.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBoxCurrentMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxCurrentMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.textBoxCurrentMonth.Location = new System.Drawing.Point(423, 55);
-            this.textBoxCurrentMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCurrentMonth.Location = new System.Drawing.Point(483, 73);
             this.textBoxCurrentMonth.Name = "textBoxCurrentMonth";
             this.textBoxCurrentMonth.ReadOnly = true;
-            this.textBoxCurrentMonth.Size = new System.Drawing.Size(88, 25);
+            this.textBoxCurrentMonth.Size = new System.Drawing.Size(101, 31);
             this.textBoxCurrentMonth.TabIndex = 0;
             this.textBoxCurrentMonth.Text = "MON";
             this.textBoxCurrentMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -185,11 +180,10 @@
             this.textBoxCurrentYear.Cursor = System.Windows.Forms.Cursors.Default;
             this.textBoxCurrentYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxCurrentYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.textBoxCurrentYear.Location = new System.Drawing.Point(423, 15);
-            this.textBoxCurrentYear.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCurrentYear.Location = new System.Drawing.Point(483, 20);
             this.textBoxCurrentYear.Name = "textBoxCurrentYear";
             this.textBoxCurrentYear.ReadOnly = true;
-            this.textBoxCurrentYear.Size = new System.Drawing.Size(88, 25);
+            this.textBoxCurrentYear.Size = new System.Drawing.Size(101, 31);
             this.textBoxCurrentYear.TabIndex = 0;
             this.textBoxCurrentYear.Text = "YEAR";
             this.textBoxCurrentYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -198,8 +192,7 @@
             // 
             this.splitContainer.BackColor = System.Drawing.Color.WhiteSmoke;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 94);
-            this.splitContainer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer.Location = new System.Drawing.Point(0, 125);
             this.splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
@@ -212,8 +205,9 @@
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.Color.White;
             this.splitContainer.Panel2MinSize = 300;
-            this.splitContainer.Size = new System.Drawing.Size(971, 582);
-            this.splitContainer.SplitterDistance = 656;
+            this.splitContainer.Size = new System.Drawing.Size(1110, 776);
+            this.splitContainer.SplitterDistance = 749;
+            this.splitContainer.SplitterWidth = 5;
             this.splitContainer.TabIndex = 1;
             this.splitContainer.Text = "splitContainer1";
             // 
@@ -227,26 +221,24 @@
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.GridColor = System.Drawing.Color.White;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(656, 582);
+            this.dataGridView.Size = new System.Drawing.Size(749, 776);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Text = "dataGridView";
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             // 
             // FinanceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(971, 676);
+            this.ClientSize = new System.Drawing.Size(1110, 901);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FinanceForm";
             this.Text = "FormBudget";
             this.panelTop.ResumeLayout(false);
