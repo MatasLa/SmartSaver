@@ -36,9 +36,9 @@ namespace Forms
             try
             {
                 string[] lines = File.ReadAllLines(resourceDirectoryQuotes);
-                amount = Int32.Parse(lines[0]);
+                amount = lines.Length;
                 var rand = new Random();
-                quoteText.Text = lines[rand.Next(1, amount + 1)];
+                quoteText.Text = lines[rand.Next(0, amount)];
             }
             catch(Exception e)
             {

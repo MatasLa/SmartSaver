@@ -159,10 +159,10 @@
             this.backToLogin.LinkColor = System.Drawing.SystemColors.ButtonHighlight;
             this.backToLogin.Location = new System.Drawing.Point(12, 19);
             this.backToLogin.Name = "backToLogin";
-            this.backToLogin.Size = new System.Drawing.Size(78, 20);
+            this.backToLogin.Size = new System.Drawing.Size(71, 20);
             this.backToLogin.TabIndex = 13;
             this.backToLogin.TabStop = true;
-            this.backToLogin.Text = "← Sign Up";
+            this.backToLogin.Text = "← Sign In";
             this.backToLogin.VisitedLinkColor = System.Drawing.SystemColors.ButtonHighlight;
             this.backToLogin.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.backToLogin_LinkClicked);
             // 
