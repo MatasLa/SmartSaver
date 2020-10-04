@@ -30,14 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinanceForm));
             this.panelTop = new System.Windows.Forms.Panel();
-            this.textBoxBalance = new System.Windows.Forms.TextBox();
+            this.labelBalance = new System.Windows.Forms.Label();
+            this.labelDay = new System.Windows.Forms.Label();
             this.buttonAddEntry = new System.Windows.Forms.Button();
             this.buttonNextYear = new System.Windows.Forms.Button();
             this.buttonPreviousYear = new System.Windows.Forms.Button();
             this.buttonNextMonth = new System.Windows.Forms.Button();
             this.buttonPreviousMonth = new System.Windows.Forms.Button();
-            this.textBoxCurrentMonth = new System.Windows.Forms.TextBox();
-            this.textBoxCurrentYear = new System.Windows.Forms.TextBox();
+            this.labelYear = new System.Windows.Forms.Label();
+            this.labelMonth = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.panelTop.SuspendLayout();
@@ -50,35 +51,56 @@
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelTop.Controls.Add(this.textBoxBalance);
+            this.panelTop.Controls.Add(this.labelBalance);
+            this.panelTop.Controls.Add(this.labelDay);
             this.panelTop.Controls.Add(this.buttonAddEntry);
             this.panelTop.Controls.Add(this.buttonNextYear);
             this.panelTop.Controls.Add(this.buttonPreviousYear);
             this.panelTop.Controls.Add(this.buttonNextMonth);
             this.panelTop.Controls.Add(this.buttonPreviousMonth);
-            this.panelTop.Controls.Add(this.textBoxCurrentMonth);
-            this.panelTop.Controls.Add(this.textBoxCurrentYear);
+            this.panelTop.Controls.Add(this.labelYear);
+            this.panelTop.Controls.Add(this.labelMonth);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(1110, 125);
             this.panelTop.TabIndex = 0;
             // 
-            // textBoxBalance
+            // labelBalance
             // 
-            this.textBoxBalance.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxBalance.Location = new System.Drawing.Point(753, 48);
-            this.textBoxBalance.Name = "textBoxBalance";
-            this.textBoxBalance.ReadOnly = true;
-            this.textBoxBalance.Size = new System.Drawing.Size(125, 27);
-            this.textBoxBalance.TabIndex = 5;
-            this.textBoxBalance.Text = "Balance";
+            this.labelBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelBalance.AutoSize = true;
+            this.labelBalance.BackColor = System.Drawing.Color.Transparent;
+            this.labelBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelBalance.Location = new System.Drawing.Point(874, 52);
+            this.labelBalance.Name = "labelBalance";
+            this.labelBalance.Size = new System.Drawing.Size(112, 31);
+            this.labelBalance.TabIndex = 9;
+            this.labelBalance.Text = "Balance";
+            // 
+            // labelDay
+            // 
+            this.labelDay.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelDay.AutoSize = true;
+            this.labelDay.BackColor = System.Drawing.Color.Transparent;
+            this.labelDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelDay.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelDay.Location = new System.Drawing.Point(636, 49);
+            this.labelDay.Name = "labelDay";
+            this.labelDay.Size = new System.Drawing.Size(70, 31);
+            this.labelDay.TabIndex = 8;
+            this.labelDay.Text = "DAY";
             // 
             // buttonAddEntry
             // 
-            this.buttonAddEntry.Location = new System.Drawing.Point(69, 67);
+            this.buttonAddEntry.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.buttonAddEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddEntry.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAddEntry.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.buttonAddEntry.Location = new System.Drawing.Point(43, 35);
             this.buttonAddEntry.Name = "buttonAddEntry";
-            this.buttonAddEntry.Size = new System.Drawing.Size(120, 29);
+            this.buttonAddEntry.Size = new System.Drawing.Size(198, 58);
             this.buttonAddEntry.TabIndex = 3;
             this.buttonAddEntry.Text = "Add Entry";
             this.buttonAddEntry.UseVisualStyleBackColor = true;
@@ -156,37 +178,31 @@
             this.buttonPreviousMonth.MouseEnter += new System.EventHandler(this.ButtonPreviousMonth_MouseEnter);
             this.buttonPreviousMonth.MouseLeave += new System.EventHandler(this.ButtonPreviousMonth_MouseLeave);
             // 
-            // textBoxCurrentMonth
+            // labelYear
             // 
-            this.textBoxCurrentMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxCurrentMonth.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBoxCurrentMonth.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxCurrentMonth.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBoxCurrentMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCurrentMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.textBoxCurrentMonth.Location = new System.Drawing.Point(483, 73);
-            this.textBoxCurrentMonth.Name = "textBoxCurrentMonth";
-            this.textBoxCurrentMonth.ReadOnly = true;
-            this.textBoxCurrentMonth.Size = new System.Drawing.Size(101, 31);
-            this.textBoxCurrentMonth.TabIndex = 0;
-            this.textBoxCurrentMonth.Text = "MON";
-            this.textBoxCurrentMonth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.labelYear.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelYear.AutoSize = true;
+            this.labelYear.BackColor = System.Drawing.Color.Transparent;
+            this.labelYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelYear.Location = new System.Drawing.Point(500, 15);
+            this.labelYear.Name = "labelYear";
+            this.labelYear.Size = new System.Drawing.Size(88, 31);
+            this.labelYear.TabIndex = 6;
+            this.labelYear.Text = "YEAR";
             // 
-            // textBoxCurrentYear
+            // labelMonth
             // 
-            this.textBoxCurrentYear.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxCurrentYear.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.textBoxCurrentYear.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxCurrentYear.Cursor = System.Windows.Forms.Cursors.Default;
-            this.textBoxCurrentYear.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCurrentYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.textBoxCurrentYear.Location = new System.Drawing.Point(483, 20);
-            this.textBoxCurrentYear.Name = "textBoxCurrentYear";
-            this.textBoxCurrentYear.ReadOnly = true;
-            this.textBoxCurrentYear.Size = new System.Drawing.Size(101, 31);
-            this.textBoxCurrentYear.TabIndex = 0;
-            this.textBoxCurrentYear.Text = "YEAR";
-            this.textBoxCurrentYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.labelMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelMonth.AutoSize = true;
+            this.labelMonth.BackColor = System.Drawing.Color.Transparent;
+            this.labelMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelMonth.Location = new System.Drawing.Point(505, 70);
+            this.labelMonth.Name = "labelMonth";
+            this.labelMonth.Size = new System.Drawing.Size(77, 31);
+            this.labelMonth.TabIndex = 7;
+            this.labelMonth.Text = "MON";
             // 
             // splitContainer
             // 
@@ -254,16 +270,17 @@
         #endregion
 
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.TextBox textBoxCurrentMonth;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.Button buttonNextMonth;
         private System.Windows.Forms.Button buttonPreviousMonth;
         private System.Windows.Forms.Button buttonNextYear;
         private System.Windows.Forms.Button buttonPreviousYear;
-        private System.Windows.Forms.TextBox textBoxCurrentYear;
         private System.Windows.Forms.DataGridView dataGridView
             ;
-        private System.Windows.Forms.TextBox textBoxBalance;
         private System.Windows.Forms.Button buttonAddEntry;
+        private System.Windows.Forms.Label labelBalance;
+        private System.Windows.Forms.Label labelDay;
+        private System.Windows.Forms.Label labelMonth;
+        private System.Windows.Forms.Label labelYear;
     }
 }

@@ -163,8 +163,14 @@ namespace Forms
             {
                 buttonCancel.PerformClick();
             }
-        } 
+        }
         #endregion
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var oldSize = this.Size;
+            oldSize.Height += 100;
+            this.Size = oldSize;
+        }
     }
 }

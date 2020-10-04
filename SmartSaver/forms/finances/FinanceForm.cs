@@ -163,22 +163,23 @@ namespace Forms
         private void DisplayBalance()
         {
             var balance = dataFilter.GetBalanceByDate(handler.Time);
-            textBoxBalance.BackColor = textBoxBalance.BackColor;
+            labelBalance.BackColor = labelBalance.BackColor;
             if (balance >= Decimal.Zero)
             {
-                textBoxBalance.ForeColor = Color.Green;
+                labelBalance.ForeColor = Color.Green;
             }
             else
             {
-                textBoxBalance.ForeColor = Color.Red;
+                labelBalance.ForeColor = Color.Red;
             }
-            textBoxBalance.Text = NumberFormatter.FormatCurrency(balance);
+            labelBalance.Text = NumberFormatter.FormatCurrency(balance);
         }
 
         private void DisplayDate()
         {
-            textBoxCurrentMonth.Text = handler.Time.ToString("MMM");
-            textBoxCurrentYear.Text = handler.Time.Year.ToString();
+            labelMonth.Text = handler.Time.ToString("MMM");
+            labelYear.Text = handler.Time.Year.ToString();
+            labelDay.Text = handler.Time.ToString("dddd, d");
         }
 
         public void SetTitles()

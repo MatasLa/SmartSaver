@@ -34,10 +34,12 @@
             this.checkBoxMonthly = new System.Windows.Forms.CheckBox();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBoxTitle
             // 
+            this.textBoxTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxTitle.Location = new System.Drawing.Point(29, 33);
             this.textBoxTitle.MaxLength = 60;
             this.textBoxTitle.Name = "textBoxTitle";
@@ -47,6 +49,7 @@
             // 
             // textBoxValue
             // 
+            this.textBoxValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxValue.Location = new System.Drawing.Point(29, 99);
             this.textBoxValue.MaxLength = 12;
             this.textBoxValue.Name = "textBoxValue";
@@ -58,6 +61,7 @@
             // 
             // checkBoxMonthly
             // 
+            this.checkBoxMonthly.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkBoxMonthly.AutoSize = true;
             this.checkBoxMonthly.Location = new System.Drawing.Point(109, 172);
             this.checkBoxMonthly.Name = "checkBoxMonthly";
@@ -68,6 +72,7 @@
             // 
             // buttonAdd
             // 
+            this.buttonAdd.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonAdd.Location = new System.Drawing.Point(173, 229);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(94, 29);
@@ -78,6 +83,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(29, 228);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -87,12 +93,24 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button1.Location = new System.Drawing.Point(109, 137);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // EntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(295, 293);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.checkBoxMonthly);
@@ -118,5 +136,6 @@
         private System.Windows.Forms.CheckBox checkBoxMonthly;
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button button1;
     }
 }
