@@ -44,6 +44,19 @@ namespace SmartSaver
             }
         }
 
+        public static int IsValidPassword(string password, string confirmPass)
+        {
+            if (password.Length < 8)
+            {
+                return 1;
+            }
+            if (!password.Equals(confirmPass))
+            {
+                return 2;
+            }
+            return 0;
+        }
+
         public static bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))

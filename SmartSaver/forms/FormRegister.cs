@@ -14,25 +14,17 @@ namespace Forms
     public partial class FormRegister : Form
     {
         public Handler DataHandler { get; }
-        private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
-        private Image selectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonSelected.png");
-        private Image unSelectedLessButton = Image.FromFile(resourceDirectory + @"\lessButtonUnselected.png");
+
 
         public FormRegister(Handler dataHandler)
         {
             InitializeComponent();
             DataHandler = dataHandler;
-            backToLoginButton.Image = unSelectedLessButton;
             errorMessage.Text = "";
         }
 
-        private void registerButton_Click(object sender, EventArgs e)
-        {
-            
-
-        }
-
-        private void backToLoginButton_Click(object sender, EventArgs e)
+        
+        private void backToLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.Hide();
             FormLogIn login = new FormLogIn(DataHandler);
@@ -40,17 +32,7 @@ namespace Forms
             this.Close();
         }
 
-        private void backToLoginButton_MouseEnter(object sender, EventArgs e)
-        {
-            backToLoginButton.Image = selectedLessButton;
-        }
-
-        private void backToLoginButton_MouseLeave(object sender, EventArgs e)
-        {
-            backToLoginButton.Image = unSelectedLessButton;
-        }
-
-        private void registerButton_Click_1(object sender, EventArgs e)
+        private void registerButton_Click(object sender, EventArgs e)
         {
             var email = emailInput.Text;
             var pass = passwordInput1.Text;
@@ -60,22 +42,21 @@ namespace Forms
                 errorMessage.Text = "Provided e-mail is not valid!";
                 return;
             }
-            if (pass.Length < 8)
-            {
-                errorMessage.Text = "Password must be atleast 8 characters long";
-                return;
-            }
-            if (pass.Equals(passConfirm))
-            {
-                UserAuth.Registration(email: email, pass: pass);
-                this.Hide();
-                FormMain main = new FormMain(DataHandler);
-                main.ShowDialog();
-                this.Close();
-            }
-            else
-            {
-                errorMessage.Text = "Passwords did not match!";
+            int passCheck = UserAuth.IsValidPassword(pass, passConfirm);
+            switch(passCheck){
+                case 0:
+                    UserAuth.Registration(email: email, pass: pass);
+                    this.Hide();
+                    FormMain main = new FormMain(DataHandler);
+                    main.ShowDialog();
+                    this.Close();
+                    break;
+                case 1:
+                    errorMessage.Text = "Password must be atleast 8 characters long";
+                    break;
+                case 2:
+                    errorMessage.Text = "Passwords did not match!";
+                    break;
             }
         }
     }
