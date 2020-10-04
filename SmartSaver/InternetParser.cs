@@ -20,7 +20,7 @@ namespace DataManager
         public static async Task GetHTMLAsync(string itemName)
         {
             //var url = "https://uk.camelcamelcamel.com/search?sq=iphone+11";
-            var url = "https://uk.camelcamelcamel.com/search?sq=" + itemName;
+            var url = "https://uk.camelcamelcamel.com/search?sq=" + itemName;/*Need tweaking with symbols inside itemName*/
             var httpClient = new HttpClient();
 
             httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
