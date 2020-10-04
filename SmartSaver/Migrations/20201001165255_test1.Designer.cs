@@ -9,8 +9,8 @@ using EPiggy;
 namespace EPiggy.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200928163856_Users")]
-    partial class Users
+    [Migration("20201001165255_test1")]
+    partial class test1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

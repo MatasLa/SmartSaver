@@ -8,7 +8,7 @@ using EPiggy;
 namespace EPiggy.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

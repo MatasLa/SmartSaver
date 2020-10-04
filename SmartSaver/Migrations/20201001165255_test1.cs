@@ -2,7 +2,7 @@
 
 namespace EPiggy.Migrations
 {
-    public partial class Users : Migration
+    public partial class test1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
