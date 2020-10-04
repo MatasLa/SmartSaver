@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegister));
             this.registerLabel = new System.Windows.Forms.Label();
             this.emailLabel = new System.Windows.Forms.Label();
             this.emailInput = new System.Windows.Forms.TextBox();
@@ -45,9 +46,9 @@
             this.registerLabel.AutoSize = true;
             this.registerLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.registerLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.registerLabel.Location = new System.Drawing.Point(164, 65);
+            this.registerLabel.Location = new System.Drawing.Point(187, 87);
             this.registerLabel.Name = "registerLabel";
-            this.registerLabel.Size = new System.Drawing.Size(221, 30);
+            this.registerLabel.Size = new System.Drawing.Size(276, 37);
             this.registerLabel.TabIndex = 0;
             this.registerLabel.Text = "Welcome to ePiggy!";
             // 
@@ -59,9 +60,9 @@
             this.emailLabel.AutoSize = true;
             this.emailLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.emailLabel.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.emailLabel.Location = new System.Drawing.Point(171, 119);
+            this.emailLabel.Location = new System.Drawing.Point(195, 159);
             this.emailLabel.Name = "emailLabel";
-            this.emailLabel.Size = new System.Drawing.Size(47, 19);
+            this.emailLabel.Size = new System.Drawing.Size(58, 23);
             this.emailLabel.TabIndex = 3;
             this.emailLabel.Text = "E-mail";
             // 
@@ -71,10 +72,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.emailInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.emailInput.Location = new System.Drawing.Point(171, 141);
-            this.emailInput.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.emailInput.Location = new System.Drawing.Point(195, 188);
+            this.emailInput.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.emailInput.Name = "emailInput";
-            this.emailInput.Size = new System.Drawing.Size(206, 23);
+            this.emailInput.Size = new System.Drawing.Size(235, 27);
             this.emailInput.TabIndex = 1;
             // 
             // passwordLabel1
@@ -82,28 +83,28 @@
             this.passwordLabel1.AutoSize = true;
             this.passwordLabel1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.passwordLabel1.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.passwordLabel1.Location = new System.Drawing.Point(170, 187);
+            this.passwordLabel1.Location = new System.Drawing.Point(194, 249);
             this.passwordLabel1.Name = "passwordLabel1";
-            this.passwordLabel1.Size = new System.Drawing.Size(67, 19);
+            this.passwordLabel1.Size = new System.Drawing.Size(80, 23);
             this.passwordLabel1.TabIndex = 4;
             this.passwordLabel1.Text = "Password";
             // 
             // passwordInput1
             // 
-            this.passwordInput1.Location = new System.Drawing.Point(170, 209);
-            this.passwordInput1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.passwordInput1.Location = new System.Drawing.Point(194, 279);
+            this.passwordInput1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.passwordInput1.Name = "passwordInput1";
             this.passwordInput1.PasswordChar = '•';
-            this.passwordInput1.Size = new System.Drawing.Size(206, 23);
+            this.passwordInput1.Size = new System.Drawing.Size(235, 27);
             this.passwordInput1.TabIndex = 2;
             // 
             // passwordInput2
             // 
-            this.passwordInput2.Location = new System.Drawing.Point(170, 272);
-            this.passwordInput2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.passwordInput2.Location = new System.Drawing.Point(194, 363);
+            this.passwordInput2.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.passwordInput2.Name = "passwordInput2";
             this.passwordInput2.PasswordChar = '•';
-            this.passwordInput2.Size = new System.Drawing.Size(206, 23);
+            this.passwordInput2.Size = new System.Drawing.Size(235, 27);
             this.passwordInput2.TabIndex = 2;
             // 
             // passwordLabel2
@@ -111,9 +112,9 @@
             this.passwordLabel2.AutoSize = true;
             this.passwordLabel2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.passwordLabel2.ForeColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.passwordLabel2.Location = new System.Drawing.Point(170, 250);
+            this.passwordLabel2.Location = new System.Drawing.Point(194, 333);
             this.passwordLabel2.Name = "passwordLabel2";
-            this.passwordLabel2.Size = new System.Drawing.Size(120, 19);
+            this.passwordLabel2.Size = new System.Drawing.Size(146, 23);
             this.passwordLabel2.TabIndex = 4;
             this.passwordLabel2.Text = "Confirm Password";
             // 
@@ -121,9 +122,9 @@
             // 
             this.errorMessage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.errorMessage.ForeColor = System.Drawing.Color.Red;
-            this.errorMessage.Location = new System.Drawing.Point(146, 307);
+            this.errorMessage.Location = new System.Drawing.Point(167, 409);
             this.errorMessage.Name = "errorMessage";
-            this.errorMessage.Size = new System.Drawing.Size(250, 19);
+            this.errorMessage.Size = new System.Drawing.Size(286, 25);
             this.errorMessage.TabIndex = 7;
             this.errorMessage.Text = "label1";
             this.errorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -140,12 +141,13 @@
             this.registerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.registerButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.registerButton.ForeColor = System.Drawing.Color.Transparent;
-            this.registerButton.Location = new System.Drawing.Point(209, 329);
+            this.registerButton.Location = new System.Drawing.Point(239, 439);
+            this.registerButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.registerButton.Name = "registerButton";
             this.registerButton.OnHoverBorderColor = System.Drawing.Color.Transparent;
             this.registerButton.OnHoverButtonColor = System.Drawing.Color.LightCyan;
             this.registerButton.OnHoverTextColor = System.Drawing.Color.SteelBlue;
-            this.registerButton.Size = new System.Drawing.Size(117, 33);
+            this.registerButton.Size = new System.Drawing.Size(134, 44);
             this.registerButton.TabIndex = 12;
             this.registerButton.Text = "Register";
             this.registerButton.TextColor = System.Drawing.Color.SteelBlue;
@@ -157,9 +159,9 @@
             this.backToLogin.AutoSize = true;
             this.backToLogin.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.backToLogin.LinkColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.backToLogin.Location = new System.Drawing.Point(12, 19);
+            this.backToLogin.Location = new System.Drawing.Point(14, 25);
             this.backToLogin.Name = "backToLogin";
-            this.backToLogin.Size = new System.Drawing.Size(71, 20);
+            this.backToLogin.Size = new System.Drawing.Size(91, 25);
             this.backToLogin.TabIndex = 13;
             this.backToLogin.TabStop = true;
             this.backToLogin.Text = "← Sign In";
@@ -168,10 +170,10 @@
             // 
             // FormRegister
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
-            this.ClientSize = new System.Drawing.Size(534, 461);
+            this.ClientSize = new System.Drawing.Size(610, 615);
             this.Controls.Add(this.backToLogin);
             this.Controls.Add(this.registerButton);
             this.Controls.Add(this.errorMessage);
@@ -183,6 +185,8 @@
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.registerLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "FormRegister";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -1,4 +1,4 @@
-﻿namespace DataManager
+﻿namespace Utilities
 {
     class ExceptionHandler
     {
