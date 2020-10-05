@@ -26,10 +26,7 @@ namespace Forms
         
         private void backToLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Hide();
-            FormLogIn login = new FormLogIn(DataHandler);
-            login.ShowDialog();
-            this.Close();
+            FormChanger.ChangeForm(this, new FormLogIn(DataHandler));
         }
 
         private void registerButton_Click(object sender, EventArgs e)
@@ -46,10 +43,7 @@ namespace Forms
             switch(passCheck){
                 case 0:
                     UserAuth.Registration(email: email, pass: pass);
-                    this.Hide();
-                    FormMain main = new FormMain(DataHandler);
-                    main.ShowDialog();
-                    this.Close();
+                    FormChanger.ChangeForm(this, new FormMain(DataHandler));
                     break;
                 case 1:
                     errorMessage.Text = "Password must be atleast 8 characters long";

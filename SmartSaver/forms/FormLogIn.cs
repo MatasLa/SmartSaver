@@ -65,10 +65,7 @@ namespace Forms
 
         private void noAccLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            this.Hide();
-            FormRegister register = new FormRegister(DataHandler);
-            register.ShowDialog();
-            this.Close();
+            FormChanger.ChangeForm(this, new FormRegister(DataHandler));
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -77,10 +74,7 @@ namespace Forms
             var pass = passwordInput.Text;
             if (UserAuth.Login(email, pass))
             {
-                this.Hide();
-                FormMain main = new FormMain(DataHandler);
-                main.ShowDialog();
-                this.Close();
+                FormChanger.ChangeForm(this, new FormMain(DataHandler));
             }
             else
             {
