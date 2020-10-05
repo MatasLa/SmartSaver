@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelSideMenu = new System.Windows.Forms.Panel();
-            this.textBoxCopyright = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.buttonLogOut = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.panelReportsSubMenu = new System.Windows.Forms.Panel();
@@ -49,6 +49,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMain = new System.Windows.Forms.Panel();
             this.pictureBoxMainLogo = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panelSideMenu.SuspendLayout();
             this.panelReportsSubMenu.SuspendLayout();
             this.panelFinancesSubMenu.SuspendLayout();
@@ -62,7 +63,8 @@
             // 
             this.panelSideMenu.AutoScroll = true;
             this.panelSideMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.panelSideMenu.Controls.Add(this.textBoxCopyright);
+            this.panelSideMenu.Controls.Add(this.label2);
+            this.panelSideMenu.Controls.Add(this.label1);
             this.panelSideMenu.Controls.Add(this.buttonLogOut);
             this.panelSideMenu.Controls.Add(this.buttonHelp);
             this.panelSideMenu.Controls.Add(this.panelReportsSubMenu);
@@ -76,21 +78,17 @@
             this.panelSideMenu.Size = new System.Drawing.Size(250, 901);
             this.panelSideMenu.TabIndex = 0;
             // 
-            // textBoxCopyright
+            // label1
             // 
-            this.textBoxCopyright.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.textBoxCopyright.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxCopyright.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBoxCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxCopyright.ForeColor = System.Drawing.Color.Azure;
-            this.textBoxCopyright.Location = new System.Drawing.Point(0, 841);
-            this.textBoxCopyright.Multiline = true;
-            this.textBoxCopyright.Name = "textBoxCopyright";
-            this.textBoxCopyright.ReadOnly = true;
-            this.textBoxCopyright.Size = new System.Drawing.Size(250, 60);
-            this.textBoxCopyright.TabIndex = 3;
-            this.textBoxCopyright.Text = "Copyright Vilnius Universtity 2020";
-            this.textBoxCopyright.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label1.ForeColor = System.Drawing.Color.Azure;
+            this.label1.Location = new System.Drawing.Point(0, 856);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(250, 45);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "©  2020 Vilnius University";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonLogOut
             // 
@@ -375,19 +373,30 @@
             this.pictureBoxMainLogo.TabIndex = 1;
             this.pictureBoxMainLogo.TabStop = false;
             // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label2.ForeColor = System.Drawing.Color.Azure;
+            this.label2.Location = new System.Drawing.Point(0, 811);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(250, 45);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Date";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormMain
             // 
             this.ClientSize = new System.Drawing.Size(1362, 901);
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelSideMenu);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1378, 782);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ePiggy";
             this.panelSideMenu.ResumeLayout(false);
-            this.panelSideMenu.PerformLayout();
             this.panelReportsSubMenu.ResumeLayout(false);
             this.panelFinancesSubMenu.ResumeLayout(false);
             this.panelMenuLogo.ResumeLayout(false);
@@ -417,10 +426,11 @@
         private System.Windows.Forms.Button buttonNetWorth;
         private System.Windows.Forms.Button buttonSpending;
         private System.Windows.Forms.Button buttonReports;
-        private System.Windows.Forms.TextBox textBoxCopyright;
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.PictureBox pictureBoxMainLogo;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 

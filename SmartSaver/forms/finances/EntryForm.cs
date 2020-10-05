@@ -16,6 +16,8 @@ namespace Forms
     {
         private DataEntry dataEntry;
         private EntryType entryType;
+        private readonly Size collapsedSize;
+        private readonly Size expandedSize;
 
         private string errorMessage;
         private readonly string badTitleErrorMessage = "Please enter a title";
@@ -28,18 +30,24 @@ namespace Forms
         public EntryForm(DataEntry dataEntry, EntryType entryType)
         {
             InitializeComponent();
+
             if (dataEntry is null)
             {
                 throw new Exception("Given null data entry");
             }
+
+            expandedSize = Size;
+            collapsedSize = new Size(Size.Width, Size.Height - monthCalendar.Size.Height - 25);
+
             this.dataEntry = dataEntry;
             this.entryType = entryType;
+
             SetUpAddOrEdit();
+            Collapse();
             Select();
         }
 
-
-        #region Initialization
+        #region Title setup
         private void SetUpAddOrEdit()
         {
             if (dataEntry.ID == 0)
@@ -81,23 +89,16 @@ namespace Forms
             textBoxValue.Text = dataEntry.Amount.ToString();
             checkBoxMonthly.Checked = dataEntry.IsMonthly;
         }
-
-        private void ButtonAdd_Click(object sender, EventArgs e)
-        {
-            if (IsInputValid())
-            {
-                TakeInput();
-                DialogResult = DialogResult.OK;
-            }
-            else
-            {
-                CreateErrorMessage();
-                MessageBox.Show(errorMessage);
-            }
-        }
         #endregion
 
         #region Input Handling
+
+        private void ReturnResult()
+        {
+            TakeInput();
+            DialogResult = DialogResult.OK;
+        }
+
         private bool IsInputValid()
         {
             if (InputValidator.IsCurrencyInputValid(textBoxValue.Text) && InputValidator.IsNameValid(textBoxValue.Text))
@@ -115,6 +116,116 @@ namespace Forms
             dataEntry.Amount = Decimal.Round(Decimal.Parse(textBoxValue.Text), 2);
             dataEntry.Title = textBoxTitle.Text;
             dataEntry.IsMonthly = checkBoxMonthly.Checked;
+            dataEntry.Date = monthCalendar.SelectionStart;
+        }
+
+        #endregion
+
+        #region Keyboard Input Handling
+
+        private void TextBoxValue_TextChanged(object sender, EventArgs e)
+        {
+            //WIP
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBoxValue.Text, "  ^ [0-9]"))
+            {
+                textBoxValue.Text = "";
+            }
+            //duodam regex chekeriui stringa ir nauja chara, 
+            //jeigu geras charas stringa keiciam, jeigu negeras nekeiciam
+        }
+
+        private void TextBoxValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //WIP
+            switch (e.KeyChar)
+            {
+                case (char)Keys.Escape:
+                    buttonCancel.PerformClick();
+                    break;
+                case (char)Keys.Enter:
+                    buttonAdd.PerformClick();
+                    break;
+            }
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void UsualEscAndEnterKeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch(e.KeyChar)
+            {
+                case (char)Keys.Escape:
+                    buttonCancel.PerformClick();
+                    break;
+                case (char)Keys.Enter:
+                    buttonAdd.PerformClick();
+                    break;
+            }
+        }
+        private void AddAndCancelKeyPress(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case (char)Keys.Escape:
+                    buttonCancel.PerformClick();
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Button Click Events
+        private void ButtonAdd_Click(object sender, EventArgs e)
+        {
+            if (IsInputValid())
+            {
+                ReturnResult();
+            }
+            else
+            {
+                ShowError();
+            }
+        }
+
+        private void ButtonDate_Click(object sender, EventArgs e)
+        {
+            ChangeSize();
+        } 
+        #endregion
+
+        #region Size Changing
+        private void ChangeSize()
+        {
+            if (Size == collapsedSize)
+            {
+                Expand();
+            }
+            else
+            {
+                Collapse();
+            }
+        }
+
+        private void Collapse()
+        {
+            Size = collapsedSize;
+            monthCalendar.Hide();
+        }
+
+        private void Expand()
+        {
+            Size = expandedSize;
+            monthCalendar.Show();
+        }
+        #endregion
+
+        #region Errors
+        private void ShowError()
+        {
+            CreateErrorMessage();
+            MessageBox.Show(errorMessage);
         }
 
         private void CreateErrorMessage()
@@ -133,44 +244,5 @@ namespace Forms
             }
         } 
         #endregion
-
-        #region Event Handlers
-        private void TextBoxValue_TextChanged(object sender, EventArgs e)
-        {
-            if (System.Text.RegularExpressions.Regex.IsMatch(textBoxValue.Text, "  ^ [0-9]"))
-            {
-                textBoxValue.Text = "";
-            }
-            //duodam regex chekeriui stringa ir nauja chara, 
-            //jeigu geras charas stringa keiciam, jeigu negeras nekeiciam
-        }
-
-        private void TextBoxValue_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Escape)
-            {
-                Select();
-            }
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void EntryForm_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Escape)
-            {
-                buttonCancel.PerformClick();
-            }
-        }
-        #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var oldSize = this.Size;
-            oldSize.Height += 100;
-            this.Size = oldSize;
-        }
     }
 }

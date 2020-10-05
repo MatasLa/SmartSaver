@@ -32,6 +32,7 @@ namespace Forms
         {
             panelFinancesSubMenu.Visible = false;
             panelReportsSubMenu.Visible = false;
+            label2.Text = DateTime.Now.ToString("D");
         }
 
         private void ShowSubMenu(Panel subMenu)
@@ -161,7 +162,7 @@ namespace Forms
 
         private void ButtonLogOut_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            FormChanger.ChangeForm(this, new FormLogIn(DataHandler));
         }
 
         private void MenuLogo_Click(object sender, EventArgs e)

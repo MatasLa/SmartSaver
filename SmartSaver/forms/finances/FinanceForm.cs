@@ -93,11 +93,11 @@ namespace Forms
                 switch (EntryType)
                 {
                     case EntryType.Income:
-                        data.EditIncomeItem(dataEntry.ID,  dataEntry.Title, dataEntry.Amount, handler.Time, dataEntry.IsMonthly);
+                        data.EditIncomeItem(dataEntry.ID,  dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly);
                         handler.DataJSON.WriteIncomeToFile();
                         break;
                     case EntryType.Expense:
-                        data.EditExpensesItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, handler.Time, dataEntry.IsMonthly);
+                        data.EditExpensesItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly);
                         handler.DataJSON.WriteExpensesToFile();
                         break;
                 }
@@ -118,11 +118,11 @@ namespace Forms
                 switch (EntryType)
                 {
                     case EntryType.Income:
-                        data.AddIncome(dataEntry.Amount, dataEntry.Title, handler.Time, dataEntry.IsMonthly);
+                        data.AddIncome(dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly);
                         handler.DataJSON.WriteIncomeToFile();
                         break;
                     case EntryType.Expense:
-                        data.AddExpense(dataEntry.Amount, dataEntry.Title, handler.Time, dataEntry.IsMonthly);
+                        data.AddExpense(dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly);
                         handler.DataJSON.WriteExpensesToFile();
                         break;
                 }
@@ -179,7 +179,6 @@ namespace Forms
         {
             labelMonth.Text = handler.Time.ToString("MMM");
             labelYear.Text = handler.Time.Year.ToString();
-            labelDay.Text = handler.Time.ToString("dddd, d");
         }
 
         public void SetTitles()
