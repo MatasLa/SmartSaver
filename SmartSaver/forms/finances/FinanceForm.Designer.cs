@@ -40,9 +40,12 @@
             this.labelMonth = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.labelNetBalance = new System.Windows.Forms.Label();
+            this.labelNetBalanceValue = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
+            this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -64,6 +67,7 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(1110, 100);
             this.panelTop.TabIndex = 0;
+            this.panelTop.Click += new System.EventHandler(this.PanelTop_Click);
             // 
             // labelBalance
             // 
@@ -214,6 +218,8 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.Color.White;
+            this.splitContainer.Panel2.Controls.Add(this.labelNetBalanceValue);
+            this.splitContainer.Panel2.Controls.Add(this.labelNetBalance);
             this.splitContainer.Panel2MinSize = 300;
             this.splitContainer.Size = new System.Drawing.Size(1110, 621);
             this.splitContainer.SplitterDistance = 749;
@@ -241,6 +247,33 @@
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Text = "dataGridView";
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
+            this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
+            // 
+            // labelNetBalance
+            // 
+            this.labelNetBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelNetBalance.AutoSize = true;
+            this.labelNetBalance.BackColor = System.Drawing.Color.Transparent;
+            this.labelNetBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelNetBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelNetBalance.Location = new System.Drawing.Point(120, 307);
+            this.labelNetBalance.Name = "labelNetBalance";
+            this.labelNetBalance.Size = new System.Drawing.Size(137, 26);
+            this.labelNetBalance.TabIndex = 9;
+            this.labelNetBalance.Text = "Net Balance:";
+            // 
+            // labelNetBalanceValue
+            // 
+            this.labelNetBalanceValue.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelNetBalanceValue.AutoSize = true;
+            this.labelNetBalanceValue.BackColor = System.Drawing.Color.Transparent;
+            this.labelNetBalanceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelNetBalanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelNetBalanceValue.Location = new System.Drawing.Point(133, 350);
+            this.labelNetBalanceValue.Name = "labelNetBalanceValue";
+            this.labelNetBalanceValue.Size = new System.Drawing.Size(91, 26);
+            this.labelNetBalanceValue.TabIndex = 9;
+            this.labelNetBalanceValue.Text = "Balance";
             // 
             // FinanceForm
             // 
@@ -257,6 +290,8 @@
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
+            this.splitContainer.Panel2.ResumeLayout(false);
+            this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
@@ -278,5 +313,7 @@
         private System.Windows.Forms.Label labelBalance;
         private System.Windows.Forms.Label labelMonth;
         private System.Windows.Forms.Label labelYear;
+        private System.Windows.Forms.Label labelNetBalanceValue;
+        private System.Windows.Forms.Label labelNetBalance;
     }
 }

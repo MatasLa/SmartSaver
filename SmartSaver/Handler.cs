@@ -17,12 +17,15 @@ namespace DataManager
 
         public DataJSON DataJSON { get; }
 
+        public DataCalculations DataCalculations { get; }
+
         public Handler()
         {
             Time = DateTime.Now;
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
+            DataCalculations = new DataCalculations(Data);
             DataJSON = new DataJSON(Data);
             DataJSON.ReadIncomeFromFile();
             DataJSON.ReadExpensesFromFile();

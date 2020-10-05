@@ -73,6 +73,7 @@ namespace Forms
             childForm.Dock = DockStyle.Fill;
             //add the form to the list of the controls in the container panel
             panelMain.Controls.Add(childForm);
+
             // associate the form with the container panel
             panelMain.Tag = childForm;
             // to hide the logo
@@ -117,47 +118,56 @@ namespace Forms
 
         private void ButtonBudget_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            //OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            FormChanger.OpenChildForm(ref activeForm, new FinanceForm(DataHandler, EntryType.Expense), panelMain);
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FinanceForm(DataHandler, EntryType.Income));
+            //OpenChildForm(new FinanceForm(DataHandler, EntryType.Income));
+            FormChanger.OpenChildForm(ref activeForm, new FinanceForm(DataHandler, EntryType.Income), panelMain);
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            //OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            FormChanger.OpenChildForm(ref activeForm, new FinanceForm(DataHandler, EntryType.Expense), panelMain);
         }
 
         private void ButtonGoals_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormGoals());
+            //OpenChildForm(new FormGoals());
+            FormChanger.OpenChildForm(ref activeForm, new FormGoals(), panelMain);
         }
 
         private void ButtonSpending_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormSpending());
+            //OpenChildForm(new FormSpending());
+            FormChanger.OpenChildForm(ref activeForm, new FormSpending(), panelMain);
         }
 
         private void ButtonNetWorth_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormNetWorth());
+            //OpenChildForm(new FormNetWorth());
+            FormChanger.OpenChildForm(ref activeForm, new FormNetWorth(), panelMain);
         }
 
         private void ButtonIncomevExpenses_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormIncomevExpenses());
+            //OpenChildForm(new FormIncomevExpenses());
+            FormChanger.OpenChildForm(ref activeForm, new FormIncomevExpenses(), panelMain);
         }
 
         private void ButtonGoalReport_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormGoalReports());
+            //OpenChildForm(new FormGoalReports());
+            FormChanger.OpenChildForm(ref activeForm, new FormGoalReports(), panelMain);
         }
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormHelp());
+            //OpenChildForm(new FormHelp());
+            FormChanger.OpenChildForm(ref activeForm, new FormHelp(), panelMain);
         }
 
         private void ButtonLogOut_Click(object sender, EventArgs e)
@@ -167,7 +177,7 @@ namespace Forms
 
         private void MenuLogo_Click(object sender, EventArgs e)
         {
-            CloseChildForm();
+            FormChanger.CloseChildForm(ref activeForm);
         }
 
         #endregion

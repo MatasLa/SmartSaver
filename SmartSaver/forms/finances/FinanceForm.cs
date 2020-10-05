@@ -31,6 +31,8 @@ namespace Forms
         private readonly string addIncomeButtonTitle = "Add Income";
         private readonly string addExpensesButtonTitle = "Add Expense";
 
+        private Form activeForm;
+
         private EntryType _entryType;
         public EntryType EntryType 
         { 
@@ -60,23 +62,26 @@ namespace Forms
         {
             SetTitles();
             UpdateDisplay();
+            FormChanger.CloseChildForm(ref activeForm);
         }
 
 
 
         #region Experimental
 
-        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        //private bool 
+
+        private bool GetDataEntryFromSelectedRow(out DataEntry dataEntry)
         {
             var value = dataGridView.SelectedRows[0].Cells["ID"].Value;
             if (value is DBNull)
             {
-                return;
+                dataEntry = new DataEntry();
+                return false;
             }
 
             int id = (int)value;
 
-            DataEntry dataEntry;
             switch (EntryType)
             {
                 case EntryType.Income:
@@ -87,8 +92,32 @@ namespace Forms
                     dataEntry = data.Expenses.FirstOrDefault(x => x.ID == id);
                     break;
             }
+            return true;
 
-            if (new EntryForm(dataEntry, EntryType).ShowDialog() == DialogResult.OK)
+        }
+        private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataEntry dataEntry;
+
+            if (!GetDataEntryFromSelectedRow(out dataEntry))
+            {
+                return;
+            }
+
+            FormChanger.OpenChildForm(ref activeForm, new EntryInfoForm(dataEntry, handler), splitContainer.Panel2);
+        }
+
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataEntry dataEntry;
+
+            if(!GetDataEntryFromSelectedRow(out dataEntry))
+            {
+                return;
+            }
+
+            if (new EntryForm(dataEntry, EntryType, handler).ShowDialog() == DialogResult.OK)
             {
                 switch (EntryType)
                 {
@@ -101,19 +130,22 @@ namespace Forms
                         handler.DataJSON.WriteExpensesToFile();
                         break;
                 }
-                DisplayTable();
-                DisplayBalance();
+                UpdateDisplay();
             }
         }
         #endregion
 
         #region Button Logic
 
+        private void PanelTop_Click(object sender, EventArgs e)
+        {
+            FormChanger.CloseChildForm(ref activeForm);
+        }
 
         private void ButtonAddEntry_Click(object sender, EventArgs e)
         {
             DataEntry dataEntry = new DataEntry();
-            if (new EntryForm(dataEntry, EntryType).ShowDialog() == DialogResult.OK)
+            if (new EntryForm(dataEntry, EntryType, handler).ShowDialog() == DialogResult.OK)
             {
                 switch (EntryType)
                 {
@@ -126,8 +158,7 @@ namespace Forms
                         handler.DataJSON.WriteExpensesToFile();
                         break;
                 }
-                DisplayTable();
-                DisplayBalance();
+                UpdateDisplay();
             }
         }
 
@@ -140,6 +171,7 @@ namespace Forms
             DisplayDate();
             DisplayTable();
             DisplayBalance();
+            DisplayTotalBalance();
         }
 
         public void DisplayTable()
@@ -173,6 +205,21 @@ namespace Forms
                 labelBalance.ForeColor = Color.Red;
             }
             labelBalance.Text = NumberFormatter.FormatCurrency(balance);
+        }
+
+        private void DisplayTotalBalance()
+        {
+            var balance = handler.DataCalculations.CheckBalance();
+            labelNetBalanceValue.BackColor = labelBalance.BackColor;
+            if (balance >= Decimal.Zero)
+            {
+                labelNetBalanceValue.ForeColor = Color.Green;
+            }
+            else
+            {
+                labelNetBalanceValue.ForeColor = Color.Red;
+            }
+            labelNetBalanceValue.Text = NumberFormatter.FormatCurrency(balance);
         }
 
         private void DisplayDate()

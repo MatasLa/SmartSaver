@@ -12,8 +12,11 @@ using Utilities;
 namespace Forms
 {
     //kol kas padaryta taip, kad jei perduodi null arba tuscia DataEntry, tai kurs nauja, o jei nera tuscias (t.y. id != 0), tada editins
+
+    //reikia padaryti, kad jeigu cia nustatau date, tai ir pasikeistu DataHandlerio data!!!
     public partial class EntryForm : Form
     {
+        private Handler handler;
         private DataEntry dataEntry;
         private EntryType entryType;
         private readonly Size collapsedSize;
@@ -27,7 +30,7 @@ namespace Forms
         private readonly string editIncomeTitle = "Edit Income";
         private readonly string editExpenseTitle = "Edit Expense";
 
-        public EntryForm(DataEntry dataEntry, EntryType entryType)
+        public EntryForm(DataEntry dataEntry, EntryType entryType, Handler handler)
         {
             InitializeComponent();
 
@@ -41,6 +44,7 @@ namespace Forms
 
             this.dataEntry = dataEntry;
             this.entryType = entryType;
+            this.handler = handler;
 
             SetUpAddOrEdit();
             Collapse();
@@ -117,6 +121,11 @@ namespace Forms
             dataEntry.Title = textBoxTitle.Text;
             dataEntry.IsMonthly = checkBoxMonthly.Checked;
             dataEntry.Date = monthCalendar.SelectionStart;
+
+            ///// WIP
+            
+            handler.Time = monthCalendar.SelectionStart;
+
         }
 
         #endregion

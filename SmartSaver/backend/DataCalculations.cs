@@ -1,6 +1,6 @@
 ﻿namespace DataManager
 {
-    class DataCalculations
+    public class DataCalculations
     {
         private Data data;
         public DataCalculations(Data data)
