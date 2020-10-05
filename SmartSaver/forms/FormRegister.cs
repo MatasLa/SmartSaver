@@ -34,24 +34,32 @@ namespace Forms
             var email = emailInput.Text;
             var pass = passwordInput1.Text;
             var passConfirm = passwordInput2.Text;
-            if (!UserAuth.IsValidEmail(email))
+            if (AuthValidator.RegisterValidation(form: this, email: email, pass: pass, passConfirm: passConfirm))
             {
-                errorMessage.Text = "Provided e-mail is not valid!";
-                return;
+                UserAuth.Registration(email: email, pass: pass);
+                FormChanger.ChangeForm(this, new FormMain(DataHandler));
             }
-            int passCheck = UserAuth.IsValidPassword(pass, passConfirm);
-            switch(passCheck){
+        }
+
+        public void ChangeErrorText(int id)
+        {
+            string text;
+            switch (id)
+            {
                 case 0:
-                    UserAuth.Registration(email: email, pass: pass);
-                    FormChanger.ChangeForm(this, new FormMain(DataHandler));
+                    text = "Provided e-mail is not valid!";
                     break;
                 case 1:
-                    errorMessage.Text = "Password must be atleast 8 characters long";
+                    text = "Password must be atleast 8 characters long";
                     break;
                 case 2:
-                    errorMessage.Text = "Passwords did not match!";
+                    text = "Passwords did not match!";
+                    break;
+                default:
+                    text = "";
                     break;
             }
+            errorMessage.Text = text;
         }
     }
 
