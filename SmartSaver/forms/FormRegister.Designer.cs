@@ -104,7 +104,7 @@
             this.passwordInput2.Name = "passwordInput2";
             this.passwordInput2.PasswordChar = '•';
             this.passwordInput2.Size = new System.Drawing.Size(206, 23);
-            this.passwordInput2.TabIndex = 2;
+            this.passwordInput2.TabIndex = 3;
             // 
             // passwordLabel2
             // 
@@ -133,14 +133,14 @@
             this.registerButton.BackColor = System.Drawing.Color.Transparent;
             this.registerButton.BorderColor = System.Drawing.Color.Transparent;
             this.registerButton.ButtonColor = System.Drawing.Color.MintCream;
-            this.registerButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.registerButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
             this.registerButton.FlatAppearance.BorderSize = 0;
             this.registerButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.registerButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.registerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.registerButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.registerButton.ForeColor = System.Drawing.Color.Transparent;
-            this.registerButton.Location = new System.Drawing.Point(209, 329);
+            this.registerButton.Location = new System.Drawing.Point(214, 329);
             this.registerButton.Name = "registerButton";
             this.registerButton.OnHoverBorderColor = System.Drawing.Color.Transparent;
             this.registerButton.OnHoverButtonColor = System.Drawing.Color.LightCyan;
@@ -168,9 +168,11 @@
             // 
             // FormRegister
             // 
+            this.AcceptButton = this.registerButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.CancelButton = this.backToLogin;
             this.ClientSize = new System.Drawing.Size(534, 461);
             this.Controls.Add(this.backToLogin);
             this.Controls.Add(this.registerButton);
