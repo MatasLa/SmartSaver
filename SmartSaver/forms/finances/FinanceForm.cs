@@ -120,11 +120,11 @@ namespace Forms
                 switch (EntryType)
                 {
                     case EntryType.Income:
-                        data.AddIncome(1, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
+                        data.AddIncome(Handler.UserId, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
                         handler.DataJSON.WriteIncomeToFile();
                         break;
                     case EntryType.Expense:
-                        data.AddExpense(1, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
+                        data.AddExpense(Handler.UserId, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
                         handler.DataJSON.WriteExpensesToFile();
                         break;
                 }

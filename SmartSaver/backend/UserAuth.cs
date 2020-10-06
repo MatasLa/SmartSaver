@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Linq;
+using DataManager;
 
 namespace DataBases
 {
@@ -15,8 +16,11 @@ namespace DataBases
                 var data = db.Users.Where(a => a.Email == email).FirstOrDefault(); //Find if email is in db
                 if (data == null)
                 {
-                    db.Add(new User { Email = email, Password = pass });
+                    var user = new User { Email = email, Password = pass };
+                    db.Add(user);
                     db.SaveChanges();
+
+                    Handler.UserId = user.Id;
                     return true;
                 }
                 else
@@ -34,6 +38,7 @@ namespace DataBases
 
                 if (data != null)
                 {
+                    Handler.UserId = data.Id;
                     return true;
                 }
                 else

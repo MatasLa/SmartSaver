@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataBases;
 
 namespace DataManager
 {
@@ -19,8 +20,11 @@ namespace DataManager
 
         public DataCalculations DataCalculations { get; }
 
+        public static int UserId { get; set; }
+
         public Handler()
         {
+            UserId = 0;
             Time = DateTime.Now;
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
