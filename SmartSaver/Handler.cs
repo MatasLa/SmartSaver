@@ -24,7 +24,6 @@ namespace DataManager
 
         public Handler()
         {
-            UserId = 0;
             Time = DateTime.Now;
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
@@ -36,6 +35,7 @@ namespace DataManager
             //DataJSON.ReadIncomeFromFile();
             //DataJSON.ReadExpensesFromFile();
         }
+
 
     }
 }
