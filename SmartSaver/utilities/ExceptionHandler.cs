@@ -1,10 +1,10 @@
 ﻿namespace Utilities
 {
-    class ExceptionHandler
+    static class ExceptionHandler
     {
-        public void Log(string error)
+        public static void Log(string error)
         {
-            System.IO.File.WriteAllText(@"Errors.txt", error);
+            System.IO.File.WriteAllText(@"Errors.txt", error + "\n");
         }
     }
 }

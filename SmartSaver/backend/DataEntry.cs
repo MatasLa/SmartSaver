@@ -8,14 +8,14 @@ namespace DataManager
 	{
 
 		/*Constructor*/
-		public DataEntry(int id, decimal amount, string title, DateTime date, bool isMonthly)
+		public DataEntry(int id, decimal amount, string title, DateTime date, bool isMonthly, int importance)
 		{
 			ID = id;
 			Amount = amount;
 			Title = title;
 			Date = date;
 			IsMonthly = isMonthly;
-
+			Importance = importance;
 		}
 
 		public DataEntry()
@@ -25,7 +25,7 @@ namespace DataManager
 			Title = "unnamed";
 			Date = DateTime.Now;
 			IsMonthly = false;
-
+			Importance = 0;
 		}
 
 		/*Getters and Setters*/
@@ -34,22 +34,32 @@ namespace DataManager
 			get;
 			set;
 		}
+
 		public decimal Amount
 		{
 			get;
 			set;
 		}
+
 		public int ID
 		{
 			get;
 			set;
 		}
+
 		public DateTime Date
 		{
 			get;
 			set;
 		}
+
 		public bool IsMonthly
+		{
+			get;
+			set;
+		}
+
+		public int Importance
 		{
 			get;
 			set;

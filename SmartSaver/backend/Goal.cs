@@ -9,7 +9,7 @@ namespace DataManager
     {
         private int id;
         private string title;
-        private double price;
+        private decimal price;
 
         public int ID
         {
@@ -19,7 +19,7 @@ namespace DataManager
         {
             get; set;
         }
-        public double Price
+        public decimal Price
         {
             get; set;
         }

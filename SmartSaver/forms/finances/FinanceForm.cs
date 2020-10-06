@@ -100,11 +100,11 @@ namespace Forms
                 switch (EntryType)
                 {
                     case EntryType.Income:
-                        data.EditIncomeItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly);
+                        data.EditIncomeItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, 1);
                         handler.DataJSON.WriteIncomeToFile();
                         break;
                     case EntryType.Expense:
-                        data.EditExpensesItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly);
+                        data.EditExpensesItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, 1);
                         handler.DataJSON.WriteExpensesToFile();
                         break;
                 }
@@ -120,11 +120,11 @@ namespace Forms
                 switch (EntryType)
                 {
                     case EntryType.Income:
-                        data.AddIncome(dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly);
+                        data.AddIncome(dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
                         handler.DataJSON.WriteIncomeToFile();
                         break;
                     case EntryType.Expense:
-                        data.AddExpense(dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly);
+                        data.AddExpense(dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
                         handler.DataJSON.WriteExpensesToFile();
                         break;
                 }
@@ -196,7 +196,8 @@ namespace Forms
                     break;
             }
             dataGridView.DataSource = dataTable;
-            dataGridView.Columns[0].Visible = false;
+            dataGridView.Columns["ID"].Visible = false;
+            dataGridView.Columns["Importance"].Visible = false;
 
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
             dataGridView.Columns["Date"].DefaultCellStyle.Format = "dd (dddd)";

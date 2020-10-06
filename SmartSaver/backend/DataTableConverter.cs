@@ -21,14 +21,14 @@ namespace DataManager
             {
                 foreach (DataEntry data in data.Income)
                 {
-                    dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly);
+                    dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
                 }
             }
             else if(entryType == EntryType.Expense)
             {
                 foreach (DataEntry data in data.Expenses)
                 {
-                    dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly);
+                    dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
                 }
             }
             return dt;
@@ -40,7 +40,7 @@ namespace DataManager
             var dt = GenerateHeaders();
             foreach (DataEntry data in customList)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly);
+                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
 
             return dt;
@@ -54,6 +54,7 @@ namespace DataManager
             dt.Columns.Add("Amount", typeof(decimal));
             dt.Columns.Add("Date", typeof(DateTime));
             dt.Columns.Add("Recurring", typeof(bool));
+            dt.Columns.Add("Importance", typeof(int));
             return dt;
         }
 
@@ -65,10 +66,11 @@ namespace DataManager
             dt.Columns.Add("Amount", typeof(decimal));
             dt.Columns.Add("Date", typeof(DateTime));
             dt.Columns.Add("Recurring", typeof(bool));
+            dt.Columns.Add("Importance", typeof(int));
 
             foreach(DataEntry data in data.Income)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly);
+                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
             return dt;
         }
@@ -81,10 +83,11 @@ namespace DataManager
             dt.Columns.Add("Amount", typeof(decimal));
             dt.Columns.Add("Date", typeof(DateTime));
             dt.Columns.Add("Recurring", typeof(bool));
+            dt.Columns.Add("Importance", typeof(int));
 
             foreach (DataEntry data in data.Expenses)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly);
+                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
             return dt;
         }
