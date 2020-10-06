@@ -14,10 +14,5 @@ namespace Forms
         {
             InitializeComponent();
         }
-
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
-        {
-            label1.Text = monthCalendar1.SelectionStart.ToString();
-        }
     }
 }

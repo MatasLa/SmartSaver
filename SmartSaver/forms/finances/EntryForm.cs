@@ -29,6 +29,8 @@ namespace Forms
         private readonly string addExpenseTitle = "Add Expense";
         private readonly string editIncomeTitle = "Edit Income";
         private readonly string editExpenseTitle = "Edit Expense";
+        private readonly string addButtonText = "Add";
+        private readonly string editButtonText = "Edit";
 
         public EntryForm(DataEntry dataEntry, EntryType entryType, Handler handler)
         {
@@ -46,9 +48,15 @@ namespace Forms
             this.entryType = entryType;
             this.handler = handler;
 
+            SetCalendarTime();
             SetUpAddOrEdit();
             Collapse();
             Select();
+        }
+
+        private void SetCalendarTime()
+        {
+            monthCalendar.SelectionStart = handler.Time;
         }
 
         #region Title setup
@@ -70,9 +78,11 @@ namespace Forms
             {
                 case EntryType.Income:
                     Text = addIncomeTitle;
+                    buttonOK.Text = addButtonText;
                     break;
                 case EntryType.Expense:
                     Text = addExpenseTitle;
+                    buttonOK.Text = addButtonText;
                     break;
             }
         }
@@ -83,9 +93,11 @@ namespace Forms
             {
                 case EntryType.Income:
                     Text = editIncomeTitle;
+                    buttonOK.Text = editButtonText;
                     break;
                 case EntryType.Expense:
                     Text = editExpenseTitle;
+                    buttonOK.Text = editButtonText;
                     break;
             }
             Text += " \"" + dataEntry.Title + "\"";
@@ -100,6 +112,10 @@ namespace Forms
         private void ReturnResult()
         {
             TakeInput();
+
+            ///// WIP, change hindler time as well
+            handler.Time = monthCalendar.SelectionStart;
+
             DialogResult = DialogResult.OK;
         }
 
@@ -121,11 +137,6 @@ namespace Forms
             dataEntry.Title = textBoxTitle.Text;
             dataEntry.IsMonthly = checkBoxMonthly.Checked;
             dataEntry.Date = monthCalendar.SelectionStart;
-
-            ///// WIP
-            
-            handler.Time = monthCalendar.SelectionStart;
-
         }
 
         #endregion
@@ -152,7 +163,7 @@ namespace Forms
                     buttonCancel.PerformClick();
                     break;
                 case (char)Keys.Enter:
-                    buttonAdd.PerformClick();
+                    buttonOK.PerformClick();
                     break;
             }
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
@@ -169,7 +180,7 @@ namespace Forms
                     buttonCancel.PerformClick();
                     break;
                 case (char)Keys.Enter:
-                    buttonAdd.PerformClick();
+                    buttonOK.PerformClick();
                     break;
             }
         }

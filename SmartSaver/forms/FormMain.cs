@@ -47,63 +47,6 @@ namespace Forms
             }
         }
 
-        private void OpenChildForm(Form childForm)
-        {
-            if (activeForm != null)
-            {
-                if (IsSameFormAlreadyOpen(childForm))
-                {
-                    if (activeForm is FinanceForm form 
-                        && form.EntryType != ((FinanceForm)childForm).EntryType)
-                    {
-                        form.EntryType = ((FinanceForm)childForm).EntryType;
-                    }
-                    return;
-                }
-                else
-                {
-                    activeForm.Close();
-                }
-            }
-
-            activeForm = childForm;
-            //it will behave like a control
-            childForm.TopLevel = false;
-            // make the form the up the whole panel
-            childForm.Dock = DockStyle.Fill;
-            //add the form to the list of the controls in the container panel
-            panelMain.Controls.Add(childForm);
-
-            // associate the form with the container panel
-            panelMain.Tag = childForm;
-            // to hide the logo
-            childForm.BringToFront();
-            childForm.Show();
-            
-        }
-
-        private bool IsSameFormAlreadyOpen(object form)
-        {
-            if(activeForm.GetType() == form.GetType())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void CloseChildForm()
-        {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-                activeForm = null;
-            }
-        }
-
-
         #region button event handlers
 
         private void ButtonFinances_Click(object sender, EventArgs e)
@@ -114,12 +57,6 @@ namespace Forms
         private void ButtonReports_Click(object sender, EventArgs e)
         {
             ShowSubMenu(panelReportsSubMenu);
-        }
-
-        private void ButtonBudget_Click(object sender, EventArgs e)
-        {
-            //OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
-            FormChanger.OpenChildForm(ref activeForm, new FinanceForm(DataHandler, EntryType.Expense), panelMain);
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)

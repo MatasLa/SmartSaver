@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.panelSideMenu = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonLogOut = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
@@ -43,13 +44,11 @@
             this.buttonGoals = new System.Windows.Forms.Button();
             this.buttonExpenses = new System.Windows.Forms.Button();
             this.buttonIncome = new System.Windows.Forms.Button();
-            this.buttonBudget = new System.Windows.Forms.Button();
             this.buttonFinances = new System.Windows.Forms.Button();
             this.panelMenuLogo = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelMain = new System.Windows.Forms.Panel();
             this.pictureBoxMainLogo = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.panelSideMenu.SuspendLayout();
             this.panelReportsSubMenu.SuspendLayout();
             this.panelFinancesSubMenu.SuspendLayout();
@@ -78,6 +77,18 @@
             this.panelSideMenu.Size = new System.Drawing.Size(250, 901);
             this.panelSideMenu.TabIndex = 0;
             // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label2.ForeColor = System.Drawing.Color.Azure;
+            this.label2.Location = new System.Drawing.Point(0, 811);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(250, 45);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Date";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
@@ -97,7 +108,7 @@
             this.buttonLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLogOut.ForeColor = System.Drawing.Color.Azure;
-            this.buttonLogOut.Location = new System.Drawing.Point(0, 580);
+            this.buttonLogOut.Location = new System.Drawing.Point(0, 540);
             this.buttonLogOut.Name = "buttonLogOut";
             this.buttonLogOut.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.buttonLogOut.Size = new System.Drawing.Size(250, 45);
@@ -114,7 +125,7 @@
             this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonHelp.ForeColor = System.Drawing.Color.Azure;
-            this.buttonHelp.Location = new System.Drawing.Point(0, 535);
+            this.buttonHelp.Location = new System.Drawing.Point(0, 495);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.buttonHelp.Size = new System.Drawing.Size(250, 45);
@@ -132,7 +143,7 @@
             this.panelReportsSubMenu.Controls.Add(this.buttonNetWorth);
             this.panelReportsSubMenu.Controls.Add(this.buttonSpending);
             this.panelReportsSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelReportsSubMenu.Location = new System.Drawing.Point(0, 375);
+            this.panelReportsSubMenu.Location = new System.Drawing.Point(0, 335);
             this.panelReportsSubMenu.Margin = new System.Windows.Forms.Padding(0);
             this.panelReportsSubMenu.Name = "panelReportsSubMenu";
             this.panelReportsSubMenu.Size = new System.Drawing.Size(250, 160);
@@ -217,7 +228,7 @@
             this.buttonReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonReports.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonReports.ForeColor = System.Drawing.Color.Azure;
-            this.buttonReports.Location = new System.Drawing.Point(0, 330);
+            this.buttonReports.Location = new System.Drawing.Point(0, 290);
             this.buttonReports.Name = "buttonReports";
             this.buttonReports.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.buttonReports.Size = new System.Drawing.Size(250, 45);
@@ -233,11 +244,10 @@
             this.panelFinancesSubMenu.Controls.Add(this.buttonGoals);
             this.panelFinancesSubMenu.Controls.Add(this.buttonExpenses);
             this.panelFinancesSubMenu.Controls.Add(this.buttonIncome);
-            this.panelFinancesSubMenu.Controls.Add(this.buttonBudget);
             this.panelFinancesSubMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelFinancesSubMenu.Location = new System.Drawing.Point(0, 170);
             this.panelFinancesSubMenu.Name = "panelFinancesSubMenu";
-            this.panelFinancesSubMenu.Size = new System.Drawing.Size(250, 160);
+            this.panelFinancesSubMenu.Size = new System.Drawing.Size(250, 120);
             this.panelFinancesSubMenu.TabIndex = 2;
             // 
             // buttonGoals
@@ -248,7 +258,7 @@
             this.buttonGoals.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonGoals.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonGoals.ForeColor = System.Drawing.Color.Azure;
-            this.buttonGoals.Location = new System.Drawing.Point(0, 120);
+            this.buttonGoals.Location = new System.Drawing.Point(0, 80);
             this.buttonGoals.Name = "buttonGoals";
             this.buttonGoals.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.buttonGoals.Size = new System.Drawing.Size(250, 40);
@@ -266,7 +276,7 @@
             this.buttonExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonExpenses.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonExpenses.ForeColor = System.Drawing.Color.Azure;
-            this.buttonExpenses.Location = new System.Drawing.Point(0, 80);
+            this.buttonExpenses.Location = new System.Drawing.Point(0, 40);
             this.buttonExpenses.Name = "buttonExpenses";
             this.buttonExpenses.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.buttonExpenses.Size = new System.Drawing.Size(250, 40);
@@ -284,7 +294,7 @@
             this.buttonIncome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonIncome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonIncome.ForeColor = System.Drawing.Color.Azure;
-            this.buttonIncome.Location = new System.Drawing.Point(0, 40);
+            this.buttonIncome.Location = new System.Drawing.Point(0, 0);
             this.buttonIncome.Name = "buttonIncome";
             this.buttonIncome.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.buttonIncome.Size = new System.Drawing.Size(250, 40);
@@ -293,24 +303,6 @@
             this.buttonIncome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonIncome.UseVisualStyleBackColor = false;
             this.buttonIncome.Click += new System.EventHandler(this.ButtonIncome_Click);
-            // 
-            // buttonBudget
-            // 
-            this.buttonBudget.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
-            this.buttonBudget.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonBudget.FlatAppearance.BorderSize = 0;
-            this.buttonBudget.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBudget.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonBudget.ForeColor = System.Drawing.Color.Azure;
-            this.buttonBudget.Location = new System.Drawing.Point(0, 0);
-            this.buttonBudget.Name = "buttonBudget";
-            this.buttonBudget.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.buttonBudget.Size = new System.Drawing.Size(250, 40);
-            this.buttonBudget.TabIndex = 0;
-            this.buttonBudget.Text = "Budget";
-            this.buttonBudget.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonBudget.UseVisualStyleBackColor = false;
-            this.buttonBudget.Click += new System.EventHandler(this.ButtonBudget_Click);
             // 
             // buttonFinances
             // 
@@ -373,18 +365,6 @@
             this.pictureBoxMainLogo.TabIndex = 1;
             this.pictureBoxMainLogo.TabStop = false;
             // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label2.ForeColor = System.Drawing.Color.Azure;
-            this.label2.Location = new System.Drawing.Point(0, 811);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(250, 45);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Date";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // FormMain
             // 
             this.ClientSize = new System.Drawing.Size(1362, 901);
@@ -416,7 +396,6 @@
         private System.Windows.Forms.Button buttonGoals;
         private System.Windows.Forms.Button buttonExpenses;
         private System.Windows.Forms.Button buttonIncome;
-        private System.Windows.Forms.Button buttonBudget;
         private System.Windows.Forms.Button buttonFinances;
         private System.Windows.Forms.Button buttonLogOut;
         private System.Windows.Forms.Button buttonHelp;

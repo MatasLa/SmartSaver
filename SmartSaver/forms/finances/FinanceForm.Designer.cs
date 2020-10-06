@@ -40,8 +40,8 @@
             this.labelMonth = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.labelNetBalance = new System.Windows.Forms.Label();
-            this.labelNetBalanceValue = new System.Windows.Forms.Label();
+            this.labelTotalBalanceValue = new System.Windows.Forms.Label();
+            this.labelTotalBalance = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -187,6 +187,7 @@
             this.labelYear.Size = new System.Drawing.Size(74, 26);
             this.labelYear.TabIndex = 6;
             this.labelYear.Text = "YEAR";
+            this.labelYear.Click += new System.EventHandler(this.LabelYear_Click);
             // 
             // labelMonth
             // 
@@ -218,8 +219,8 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainer.Panel2.Controls.Add(this.labelNetBalanceValue);
-            this.splitContainer.Panel2.Controls.Add(this.labelNetBalance);
+            this.splitContainer.Panel2.Controls.Add(this.labelTotalBalanceValue);
+            this.splitContainer.Panel2.Controls.Add(this.labelTotalBalance);
             this.splitContainer.Panel2MinSize = 300;
             this.splitContainer.Size = new System.Drawing.Size(1110, 621);
             this.splitContainer.SplitterDistance = 749;
@@ -246,34 +247,34 @@
             this.dataGridView.Size = new System.Drawing.Size(749, 621);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Text = "dataGridView";
-            this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
-            this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
+            this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellDoubleClick);
+            this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView_CellMouseClick);
             // 
-            // labelNetBalance
+            // labelTotalBalanceValue
             // 
-            this.labelNetBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelNetBalance.AutoSize = true;
-            this.labelNetBalance.BackColor = System.Drawing.Color.Transparent;
-            this.labelNetBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelNetBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelNetBalance.Location = new System.Drawing.Point(120, 307);
-            this.labelNetBalance.Name = "labelNetBalance";
-            this.labelNetBalance.Size = new System.Drawing.Size(137, 26);
-            this.labelNetBalance.TabIndex = 9;
-            this.labelNetBalance.Text = "Net Balance:";
+            this.labelTotalBalanceValue.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelTotalBalanceValue.AutoSize = true;
+            this.labelTotalBalanceValue.BackColor = System.Drawing.Color.Transparent;
+            this.labelTotalBalanceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTotalBalanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelTotalBalanceValue.Location = new System.Drawing.Point(130, 350);
+            this.labelTotalBalanceValue.Name = "labelTotalBalanceValue";
+            this.labelTotalBalanceValue.Size = new System.Drawing.Size(91, 26);
+            this.labelTotalBalanceValue.TabIndex = 9;
+            this.labelTotalBalanceValue.Text = "Balance";
             // 
-            // labelNetBalanceValue
+            // labelTotalBalance
             // 
-            this.labelNetBalanceValue.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelNetBalanceValue.AutoSize = true;
-            this.labelNetBalanceValue.BackColor = System.Drawing.Color.Transparent;
-            this.labelNetBalanceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelNetBalanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelNetBalanceValue.Location = new System.Drawing.Point(133, 350);
-            this.labelNetBalanceValue.Name = "labelNetBalanceValue";
-            this.labelNetBalanceValue.Size = new System.Drawing.Size(91, 26);
-            this.labelNetBalanceValue.TabIndex = 9;
-            this.labelNetBalanceValue.Text = "Balance";
+            this.labelTotalBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelTotalBalance.AutoSize = true;
+            this.labelTotalBalance.BackColor = System.Drawing.Color.Transparent;
+            this.labelTotalBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTotalBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelTotalBalance.Location = new System.Drawing.Point(117, 307);
+            this.labelTotalBalance.Name = "labelTotalBalance";
+            this.labelTotalBalance.Size = new System.Drawing.Size(150, 26);
+            this.labelTotalBalance.TabIndex = 9;
+            this.labelTotalBalance.Text = "Total Balance:";
             // 
             // FinanceForm
             // 
@@ -313,7 +314,7 @@
         private System.Windows.Forms.Label labelBalance;
         private System.Windows.Forms.Label labelMonth;
         private System.Windows.Forms.Label labelYear;
-        private System.Windows.Forms.Label labelNetBalanceValue;
-        private System.Windows.Forms.Label labelNetBalance;
+        private System.Windows.Forms.Label labelTotalBalanceValue;
+        private System.Windows.Forms.Label labelTotalBalance;
     }
 }

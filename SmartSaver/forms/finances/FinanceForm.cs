@@ -63,13 +63,10 @@ namespace Forms
             SetTitles();
             UpdateDisplay();
             FormChanger.CloseChildForm(ref activeForm);
+            Select();
         }
 
-
-
-        #region Experimental
-
-        //private bool 
+        #region Entry handling
 
         private bool GetDataEntryFromSelectedRow(out DataEntry dataEntry)
         {
@@ -95,34 +92,15 @@ namespace Forms
             return true;
 
         }
-        private void dataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+
+        private void EditEntry(DataEntry dataEntry)
         {
-            DataEntry dataEntry;
-
-            if (!GetDataEntryFromSelectedRow(out dataEntry))
-            {
-                return;
-            }
-
-            FormChanger.OpenChildForm(ref activeForm, new EntryInfoForm(dataEntry, handler), splitContainer.Panel2);
-        }
-
-
-        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DataEntry dataEntry;
-
-            if(!GetDataEntryFromSelectedRow(out dataEntry))
-            {
-                return;
-            }
-
             if (new EntryForm(dataEntry, EntryType, handler).ShowDialog() == DialogResult.OK)
             {
                 switch (EntryType)
                 {
                     case EntryType.Income:
-                        data.EditIncomeItem(dataEntry.ID,  dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly);
+                        data.EditIncomeItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly);
                         handler.DataJSON.WriteIncomeToFile();
                         break;
                     case EntryType.Expense:
@@ -133,16 +111,8 @@ namespace Forms
                 UpdateDisplay();
             }
         }
-        #endregion
 
-        #region Button Logic
-
-        private void PanelTop_Click(object sender, EventArgs e)
-        {
-            FormChanger.CloseChildForm(ref activeForm);
-        }
-
-        private void ButtonAddEntry_Click(object sender, EventArgs e)
+        private void AddEntry()
         {
             DataEntry dataEntry = new DataEntry();
             if (new EntryForm(dataEntry, EntryType, handler).ShowDialog() == DialogResult.OK)
@@ -161,6 +131,46 @@ namespace Forms
                 UpdateDisplay();
             }
         }
+
+        #endregion
+
+        #region Mouse Click Handling
+
+        private void PanelTop_Click(object sender, EventArgs e)
+        {
+            FormChanger.CloseChildForm(ref activeForm);
+        }
+
+        private void ButtonAddEntry_Click(object sender, EventArgs e)
+        {
+            AddEntry();
+        }
+
+        private void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataEntry dataEntry;
+
+            if (!GetDataEntryFromSelectedRow(out dataEntry))
+            {
+                AddEntry();
+                return;
+            }
+
+            EditEntry(dataEntry);
+        }
+
+        private void DataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataEntry dataEntry;
+
+            if (!GetDataEntryFromSelectedRow(out dataEntry))
+            {
+                return;
+            }
+
+            FormChanger.OpenChildForm(ref activeForm, new EntryInfoForm(dataEntry, handler), splitContainer.Panel2);
+        }
+
 
         #endregion
 
@@ -210,16 +220,16 @@ namespace Forms
         private void DisplayTotalBalance()
         {
             var balance = handler.DataCalculations.CheckBalance();
-            labelNetBalanceValue.BackColor = labelBalance.BackColor;
+            labelTotalBalanceValue.BackColor = labelBalance.BackColor;
             if (balance >= Decimal.Zero)
             {
-                labelNetBalanceValue.ForeColor = Color.Green;
+                labelTotalBalanceValue.ForeColor = Color.Green;
             }
             else
             {
-                labelNetBalanceValue.ForeColor = Color.Red;
+                labelTotalBalanceValue.ForeColor = Color.Red;
             }
-            labelNetBalanceValue.Text = NumberFormatter.FormatCurrency(balance);
+            labelTotalBalanceValue.Text = NumberFormatter.FormatCurrency(balance);
         }
 
         private void DisplayDate()
@@ -244,7 +254,14 @@ namespace Forms
         }
         #endregion
 
-        #region Time Button Logic
+        #region Time Button Click Handling
+
+        private void LabelYear_Click(object sender, EventArgs e)
+        {
+            handler.Time = DateTime.Now;
+            UpdateDisplay();
+        }
+
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
             handler.Time = TimeManager.MoveToNextYear(handler.Time);
@@ -313,6 +330,5 @@ namespace Forms
         }
 
         #endregion
-
     }
 }
