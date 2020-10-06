@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using DataBases;
 
 namespace DataManager
 {
@@ -17,19 +18,29 @@ namespace DataManager
 		public List<DataEntry> Expenses { get; } = new List<DataEntry>();
 
 		/*Methods that creates new instance of class and adds to List*/
-		public void AddIncome(decimal value, string title, DateTime date, bool isMonthly, int importance)
-		{
-			Random rnd = new Random();//Since no database, IDs randomized between 100 and 201
-			DataEntry newIncome = new DataEntry(rnd.Next(100, 200), value, title, date, isMonthly, importance);
-			Income.Add(newIncome);
-		}
+        public void AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        {
+            var db = new DatabaseContext();
+            var income = new Incomes { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
+            db.Add(income);
+            db.SaveChanges();
 
-		public void AddExpense(decimal value, string title, DateTime date, bool isMonthly, int importance)
-		{
-			Random rnd = new Random();
-			DataEntry newExpense = new DataEntry(rnd.Next(100, 201), value, title, date, isMonthly, importance);
-			Expenses.Add(newExpense);
-		}
+            int id = income.Id;
+            DataEntry newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
+            Income.Add(newIncome);
+        }
+
+        public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        {
+            var db = new DatabaseContext();
+            var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
+            db.Add(expense);
+            db.SaveChanges();
+
+            int id = expense.Id;
+            DataEntry newExpense = new DataEntry(id, userid, value, title, date, isMonthly, importance);
+            Expenses.Add(newExpense);
+        }
 
 		public void RemoveIncome(int id)
 		{
