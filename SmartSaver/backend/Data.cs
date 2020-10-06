@@ -42,17 +42,23 @@ namespace DataManager
             Expenses.Add(newExpense);
         }
 
-		public void RemoveIncome(int id)
-		{
-			var index = Income.FindIndex(x => x.ID == id);
-			Income.RemoveAt(index);
-		}
+        public void RemoveIncome(int id)
+        {
+            var db = new DatabaseContext();
+            var index = db.Incomes.FirstOrDefault(x => x.Id == id);
+            db.Incomes.Remove(index);
+            db.SaveChanges();
+            //Income.RemoveAt(index);
+        }
 
-		public void RemoveExpense(int id)
-		{
-			var index = Expenses.FindIndex(x => x.ID == id);
-			Income.RemoveAt(index);
-		}
+        public void RemoveExpense(int id)
+        {
+            var db = new DatabaseContext();
+            var index = db.Expenses.FirstOrDefault(x => x.Id == id);
+            db.Expenses.Remove(index);
+            db.SaveChanges();
+            //Expenses.RemoveAt(index);
+        }
 
 		/*Methods that allows to edit different parts of already existing entrys*/
 		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
