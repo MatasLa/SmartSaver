@@ -63,7 +63,6 @@ namespace Forms
             SetTitles();
             UpdateDisplay();
             FormChanger.CloseChildForm(ref activeForm);
-            Select();
         }
 
         #region Entry handling
@@ -91,6 +90,22 @@ namespace Forms
             }
             return true;
 
+        }
+
+        private void DeleteEntry(DataEntry dataEntry)
+        {
+            switch (EntryType)
+            {
+                case EntryType.Income:
+                    data.RemoveIncome(dataEntry.ID);
+                    handler.DataJSON.WriteIncomeToFile();
+                    break;
+                case EntryType.Expense:
+                    data.RemoveExpense(dataEntry.ID);
+                    handler.DataJSON.WriteExpensesToFile();
+                    break;
+            }
+            UpdateDisplay();
         }
 
         private void EditEntry(DataEntry dataEntry)
@@ -135,6 +150,22 @@ namespace Forms
         #endregion
 
         #region Mouse Click Handling
+
+        private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.D)
+            {
+                DataEntry dataEntry;
+
+                if (!GetDataEntryFromSelectedRow(out dataEntry))
+                {
+                    AddEntry();
+                    return;
+                }
+
+                DeleteEntry(dataEntry);
+            }
+        }
 
         private void PanelTop_Click(object sender, EventArgs e)
         {
@@ -331,5 +362,6 @@ namespace Forms
         }
 
         #endregion
+
     }
 }
