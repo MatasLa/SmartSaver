@@ -63,10 +63,13 @@ namespace DataManager
 		/*Methods that allows to edit different parts of already existing entrys*/
 		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
 		{
-			var temp = Income.FirstOrDefault(x => x.ID == id);
+
+			var db = new DatabaseContext();
+			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Amount = value;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -77,10 +80,12 @@ namespace DataManager
 
 		public bool EditIncomeItem(int id, string value)
 		{
-			var temp = Income.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Title = value;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -91,10 +96,12 @@ namespace DataManager
 
 		public bool EditIncomeItem(int id, DateTime date)
 		{
-			var temp = Income.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Date = date;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -105,10 +112,12 @@ namespace DataManager
 
 		public bool EditIncomeItem(int id, bool isMonthly)
 		{
-			var temp = Income.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.IsMonthly = isMonthly;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -118,11 +127,13 @@ namespace DataManager
 		}
 
 		public bool EditIncomeItem(int id, int importance)
-        {
-			var temp = Income.FirstOrDefault(x => x.ID == id);
+		{
+			var db = new DatabaseContext();
+			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Importance = importance;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -133,7 +144,8 @@ namespace DataManager
 
 		public bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
 		{
-			var temp = Income.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Title = value;
@@ -141,6 +153,7 @@ namespace DataManager
 				temp.Date = date;
 				temp.IsMonthly = isMonthly;
 				temp.Importance = importance;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -148,13 +161,15 @@ namespace DataManager
 				return false;
 			}
 		}
-		
+
 		public bool EditExpensesItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
 		{
-			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Amount = value;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -165,10 +180,12 @@ namespace DataManager
 
 		public bool EditExpensesItem(int id, string value)
 		{
-			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Title = value;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -180,10 +197,12 @@ namespace DataManager
 
 		public bool EditExpensesItem(int id, DateTime date)
 		{
-			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Date = date;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -194,10 +213,12 @@ namespace DataManager
 
 		public bool EditExpensesItem(int id, bool isMonthly)
 		{
-			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.IsMonthly = isMonthly;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -208,10 +229,12 @@ namespace DataManager
 
 		public bool EditExpensesItem(int id, int importance)
 		{
-			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Importance = importance;
+				db.SaveChanges();
 				return true;
 			}
 			else
@@ -222,7 +245,8 @@ namespace DataManager
 
 		public bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
 		{
-			var temp = Expenses.FirstOrDefault(x => x.ID == id);
+			var db = new DatabaseContext();
+			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
 			if (temp != null)
 			{
 				temp.Title = value;
@@ -230,6 +254,7 @@ namespace DataManager
 				temp.Date = date;
 				temp.IsMonthly = isMonthly;
 				temp.Importance = importance;
+				db.SaveChanges();
 				return true;
 			}
 			else
