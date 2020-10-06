@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Linq;
 
@@ -11,9 +12,8 @@ namespace SmartSaver
         {
             using (var db = new DatabaseContext())
             {
-                var data = db.Users.Where(a => a.Email == email).ToList();
-
-                if (data.Equals(null))
+                var data = db.Users.Where(a => a.Email == email).FirstOrDefault(); //Find if email is in db
+                if (data == null)
                 {
                     db.Add(new User { Email = email, Password = pass });
                     db.SaveChanges();
@@ -29,9 +29,9 @@ namespace SmartSaver
         {
             using (var db = new DatabaseContext())
             {
-                var data = db.Users.Where(a => a.Email == email && a.Password == pass).ToList();
+                var data = db.Users.Where(a => a.Email == email && a.Password == pass).FirstOrDefault(); //Find user and pass in db and check if matches
 
-                if (!data.Equals(null))
+                if (data != null)
                 {
                     return true;
                 }
@@ -41,7 +41,6 @@ namespace SmartSaver
                 }
             }
         }
-        
 
     }
 }

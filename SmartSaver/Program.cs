@@ -25,7 +25,8 @@ namespace SmartSaver.forms
             Application.SetCompatibleTextRenderingDefault(false);
 
             Handler dataHandler = new Handler();
-            Application.Run(new FormMain(dataHandler));
+            //Application.Run(new FormMain(dataHandler));
+            Application.Run(new FormLogIn(dataHandler));
         }
     }
 }
