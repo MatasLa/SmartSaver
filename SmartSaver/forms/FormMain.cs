@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataManager;
 using Forms;
+using EPiggy;
 using Utilities;
 
 namespace Forms
@@ -17,6 +18,8 @@ namespace Forms
     public partial class FormMain : Form
     {
         public Handler DataHandler { get; }
+        //we need to store the previous form to close it to open the new form
+        private Form activeForm = null;
 
         public FormMain(Handler dataHandler)
         {
@@ -29,74 +32,8 @@ namespace Forms
         {
             panelFinancesSubMenu.Visible = false;
             panelReportsSubMenu.Visible = false;
+            label2.Text = DateTime.Now.ToString("D");
         }
-
-        private void ButtonFinances_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(panelFinancesSubMenu);
-        }
-
-        private void ButtonReports_Click(object sender, EventArgs e)
-        {
-            ShowSubMenu(panelReportsSubMenu);
-        }
-
-        private void ButtonBudget_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormBudget.FormBudget(DataHandler));
-        }
-
-        private void ButtonIncome_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormIncome.FormIncome(DataHandler));
-        }
-
-        private void ButtonExpenses_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormExpenses.FormExpenses(DataHandler));
-        }
-
-        private void ButtonGoals_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormGoals());
-        }
-
-        private void ButtonSpending_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormSpending());
-        }
-
-
-        private void ButtonNetWorth_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormNetWorth());
-        }
-
-        private void ButtonIncomevExpenses_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormIncomevExpenses());
-        }
-
-        private void ButtonGoalReport_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormGoalReports());
-        }
-
-        private void ButtonHelp_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormHelp());
-        }
-
-        private void ButtonLogOut_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void MenuLogo_Click(object sender, EventArgs e)
-        {
-            CloseChildForm();
-        }
-
 
         private void ShowSubMenu(Panel subMenu)
         {
@@ -110,36 +47,78 @@ namespace Forms
             }
         }
 
-        //we need to store the previous form to close it to open the new form
-        private Form activeForm = null;
-        private void OpenChildForm(Form childForm)
+        #region button event handlers
+
+        private void ButtonFinances_Click(object sender, EventArgs e)
         {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-            }
-            activeForm = childForm;
-            //it will behave like a control
-            childForm.TopLevel = false;
-            // make the form the up the whole panel
-            childForm.Dock = DockStyle.Fill;
-            //add the form to the list of the controls in the container panel
-            panelMain.Controls.Add(childForm);
-            // associate the form with the container panel
-            panelMain.Tag = childForm;
-            // to hide the logo
-            childForm.BringToFront();
-            childForm.Show();
+            ShowSubMenu(panelFinancesSubMenu);
         }
 
-        private void CloseChildForm()
+        private void ButtonReports_Click(object sender, EventArgs e)
         {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-                activeForm = null;
-            }
+            ShowSubMenu(panelReportsSubMenu);
         }
+
+        private void ButtonIncome_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FinanceForm(DataHandler, EntryType.Income));
+            FormChanger.OpenChildForm(ref activeForm, new FinanceForm(DataHandler, EntryType.Income), panelMain);
+        }
+
+        private void ButtonExpenses_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FinanceForm(DataHandler, EntryType.Expense));
+            FormChanger.OpenChildForm(ref activeForm, new FinanceForm(DataHandler, EntryType.Expense), panelMain);
+        }
+
+        private void ButtonGoals_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FormGoals());
+            FormChanger.OpenChildForm(ref activeForm, new FormGoals(), panelMain);
+        }
+
+        private void ButtonSpending_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FormSpending());
+            FormChanger.OpenChildForm(ref activeForm, new FormSpending(), panelMain);
+        }
+
+        private void ButtonNetWorth_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FormNetWorth());
+            FormChanger.OpenChildForm(ref activeForm, new FormNetWorth(), panelMain);
+        }
+
+        private void ButtonIncomevExpenses_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FormIncomevExpenses());
+            FormChanger.OpenChildForm(ref activeForm, new FormIncomevExpenses(), panelMain);
+        }
+
+        private void ButtonGoalReport_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FormGoalReports());
+            FormChanger.OpenChildForm(ref activeForm, new FormGoalReports(), panelMain);
+        }
+
+        private void ButtonHelp_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(new FormHelp());
+            FormChanger.OpenChildForm(ref activeForm, new FormHelp(), panelMain);
+        }
+
+        private void ButtonLogOut_Click(object sender, EventArgs e)
+        {
+            FormChanger.ChangeForm(this, new FormLogIn(DataHandler));
+        }
+
+        private void MenuLogo_Click(object sender, EventArgs e)
+        {
+            FormChanger.CloseChildForm(ref activeForm);
+        }
+
+        #endregion
+
     }
-    
+
 }
