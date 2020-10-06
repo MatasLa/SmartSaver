@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegister));
             this.registerLabel = new System.Windows.Forms.Label();
             this.emailLabel = new System.Windows.Forms.Label();
             this.emailInput = new System.Windows.Forms.TextBox();
@@ -53,8 +54,8 @@
             // 
             // emailLabel
             // 
-            this.emailLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.emailLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.emailLabel.AutoSize = true;
             this.emailLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -67,9 +68,10 @@
             // 
             // emailInput
             // 
-            this.emailInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.emailInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailInput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.emailInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.emailInput.Location = new System.Drawing.Point(171, 141);
             this.emailInput.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -90,6 +92,7 @@
             // 
             // passwordInput1
             // 
+            this.passwordInput1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.passwordInput1.Location = new System.Drawing.Point(170, 209);
             this.passwordInput1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.passwordInput1.Name = "passwordInput1";
@@ -99,6 +102,7 @@
             // 
             // passwordInput2
             // 
+            this.passwordInput2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.passwordInput2.Location = new System.Drawing.Point(170, 272);
             this.passwordInput2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.passwordInput2.Name = "passwordInput2";
@@ -171,7 +175,7 @@
             this.AcceptButton = this.registerButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.CancelButton = this.backToLogin;
             this.ClientSize = new System.Drawing.Size(534, 461);
             this.Controls.Add(this.backToLogin);
@@ -185,6 +189,7 @@
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.registerLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormRegister";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
