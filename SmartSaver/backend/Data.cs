@@ -262,5 +262,29 @@ namespace DataManager
 				return false;
 			}
 		}
+        public void ReadIncomeFromDb()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var incomes = context.Incomes; // define query
+                foreach (var income in incomes) // query executed and data obtained from database
+                {
+                    DataEntry newIncome = new DataEntry(income.Id, income.UserId, income.Amount, income.Title, income.Date, income.IsMonthly, income.Importance);
+                    Income.Add(newIncome);
+                }
+            }
+        }
+        public void ReadExpensesFromDb()
+        {
+            using (var context = new DatabaseContext())
+            {
+                var expenses = context.Expenses; // define query
+                foreach (var expense in expenses) // query executed and data obtained from database
+                {
+                    DataEntry newExpense = new DataEntry(expense.Id, expense.UserId, expense.Amount, expense.Title, expense.Date, expense.IsMonthly, expense.Importance);
+                    Expenses.Add(newExpense);
+                }
+            }
+        }
 	}
 }

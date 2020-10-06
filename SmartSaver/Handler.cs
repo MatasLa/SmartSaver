@@ -27,8 +27,10 @@ namespace DataManager
             DataFilter = new DataFilter(Data);
             DataCalculations = new DataCalculations(Data);
             DataJSON = new DataJSON(Data);
-            DataJSON.ReadIncomeFromFile();
-            DataJSON.ReadExpensesFromFile();
+            Data.ReadIncomeFromDb();
+            Data.ReadExpensesFromDb();
+            //DataJSON.ReadIncomeFromFile();
+            //DataJSON.ReadExpensesFromFile();
         }
 
     }
