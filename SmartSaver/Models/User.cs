@@ -8,8 +8,7 @@ using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 
 
-
-namespace EPiggy
+namespace DataBases
 {
     public class User
     {

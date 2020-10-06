@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace EPiggy.Migrations
+namespace DataBases
 {
     public partial class test1 : Migration
     {

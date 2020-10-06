@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using EPiggy;
 
-namespace EPiggy.Migrations
+namespace DataBases
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20201001165255_test1")]

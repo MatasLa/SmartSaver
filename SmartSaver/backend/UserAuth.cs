@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Linq;
 
-namespace EPiggy
+namespace DataBases
 {
     public class UserAuth
     {
@@ -25,6 +25,7 @@ namespace EPiggy
                 }
             }
         }
+
         public static bool Login(string email, string pass)
         {
             using (var db = new DatabaseContext())
