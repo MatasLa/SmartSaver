@@ -49,6 +49,12 @@ namespace DataManager
             return true;
         }
 
+        public void RemoveGoal(int id)
+        {
+            var index = Goals.FindIndex(x => x.ID == id);
+            Goals.RemoveAt(index);
+		}
+
 		public void RemoveIncome(int id)
 		{
 			var index = Income.FindIndex(x => x.ID == id);
