@@ -1,6 +1,7 @@
 ﻿using EPiggy;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 
 namespace DataManager
@@ -18,6 +19,8 @@ namespace DataManager
         public DataJSON DataJSON { get; }
 
         public DataCalculations DataCalculations { get; }
+
+        public static HttpClient HttpClient = new HttpClient();
 
         public Handler()
         {

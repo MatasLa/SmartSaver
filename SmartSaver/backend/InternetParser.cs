@@ -11,22 +11,21 @@ using System.Threading.Tasks;
 
 namespace DataManager
 {
-    class InternetParser
+    public static class InternetParser
     {
         /*Example of calling method:
          * Task.Run(() => InternetParser.GetHTMLAsync()).Wait();
         */
-
+        private static readonly string resourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\parsedGoal.txt";
         public static async Task GetHTMLAsync(string itemName)
         {
+            itemName = itemName.Replace("&", "%26");
             var url = "https://uk.camelcamelcamel.com/search?sq=" + itemName;/*Need tweaking with symbols inside itemName*/
-            var httpClient = new HttpClient();
+            Handler.HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
+            Handler.HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
+            Handler.HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
 
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "text/html,application/xhtml+xml,application/xml");
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.2; WOW64; rv:19.0) Gecko/20100101 Firefox/19.0");
-            httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Charset", "ISO-8859-1");
-
-            var html =  await httpClient.GetStringAsync(url);
+            var html =  await Handler.HttpClient.GetStringAsync(url);
 
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(html);
@@ -44,7 +43,7 @@ namespace DataManager
             pricestr = pricestr.Substring(1).Trim();
 
             
-            File.WriteAllText("priceInfo.txt", name +"\n"+ pricestr);
+            File.WriteAllText(resourceDirectoryParsedGoal, name +"\n"+ pricestr);
             
         }
     }
