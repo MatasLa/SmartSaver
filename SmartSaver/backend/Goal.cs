@@ -24,6 +24,13 @@ namespace DataManager
             get; set;
         }
 
+        public Goal(int id, string title, decimal price)
+        {
+            ID = id;
+            Title = title;
+            Price = price;
+        }
+
         public void SetGoalFromWeb(string itemName)
         {
             try
@@ -40,9 +47,12 @@ namespace DataManager
             {
 
             }
-           
+        }
 
-            
+        public void SetGoal(string itemName, decimal price)
+        {
+            Title = itemName;
+            Price = price;
         }
     }
 }
