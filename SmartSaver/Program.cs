@@ -23,7 +23,7 @@ namespace EPiggy
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Handler dataHandler = new Handler();
+            var dataHandler = new Handler();
             Application.Run(new FormMain(dataHandler));
             //Application.Run(new FormLogIn(dataHandler));
         }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataManager
 {
-	public class DataEntry
+	public class DataEntry : IComparable
 	{
 
 		/*Constructor*/
@@ -27,6 +27,17 @@ namespace DataManager
 			IsMonthly = false;
 			Importance = 0;
 		}
+
+        public int CompareTo(object? obj)
+        {
+            if (obj == null) return 1;
+
+            var otherEntry = obj as DataEntry;
+            if (otherEntry != null)
+                return this.Amount.CompareTo(otherEntry.Amount);
+            else
+                throw new ArgumentException("Object is not a DataEntry");
+        }
 
 		/*Getters and Setters*/
 		public string Title
@@ -64,5 +75,5 @@ namespace DataManager
 			get;
 			set;
 		}
-	}
+    }
 }
