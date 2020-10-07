@@ -9,13 +9,18 @@ namespace DataManager
 
 		/*Constructor*/
 		public DataEntry(int id, decimal amount, string title, DateTime date, bool isMonthly, int importance)
-		{
+            :this(amount, title, date, isMonthly, importance)
+        {
 			ID = id;
-			Amount = amount;
-			Title = title;
-			Date = date;
-			IsMonthly = isMonthly;
-			Importance = importance;
+        }
+
+        public DataEntry(decimal amount, string title, DateTime date, bool isMonthly, int importance)
+        {
+            Amount = amount;
+            Title = title;
+            Date = date;
+            IsMonthly = isMonthly;
+            Importance = importance;
 		}
 
 		public DataEntry()

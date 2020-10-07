@@ -15,21 +15,39 @@ namespace DataManager
 		/*Lists that store income and expenses*/
 		public List<DataEntry> Income { get; } = new List<DataEntry>();
 		public List<DataEntry> Expenses { get; } = new List<DataEntry>();
+		public List<Goal> Goals { get; } = new List<Goal>();
 
 		/*Methods that creates new instance of class and adds to List*/
 		public void AddIncome(decimal value, string title, DateTime date, bool isMonthly, int importance)
 		{
-			Random rnd = new Random();//Since no database, IDs randomized between 100 and 201
-			DataEntry newIncome = new DataEntry(rnd.Next(100, 200), value, title, date, isMonthly, importance);
+			var rnd = new Random();//Since no database, IDs randomized between 100 and 201
+			var newIncome = new DataEntry(rnd.Next(100, 200), value, title, date, isMonthly, importance);
 			Income.Add(newIncome);
 		}
 
 		public void AddExpense(decimal value, string title, DateTime date, bool isMonthly, int importance)
 		{
-			Random rnd = new Random();
-			DataEntry newExpense = new DataEntry(rnd.Next(100, 201), value, title, date, isMonthly, importance);
+			var rnd = new Random();
+			var newExpense = new DataEntry(rnd.Next(100, 201), value, title, date, isMonthly, importance);
 			Expenses.Add(newExpense);
 		}
+
+        public bool AddGoal(string title, decimal value)//manual
+        {
+            if (Goals.Count >= 10) return false;//if 10 entries already in, does not allow to add
+            var goal = new Goal(title, value);
+			Goals.Add(goal);
+            return true;
+        }
+
+        public bool AddGoal(string title)//parsing from internet
+        {
+            if (Goals.Count >= 10) return false;//if 10 entries already in, does not allow to add
+			var goal = new Goal(title, 0);
+			goal.SetGoalFromWeb(title);
+			Goals.Add(goal);
+            return true;
+        }
 
 		public void RemoveIncome(int id)
 		{
@@ -43,7 +61,7 @@ namespace DataManager
 			Income.RemoveAt(index);
 		}
 
-		/*Methods that allows to edit different parts of already existing entrys*/
+		/*Methods that allows to edit different parts of already existing entries*/
 		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
 		{
 			var temp = Income.FirstOrDefault(x => x.ID == id);

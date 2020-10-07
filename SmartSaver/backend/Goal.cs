@@ -25,8 +25,13 @@ namespace DataManager
         }
 
         public Goal(int id, string title, decimal price)
+            :this(title, price)
         {
             ID = id;
+        }
+
+        public Goal(string title, decimal price)
+        {
             Title = title;
             Price = price;
         }
