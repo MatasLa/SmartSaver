@@ -8,11 +8,6 @@ namespace DataManager
 	{
 
 		/*Constructor*/
-		public DataEntry(int id, decimal amount, string title, DateTime date, bool isMonthly, int importance)
-            :this(amount, title, date, isMonthly, importance)
-        {
-			ID = id;
-        }
 
         public DataEntry(decimal amount, string title, DateTime date, bool isMonthly, int importance)
         {
@@ -21,11 +16,19 @@ namespace DataManager
             Date = date;
             IsMonthly = isMonthly;
             Importance = importance;
-		}
+        }
+
+        public DataEntry(int id, int userId, decimal amount, string title, DateTime date, bool isMonthly, int importance)
+            :this(amount, title, date, isMonthly, importance)
+		{
+			ID = id;
+            UserId = userId;
+        }
 
 		public DataEntry()
 		{
 			ID = 0;
+            UserId = 0;
 			Amount = 0;
 			Title = "unnamed";
 			Date = DateTime.Now;
@@ -62,6 +65,12 @@ namespace DataManager
 			get;
 			set;
 		}
+
+        public int UserId
+        {
+            get;
+            set;
+        }
 
 		public DateTime Date
 		{

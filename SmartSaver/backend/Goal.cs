@@ -10,6 +10,7 @@ namespace DataManager
         private int id;
         private string title;
         private decimal price;
+        private int placeInQueue;
 
         public int ID
         {
@@ -24,10 +25,16 @@ namespace DataManager
             get; set;
         }
 
-        public Goal(int id, string title, decimal price)
+        public int PlaceInQueue
+        {
+            get; set;
+        }
+
+        public Goal(int id, string title, decimal price, int placeInQueue)
             :this(title, price)
         {
             ID = id;
+            PlaceInQueue = placeInQueue;
         }
 
         public Goal(string title, decimal price)
