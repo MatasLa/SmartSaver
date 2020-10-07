@@ -53,8 +53,8 @@
             // 
             // emailLabel
             // 
-            this.emailLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.emailLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.emailLabel.AutoSize = true;
             this.emailLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -67,8 +67,8 @@
             // 
             // emailInput
             // 
-            this.emailInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.emailInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.emailInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.emailInput.Location = new System.Drawing.Point(171, 141);
@@ -121,9 +121,9 @@
             // 
             this.errorMessage.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.errorMessage.ForeColor = System.Drawing.Color.Red;
-            this.errorMessage.Location = new System.Drawing.Point(146, 307);
+            this.errorMessage.Location = new System.Drawing.Point(126, 307);
             this.errorMessage.Name = "errorMessage";
-            this.errorMessage.Size = new System.Drawing.Size(250, 19);
+            this.errorMessage.Size = new System.Drawing.Size(294, 49);
             this.errorMessage.TabIndex = 7;
             this.errorMessage.Text = "label1";
             this.errorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -140,7 +140,7 @@
             this.registerButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.registerButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.registerButton.ForeColor = System.Drawing.Color.Transparent;
-            this.registerButton.Location = new System.Drawing.Point(214, 329);
+            this.registerButton.Location = new System.Drawing.Point(215, 359);
             this.registerButton.Name = "registerButton";
             this.registerButton.OnHoverBorderColor = System.Drawing.Color.Transparent;
             this.registerButton.OnHoverButtonColor = System.Drawing.Color.LightCyan;

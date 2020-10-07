@@ -55,6 +55,9 @@ namespace Forms
                 case 2:
                     text = "Passwords did not match!";
                     break;
+                case 3:
+                    text = "Password must contain: 1 Uppercase letter,\n1 digit and 1 symbol!";
+                    break;
                 default:
                     text = "";
                     break;
