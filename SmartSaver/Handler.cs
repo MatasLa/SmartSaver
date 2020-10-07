@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DataBases;
 
 namespace DataManager
 {
@@ -19,6 +20,8 @@ namespace DataManager
 
         public DataCalculations DataCalculations { get; }
 
+        public static int UserId { get; set; }
+
         public Handler()
         {
             Time = DateTime.Now;
@@ -27,9 +30,12 @@ namespace DataManager
             DataFilter = new DataFilter(Data);
             DataCalculations = new DataCalculations(Data);
             DataJSON = new DataJSON(Data);
-            DataJSON.ReadIncomeFromFile();
-            DataJSON.ReadExpensesFromFile();
+            Data.ReadIncomeFromDb();
+            Data.ReadExpensesFromDb();
+            //DataJSON.ReadIncomeFromFile();
+            //DataJSON.ReadExpensesFromFile();
         }
+
 
     }
 }
