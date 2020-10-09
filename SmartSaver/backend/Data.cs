@@ -48,7 +48,9 @@ namespace DataManager
             var index = db.Incomes.FirstOrDefault(x => x.Id == id);
             db.Incomes.Remove(index);
             db.SaveChanges();
-            //Income.RemoveAt(index);
+
+            var dataEntry = Income.FirstOrDefault(x => x.ID == id);
+            Income.Remove(dataEntry);
         }
 
         public void RemoveExpense(int id)
@@ -57,7 +59,9 @@ namespace DataManager
             var index = db.Expenses.FirstOrDefault(x => x.Id == id);
             db.Expenses.Remove(index);
             db.SaveChanges();
-            //Expenses.RemoveAt(index);
+
+            var dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
+            Expenses.Remove(dataEntry);
         }
 
 		/*Methods that allows to edit different parts of already existing entrys*/

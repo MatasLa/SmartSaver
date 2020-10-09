@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using ePiggy.forms.finances;
 
-namespace Forms
+namespace ePiggy.utilities
 {
     public static class FormChanger
     {
@@ -21,21 +19,19 @@ namespace Forms
                 //kazkaip noreciau sita pakeisti, kad butu platesnio naudojimo
                 if (IsSameFormAlreadyOpen(activeForm, childForm))
                 {
-                    if (activeForm is FinanceForm financeForm
-                        && financeForm.EntryType != ((FinanceForm)childForm).EntryType)
+                    switch (activeForm)
                     {
-                        financeForm.EntryType = ((FinanceForm)childForm).EntryType;
+                        case FinanceForm financeForm when financeForm.EntryType != ((FinanceForm)childForm).EntryType:
+                            financeForm.EntryType = ((FinanceForm)childForm).EntryType;
+                            break;
+                        case EntryInfoForm entryInfoForm:
+                            entryInfoForm.DataEntry = ((EntryInfoForm)childForm).DataEntry;
+                            break;
                     }
-                    else if (activeForm is EntryInfoForm entryInfoForm)
-                    {
-                        entryInfoForm.DataEntry = ((EntryInfoForm)childForm).DataEntry;
-                    }
+
                     return;
                 }
-                else
-                {
-                    activeForm.Close();
-                }
+                activeForm.Close();
             }
 
             activeForm = childForm;
@@ -55,23 +51,19 @@ namespace Forms
 
         private static bool IsSameFormAlreadyOpen(object activeForm, object newForm)
         {
-            if (activeForm.GetType() == newForm.GetType())
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return activeForm.GetType() == newForm.GetType();
         }
 
         public static void CloseChildForm(ref Form activeForm)
         {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-                activeForm = null;
-            }
+            if (activeForm == null) return;
+            activeForm.Close();
+            activeForm = null;
+        }
+
+        public static void ShowSubMenu(Control control)
+        {
+            control.Visible = control.Visible == false;
         }
     }
 }

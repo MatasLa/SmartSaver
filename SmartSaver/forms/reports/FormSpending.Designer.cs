@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace ePiggy.forms.reports
 {
     partial class FormSpending
     {

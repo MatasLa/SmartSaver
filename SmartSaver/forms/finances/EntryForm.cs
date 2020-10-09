@@ -1,52 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
+using System.Globalization;
 using System.Windows.Forms;
 using DataManager;
-using EPiggy;
-using Utilities;
+using ePiggy.utilities;
 
-namespace Forms
+namespace ePiggy.forms.finances
 {
-    //kol kas padaryta taip, kad jei perduodi null arba tuscia DataEntry, tai kurs nauja, o jei nera tuscias (t.y. id != 0), tada editins
-
-    //reikia padaryti, kad jeigu cia nustatau date, tai ir pasikeistu DataHandlerio data!!!
     public partial class EntryForm : Form
     {
-        private Handler handler;
-        private DataEntry dataEntry;
-        private EntryType entryType;
-        private readonly Size collapsedSize;
-        private readonly Size expandedSize;
+        private readonly Handler _handler;
+        private readonly DataEntry _dataEntry;
+        private readonly EntryType _entryType;
+        private readonly Size _collapsedSize;
+        private readonly Size _expandedSize;
 
-        private string errorMessage;
-        private readonly string badTitleErrorMessage = "Please enter a title";
-        private readonly string badNumberErrorMessage = "Please enter a valid number";
-        private readonly string addIncomeTitle = "Add Income";
-        private readonly string addExpenseTitle = "Add Expense";
-        private readonly string editIncomeTitle = "Edit Income";
-        private readonly string editExpenseTitle = "Edit Expense";
-        private readonly string addButtonText = "Add";
-        private readonly string editButtonText = "Edit";
+        private string _errorMessage;
+        private const string BadTitleErrorMessage = "Please enter a title";
+        private const string BadNumberErrorMessage = "Please enter a valid number";
+        private const string AddIncomeTitle = "Add Income";
+        private const string AddExpenseTitle = "Add Expense";
+        private const string EditIncomeTitle = "Edit Income";
+        private const string EditExpenseTitle = "Edit Expense";
+        private const string AddButtonText = "Add";
+        private const string EditButtonText = "Edit";
 
         public EntryForm(DataEntry dataEntry, EntryType entryType, Handler handler)
         {
             InitializeComponent();
 
-            if (dataEntry is null)
-            {
-                throw new Exception("Given null data entry");
-            }
+            _expandedSize = Size;
+            _collapsedSize = new Size(Size.Width, Size.Height - monthCalendar.Size.Height - 25);
 
-            expandedSize = Size;
-            collapsedSize = new Size(Size.Width, Size.Height - monthCalendar.Size.Height - 25);
-
-            this.dataEntry = dataEntry;
-            this.entryType = entryType;
-            this.handler = handler;
+            _dataEntry = dataEntry ?? throw new Exception("Given null data entry");
+            _entryType = entryType;
+            _handler = handler;
 
             SetCalendarTime();
             SetUpAddOrEdit();
@@ -56,13 +44,13 @@ namespace Forms
 
         private void SetCalendarTime()
         {
-            monthCalendar.SelectionStart = handler.Time;
+            monthCalendar.SelectionStart = _handler.Time;
         }
 
         #region Title setup
         private void SetUpAddOrEdit()
         {
-            if (dataEntry.ID == 0)
+            if (_dataEntry.ID == 0)
             {
                 SetUpAdd();
             }
@@ -74,36 +62,40 @@ namespace Forms
 
         private void SetUpAdd()
         {
-            switch (entryType)
+            switch (_entryType)
             {
                 case EntryType.Income:
-                    Text = addIncomeTitle;
-                    buttonOK.Text = addButtonText;
+                    Text = AddIncomeTitle;
+                    buttonOK.Text = AddButtonText;
                     break;
                 case EntryType.Expense:
-                    Text = addExpenseTitle;
-                    buttonOK.Text = addButtonText;
+                    Text = AddExpenseTitle;
+                    buttonOK.Text = AddButtonText;
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         private void SetUpEdit()
         {
-            switch (entryType)
+            switch (_entryType)
             {
                 case EntryType.Income:
-                    Text = editIncomeTitle;
-                    buttonOK.Text = editButtonText;
+                    Text = EditIncomeTitle;
+                    buttonOK.Text = EditButtonText;
                     break;
                 case EntryType.Expense:
-                    Text = editExpenseTitle;
-                    buttonOK.Text = editButtonText;
+                    Text = EditExpenseTitle;
+                    buttonOK.Text = EditButtonText;
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            Text += " \"" + dataEntry.Title + "\"";
-            textBoxTitle.Text = dataEntry.Title;
-            textBoxValue.Text = dataEntry.Amount.ToString();
-            checkBoxMonthly.Checked = dataEntry.IsMonthly;
+            Text += @" """ + _dataEntry.Title + @"""";
+            textBoxTitle.Text = _dataEntry.Title;
+            textBoxValue.Text = _dataEntry.Amount.ToString(CultureInfo.CurrentCulture);
+            checkBoxMonthly.Checked = _dataEntry.IsMonthly;
         }
         #endregion
 
@@ -113,30 +105,23 @@ namespace Forms
         {
             TakeInput();
 
-            ///// WIP, change hindler time as well
-            handler.Time = monthCalendar.SelectionStart;
+            ///// WIP, change handler time as well
+            _handler.Time = monthCalendar.SelectionStart;
 
             DialogResult = DialogResult.OK;
         }
 
         private bool IsInputValid()
         {
-            if (InputValidator.IsCurrencyInputValid(textBoxValue.Text) && InputValidator.IsNameValid(textBoxValue.Text))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return InputValidator.IsCurrencyInputValid(textBoxValue.Text) && InputValidator.IsNameValid(textBoxTitle.Text);
         }
 
         private void TakeInput()
         {
-            dataEntry.Amount = Decimal.Round(Decimal.Parse(textBoxValue.Text), 2);
-            dataEntry.Title = textBoxTitle.Text;
-            dataEntry.IsMonthly = checkBoxMonthly.Checked;
-            dataEntry.Date = monthCalendar.SelectionStart;
+            _dataEntry.Amount = decimal.Round(decimal.Parse(textBoxValue.Text), 2);
+            _dataEntry.Title = textBoxTitle.Text;
+            _dataEntry.IsMonthly = checkBoxMonthly.Checked;
+            _dataEntry.Date = monthCalendar.SelectionStart;
         }
 
         #endregion
@@ -150,8 +135,6 @@ namespace Forms
             {
                 textBoxValue.Text = "";
             }
-            //duodam regex chekeriui stringa ir nauja chara, 
-            //jeigu geras charas stringa keiciam, jeigu negeras nekeiciam
         }
 
         private void TextBoxValue_KeyPress(object sender, KeyPressEventArgs e)
@@ -166,7 +149,7 @@ namespace Forms
                     buttonOK.PerformClick();
                     break;
             }
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && (e.KeyChar != ','))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != ',')
             {
                 e.Handled = true;
             }
@@ -218,7 +201,7 @@ namespace Forms
         #region Size Changing
         private void ChangeSize()
         {
-            if (Size == collapsedSize)
+            if (Size == _collapsedSize)
             {
                 Expand();
             }
@@ -230,13 +213,13 @@ namespace Forms
 
         private void Collapse()
         {
-            Size = collapsedSize;
+            Size = _collapsedSize;
             monthCalendar.Hide();
         }
 
         private void Expand()
         {
-            Size = expandedSize;
+            Size = _expandedSize;
             monthCalendar.Show();
         }
         #endregion
@@ -245,22 +228,22 @@ namespace Forms
         private void ShowError()
         {
             CreateErrorMessage();
-            MessageBox.Show(errorMessage);
+            MessageBox.Show(_errorMessage);
         }
 
         private void CreateErrorMessage()
         {
             if (InputValidator.IsNameValid(textBoxTitle.Text))
             {
-                errorMessage = badNumberErrorMessage;
+                _errorMessage = BadNumberErrorMessage;
             }
             else if (InputValidator.IsCurrencyInputValid(textBoxValue.Text))
             {
-                errorMessage = badTitleErrorMessage;
+                _errorMessage = BadTitleErrorMessage;
             }
             else
             {
-                errorMessage = badTitleErrorMessage + "\n" + badNumberErrorMessage;
+                _errorMessage = BadTitleErrorMessage + "\n" + BadNumberErrorMessage;
             }
         } 
         #endregion

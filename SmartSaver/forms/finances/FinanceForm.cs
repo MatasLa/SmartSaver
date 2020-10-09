@@ -1,45 +1,37 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
+using System.Linq;
 using System.Windows.Forms;
 using DataManager;
-using Utilities;
-using EPiggy;
-using System.Linq;
+using ePiggy.utilities;
 
-namespace Forms
+namespace ePiggy.forms.finances
 {
     public partial class FinanceForm : Form
     {
-        private readonly Handler handler;
-        private readonly Data data;
-        private readonly DataTableConverter dataTableConverter;
-        private readonly DataFilter dataFilter;
-        private DataTable dataTable;
+        private readonly Handler _handler;
+        private readonly Data _data;
+        private readonly DataTableConverter _dataTableConverter;
+        private readonly DataFilter _dataFilter;
+        private DataTable _dataTable;
 
-        private readonly Image selectedLessButton = new Bitmap(ePiggy.Properties.Resources.lessButtonSelected);
-        private readonly Image selectedMorebutton = new Bitmap(ePiggy.Properties.Resources.moreButtonSelected);
-        private readonly Image unSelectedLessButton = new Bitmap(ePiggy.Properties.Resources.lessButtonUnselected);
-        private readonly Image unSelectedMoreButton = new Bitmap(ePiggy.Properties.Resources.moreButtonUnselected);
+        private readonly Image _selectedLessButton = new Bitmap(Properties.Resources.lessButtonSelected);
+        private readonly Image _selectedMoreButton = new Bitmap(Properties.Resources.moreButtonSelected);
+        private readonly Image _unSelectedLessButton = new Bitmap(Properties.Resources.lessButtonUnselected);
+        private readonly Image _unSelectedMoreButton = new Bitmap(Properties.Resources.moreButtonUnselected);
 
-        private readonly string incomeFormTitle = "Income";
-        private readonly string expensesFormTitle = "Expenses";
-        private readonly string addIncomeButtonTitle = "Add Income";
-        private readonly string addExpensesButtonTitle = "Add Expense";
+        private const string IncomeFormTitle = "Income";
+        private const string ExpensesFormTitle = "Expenses";
+        private const string AddIncomeButtonTitle = "Add Income";
+        private const string AddExpensesButtonTitle = "Add Expense";
 
-        private Form activeForm;
+        private Form _activeForm;
 
         private EntryType _entryType;
         public EntryType EntryType 
         { 
-            get 
-            {
-                return _entryType;
-            } 
+            get => _entryType;
             set 
             {
                 _entryType = value;
@@ -50,10 +42,10 @@ namespace Forms
         public FinanceForm(Handler handler, EntryType entryType)
         {
             InitializeComponent();
-            this.handler = handler;
-            data = handler.Data;
-            dataTableConverter = handler.DataTableConverter;
-            dataFilter = handler.DataFilter;
+            _handler = handler;
+            _data = handler.Data;
+            _dataTableConverter = handler.DataTableConverter;
+            _dataFilter = handler.DataFilter;
             _entryType = entryType;
             Init();
         }
@@ -62,7 +54,7 @@ namespace Forms
         {
             SetTitles();
             UpdateDisplay();
-            FormChanger.CloseChildForm(ref activeForm);
+            FormChanger.CloseChildForm(ref _activeForm);
         }
 
         #region Entry handling
@@ -76,18 +68,15 @@ namespace Forms
                 return false;
             }
 
-            int id = (int)value;
+            var id = (int)value;
 
-            switch (EntryType)
+            dataEntry = EntryType switch
             {
-                case EntryType.Income:
-                    dataEntry = data.Income.FirstOrDefault(x => x.ID == id);
-                    break;
-                case EntryType.Expense:
-                default:
-                    dataEntry = data.Expenses.FirstOrDefault(x => x.ID == id);
-                    break;
-            }
+                EntryType.Income => _data.Income.FirstOrDefault(x => x.ID == id),
+                EntryType.Expense => _data.Expenses.FirstOrDefault(x => x.ID == id),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
             return true;
 
         }
@@ -97,53 +86,52 @@ namespace Forms
             switch (EntryType)
             {
                 case EntryType.Income:
-                    data.RemoveIncome(dataEntry.ID);
-                    handler.DataJSON.WriteIncomeToFile();
+                    _data.RemoveIncome(dataEntry.ID);
+                    //_handler.DataJSON.WriteIncomeToFile();
                     break;
                 case EntryType.Expense:
-                    data.RemoveExpense(dataEntry.ID);
-                    handler.DataJSON.WriteExpensesToFile();
+                    _data.RemoveExpense(dataEntry.ID);
+                    //_handler.DataJSON.WriteExpensesToFile();
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
-            UpdateDisplay();
         }
 
         private void EditEntry(DataEntry dataEntry)
         {
-            if (new EntryForm(dataEntry, EntryType, handler).ShowDialog() == DialogResult.OK)
+            if (new EntryForm(dataEntry, EntryType, _handler).ShowDialog() != DialogResult.OK) return;
+            switch (EntryType)
             {
-                switch (EntryType)
-                {
-                    case EntryType.Income:
-                        data.EditIncomeItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, 1);
-                        handler.DataJSON.WriteIncomeToFile();
-                        break;
-                    case EntryType.Expense:
-                        data.EditExpensesItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, 1);
-                        handler.DataJSON.WriteExpensesToFile();
-                        break;
-                }
-                UpdateDisplay();
+                case EntryType.Income:
+                    _data.EditIncomeItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, 1);
+                    //_handler.DataJSON.WriteIncomeToFile();
+                    break;
+                case EntryType.Expense:
+                    _data.EditExpensesItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, 1);
+                    //_handler.DataJSON.WriteExpensesToFile();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         private void AddEntry()
         {
-            DataEntry dataEntry = new DataEntry();
-            if (new EntryForm(dataEntry, EntryType, handler).ShowDialog() == DialogResult.OK)
+            var dataEntry = new DataEntry();
+            if (new EntryForm(dataEntry, EntryType, _handler).ShowDialog() != DialogResult.OK) return;
+            switch (EntryType)
             {
-                switch (EntryType)
-                {
-                    case EntryType.Income:
-                        data.AddIncome(Handler.UserId, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
-                        handler.DataJSON.WriteIncomeToFile();
-                        break;
-                    case EntryType.Expense:
-                        data.AddExpense(Handler.UserId, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
-                        handler.DataJSON.WriteExpensesToFile();
-                        break;
-                }
-                UpdateDisplay();
+                case EntryType.Income:
+                    _data.AddIncome(Handler.UserId, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
+                    //_handler.DataJSON.WriteIncomeToFile();
+                    break;
+                case EntryType.Expense:
+                    _data.AddExpense(Handler.UserId, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
+                    //_handler.DataJSON.WriteExpensesToFile();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -153,53 +141,48 @@ namespace Forms
 
         private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)Keys.D)
+            if (e.KeyChar != (char) Keys.D) return;
+            if (!GetDataEntryFromSelectedRow(out var dataEntry))
             {
-                DataEntry dataEntry;
-
-                if (!GetDataEntryFromSelectedRow(out dataEntry))
-                {
-                    AddEntry();
-                    return;
-                }
-
-                DeleteEntry(dataEntry);
+                AddEntry();
+                return;
             }
+
+            DeleteEntry(dataEntry);
+            UpdateDisplay();
         }
 
         private void PanelTop_Click(object sender, EventArgs e)
         {
-            FormChanger.CloseChildForm(ref activeForm);
+            FormChanger.CloseChildForm(ref _activeForm);
         }
 
         private void ButtonAddEntry_Click(object sender, EventArgs e)
         {
             AddEntry();
+            UpdateDisplay();
         }
 
         private void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            DataEntry dataEntry;
-
-            if (!GetDataEntryFromSelectedRow(out dataEntry))
+            if (!GetDataEntryFromSelectedRow(out var dataEntry))
             {
                 AddEntry();
                 return;
             }
 
             EditEntry(dataEntry);
+            UpdateDisplay();
         }
 
         private void DataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            DataEntry dataEntry;
-
-            if (!GetDataEntryFromSelectedRow(out dataEntry))
+            if (!GetDataEntryFromSelectedRow(out var dataEntry))
             {
                 return;
             }
 
-            FormChanger.OpenChildForm(ref activeForm, new EntryInfoForm(dataEntry, handler), splitContainer.Panel2);
+            FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(dataEntry, _handler), splitContainer.Panel2);
         }
 
 
@@ -217,16 +200,13 @@ namespace Forms
 
         public void DisplayTable()
         {
-            switch(EntryType)
+            _dataTable = EntryType switch
             {
-                case EntryType.Income:
-                    dataTable = dataTableConverter.CustomTable(dataFilter.GetIncomeByDate(handler.Time));
-                    break;
-                case EntryType.Expense:
-                    dataTable = dataTableConverter.CustomTable(dataFilter.GetExpensesByDate(handler.Time));
-                    break;
-            }
-            dataGridView.DataSource = dataTable;
+                EntryType.Income => _dataTableConverter.CustomTable(_dataFilter.GetIncomeByDate(_handler.Time)),
+                EntryType.Expense => _dataTableConverter.CustomTable(_dataFilter.GetExpensesByDate(_handler.Time)),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+            dataGridView.DataSource = _dataTable;
             dataGridView.Columns["ID"].Visible = false;
             dataGridView.Columns["Importance"].Visible = false;
 
@@ -236,38 +216,24 @@ namespace Forms
     
         private void DisplayBalance()
         {
-            var balance = dataFilter.GetBalanceByDate(handler.Time);
+            var balance = _dataFilter.GetBalanceByDate(_handler.Time);
             labelBalance.BackColor = labelBalance.BackColor;
-            if (balance >= Decimal.Zero)
-            {
-                labelBalance.ForeColor = Color.Green;
-            }
-            else
-            {
-                labelBalance.ForeColor = Color.Red;
-            }
+            labelBalance.ForeColor = balance >= decimal.Zero ? Color.Green : Color.Red;
             labelBalance.Text = NumberFormatter.FormatCurrency(balance);
         }
 
         private void DisplayTotalBalance()
         {
-            var balance = handler.DataCalculations.CheckBalance();
+            var balance = _handler.DataCalculations.CheckBalance();
             labelTotalBalanceValue.BackColor = labelBalance.BackColor;
-            if (balance >= Decimal.Zero)
-            {
-                labelTotalBalanceValue.ForeColor = Color.Green;
-            }
-            else
-            {
-                labelTotalBalanceValue.ForeColor = Color.Red;
-            }
+            labelTotalBalanceValue.ForeColor = balance >= decimal.Zero ? Color.Green : Color.Red;
             labelTotalBalanceValue.Text = NumberFormatter.FormatCurrency(balance);
         }
 
         private void DisplayDate()
         {
-            labelMonth.Text = handler.Time.ToString("MMM");
-            labelYear.Text = handler.Time.Year.ToString();
+            labelMonth.Text = _handler.Time.ToString("MMM");
+            labelYear.Text = _handler.Time.Year.ToString();
         }
 
         public void SetTitles()
@@ -275,13 +241,15 @@ namespace Forms
             switch (_entryType)
             {
                 case EntryType.Income:
-                    this.Text = incomeFormTitle;
-                    buttonAddEntry.Text = addIncomeButtonTitle;
+                    Text = IncomeFormTitle;
+                    buttonAddEntry.Text = AddIncomeButtonTitle;
                     break;
                 case EntryType.Expense:
-                    this.Text = expensesFormTitle;
-                    buttonAddEntry.Text = addExpensesButtonTitle;
+                    Text = ExpensesFormTitle;
+                    buttonAddEntry.Text = AddExpensesButtonTitle;
                     break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
         #endregion
@@ -290,31 +258,31 @@ namespace Forms
 
         private void LabelYear_Click(object sender, EventArgs e)
         {
-            handler.Time = DateTime.Now;
+            _handler.Time = DateTime.Now;
             UpdateDisplay();
         }
 
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
-            handler.Time = TimeManager.MoveToNextYear(handler.Time);
+            _handler.Time = TimeManager.MoveToNextYear(_handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonPreviousYear_Click(object sender, EventArgs e)
         {
-            handler.Time = TimeManager.MoveToPreviousYear(handler.Time);
+            _handler.Time = TimeManager.MoveToPreviousYear(_handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonNextMonth_Click(object sender, EventArgs e)
         {
-            handler.Time = TimeManager.MoveToNextMonth(handler.Time);
+            _handler.Time = TimeManager.MoveToNextMonth(_handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonPreviousMonth_Click(object sender, EventArgs e)
         {
-            handler.Time = TimeManager.MoveToPreviousMonth(handler.Time);
+            _handler.Time = TimeManager.MoveToPreviousMonth(_handler.Time);
             UpdateDisplay();
         }
         #endregion
@@ -323,42 +291,42 @@ namespace Forms
 
         private void buttonNextMonth_MouseEnter(object sender, EventArgs e)
         {
-            buttonNextMonth.Image = selectedMorebutton;
+            buttonNextMonth.Image = _selectedMoreButton;
         }
 
         private void ButtonNextMonth_MouseLeave(object sender, EventArgs e)
         {
-            buttonNextMonth.Image = unSelectedMoreButton;
+            buttonNextMonth.Image = _unSelectedMoreButton;
         }
 
         private void ButtonPreviousMonth_MouseEnter(object sender, EventArgs e)
         {
-            buttonPreviousMonth.Image = selectedLessButton;
+            buttonPreviousMonth.Image = _selectedLessButton;
         }
 
         private void ButtonPreviousMonth_MouseLeave(object sender, EventArgs e)
         {
-            buttonPreviousMonth.Image = unSelectedLessButton;
+            buttonPreviousMonth.Image = _unSelectedLessButton;
         }
 
         private void ButtonNextYear_MouseEnter(object sender, EventArgs e)
         {
-            buttonNextYear.Image = selectedMorebutton;
+            buttonNextYear.Image = _selectedMoreButton;
         }
 
         private void ButtonNextYear_MouseLeave(object sender, EventArgs e)
         {
-            buttonNextYear.Image = unSelectedMoreButton;
+            buttonNextYear.Image = _unSelectedMoreButton;
         }
 
         private void ButtonPreviousYear_MouseEnter(object sender, EventArgs e)
         {
-            buttonPreviousYear.Image = selectedLessButton;
+            buttonPreviousYear.Image = _selectedLessButton;
         }
 
         private void ButtonPreviousYear_MouseLeave(object sender, EventArgs e)
         {
-            buttonPreviousYear.Image = unSelectedLessButton;
+            buttonPreviousYear.Image = _unSelectedLessButton;
         }
 
         #endregion

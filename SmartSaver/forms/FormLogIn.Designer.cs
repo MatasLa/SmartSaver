@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace ePiggy.forms
 {
     partial class FormLogIn
     {
@@ -36,7 +36,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordInput = new System.Windows.Forms.TextBox();
             this.forgotPassLink = new System.Windows.Forms.LinkLabel();
-            this.loginButton = new ePOSOne.btnProduct.Button_WOC();
+            this.loginButton = new ButtonWoc();
             this.errorMessage = new System.Windows.Forms.Label();
             this.noAccLable = new System.Windows.Forms.Label();
             this.noAccLink = new System.Windows.Forms.LinkLabel();
@@ -250,6 +250,6 @@
         private System.Windows.Forms.LinkLabel noAccLink;
         private System.Windows.Forms.Label noAccLable;
         private System.Windows.Forms.Label errorMessage;
-        private ePOSOne.btnProduct.Button_WOC loginButton;
+        private ButtonWoc loginButton;
     }
 }

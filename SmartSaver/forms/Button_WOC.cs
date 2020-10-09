@@ -1,10 +1,9 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace ePOSOne.btnProduct
+namespace ePiggy.forms
 {
-    public class Button_WOC : Button
+    public class ButtonWoc : Button
     {
         private Color _borderColor = Color.Silver;
         private Color _onHoverBorderColor = Color.Gray;
@@ -14,11 +13,11 @@ namespace ePOSOne.btnProduct
         private Color _onHoverTextColor = Color.Gray;
 
         private bool _isHovering;
-        private int _borderThickness = 6;
-        private int _borderThicknessByTwo = 3;
+        private const int BorderThickness = 6;
+        private const int BorderThicknessByTwo = 3;
 
 
-        public Button_WOC()
+        public ButtonWoc()
         {
             DoubleBuffered = true;
             MouseEnter += (sender, e) =>
@@ -37,7 +36,7 @@ namespace ePOSOne.btnProduct
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            Graphics g = e.Graphics;
+            var g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             Brush brush = new SolidBrush(_isHovering ? _onHoverBorderColor : _borderColor);
 
@@ -50,18 +49,18 @@ namespace ePOSOne.btnProduct
             brush = new SolidBrush(_isHovering ? _onHoverButtonColor : _buttonColor);
 
             //Inner part. Button itself
-            g.FillEllipse(brush, _borderThicknessByTwo, _borderThicknessByTwo, Height - _borderThickness,
-                Height - _borderThickness);
-            g.FillEllipse(brush, (Width - Height) + _borderThicknessByTwo, _borderThicknessByTwo,
-                Height - _borderThickness, Height - _borderThickness);
-            g.FillRectangle(brush, Height / 2 + _borderThicknessByTwo, _borderThicknessByTwo,
-                Width - Height - _borderThickness, Height - _borderThickness);
+            g.FillEllipse(brush, BorderThicknessByTwo, BorderThicknessByTwo, Height - BorderThickness,
+                Height - BorderThickness);
+            g.FillEllipse(brush, Width - Height + BorderThicknessByTwo, BorderThicknessByTwo,
+                Height - BorderThickness, Height - BorderThickness);
+            g.FillRectangle(brush, Height / 2 + BorderThicknessByTwo, BorderThicknessByTwo,
+                Width - Height - BorderThickness, Height - BorderThickness);
 
             brush.Dispose();
             brush = new SolidBrush(_isHovering ? _onHoverTextColor : _textColor);
 
             //Button Text
-            SizeF stringSize = g.MeasureString(Text, Font);
+            var stringSize = g.MeasureString(Text, Font);
             g.DrawString(Text, Font, brush, (Width - stringSize.Width) / 2, (Height - stringSize.Height) / 2);
         }
 

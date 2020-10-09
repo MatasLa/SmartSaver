@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace ePiggy.forms
 {
     partial class FormRegister
     {
@@ -37,7 +37,7 @@
             this.passwordInput2 = new System.Windows.Forms.TextBox();
             this.passwordLabel2 = new System.Windows.Forms.Label();
             this.errorMessage = new System.Windows.Forms.Label();
-            this.registerButton = new ePOSOne.btnProduct.Button_WOC();
+            this.registerButton = new ButtonWoc();
             this.backToLogin = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
@@ -209,7 +209,7 @@
         private System.Windows.Forms.TextBox passwordInput2;
         private System.Windows.Forms.Label passwordLabel2;
         private System.Windows.Forms.Label errorMessage;
-        private ePOSOne.btnProduct.Button_WOC registerButton;
+        private ButtonWoc registerButton;
         private System.Windows.Forms.LinkLabel backToLogin;
     }
 }

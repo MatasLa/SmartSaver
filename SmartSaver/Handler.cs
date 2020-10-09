@@ -1,10 +1,7 @@
-﻿using EPiggy;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using DataBases;
+﻿using System;
+using DataManager;
 
-namespace DataManager
+namespace ePiggy
 {
     public class Handler
     {
@@ -35,7 +32,6 @@ namespace DataManager
             //DataJSON.ReadIncomeFromFile();
             //DataJSON.ReadExpensesFromFile();
         }
-
-
+        
     }
 }

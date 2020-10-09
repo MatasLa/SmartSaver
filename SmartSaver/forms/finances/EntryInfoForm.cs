@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using DataManager;
-using Utilities;
+using ePiggy.utilities;
 
-namespace Forms
+namespace ePiggy.forms.finances
 {
     public partial class EntryInfoForm : Form
     {
         private DataEntry _dataEntry;
         public DataEntry DataEntry
         {
-            get
-            {
-                return _dataEntry;
-            }
+            get => _dataEntry;
             set
             {
                 _dataEntry = value;
@@ -26,13 +17,13 @@ namespace Forms
             }
         }
 
-        Handler handler;
+        private Handler _handler;
 
         public EntryInfoForm(DataEntry dataEntry, Handler handler)
         {
             InitializeComponent();
             DataEntry = dataEntry;
-            this.handler = handler;
+            _handler = handler;
             Init();
 
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using EPiggy;
+using ePiggy.utilities;
 
 namespace DataManager
 {
@@ -38,9 +39,9 @@ namespace DataManager
         public DataTable CustomTable(List<DataEntry> customList)
         {
             var dt = GenerateHeaders();
-            foreach (DataEntry data in customList)
+            foreach (var dataEntry in customList)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                dt.Rows.Add(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, dataEntry.Importance);
             }
 
             return dt;

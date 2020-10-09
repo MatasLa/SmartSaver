@@ -1,6 +1,6 @@
-﻿namespace Forms
+﻿namespace ePiggy.forms.reports
 {
-    partial class FormIncomevExpenses
+    partial class FormIncomeVExpenses
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             this.SuspendLayout();
             // 
-            // FormIncomevExpenses
+            // FormIncomeVExpenses
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 901);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormIncomevExpenses";
-            this.Text = "FormIncomevExpenses";
+            this.Name = "FormIncomeVExpenses";
+            this.Text = "FormIncomeVExpenses";
             this.ResumeLayout(false);
 
         }
