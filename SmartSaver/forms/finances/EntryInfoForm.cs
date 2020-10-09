@@ -35,5 +35,19 @@ namespace ePiggy.forms.finances
             labelDate.Text = DataEntry.Date.ToString("d");
             labelRecurring.Text = DataEntry.IsMonthly.ToString();
         }
+
+        private void ButtonEdit_Click(object sender, System.EventArgs e)
+        {
+            //WIP
+            MessageBox.Show(DataEntry.ID.ToString());
+        }
+        private void ButtonDelete_Click(object sender, System.EventArgs e)
+        {
+            //WIP
+            //MessageBox.Show(DataEntry.ID.ToString());
+            _handler.Data.RemoveIncome(_dataEntry);
+            this.Hide();
+            this.Close();
+        }
     }
 }

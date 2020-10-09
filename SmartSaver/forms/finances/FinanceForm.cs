@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 using DataManager;
 using ePiggy.utilities;
@@ -27,6 +26,7 @@ namespace ePiggy.forms.finances
         private const string AddExpensesButtonTitle = "Add Expense";
 
         private Form _activeForm;
+        private bool _tableLoaded = false;
 
         private EntryType _entryType;
         public EntryType EntryType 
@@ -53,32 +53,43 @@ namespace ePiggy.forms.finances
         private void Init()
         {
             SetTitles();
-            UpdateDisplay();
-            FormChanger.CloseChildForm(ref _activeForm);
+            RePaintDisplay();
+        }
+
+        private void labelMonth_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            dataGridView.ClearSelection();
         }
 
         #region Entry handling
 
         private bool GetDataEntryFromSelectedRow(out DataEntry dataEntry)
         {
+            dataEntry = new DataEntry();
+            if (dataGridView.SelectedRows.Count == 0) return false;
             var value = dataGridView.SelectedRows[0].Cells["ID"].Value;
             if (value is DBNull)
             {
-                dataEntry = new DataEntry();
                 return false;
             }
 
             var id = (int)value;
 
-            dataEntry = EntryType switch
+            return _data.GetDataEntryById(id, out dataEntry, EntryType);
+        }
+
+        private void GetSelectedDataEntries()
+        {
+            if (_tableLoaded)
             {
-                EntryType.Income => _data.Income.FirstOrDefault(x => x.ID == id),
-                EntryType.Expense => _data.Expenses.FirstOrDefault(x => x.ID == id),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
-            return true;
-
+                //MessageBox.Show(dataGridView.SelectedRows.Count.ToString());
+            }
+            //MessageBox.Show(dataGridView.SelectedRows.Count.ToString());
+            if (dataGridView.SelectedRows.Count > 1)
+            {
+                //MessageBox.Show(dataGridView.SelectedRows.Count.ToString());
+            }
         }
 
         private void DeleteEntry(DataEntry dataEntry)
@@ -137,7 +148,39 @@ namespace ePiggy.forms.finances
 
         #endregion
 
-        #region Mouse Click Handling
+        #region Event Handlers
+
+        private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            dataGridView.ClearSelection();
+            FormChanger.CloseChildForm(ref _activeForm);
+        }
+
+        private void dataGridView_MouseCaptureChanged(object sender, EventArgs e)
+        {
+            //dataGridView.
+            //GetSelectedDataEntries();
+        }
+
+        private void dataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            //GetSelectedDataEntries();
+            if (!GetDataEntryFromSelectedRow(out var dataEntry))
+            {
+                return;
+            }
+
+            FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(dataEntry, _handler), splitContainer.Panel2);
+
+        }
+
+        private void dataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            //dataGridView.CurrentCell.Selected = false;
+            //if (dataGridView.CurrentCell is null) return;
+            //dataGridView.CurrentCell.Selected = false;
+            //dataGridView.ClearSelection();
+        }
 
         private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -149,18 +192,19 @@ namespace ePiggy.forms.finances
             }
 
             DeleteEntry(dataEntry);
-            UpdateDisplay();
+            RePaintDisplay();
         }
 
         private void PanelTop_Click(object sender, EventArgs e)
         {
+            dataGridView.ClearSelection();
             FormChanger.CloseChildForm(ref _activeForm);
         }
 
         private void ButtonAddEntry_Click(object sender, EventArgs e)
         {
             AddEntry();
-            UpdateDisplay();
+            RePaintDisplay();
         }
 
         private void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -172,17 +216,17 @@ namespace ePiggy.forms.finances
             }
 
             EditEntry(dataEntry);
-            UpdateDisplay();
+            RePaintDisplay();
         }
 
         private void DataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (!GetDataEntryFromSelectedRow(out var dataEntry))
-            {
-                return;
-            }
+            //if (!GetDataEntryFromSelectedRow(out var dataEntry))
+            //{
+            //    return;
+            //}
 
-            FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(dataEntry, _handler), splitContainer.Panel2);
+            //FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(dataEntry, _handler), splitContainer.Panel2);
         }
 
 
@@ -190,16 +234,18 @@ namespace ePiggy.forms.finances
 
         #region Data Display
 
-        public void UpdateDisplay()
+        private void RePaintDisplay()
         {
             DisplayDate();
             DisplayTable();
             DisplayBalance();
             DisplayTotalBalance();
+            FormChanger.CloseChildForm(ref _activeForm);
         }
 
-        public void DisplayTable()
+        private void DisplayTable()
         {
+            _tableLoaded = false;
             _dataTable = EntryType switch
             {
                 EntryType.Income => _dataTableConverter.CustomTable(_dataFilter.GetIncomeByDate(_handler.Time)),
@@ -212,6 +258,11 @@ namespace ePiggy.forms.finances
 
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
             dataGridView.Columns["Date"].DefaultCellStyle.Format = "dd (dddd)";
+
+            //dataGridView.ClearSelection();
+            //dataGridView.CurrentCell.Selected = false;
+            //dataGridView.CurrentCell = null;
+            _tableLoaded = true;
         }
     
         private void DisplayBalance()
@@ -236,7 +287,7 @@ namespace ePiggy.forms.finances
             labelYear.Text = _handler.Time.Year.ToString();
         }
 
-        public void SetTitles()
+        private void SetTitles()
         {
             switch (_entryType)
             {
@@ -259,31 +310,31 @@ namespace ePiggy.forms.finances
         private void LabelYear_Click(object sender, EventArgs e)
         {
             _handler.Time = DateTime.Now;
-            UpdateDisplay();
+            RePaintDisplay();
         }
 
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
             _handler.Time = TimeManager.MoveToNextYear(_handler.Time);
-            UpdateDisplay();
+            RePaintDisplay();
         }
 
         private void ButtonPreviousYear_Click(object sender, EventArgs e)
         {
             _handler.Time = TimeManager.MoveToPreviousYear(_handler.Time);
-            UpdateDisplay();
+            RePaintDisplay();
         }
 
         private void ButtonNextMonth_Click(object sender, EventArgs e)
         {
             _handler.Time = TimeManager.MoveToNextMonth(_handler.Time);
-            UpdateDisplay();
+            RePaintDisplay();
         }
 
         private void ButtonPreviousMonth_Click(object sender, EventArgs e)
         {
             _handler.Time = TimeManager.MoveToPreviousMonth(_handler.Time);
-            UpdateDisplay();
+            RePaintDisplay();
         }
         #endregion
 

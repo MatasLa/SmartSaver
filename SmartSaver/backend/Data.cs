@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using DataBases;
+using ePiggy.utilities;
 
 namespace DataManager
 {
@@ -64,6 +65,25 @@ namespace DataManager
             Expenses.Remove(dataEntry);
         }
 
+        public void RemoveIncome(DataEntry dataEntry)
+        {
+            var db = new DatabaseContext();
+            var index = db.Incomes.FirstOrDefault(x => x.Id == dataEntry.ID);
+            db.Incomes.Remove(index);
+            db.SaveChanges();
+
+            Income.Remove(dataEntry);
+        }
+
+        public void RemoveExpense(DataEntry dataEntry)
+        {
+            var db = new DatabaseContext();
+            var index = db.Expenses.FirstOrDefault(x => x.Id == dataEntry.ID);
+			db.Expenses.Remove(index);
+            db.SaveChanges();
+
+            Expenses.Remove(dataEntry);
+        }
 		/*Methods that allows to edit different parts of already existing entrys*/
 		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
 		{
@@ -290,5 +310,43 @@ namespace DataManager
                 }
             }
         }
+
+        public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
+        {
+            switch (entryType)
+            {
+				case EntryType.Income:
+                    dataEntry = Income.FirstOrDefault(x => x.ID == id);
+					return dataEntry is { };
+				case EntryType.Expense:
+                    dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
+                    return dataEntry is { };
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
+            }
+		}
+
+        public bool GetListOfDataEntriesById(IEnumerable<int> idArray, List<DataEntry> list, EntryType entryType)
+        {
+            foreach (var id in idArray)
+			{
+                if (!GetDataEntryById(id, out var dataEntry, entryType)) return false;
+                switch (entryType)
+                {
+					case EntryType.Income:
+                        list.Add(dataEntry);
+						break;
+					case EntryType.Expense:
+                        list.Add(dataEntry);
+						break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
+                }
+                list.Add(dataEntry);
+            }
+            return true;
+			//public List<DataEntry> Income { get; } = new List<DataEntry>();
+		}
+
 	}
 }
