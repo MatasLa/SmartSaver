@@ -39,18 +39,18 @@ namespace DataManager
             }
         }
         //Code below is still very much WIP
-        public bool CheckGoal()
+        public bool CheckGoal(Goal goal)
         {
             if (IsBalancePositive())
             {
-                Goal goal = new Goal();
+               // Goal goal = new Goal();
                 if((CheckBalance() - goal.Price) >= 0)
                 {
                     return true;    //can already buy this month
                 }
                 else
                 {
-                    return SavingMoney(); //needs saving
+                    return SavingMoney(goal); //needs saving
                 }
             }
             else
@@ -59,10 +59,10 @@ namespace DataManager
             }
         }
         
-        private bool SavingMoney()
+        private bool SavingMoney(Goal goal)
         {
             decimal savedAmount = 0;
-            Goal goal = new Goal();
+            //Goal goal = new Goal();
             decimal neededAmount = (goal.Price - CheckBalance());
             
             while ((neededAmount - savedAmount) > 0) //while(can't afford goal)

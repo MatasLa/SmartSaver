@@ -1,5 +1,8 @@
-﻿using System;
-using DataManager;
+﻿using DataManager;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 
 namespace ePiggy
 {
@@ -19,9 +22,12 @@ namespace ePiggy
 
         public static int UserId { get; set; }
 
+        public static HttpClient HttpClient { get; set; }
+
         public Handler()
         {
             Time = DateTime.Now;
+            HttpClient = new HttpClient();
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
