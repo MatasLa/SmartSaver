@@ -7,8 +7,18 @@ using ePiggy.utilities;
 
 namespace ePiggy.forms.finances
 {
+    
+
     public partial class EntryForm : Form
     {
+        public enum Type
+        {
+            Add,
+            Edit
+        }
+
+        private readonly Type _type;
+
         private readonly Handler _handler;
         private readonly DataEntry _dataEntry;
         private readonly EntryType _entryType;
@@ -25,7 +35,7 @@ namespace ePiggy.forms.finances
         private const string AddButtonText = "Add";
         private const string EditButtonText = "Edit";
 
-        public EntryForm(DataEntry dataEntry, EntryType entryType, Handler handler)
+        public EntryForm(DataEntry dataEntry, EntryType entryType, Handler handler, Type type)
         {
             InitializeComponent();
 
@@ -35,6 +45,7 @@ namespace ePiggy.forms.finances
             _dataEntry = dataEntry ?? throw new Exception("Given null data entry");
             _entryType = entryType;
             _handler = handler;
+            _type = type;
 
             SetCalendarTime();
             SetUpAddOrEdit();
@@ -50,7 +61,7 @@ namespace ePiggy.forms.finances
         #region Title setup
         private void SetUpAddOrEdit()
         {
-            if (_dataEntry.ID == 0)
+            if (_type == Type.Add)
             {
                 SetUpAdd();
             }
@@ -62,35 +73,29 @@ namespace ePiggy.forms.finances
 
         private void SetUpAdd()
         {
-            switch (_entryType)
+            if (_entryType == EntryType.Income)
             {
-                case EntryType.Income:
-                    Text = AddIncomeTitle;
-                    buttonOK.Text = AddButtonText;
-                    break;
-                case EntryType.Expense:
-                    Text = AddExpenseTitle;
-                    buttonOK.Text = AddButtonText;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Text = AddIncomeTitle;
+                buttonOK.Text = AddButtonText;
+            }
+            else
+            {
+                Text = AddExpenseTitle;
+                buttonOK.Text = AddButtonText;
             }
         }
 
         private void SetUpEdit()
         {
-            switch (_entryType)
+            if (_entryType == EntryType.Income)
             {
-                case EntryType.Income:
-                    Text = EditIncomeTitle;
-                    buttonOK.Text = EditButtonText;
-                    break;
-                case EntryType.Expense:
-                    Text = EditExpenseTitle;
-                    buttonOK.Text = EditButtonText;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Text = EditIncomeTitle;
+                buttonOK.Text = EditButtonText;
+            }
+            else
+            {
+                Text = EditExpenseTitle;
+                buttonOK.Text = EditButtonText;
             }
             Text += @" """ + _dataEntry.Title + @"""";
             textBoxTitle.Text = _dataEntry.Title;

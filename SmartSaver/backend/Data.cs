@@ -52,18 +52,7 @@ namespace DataManager
 
             var dataEntry = Income.FirstOrDefault(x => x.ID == id);
             Income.Remove(dataEntry);
-        }
-
-        public void RemoveExpense(int id)
-        {
-            var db = new DatabaseContext();
-            var index = db.Expenses.FirstOrDefault(x => x.Id == id);
-            db.Expenses.Remove(index);
-            db.SaveChanges();
-
-            var dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
-            Expenses.Remove(dataEntry);
-        }
+		}
 
         public void RemoveIncome(DataEntry dataEntry)
         {
@@ -75,16 +64,60 @@ namespace DataManager
             Income.Remove(dataEntry);
         }
 
-        public void RemoveExpense(DataEntry dataEntry)
+        public void RemoveIncomes(List<DataEntry> entries)
+        {
+            foreach (var entry in entries)
+            {
+                RemoveIncome(entry.ID);
+            }
+        }
+
+        public void RemoveIncomes(List<int> idList)
+		{
+			foreach (var id in idList)
+            {
+                RemoveIncome(id);
+            }
+		}
+
+		public void RemoveExpense(DataEntry dataEntry)
         {
             var db = new DatabaseContext();
             var index = db.Expenses.FirstOrDefault(x => x.Id == dataEntry.ID);
-			db.Expenses.Remove(index);
+            db.Expenses.Remove(index);
             db.SaveChanges();
 
             Expenses.Remove(dataEntry);
         }
-		/*Methods that allows to edit different parts of already existing entrys*/
+
+		public void RemoveExpense(int id)
+        {
+            var db = new DatabaseContext();
+            var index = db.Expenses.FirstOrDefault(x => x.Id == id);
+            db.Expenses.Remove(index);
+            db.SaveChanges();
+
+            var dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
+            Expenses.Remove(dataEntry);
+        }
+
+        public void RemoveExpenses(List<DataEntry> entries)
+        {
+            foreach (var entry in entries)
+            {
+                RemoveExpense(entry.ID);
+            }
+        }
+
+        public void RemoveExpenses(List<int> idList)
+        {
+            foreach (var id in idList)
+            {
+                RemoveExpense(id);
+            }
+        }
+
+		/*Methods that allows to edit different parts of already existing entries*/
 		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
 		{
 
@@ -331,21 +364,9 @@ namespace DataManager
             foreach (var id in idArray)
 			{
                 if (!GetDataEntryById(id, out var dataEntry, entryType)) return false;
-                switch (entryType)
-                {
-					case EntryType.Income:
-                        list.Add(dataEntry);
-						break;
-					case EntryType.Expense:
-                        list.Add(dataEntry);
-						break;
-                    default:
-                        throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
-                }
                 list.Add(dataEntry);
             }
             return true;
-			//public List<DataEntry> Income { get; } = new List<DataEntry>();
 		}
 
 	}

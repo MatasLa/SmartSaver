@@ -27,6 +27,9 @@ namespace ePiggy.utilities
                         case EntryInfoForm entryInfoForm:
                             entryInfoForm.DataEntry = ((EntryInfoForm)childForm).DataEntry;
                             break;
+                        case MultiEntryInfoForm multiEntryInfoForm:
+                            multiEntryInfoForm.Entries = ((MultiEntryInfoForm)childForm).Entries;
+                            break;
                     }
 
                     return;

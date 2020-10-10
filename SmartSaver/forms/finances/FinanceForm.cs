@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -26,7 +27,6 @@ namespace ePiggy.forms.finances
         private const string AddExpensesButtonTitle = "Add Expense";
 
         private Form _activeForm;
-        private bool _tableLoaded = false;
 
         private EntryType _entryType;
         public EntryType EntryType 
@@ -53,147 +53,179 @@ namespace ePiggy.forms.finances
         private void Init()
         {
             SetTitles();
-            RePaintDisplay();
-        }
-
-        private void labelMonth_MouseClick(object sender, MouseEventArgs e)
-        {
-
-            dataGridView.ClearSelection();
+            UpdateDisplay();
         }
 
         #region Entry handling
 
-        private bool GetDataEntryFromSelectedRow(out DataEntry dataEntry)
+        public bool AddEntryWithEntryForm(DataEntry entry)
         {
-            dataEntry = new DataEntry();
-            if (dataGridView.SelectedRows.Count == 0) return false;
-            var value = dataGridView.SelectedRows[0].Cells["ID"].Value;
-            if (value is DBNull)
-            {
-                return false;
-            }
-
-            var id = (int)value;
-
-            return _data.GetDataEntryById(id, out dataEntry, EntryType);
+            if (!OpenEntryForm(entry, EntryForm.Type.Add)) return false;
+            AddEntry(entry);
+            return true;
         }
 
-        private void GetSelectedDataEntries()
+        public bool EditEntryWithEntryForm(DataEntry entry)
         {
-            if (_tableLoaded)
-            {
-                //MessageBox.Show(dataGridView.SelectedRows.Count.ToString());
-            }
-            //MessageBox.Show(dataGridView.SelectedRows.Count.ToString());
-            if (dataGridView.SelectedRows.Count > 1)
-            {
-                //MessageBox.Show(dataGridView.SelectedRows.Count.ToString());
-            }
+            if (!OpenEntryForm(entry, EntryForm.Type.Edit)) return false;
+            EditEntry(entry);
+            return true;
         }
 
-        private void DeleteEntry(DataEntry dataEntry)
+        private void AddEntry(DataEntry entry)
         {
-            switch (EntryType)
+            if (EntryType == EntryType.Income)
             {
-                case EntryType.Income:
-                    _data.RemoveIncome(dataEntry.ID);
-                    //_handler.DataJSON.WriteIncomeToFile();
-                    break;
-                case EntryType.Expense:
-                    _data.RemoveExpense(dataEntry.ID);
-                    //_handler.DataJSON.WriteExpensesToFile();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+            }
+            else
+            {
+                _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
             }
         }
 
-        private void EditEntry(DataEntry dataEntry)
+        private void EditEntry(DataEntry entry)
         {
-            if (new EntryForm(dataEntry, EntryType, _handler).ShowDialog() != DialogResult.OK) return;
-            switch (EntryType)
+            if (EntryType == EntryType.Income)
             {
-                case EntryType.Income:
-                    _data.EditIncomeItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, 1);
-                    //_handler.DataJSON.WriteIncomeToFile();
-                    break;
-                case EntryType.Expense:
-                    _data.EditExpensesItem(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, 1);
-                    //_handler.DataJSON.WriteExpensesToFile();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                _data.EditIncomeItem(entry.ID, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
+            }
+            else
+            {
+                _data.EditExpensesItem(entry.ID, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
             }
         }
 
-        private void AddEntry()
+        private void DeleteEntry(DataEntry entry)
         {
-            var dataEntry = new DataEntry();
-            if (new EntryForm(dataEntry, EntryType, _handler).ShowDialog() != DialogResult.OK) return;
-            switch (EntryType)
+            if (EntryType == EntryType.Income)
             {
-                case EntryType.Income:
-                    _data.AddIncome(Handler.UserId, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
-                    //_handler.DataJSON.WriteIncomeToFile();
-                    break;
-                case EntryType.Expense:
-                    _data.AddExpense(Handler.UserId, dataEntry.Amount, dataEntry.Title, dataEntry.Date, dataEntry.IsMonthly, 1);
-                    //_handler.DataJSON.WriteExpensesToFile();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                _data.RemoveIncome(entry.ID);
+            }
+            else
+            {
+                _data.RemoveExpense(entry.ID);
+            }
+        }
+
+        private void DeleteEntries(List<DataEntry> entries)
+        {
+            if (EntryType == EntryType.Income)
+            {
+                _data.RemoveIncomes(entries);
+            }
+            else
+            {
+                _data.RemoveExpenses(entries);
             }
         }
 
         #endregion
 
-        #region Event Handlers
+        #region Table stuff
+
+        private bool GetSelectedEntry(out DataEntry dataEntry)
+        {
+            dataEntry = new DataEntry();
+            var value = dataGridView.SelectedRows[0].Cells["ID"].Value;
+            if (value is DBNull) return false;
+            var id = (int) value;
+            return _data.GetDataEntryById(id, out dataEntry, EntryType);
+        }
+
+        private bool GetSelectedEntries(out List<DataEntry> entries)
+        {
+            entries = new List<DataEntry>();
+            var idList = new List<int>();
+            foreach (DataGridViewRow row in dataGridView.SelectedRows)
+            {
+                var value = row.Cells["ID"].Value;
+                if (value is null) continue;
+                idList.Add((int)value);
+            }
+            return _data.GetListOfDataEntriesById(idList, entries, EntryType);
+        }
 
         private void dataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             dataGridView.ClearSelection();
-            FormChanger.CloseChildForm(ref _activeForm);
+            CloseSideForm();
         }
 
-        private void dataGridView_MouseCaptureChanged(object sender, EventArgs e)
-        {
-            //dataGridView.
-            //GetSelectedDataEntries();
-        }
 
         private void dataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            //GetSelectedDataEntries();
-            if (!GetDataEntryFromSelectedRow(out var dataEntry))
+            if (dataGridView.SelectedRows.Count == 1)
             {
-                return;
-            }
-
-            FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(dataEntry, _handler), splitContainer.Panel2);
-
-        }
-
-        private void dataGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            //dataGridView.CurrentCell.Selected = false;
-            //if (dataGridView.CurrentCell is null) return;
-            //dataGridView.CurrentCell.Selected = false;
-            //dataGridView.ClearSelection();
-        }
-
-        private void dataGridView_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar != (char) Keys.D) return;
-            if (!GetDataEntryFromSelectedRow(out var dataEntry))
+                if (GetSelectedEntry(out var entry))
+                {
+                    OpenEntryInfoForm(entry);
+                }
+                else
+                {
+                    FormChanger.OpenChildForm(ref _activeForm, new EntryForm(new DataEntry(), EntryType, _handler, EntryForm.Type.Add), splitContainer.Panel2);
+                }
+            } 
+            else if (dataGridView.SelectedRows.Count > 1)
             {
-                AddEntry();
-                return;
+                if (GetSelectedEntries(out var entries))
+                {
+                    OpenMultiEntryInfoForm(entries);
+                }
             }
-
-            DeleteEntry(dataEntry);
-            RePaintDisplay();
         }
+
+        private int GetSelectedRowCount()
+        {
+            return dataGridView.SelectedRows.Count;
+        }
+
+        #endregion
+
+        #region Side Form Changing
+
+        public void CloseSideForm()
+        {
+            FormChanger.CloseChildForm(ref _activeForm);
+        }
+        private void OpenMultiEntryInfoForm(List<DataEntry> entries)
+        {
+            FormChanger.OpenChildForm(ref _activeForm, new MultiEntryInfoForm(entries, _handler), splitContainer.Panel2);
+        }
+
+        public void OpenEntryInfoForm(DataEntry entry)
+        {
+            FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(entry, _handler, this), splitContainer.Panel2);
+        }
+
+        private bool OpenEntryForm(DataEntry entry, EntryForm.Type entryFormType)
+        {
+            return new EntryForm(entry, EntryType, _handler, entryFormType).ShowDialog() == DialogResult.OK;
+        }
+
+        #endregion
+
+        #region Key Press Handling
+
+        private void DataGridView_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar != (char)Keys.D) return;
+            if (GetSelectedRowCount() == 1)
+            {
+                if (!GetSelectedEntry(out var entry)) return;
+                DeleteEntry(entry);
+            }
+            else if (GetSelectedRowCount() > 1)
+            {
+                if (!GetSelectedEntries(out var entries)) return;
+                DeleteEntries(entries);
+            }
+            UpdateDisplay();
+        }
+
+        #endregion
+
+        #region Mouse Click Handling
 
         private void PanelTop_Click(object sender, EventArgs e)
         {
@@ -203,66 +235,37 @@ namespace ePiggy.forms.finances
 
         private void ButtonAddEntry_Click(object sender, EventArgs e)
         {
-            AddEntry();
-            RePaintDisplay();
+            if (!AddEntryWithEntryForm(new DataEntry())) return;
+            UpdateDisplay();
         }
-
-        private void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (!GetDataEntryFromSelectedRow(out var dataEntry))
-            {
-                AddEntry();
-                return;
-            }
-
-            EditEntry(dataEntry);
-            RePaintDisplay();
-        }
-
-        private void DataGridView_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            //if (!GetDataEntryFromSelectedRow(out var dataEntry))
-            //{
-            //    return;
-            //}
-
-            //FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(dataEntry, _handler), splitContainer.Panel2);
-        }
-
 
         #endregion
 
         #region Data Display
 
-        private void RePaintDisplay()
+        public void UpdateDisplay()
         {
             DisplayDate();
             DisplayTable();
             DisplayBalance();
             DisplayTotalBalance();
-            FormChanger.CloseChildForm(ref _activeForm);
         }
 
         private void DisplayTable()
         {
-            _tableLoaded = false;
             _dataTable = EntryType switch
             {
                 EntryType.Income => _dataTableConverter.CustomTable(_dataFilter.GetIncomeByDate(_handler.Time)),
                 EntryType.Expense => _dataTableConverter.CustomTable(_dataFilter.GetExpensesByDate(_handler.Time)),
                 _ => throw new ArgumentOutOfRangeException()
             };
+
             dataGridView.DataSource = _dataTable;
             dataGridView.Columns["ID"].Visible = false;
             dataGridView.Columns["Importance"].Visible = false;
 
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
             dataGridView.Columns["Date"].DefaultCellStyle.Format = "dd (dddd)";
-
-            //dataGridView.ClearSelection();
-            //dataGridView.CurrentCell.Selected = false;
-            //dataGridView.CurrentCell = null;
-            _tableLoaded = true;
         }
     
         private void DisplayBalance()
@@ -289,18 +292,15 @@ namespace ePiggy.forms.finances
 
         private void SetTitles()
         {
-            switch (_entryType)
+            if (EntryType == EntryType.Income)
             {
-                case EntryType.Income:
-                    Text = IncomeFormTitle;
-                    buttonAddEntry.Text = AddIncomeButtonTitle;
-                    break;
-                case EntryType.Expense:
-                    Text = ExpensesFormTitle;
-                    buttonAddEntry.Text = AddExpensesButtonTitle;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                Text = IncomeFormTitle;
+                buttonAddEntry.Text = AddIncomeButtonTitle;
+            }
+            else
+            {
+                Text = ExpensesFormTitle;
+                buttonAddEntry.Text = AddExpensesButtonTitle;
             }
         }
         #endregion
@@ -310,31 +310,31 @@ namespace ePiggy.forms.finances
         private void LabelYear_Click(object sender, EventArgs e)
         {
             _handler.Time = DateTime.Now;
-            RePaintDisplay();
+            UpdateDisplay();
         }
 
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
             _handler.Time = TimeManager.MoveToNextYear(_handler.Time);
-            RePaintDisplay();
+            UpdateDisplay();
         }
 
         private void ButtonPreviousYear_Click(object sender, EventArgs e)
         {
             _handler.Time = TimeManager.MoveToPreviousYear(_handler.Time);
-            RePaintDisplay();
+            UpdateDisplay();
         }
 
         private void ButtonNextMonth_Click(object sender, EventArgs e)
         {
             _handler.Time = TimeManager.MoveToNextMonth(_handler.Time);
-            RePaintDisplay();
+            UpdateDisplay();
         }
 
         private void ButtonPreviousMonth_Click(object sender, EventArgs e)
         {
             _handler.Time = TimeManager.MoveToPreviousMonth(_handler.Time);
-            RePaintDisplay();
+            UpdateDisplay();
         }
         #endregion
 

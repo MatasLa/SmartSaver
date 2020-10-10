@@ -78,7 +78,7 @@
             this.labelBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.labelBalance.Location = new System.Drawing.Point(874, 42);
             this.labelBalance.Name = "labelBalance";
-            this.labelBalance.Size = new System.Drawing.Size(91, 26);
+            this.labelBalance.Size = new System.Drawing.Size(112, 31);
             this.labelBalance.TabIndex = 9;
             this.labelBalance.Text = "Balance";
             // 
@@ -184,7 +184,7 @@
             this.labelYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.labelYear.Location = new System.Drawing.Point(501, 12);
             this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(74, 26);
+            this.labelYear.Size = new System.Drawing.Size(88, 31);
             this.labelYear.TabIndex = 6;
             this.labelYear.Text = "YEAR";
             this.labelYear.Click += new System.EventHandler(this.LabelYear_Click);
@@ -198,10 +198,9 @@
             this.labelMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.labelMonth.Location = new System.Drawing.Point(505, 55);
             this.labelMonth.Name = "labelMonth";
-            this.labelMonth.Size = new System.Drawing.Size(63, 26);
+            this.labelMonth.Size = new System.Drawing.Size(77, 31);
             this.labelMonth.TabIndex = 7;
             this.labelMonth.Text = "MON";
-            this.labelMonth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.labelMonth_MouseClick);
             // 
             // splitContainer
             // 
@@ -247,13 +246,9 @@
             this.dataGridView.Size = new System.Drawing.Size(749, 621);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.Text = "dataGridView";
-            this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridView_CellDoubleClick);
-            this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DataGridView_CellMouseClick);
             this.dataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView_DataBindingComplete);
-            this.dataGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridView_RowsAdded);
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
-            this.dataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridView_KeyPress);
-            this.dataGridView.MouseCaptureChanged += new System.EventHandler(this.dataGridView_MouseCaptureChanged);
+            this.dataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DataGridView_KeyPress);
             // 
             // labelTotalBalanceValue
             // 
@@ -262,9 +257,9 @@
             this.labelTotalBalanceValue.BackColor = System.Drawing.Color.Transparent;
             this.labelTotalBalanceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTotalBalanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelTotalBalanceValue.Location = new System.Drawing.Point(121, 350);
+            this.labelTotalBalanceValue.Location = new System.Drawing.Point(120, 350);
             this.labelTotalBalanceValue.Name = "labelTotalBalanceValue";
-            this.labelTotalBalanceValue.Size = new System.Drawing.Size(91, 26);
+            this.labelTotalBalanceValue.Size = new System.Drawing.Size(112, 31);
             this.labelTotalBalanceValue.TabIndex = 9;
             this.labelTotalBalanceValue.Text = "Balance";
             // 
@@ -275,15 +270,15 @@
             this.labelTotalBalance.BackColor = System.Drawing.Color.Transparent;
             this.labelTotalBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTotalBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelTotalBalance.Location = new System.Drawing.Point(108, 307);
+            this.labelTotalBalance.Location = new System.Drawing.Point(107, 307);
             this.labelTotalBalance.Name = "labelTotalBalance";
-            this.labelTotalBalance.Size = new System.Drawing.Size(150, 26);
+            this.labelTotalBalance.Size = new System.Drawing.Size(188, 31);
             this.labelTotalBalance.TabIndex = 9;
             this.labelTotalBalance.Text = "Total Balance:";
             // 
             // FinanceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 721);
             this.Controls.Add(this.splitContainer);

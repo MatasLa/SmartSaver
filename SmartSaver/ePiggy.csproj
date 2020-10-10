@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="forms\finances\MultiEntryInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="forms\finances\FinanceForm.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>

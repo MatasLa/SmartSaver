@@ -6,6 +6,13 @@ namespace ePiggy.forms.finances
 {
     public partial class EntryInfoForm : Form
     {
+        public enum Type
+        {
+            Blank,
+            Filled
+        }
+
+
         private DataEntry _dataEntry;
         public DataEntry DataEntry
         {
@@ -17,13 +24,15 @@ namespace ePiggy.forms.finances
             }
         }
 
-        private Handler _handler;
+        private readonly Handler _handler;
+        private readonly FinanceForm _parentForm;
 
-        public EntryInfoForm(DataEntry dataEntry, Handler handler)
+        public EntryInfoForm(DataEntry dataEntry, Handler handler, FinanceForm financeForm)
         {
             InitializeComponent();
             DataEntry = dataEntry;
             _handler = handler;
+            _parentForm = financeForm;
             Init();
 
         }
@@ -38,16 +47,15 @@ namespace ePiggy.forms.finances
 
         private void ButtonEdit_Click(object sender, System.EventArgs e)
         {
-            //WIP
-            MessageBox.Show(DataEntry.ID.ToString());
+            if(!_parentForm.EditEntryWithEntryForm(DataEntry)) return;
+            _parentForm.UpdateDisplay();
+            _parentForm.OpenEntryInfoForm(DataEntry);
         }
+
         private void ButtonDelete_Click(object sender, System.EventArgs e)
         {
-            //WIP
-            //MessageBox.Show(DataEntry.ID.ToString());
             _handler.Data.RemoveIncome(_dataEntry);
-            this.Hide();
-            this.Close();
+            _parentForm.UpdateDisplay();
         }
     }
 }
