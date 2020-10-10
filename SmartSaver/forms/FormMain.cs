@@ -58,7 +58,7 @@ namespace ePiggy.forms
 
         private void ButtonGoals_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FormGoals(), panelMain);
+            FormChanger.OpenChildForm(ref _activeForm, new FormGoals(Handler), panelMain);
         }
 
         private void ButtonSpending_Click(object sender, EventArgs e)

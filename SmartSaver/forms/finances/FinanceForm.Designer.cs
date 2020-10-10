@@ -252,12 +252,12 @@
             // 
             // labelTotalBalanceValue
             // 
-            this.labelTotalBalanceValue.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelTotalBalanceValue.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelTotalBalanceValue.AutoSize = true;
             this.labelTotalBalanceValue.BackColor = System.Drawing.Color.Transparent;
             this.labelTotalBalanceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTotalBalanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelTotalBalanceValue.Location = new System.Drawing.Point(120, 350);
+            this.labelTotalBalanceValue.Location = new System.Drawing.Point(119, 350);
             this.labelTotalBalanceValue.Name = "labelTotalBalanceValue";
             this.labelTotalBalanceValue.Size = new System.Drawing.Size(112, 31);
             this.labelTotalBalanceValue.TabIndex = 9;
@@ -265,12 +265,12 @@
             // 
             // labelTotalBalance
             // 
-            this.labelTotalBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelTotalBalance.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelTotalBalance.AutoSize = true;
             this.labelTotalBalance.BackColor = System.Drawing.Color.Transparent;
             this.labelTotalBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTotalBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelTotalBalance.Location = new System.Drawing.Point(107, 307);
+            this.labelTotalBalance.Location = new System.Drawing.Point(106, 307);
             this.labelTotalBalance.Name = "labelTotalBalance";
             this.labelTotalBalance.Size = new System.Drawing.Size(188, 31);
             this.labelTotalBalance.TabIndex = 9;

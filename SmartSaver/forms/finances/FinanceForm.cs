@@ -188,6 +188,7 @@ namespace ePiggy.forms.finances
         {
             FormChanger.CloseChildForm(ref _activeForm);
         }
+
         private void OpenMultiEntryInfoForm(List<DataEntry> entries)
         {
             FormChanger.OpenChildForm(ref _activeForm, new MultiEntryInfoForm(entries, _handler), splitContainer.Panel2);

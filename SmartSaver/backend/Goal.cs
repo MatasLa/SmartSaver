@@ -31,6 +31,13 @@ namespace DataManager
             Price = price;
         }
 
+        public Goal()
+        {
+            ID = 0;
+            Title = "unnamed";
+            Price = 0;
+        }
+
         public void SetGoalFromWeb(string itemName)
         {
             try
