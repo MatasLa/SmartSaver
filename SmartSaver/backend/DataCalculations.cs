@@ -14,7 +14,7 @@ namespace DataManager
         
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
-        public decimal CheckBalance()
+        public decimal CheckBalance()/*Checks even future data*/
         {
             decimal sum = 0;
             foreach (DataEntry data in data.Income)
@@ -28,7 +28,7 @@ namespace DataManager
             return sum;
         }
 
-        public bool IsBalancePositive()
+        public bool IsBalancePositive()/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
         {
             if (CheckBalance() >= 0)
             {
