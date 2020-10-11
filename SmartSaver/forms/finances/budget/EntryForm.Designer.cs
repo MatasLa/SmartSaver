@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace ePiggy.forms.finances.budget
 {
     partial class EntryForm
     {
@@ -48,7 +48,7 @@
             this.textBoxTitle.MaxLength = 60;
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.PlaceholderText = "Title";
-            this.textBoxTitle.Size = new System.Drawing.Size(237, 23);
+            this.textBoxTitle.Size = new System.Drawing.Size(237, 26);
             this.textBoxTitle.TabIndex = 0;
             this.textBoxTitle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UsualEscAndEnterKeyPress);
             // 
@@ -62,7 +62,7 @@
             this.textBoxValue.MaxLength = 12;
             this.textBoxValue.Name = "textBoxValue";
             this.textBoxValue.PlaceholderText = "Value";
-            this.textBoxValue.Size = new System.Drawing.Size(237, 23);
+            this.textBoxValue.Size = new System.Drawing.Size(237, 26);
             this.textBoxValue.TabIndex = 1;
             this.textBoxValue.TextChanged += new System.EventHandler(this.TextBoxValue_TextChanged);
             this.textBoxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxValue_KeyPress);
@@ -73,10 +73,10 @@
             this.checkBoxMonthly.AutoSize = true;
             this.checkBoxMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkBoxMonthly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.checkBoxMonthly.Location = new System.Drawing.Point(109, 344);
+            this.checkBoxMonthly.Location = new System.Drawing.Point(109, 339);
             this.checkBoxMonthly.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.checkBoxMonthly.Name = "checkBoxMonthly";
-            this.checkBoxMonthly.Size = new System.Drawing.Size(83, 24);
+            this.checkBoxMonthly.Size = new System.Drawing.Size(103, 29);
             this.checkBoxMonthly.TabIndex = 2;
             this.checkBoxMonthly.Text = "Monthly";
             this.checkBoxMonthly.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@
             // 
             // monthCalendar
             // 
-            this.monthCalendar.Location = new System.Drawing.Point(35, 158);
+            this.monthCalendar.Location = new System.Drawing.Point(40, 161);
             this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 6;
@@ -143,7 +143,7 @@
             // 
             // EntryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(295, 447);

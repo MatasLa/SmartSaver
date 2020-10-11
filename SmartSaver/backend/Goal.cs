@@ -31,16 +31,29 @@ namespace DataManager
         }
 
         public Goal(int id, string title, decimal price, int placeInQueue)
-            :this(title, price)
+            :this(title, price, placeInQueue)
         {
             ID = id;
             PlaceInQueue = placeInQueue;
         }
 
-        public Goal(string title, decimal price)
+        public Goal(string title, decimal price, int placeInQueue)
         {
             Title = title;
             Price = price;
+        }
+
+        public Goal(string title, int placeInQueue)
+        {
+            SetGoalFromWeb(title);
+            PlaceInQueue = placeInQueue;
+        }
+
+        public Goal()
+        {
+            ID = 0;
+            Title = "unnamed";
+            Price = 0;
         }
 
         public void SetGoalFromWeb(string itemName)

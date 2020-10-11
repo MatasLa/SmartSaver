@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using DataBases;
+using ePiggy.utilities;
 
 namespace DataManager
 {
@@ -19,28 +20,44 @@ namespace DataManager
 		public List<Goal> Goals { get; } = new List<Goal>();
 
 		/*Methods that creates new instance of class and adds to List*/
-        public bool AddGoal(string title, decimal value)//manual
+
+		/*NEW*/
+        public bool AddGoal(string title, decimal value, int placeInQueue)//manual
         {
             if (Goals.Count >= 10) return false;//if 10 entries already in, does not allow to add
-            var goal = new Goal(title, value);
-			Goals.Add(goal);
+            var db = new DatabaseContext();
+            var goal = new Goal(title, value, placeInQueue);
+            db.Add(goal);
+            db.SaveChanges();
+            int id = goal.Id;
+            goal.ID = id;
+            Goals.Add(goal);
             return true;
         }
 
-        public bool AddGoal(string title)//parsing from internet
+		/*NEW*/
+        public bool AddGoal(string title, int placeInQueue)//parsing from internet
         {
             if (Goals.Count >= 10) return false;//if 10 entries already in, does not allow to add
-			var goal = new Goal(title, 0);
-			goal.SetGoalFromWeb(title);
-			Goals.Add(goal);
+            var db = new DatabaseContext();
+            var goal = new Goal(title, placeInQueue);
+			db.Add(goal);
+            db.SaveChanges();
+            int id = goal.Id;
+            goal.ID = id;
+            Goals.Add(goal);
             return true;
         }
 
         public void RemoveGoal(int id)
         {
-            var index = Goals.FindIndex(x => x.ID == id);
-            Goals.RemoveAt(index);
-		}
+            var db = new DatabaseContext();
+            var index = db.Goals.FirstOrDefault(x => x.Id == id);
+            db.Incomes.Remove(index);
+            db.SaveChanges();
+            var goal = Goals.FirstOrDefault(x => x.ID == id);
+            Goals.Remove(goal);
+        }
 
         public void AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
@@ -70,16 +87,72 @@ namespace DataManager
             var index = db.Incomes.FirstOrDefault(x => x.Id == id);
             db.Incomes.Remove(index);
             db.SaveChanges();
-            //Income.RemoveAt(index);
+
+            var dataEntry = Income.FirstOrDefault(x => x.ID == id);
+            Income.Remove(dataEntry);
+		}
+
+        public void RemoveIncome(DataEntry dataEntry)
+        {
+            var db = new DatabaseContext();
+            var index = db.Incomes.FirstOrDefault(x => x.Id == dataEntry.ID);
+            db.Incomes.Remove(index);
+            db.SaveChanges();
+
+            Income.Remove(dataEntry);
         }
 
-        public void RemoveExpense(int id)
+        public void RemoveIncomes(List<DataEntry> entries)
+        {
+            foreach (var entry in entries)
+            {
+                RemoveIncome(entry.ID);
+            }
+        }
+
+        public void RemoveIncomes(List<int> idList)
+		{
+			foreach (var id in idList)
+            {
+                RemoveIncome(id);
+            }
+		}
+
+		public void RemoveExpense(DataEntry dataEntry)
+        {
+            var db = new DatabaseContext();
+            var index = db.Expenses.FirstOrDefault(x => x.Id == dataEntry.ID);
+            db.Expenses.Remove(index);
+            db.SaveChanges();
+
+            Expenses.Remove(dataEntry);
+        }
+
+		public void RemoveExpense(int id)
         {
             var db = new DatabaseContext();
             var index = db.Expenses.FirstOrDefault(x => x.Id == id);
             db.Expenses.Remove(index);
             db.SaveChanges();
-            //Expenses.RemoveAt(index);
+
+            var dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
+            Expenses.Remove(dataEntry);
+        }
+
+        public void RemoveExpenses(List<DataEntry> entries)
+        {
+            foreach (var entry in entries)
+            {
+                RemoveExpense(entry.ID);
+            }
+        }
+
+        public void RemoveExpenses(List<int> idList)
+        {
+            foreach (var id in idList)
+            {
+                RemoveExpense(id);
+            }
         }
 
 		/*Methods that allows to edit different parts of already existing entries*/
@@ -308,5 +381,31 @@ namespace DataManager
                 }
             }
         }
+
+        public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
+        {
+            switch (entryType)
+            {
+				case EntryType.Income:
+                    dataEntry = Income.FirstOrDefault(x => x.ID == id);
+					return dataEntry is { };
+				case EntryType.Expense:
+                    dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
+                    return dataEntry is { };
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
+            }
+		}
+
+        public bool GetListOfDataEntriesById(IEnumerable<int> idArray, List<DataEntry> list, EntryType entryType)
+        {
+            foreach (var id in idArray)
+			{
+                if (!GetDataEntryById(id, out var dataEntry, entryType)) return false;
+                list.Add(dataEntry);
+            }
+            return true;
+		}
+
 	}
 }

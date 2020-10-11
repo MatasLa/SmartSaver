@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace Utilities
+namespace ePiggy.utilities
 {
     public class NumberFormatter
     {
@@ -11,81 +8,43 @@ namespace Utilities
         {
             var cultureInfo = CultureInfo.CurrentCulture;
             var numberFormat = cultureInfo.NumberFormat;
-            string pattern = null;
-            if (value >= Decimal.Zero)
+            var pattern = string.Empty;
+            if (value >= decimal.Zero)
             {
-                switch (numberFormat.CurrencyPositivePattern)
+                pattern = numberFormat.CurrencyPositivePattern switch
                 {
-                    case 0:
-                        pattern = "{0}{1:N" + numberFormat.CurrencyDecimalDigits + "}";
-                        break;
-                    case 1:
-                        pattern = "{1:N" + numberFormat.CurrencyDecimalDigits + "}{0}";
-                        break;
-                    case 2:
-                        pattern = "{0} {1:N" + numberFormat.CurrencyDecimalDigits + "}";
-                        break;
-                    case 3:
-                        pattern = "{1:N" + numberFormat.CurrencyDecimalDigits + "} {0}";
-                        break;
-                }
+                    0 => "{0}{1:N" + numberFormat.CurrencyDecimalDigits + "}",
+                    1 => "{1:N" + numberFormat.CurrencyDecimalDigits + "}{0}",
+                    2 => "{0} {1:N" + numberFormat.CurrencyDecimalDigits + "}",
+                    3 => "{1:N" + numberFormat.CurrencyDecimalDigits + "} {0}",
+                    _ => pattern
+                };
             }
             else
             {
                 value = -value;
-                switch (numberFormat.CurrencyNegativePattern)
+                pattern = numberFormat.CurrencyNegativePattern switch
                 {
-                    case 0:
-                        pattern = "({0}{1:N" + numberFormat.CurrencyDecimalDigits + "})";
-                        break;
-                    case 1:
-                        pattern = "-{0}{1:N" + numberFormat.CurrencyDecimalDigits + "}";
-                        break;
-                    case 2:
-                        pattern = "{0}-{1:N" + numberFormat.CurrencyDecimalDigits + "}";
-                        break;
-                    case 3:
-                        pattern = "{0}{1:N" + numberFormat.CurrencyDecimalDigits + "}-";
-                        break;
-                    case 4:
-                        pattern = "({1:N" + numberFormat.CurrencyDecimalDigits + "}{0})";
-                        break;
-                    case 5:
-                        pattern = "-{1:N" + numberFormat.CurrencyDecimalDigits + "}{0}";
-                        break;
-                    case 6:
-                        pattern = "{1:N" + numberFormat.CurrencyDecimalDigits + "}-{0}";
-                        break;
-                    case 7:
-                        pattern = "{1:N" + numberFormat.CurrencyDecimalDigits + "}{0}-";
-                        break;
-                    case 8:
-                        pattern = "-{1:N" + numberFormat.CurrencyDecimalDigits + "} {0}";
-                        break;
-                    case 9:
-                        pattern = "-{0} {1:N" + numberFormat.CurrencyDecimalDigits + "}";
-                        break;
-                    case 10:
-                        pattern = "{1:N" + numberFormat.CurrencyDecimalDigits + "} {0}-";
-                        break;
-                    case 11:
-                        pattern = "{0} {1:N" + numberFormat.CurrencyDecimalDigits + "}-";
-                        break;
-                    case 12:
-                        pattern = "{0} -{1:N" + numberFormat.CurrencyDecimalDigits + "}";
-                        break;
-                    case 13:
-                        pattern = "{1:N" + numberFormat.CurrencyDecimalDigits + "}- {0}";
-                        break;
-                    case 14:
-                        pattern = "({0} {1:N" + numberFormat.CurrencyDecimalDigits + "})";
-                        break;
-                    case 15:
-                        pattern = "({1:N" + numberFormat.CurrencyDecimalDigits + "} {0})";
-                        break;
-                }
+                    0 => "({0}{1:N" + numberFormat.CurrencyDecimalDigits + "})",
+                    1 => "-{0}{1:N" + numberFormat.CurrencyDecimalDigits + "}",
+                    2 => "{0}-{1:N" + numberFormat.CurrencyDecimalDigits + "}",
+                    3 => "{0}{1:N" + numberFormat.CurrencyDecimalDigits + "}-",
+                    4 => "({1:N" + numberFormat.CurrencyDecimalDigits + "}{0})",
+                    5 => "-{1:N" + numberFormat.CurrencyDecimalDigits + "}{0}",
+                    6 => "{1:N" + numberFormat.CurrencyDecimalDigits + "}-{0}",
+                    7 => "{1:N" + numberFormat.CurrencyDecimalDigits + "}{0}-",
+                    8 => "-{1:N" + numberFormat.CurrencyDecimalDigits + "} {0}",
+                    9 => "-{0} {1:N" + numberFormat.CurrencyDecimalDigits + "}",
+                    10 => "{1:N" + numberFormat.CurrencyDecimalDigits + "} {0}-",
+                    11 => "{0} {1:N" + numberFormat.CurrencyDecimalDigits + "}-",
+                    12 => "{0} -{1:N" + numberFormat.CurrencyDecimalDigits + "}",
+                    13 => "{1:N" + numberFormat.CurrencyDecimalDigits + "}- {0}",
+                    14 => "({0} {1:N" + numberFormat.CurrencyDecimalDigits + "})",
+                    15 => "({1:N" + numberFormat.CurrencyDecimalDigits + "} {0})",
+                    _ => pattern
+                };
             }
-            string formattedValue = String.Format(cultureInfo, pattern, numberFormat.CurrencySymbol, value);
+            var formattedValue = string.Format(cultureInfo, pattern, numberFormat.CurrencySymbol, value);
             return formattedValue;
         }
     }

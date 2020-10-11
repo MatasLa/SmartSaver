@@ -1,4 +1,6 @@
-﻿namespace Forms
+﻿using ePiggy.forms.customcontrols;
+
+namespace ePiggy.forms
 {
     partial class FormRegister
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRegister));
             this.registerLabel = new System.Windows.Forms.Label();
             this.emailLabel = new System.Windows.Forms.Label();
             this.emailInput = new System.Windows.Forms.TextBox();
@@ -36,7 +39,7 @@
             this.passwordInput2 = new System.Windows.Forms.TextBox();
             this.passwordLabel2 = new System.Windows.Forms.Label();
             this.errorMessage = new System.Windows.Forms.Label();
-            this.registerButton = new ePOSOne.btnProduct.Button_WOC();
+            this.registerButton = new ButtonWoc();
             this.backToLogin = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
@@ -70,6 +73,7 @@
             this.emailInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailInput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.emailInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.emailInput.Location = new System.Drawing.Point(171, 141);
             this.emailInput.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -90,6 +94,7 @@
             // 
             // passwordInput1
             // 
+            this.passwordInput1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.passwordInput1.Location = new System.Drawing.Point(170, 209);
             this.passwordInput1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.passwordInput1.Name = "passwordInput1";
@@ -99,6 +104,7 @@
             // 
             // passwordInput2
             // 
+            this.passwordInput2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.passwordInput2.Location = new System.Drawing.Point(170, 272);
             this.passwordInput2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.passwordInput2.Name = "passwordInput2";
@@ -171,7 +177,7 @@
             this.AcceptButton = this.registerButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.CancelButton = this.backToLogin;
             this.ClientSize = new System.Drawing.Size(534, 461);
             this.Controls.Add(this.backToLogin);
@@ -185,6 +191,7 @@
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.registerLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormRegister";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -204,7 +211,7 @@
         private System.Windows.Forms.TextBox passwordInput2;
         private System.Windows.Forms.Label passwordLabel2;
         private System.Windows.Forms.Label errorMessage;
-        private ePOSOne.btnProduct.Button_WOC registerButton;
+        private ButtonWoc registerButton;
         private System.Windows.Forms.LinkLabel backToLogin;
     }
 }

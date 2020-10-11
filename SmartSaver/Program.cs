@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DataManager;
-using Forms;
-using Utilities;
+using ePiggy;
+using ePiggy.forms;
 
 namespace EPiggy
 {
@@ -23,8 +23,8 @@ namespace EPiggy
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var dataHandler = new Handler();
-            Application.Run(new FormMain(dataHandler));
+            var handler = new Handler();
+            Application.Run(new FormMain(handler));
             //Application.Run(new FormLogIn(dataHandler));
         }
     }
