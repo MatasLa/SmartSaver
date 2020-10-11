@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using ePiggy.forms.finances;
 using ePiggy.forms.finances.budget;
+using ePiggy.forms.finances.goals;
 
 namespace ePiggy.utilities
 {
@@ -22,14 +23,20 @@ namespace ePiggy.utilities
                 {
                     switch (activeForm)
                     {
-                        case FinanceForm financeForm when financeForm.EntryType != ((FinanceForm)childForm).EntryType:
-                            financeForm.EntryType = ((FinanceForm)childForm).EntryType;
+                        case FinanceForm form when form.EntryType != ((FinanceForm)childForm).EntryType:
+                            form.EntryType = ((FinanceForm)childForm).EntryType;
                             break;
-                        case EntryInfoForm entryInfoForm:
-                            entryInfoForm.DataEntry = ((EntryInfoForm)childForm).DataEntry;
+                        case EntryInfoForm form:
+                            form.DataEntry = ((EntryInfoForm)childForm).DataEntry;
                             break;
-                        case MultiEntryInfoForm multiEntryInfoForm:
-                            multiEntryInfoForm.Entries = ((MultiEntryInfoForm)childForm).Entries;
+                        case MultiEntryInfoForm form:
+                            form.Entries = ((MultiEntryInfoForm)childForm).Entries;
+                            break;
+                        case GoalForm form:
+                            form.Goal = ((GoalForm) childForm).Goal;
+                            break;
+                        case ExpandedGoalForm form:
+                            form.Goal = ((ExpandedGoalForm)childForm).Goal;
                             break;
                     }
 
@@ -65,9 +72,9 @@ namespace ePiggy.utilities
             activeForm = null;
         }
 
-        public static void ShowSubMenu(Control control)
+        public static void ShowOrHideControl(Control control)
         {
-            control.Visible = control.Visible == false;
+            control.Visible = !control.Visible;
         }
     }
 }

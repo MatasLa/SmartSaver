@@ -1,5 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using DataManager;
+using ePiggy.utilities;
 
 namespace ePiggy.forms.finances.goals
 {
@@ -23,7 +25,7 @@ namespace ePiggy.forms.finances.goals
         {
             InitializeComponent();
 
-            _goal = goal;
+            _goal = goal ?? throw new Exception("Given null goal");
             _handler = handler;
             _parentForm = parentForm;
 
@@ -32,7 +34,8 @@ namespace ePiggy.forms.finances.goals
 
         private void Init()
         {
-
+            labelTitle.Text = Goal.Title;
+            labelTarget.Text = NumberFormatter.FormatCurrency(Goal.Price);
         }
     }
 }

@@ -39,12 +39,12 @@ namespace ePiggy.forms
 
         private void ButtonFinances_Click(object sender, EventArgs e)
         {
-            FormChanger.ShowSubMenu(panelFinancesSubMenu);
+            FormChanger.ShowOrHideControl(panelFinancesSubMenu);
         }
 
         private void ButtonReports_Click(object sender, EventArgs e)
         {
-            FormChanger.ShowSubMenu(panelReportsSubMenu);
+            FormChanger.ShowOrHideControl(panelReportsSubMenu);
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)

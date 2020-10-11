@@ -30,25 +30,25 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelGoal1 = new System.Windows.Forms.Panel();
+            this.panelGoal0 = new System.Windows.Forms.Panel();
             this.buttonAddGoal1 = new System.Windows.Forms.Button();
-            this.panelGoal2 = new System.Windows.Forms.Panel();
+            this.panelGoal1 = new System.Windows.Forms.Panel();
             this.buttonAddGoal2 = new System.Windows.Forms.Button();
-            this.panelGoal3 = new System.Windows.Forms.Panel();
+            this.panelGoal2 = new System.Windows.Forms.Panel();
             this.buttonAddGoal3 = new System.Windows.Forms.Button();
-            this.panelGoal4 = new System.Windows.Forms.Panel();
+            this.panelGoal3 = new System.Windows.Forms.Panel();
             this.buttonAddGoal4 = new System.Windows.Forms.Button();
-            this.panelGoal5 = new System.Windows.Forms.Panel();
+            this.panelGoal4 = new System.Windows.Forms.Panel();
             this.buttonAddGoal5 = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
             this.labelPlaceholder = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.panelGoal0.SuspendLayout();
             this.panelGoal1.SuspendLayout();
             this.panelGoal2.SuspendLayout();
             this.panelGoal3.SuspendLayout();
             this.panelGoal4.SuspendLayout();
-            this.panelGoal5.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,11 +74,11 @@
             this.flowLayoutPanel2.AutoScroll = true;
             this.flowLayoutPanel2.AutoSize = true;
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.White;
+            this.flowLayoutPanel2.Controls.Add(this.panelGoal0);
             this.flowLayoutPanel2.Controls.Add(this.panelGoal1);
             this.flowLayoutPanel2.Controls.Add(this.panelGoal2);
             this.flowLayoutPanel2.Controls.Add(this.panelGoal3);
             this.flowLayoutPanel2.Controls.Add(this.panelGoal4);
-            this.flowLayoutPanel2.Controls.Add(this.panelGoal5);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(1387, 269);
@@ -87,14 +87,13 @@
             // 
             // panelGoal1
             // 
-            this.panelGoal1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelGoal1.Controls.Add(this.buttonAddGoal1);
-            this.panelGoal1.Location = new System.Drawing.Point(10, 10);
-            this.panelGoal1.Margin = new System.Windows.Forms.Padding(10);
-            this.panelGoal1.Name = "panelGoal1";
-            this.panelGoal1.Size = new System.Drawing.Size(300, 225);
-            this.panelGoal1.TabIndex = 0;
-            this.panelGoal1.Click += new System.EventHandler(this.panelGoal1_Click);
+            this.panelGoal0.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelGoal0.Controls.Add(this.buttonAddGoal1);
+            this.panelGoal0.Location = new System.Drawing.Point(10, 10);
+            this.panelGoal0.Margin = new System.Windows.Forms.Padding(10);
+            this.panelGoal0.Name = "panelGoal0";
+            this.panelGoal0.Size = new System.Drawing.Size(300, 225);
+            this.panelGoal0.TabIndex = 0;
             // 
             // buttonAddGoal1
             // 
@@ -109,13 +108,13 @@
             // 
             // panelGoal2
             // 
-            this.panelGoal2.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelGoal2.Controls.Add(this.buttonAddGoal2);
-            this.panelGoal2.Location = new System.Drawing.Point(330, 10);
-            this.panelGoal2.Margin = new System.Windows.Forms.Padding(10);
-            this.panelGoal2.Name = "panelGoal2";
-            this.panelGoal2.Size = new System.Drawing.Size(300, 225);
-            this.panelGoal2.TabIndex = 1;
+            this.panelGoal1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelGoal1.Controls.Add(this.buttonAddGoal2);
+            this.panelGoal1.Location = new System.Drawing.Point(330, 10);
+            this.panelGoal1.Margin = new System.Windows.Forms.Padding(10);
+            this.panelGoal1.Name = "panelGoal1";
+            this.panelGoal1.Size = new System.Drawing.Size(300, 225);
+            this.panelGoal1.TabIndex = 1;
             // 
             // buttonAddGoal2
             // 
@@ -130,13 +129,13 @@
             // 
             // panelGoal3
             // 
-            this.panelGoal3.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelGoal3.Controls.Add(this.buttonAddGoal3);
-            this.panelGoal3.Location = new System.Drawing.Point(650, 10);
-            this.panelGoal3.Margin = new System.Windows.Forms.Padding(10);
-            this.panelGoal3.Name = "panelGoal3";
-            this.panelGoal3.Size = new System.Drawing.Size(300, 225);
-            this.panelGoal3.TabIndex = 2;
+            this.panelGoal2.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelGoal2.Controls.Add(this.buttonAddGoal3);
+            this.panelGoal2.Location = new System.Drawing.Point(650, 10);
+            this.panelGoal2.Margin = new System.Windows.Forms.Padding(10);
+            this.panelGoal2.Name = "panelGoal2";
+            this.panelGoal2.Size = new System.Drawing.Size(300, 225);
+            this.panelGoal2.TabIndex = 2;
             // 
             // buttonAddGoal3
             // 
@@ -151,13 +150,13 @@
             // 
             // panelGoal4
             // 
-            this.panelGoal4.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelGoal4.Controls.Add(this.buttonAddGoal4);
-            this.panelGoal4.Location = new System.Drawing.Point(970, 10);
-            this.panelGoal4.Margin = new System.Windows.Forms.Padding(10);
-            this.panelGoal4.Name = "panelGoal4";
-            this.panelGoal4.Size = new System.Drawing.Size(300, 225);
-            this.panelGoal4.TabIndex = 3;
+            this.panelGoal3.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelGoal3.Controls.Add(this.buttonAddGoal4);
+            this.panelGoal3.Location = new System.Drawing.Point(970, 10);
+            this.panelGoal3.Margin = new System.Windows.Forms.Padding(10);
+            this.panelGoal3.Name = "panelGoal3";
+            this.panelGoal3.Size = new System.Drawing.Size(300, 225);
+            this.panelGoal3.TabIndex = 3;
             // 
             // buttonAddGoal4
             // 
@@ -172,13 +171,13 @@
             // 
             // panelGoal5
             // 
-            this.panelGoal5.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelGoal5.Controls.Add(this.buttonAddGoal5);
-            this.panelGoal5.Location = new System.Drawing.Point(1290, 10);
-            this.panelGoal5.Margin = new System.Windows.Forms.Padding(10);
-            this.panelGoal5.Name = "panelGoal5";
-            this.panelGoal5.Size = new System.Drawing.Size(300, 225);
-            this.panelGoal5.TabIndex = 4;
+            this.panelGoal4.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelGoal4.Controls.Add(this.buttonAddGoal5);
+            this.panelGoal4.Location = new System.Drawing.Point(1290, 10);
+            this.panelGoal4.Margin = new System.Windows.Forms.Padding(10);
+            this.panelGoal4.Name = "panelGoal4";
+            this.panelGoal4.Size = new System.Drawing.Size(300, 225);
+            this.panelGoal4.TabIndex = 4;
             // 
             // buttonAddGoal5
             // 
@@ -206,7 +205,7 @@
             this.labelPlaceholder.AutoSize = true;
             this.labelPlaceholder.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelPlaceholder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelPlaceholder.Location = new System.Drawing.Point(404, 297);
+            this.labelPlaceholder.Location = new System.Drawing.Point(548, 298);
             this.labelPlaceholder.Name = "labelPlaceholder";
             this.labelPlaceholder.Size = new System.Drawing.Size(348, 52);
             this.labelPlaceholder.TabIndex = 0;
@@ -229,11 +228,11 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
+            this.panelGoal0.ResumeLayout(false);
             this.panelGoal1.ResumeLayout(false);
             this.panelGoal2.ResumeLayout(false);
             this.panelGoal3.ResumeLayout(false);
             this.panelGoal4.ResumeLayout(false);
-            this.panelGoal5.ResumeLayout(false);
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             this.ResumeLayout(false);
@@ -243,11 +242,11 @@
         #endregion
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Panel panelGoal0;
         private System.Windows.Forms.Panel panelGoal1;
         private System.Windows.Forms.Panel panelGoal2;
         private System.Windows.Forms.Panel panelGoal3;
         private System.Windows.Forms.Panel panelGoal4;
-        private System.Windows.Forms.Panel panelGoal5;
         private System.Windows.Forms.Button buttonAddGoal1;
         private System.Windows.Forms.Button buttonAddGoal2;
         private System.Windows.Forms.Button buttonAddGoal3;

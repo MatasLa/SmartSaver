@@ -8,7 +8,6 @@ using ePiggy.utilities;
 namespace ePiggy.forms.finances.budget
 {
     
-
     public partial class EntryForm : Form
     {
         public enum Type
@@ -110,7 +109,6 @@ namespace ePiggy.forms.finances.budget
         {
             TakeInput();
 
-            ///// WIP, change handler time as well
             _handler.Time = monthCalendar.SelectionStart;
 
             DialogResult = DialogResult.OK;
@@ -227,6 +225,7 @@ namespace ePiggy.forms.finances.budget
             Size = _expandedSize;
             monthCalendar.Show();
         }
+
         #endregion
 
         #region Errors

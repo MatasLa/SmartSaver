@@ -7,9 +7,13 @@ namespace ePiggy.forms.finances.goals
 {
     public partial class GoalForm : Form
     {
-        private Handler _handler;
+        private readonly Handler _handler;
         private Goal _goal;
         private readonly GoalsForm _parentForm;
+        
+        private decimal _target;
+        private decimal _saved;
+        private int _progress;
 
         public Goal Goal
         {
@@ -24,35 +28,55 @@ namespace ePiggy.forms.finances.goals
         public GoalForm(Goal goal, Handler handler, GoalsForm parentForm)
         {
             InitializeComponent();
-            Goal = goal;
-            _handler = handler;
             _parentForm = parentForm;
+            _handler = handler;
+            Goal = goal ?? throw new Exception("Given null goal");
+
+
             Init();
         }
 
         private void Init()
         {
-            var random = new Random();
-            var value = random.Next(0, 100);
-            progressBar.Value = value;
-            //labelProgress.Text = 
+            _target = Goal.Price;
+            _saved = _handler.DataCalculations.CheckBalance();
+            _progress = CalculateProgress(_saved, _target);
 
-            var temp = (decimal) (random.NextDouble() + 0.1) * 10;
-            var current = value * temp;
-            var total = 100 * temp;
-
+            labelTitle.Text = Goal.Title;
+            labelDate.Text = @"Deadline: " + DateTime.Today.ToString("d");
             labelProgress.Text =
-                NumberFormatter.FormatCurrency(current) + " of " + NumberFormatter.FormatCurrency(total);
-
-
-
+                NumberFormatter.FormatCurrency(_saved) + @" of " + NumberFormatter.FormatCurrency(_target);
+            DisplayProgressBar();
         }
 
 
+        private void DisplayProgressBar()
+        {
+           progressBar.Value = _progress >= 100 ? progressBar.Maximum : _progress;
+        }
+
+        #region Calculation to be moved elsewhere
+
+        private static int CalculateProgress(decimal saved, decimal target)
+        {
+            return (int)(saved * 100 / target);
+        }
+
+        #endregion
+
+        #region Click Handling
+
+        private void ButtonRemoveGoal_Click(object sender, EventArgs e)
+        {
+            _parentForm.RemoveGoal(Goal);
+            _parentForm.UpdateDisplay();
+        }
 
         private void GoalForm_Click(object sender, EventArgs e)
         {
             _parentForm.DisplayExpandedGoal(_goal);
         }
+
+        #endregion
     }
 }
