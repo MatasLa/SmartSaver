@@ -156,6 +156,38 @@ namespace DataManager
         }
 
 		/*Methods that allows to edit different parts of already existing entries*/
+        public bool EditGoal(int id, string title, decimal value)
+        {
+            var db = new DatabaseContext();
+            var temp = db.Goals.FirstOrDefault(x => x.Id == id);
+            if (temp != null)
+            {
+                goal.Title = title;
+                goal.Price = value;
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+		}
+
+        public bool EditGoalPlaceInQueue(int id, int placeInQueue)
+        {
+            var db = new DatabaseContext();
+            var temp = db.Goals.FirstOrDefault(x => x.Id == id);
+            if (temp != null)
+            {
+                goal.PlaceInQueue = placeInQueue;
+                db.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+		}
 		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
 		{
 
