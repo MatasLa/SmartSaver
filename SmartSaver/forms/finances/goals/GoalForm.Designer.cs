@@ -1,4 +1,4 @@
-﻿namespace ePiggy.forms.finances
+﻿namespace ePiggy.forms.finances.goals
 {
     partial class GoalForm
     {
@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.labelProgress = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -46,7 +47,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
-            this.tableLayoutPanel1.Controls.Add(this.progressBar1, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.progressBar, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelProgress, 1, 8);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -67,12 +69,25 @@
             // 
             // progressBar1
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.progressBar1, 8);
-            this.progressBar1.Location = new System.Drawing.Point(32, 135);
-            this.progressBar1.Name = "progressBar1";
-            this.tableLayoutPanel1.SetRowSpan(this.progressBar1, 2);
-            this.progressBar1.Size = new System.Drawing.Size(229, 38);
-            this.progressBar1.TabIndex = 0;
+            this.tableLayoutPanel1.SetColumnSpan(this.progressBar, 8);
+            this.progressBar.Location = new System.Drawing.Point(32, 135);
+            this.progressBar.Name = "progressBar";
+            this.tableLayoutPanel1.SetRowSpan(this.progressBar, 2);
+            this.progressBar.Size = new System.Drawing.Size(229, 38);
+            this.progressBar.TabIndex = 0;
+            // 
+            // labelProgress
+            // 
+            this.labelProgress.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.SetColumnSpan(this.labelProgress, 8);
+            this.labelProgress.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelProgress.Location = new System.Drawing.Point(32, 176);
+            this.labelProgress.Name = "labelProgress";
+            this.tableLayoutPanel1.SetRowSpan(this.labelProgress, 2);
+            this.labelProgress.Size = new System.Drawing.Size(229, 49);
+            this.labelProgress.TabIndex = 1;
+            this.labelProgress.Text = "label1";
+            this.labelProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // GoalForm
             // 
@@ -85,7 +100,6 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "GoalForm";
             this.Text = "GoalForm";
-            this.Click += new System.EventHandler(this.GoalForm_Click);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -94,6 +108,7 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Label labelProgress;
     }
 }

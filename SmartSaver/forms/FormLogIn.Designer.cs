@@ -1,4 +1,6 @@
-﻿namespace ePiggy.forms
+﻿using ePiggy.forms.customcontrols;
+
+namespace ePiggy.forms
 {
     partial class FormLogIn
     {

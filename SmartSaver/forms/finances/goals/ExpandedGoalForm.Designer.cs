@@ -1,6 +1,6 @@
-﻿namespace ePiggy.forms.finances
+﻿namespace ePiggy.forms.finances.goals
 {
-    partial class GoalDialogForm
+    partial class ExpandedGoalForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // AddGoalForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 450);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "AddGoalForm";
-            this.Text = "AddGoalForm";
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "ExpandedGoalForm";
         }
 
         #endregion

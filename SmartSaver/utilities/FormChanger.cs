@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using ePiggy.forms.finances;
+using ePiggy.forms.finances.budget;
 
 namespace ePiggy.utilities
 {

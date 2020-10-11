@@ -2,7 +2,7 @@
 using DataManager;
 using ePiggy.utilities;
 
-namespace ePiggy.forms.finances
+namespace ePiggy.forms.finances.budget
 {
     public partial class EntryInfoForm : Form
     {

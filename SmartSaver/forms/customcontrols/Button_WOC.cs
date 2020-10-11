@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace ePiggy.forms
+namespace ePiggy.forms.customcontrols
 {
     public class ButtonWoc : Button
     {

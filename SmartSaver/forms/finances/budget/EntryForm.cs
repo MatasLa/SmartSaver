@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using DataManager;
 using ePiggy.utilities;
 
-namespace ePiggy.forms.finances
+namespace ePiggy.forms.finances.budget
 {
     
 

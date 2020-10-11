@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using DataManager;
 using ePiggy.utilities;
 
-namespace ePiggy.forms.finances
+namespace ePiggy.forms.finances.budget
 {
     public partial class MultiEntryInfoForm : Form
     {
@@ -35,7 +35,7 @@ namespace ePiggy.forms.finances
         {
             //WIP
             var value = Entries.Sum(dataEntry => dataEntry.Amount);
-            labelTotalValue.Text = NumberFormatter.FormatCurrency(value) + Entries.Count.ToString();
+            labelTotalValue.Text = NumberFormatter.FormatCurrency(value) + Entries.Count;
             //labelTitle.Text = DataEntry.Title;
             //labelValueText.Text = NumberFormatter.FormatCurrency(DataEntry.Amount);
         }

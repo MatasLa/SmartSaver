@@ -1,4 +1,4 @@
-﻿namespace ePiggy.forms.finances
+﻿namespace ePiggy.forms.finances.budget
 {
     partial class FinanceForm
     {
