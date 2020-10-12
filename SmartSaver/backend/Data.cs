@@ -68,12 +68,11 @@ namespace DataManager
             var db = new DatabaseContext();
             var income = new Incomes { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
                 db.Add(income);
-                int id = income.Id;
+                db.SaveChanges();
+			    int id = income.Id;
                 DataEntry newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
                 Income.Add(newIncome);
-                db.SaveChanges();
-
-		}
+        }
 		public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var dateUse = date;
@@ -83,12 +82,13 @@ namespace DataManager
             {
                 var income = new Incomes { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
                 db.Add(income);
-                int id = income.Id;
+                db.SaveChanges();
+				int id = income.Id;
                 DataEntry newIncome = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
                 Income.Add(newIncome);
                 dateUse = dateUse.AddMonths(1);
             }
-            db.SaveChanges();
+            
 
         }
 
@@ -112,13 +112,13 @@ public void AddExpense(int userid, decimal value, string title, DateTime date, b
             {
                 var expense = new Expenses { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
                 db.Add(expense);
-                int id = expense.Id;
+                db.SaveChanges();
+				int id = expense.Id;
                 DataEntry newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
                 Expenses.Add(newExpense);
                 dateUse.AddMonths(1);
             }
-            db.SaveChanges();
-		}
+        }
 
 		public void RemoveIncome(int id)
         {
