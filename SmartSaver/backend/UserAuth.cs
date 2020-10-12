@@ -19,7 +19,7 @@ namespace DataBases
                 var userInfo = db.Users.Where(a => a.Email == email).FirstOrDefault(); //Find if email is in db
                 if (userInfo == null)
                 {
-                    var salt = HashingProcessor.CreateSalt(10);
+                    var salt = HashingProcessor.CreateSalt(20);
                     var passwordHash = HashingProcessor.GenerateHash(pass, salt);
 
                     var user = new User { Email = email, Password = passwordHash, Salt = salt };
