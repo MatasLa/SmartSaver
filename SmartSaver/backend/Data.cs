@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using DataBases;
+using ePiggy;
 using ePiggy.utilities;
 
 namespace DataManager
@@ -432,12 +433,14 @@ public void AddExpense(int userid, decimal value, string title, DateTime date, b
 		}
         public void ReadIncomeFromDb()
         {
-            using (var context = new DatabaseContext())
+            Debug.WriteLine("ReadIncomeFromDB");
+			using (var context = new DatabaseContext())
             {
                 var incomes = context.Incomes; // define query
-                foreach (var income in incomes) // query executed and data obtained from database
+                foreach (var income in incomes.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
                 {
-                    DataEntry newIncome = new DataEntry(income.Id, income.UserId, income.Amount, income.Title, income.Date, income.IsMonthly, income.Importance);
+                    Debug.WriteLine("ReadIncomeFromDB555");
+					DataEntry newIncome = new DataEntry(income.Id, income.UserId, income.Amount, income.Title, income.Date, income.IsMonthly, income.Importance);
                     Income.Add(newIncome);
                 }
             }
@@ -447,7 +450,7 @@ public void AddExpense(int userid, decimal value, string title, DateTime date, b
             using (var context = new DatabaseContext())
             {
                 var expenses = context.Expenses; // define query
-                foreach (var expense in expenses) // query executed and data obtained from database
+                foreach (var expense in expenses.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
                 {
                     DataEntry newExpense = new DataEntry(expense.Id, expense.UserId, expense.Amount, expense.Title, expense.Date, expense.IsMonthly, expense.Importance);
                     Expenses.Add(newExpense);

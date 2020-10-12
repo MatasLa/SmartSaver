@@ -15,8 +15,8 @@ namespace DataBases
         {
             using (var db = new DatabaseContext())
             {
-                var data = db.Users.Where(a => a.Email == email).FirstOrDefault(); //Find if email is in db
-                if (data == null)
+                var userInfo = db.Users.Where(a => a.Email == email).FirstOrDefault(); //Find if email is in db
+                if (userInfo == null)
                 {
                     var user = new User { Email = email, Password = pass };
                     db.Add(user);
@@ -36,11 +36,11 @@ namespace DataBases
         {
             using (var db = new DatabaseContext())
             {
-                var data = db.Users.Where(a => a.Email == email && a.Password == pass).FirstOrDefault(); //Find user and pass in db and check if matches
+                var userInfo = db.Users.Where(a => a.Email == email && a.Password == pass).FirstOrDefault(); //Find user and pass in db and check if matches
 
-                if (data != null)
+                if (userInfo != null)
                 {
-                    Handler.UserId = data.Id;
+                    Handler.UserId = userInfo.Id;
                     return true;
                 }
                 else

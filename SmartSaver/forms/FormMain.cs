@@ -20,6 +20,10 @@ namespace ePiggy.forms
             InitializeComponent();
             CustomizeDesign();
             Handler = handler;
+            Handler.Data.Income.Clear();
+            Handler.Data.Expenses.Clear();
+            Handler.Data.ReadExpensesFromDb();
+            Handler.Data.ReadIncomeFromDb();
         }
 
         private void CustomizeDesign()
