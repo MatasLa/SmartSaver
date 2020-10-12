@@ -23,7 +23,7 @@ namespace ePiggy.forms.finances.goals
             InitializeComponent();
             _handler = handler;
 
-            //_goals = _handler.Goals;
+            //_goals = _handler.GoalsList;
             _goals = new List<Goal>();
 
             Init();

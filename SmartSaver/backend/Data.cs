@@ -17,60 +17,82 @@ namespace DataManager
 		/*Lists that store income and expenses*/
 		public List<DataEntry> Income { get; } = new List<DataEntry>();
 		public List<DataEntry> Expenses { get; } = new List<DataEntry>();
-		public List<Goal> Goals { get; } = new List<Goal>();
+		public List<Goal> GoalsList { get; } = new List<Goal>();
 
 		/*Methods that creates new instance of class and adds to List*/
 
 		/*NEW*/
-        public bool AddGoal(string title, decimal value, int placeInQueue)//manual
+        public bool AddGoal(int userid, string title, decimal value, int placeInQueue)//manual
         {
-            if (Goals.Count >= 10) return false;//if 10 entries already in, does not allow to add
+            if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
             var db = new DatabaseContext();
-            var goal = new Goal(title, value, placeInQueue);
+            var goal = new Goals {UserId = userid, Title = title, Price = value, PlaceInQueue = placeInQueue};
             db.Add(goal);
             db.SaveChanges();
             int id = goal.Id;
-            goal.ID = id;
-            Goals.Add(goal);
+			var newGoal = new Goal(title, value, placeInQueue);
+            newGoal.ID = id;
+            GoalsList.Add(newGoal);
             return true;
         }
 
 		/*NEW*/
-        public bool AddGoal(string title, int placeInQueue)//parsing from internet
+        public bool AddGoal(int userid, string title, int placeInQueue)//parsing from internet
         {
-            if (Goals.Count >= 10) return false;//if 10 entries already in, does not allow to add
+            if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
             var db = new DatabaseContext();
-            var goal = new Goal(title, placeInQueue);
+            var goal = new Goals { UserId = userid, Title = title, Price = 0, PlaceInQueue = placeInQueue };
 			db.Add(goal);
-            db.SaveChanges();
             int id = goal.Id;
-            goal.ID = id;
-            Goals.Add(goal);
-            return true;
+            var newGoal = new Goal(title, placeInQueue);
+            newGoal.ID = id;
+            var price = newGoal.Price;
+            goal.Price = price;
+            GoalsList.Add(newGoal);
+            db.SaveChanges();
+			return true;
         }
-
+		/*NEW*/
         public void RemoveGoal(int id)
         {
             var db = new DatabaseContext();
             var index = db.Goals.FirstOrDefault(x => x.Id == id);
-            db.Incomes.Remove(index);
+            db.Goals.Remove(index);
             db.SaveChanges();
-            var goal = Goals.FirstOrDefault(x => x.ID == id);
-            Goals.Remove(goal);
+            var goal = GoalsList.FirstOrDefault(x => x.ID == id);
+            GoalsList.Remove(goal);
         }
 
         public void AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var db = new DatabaseContext();
             var income = new Incomes { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
-            db.Add(income);
+                db.Add(income);
+                int id = income.Id;
+                DataEntry newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
+                Income.Add(newIncome);
+                db.SaveChanges();
+
+		}
+		public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        {
+            var dateUse = date;
+            var db = new DatabaseContext();
+            var rotations = isMonthly ? 12 : 1;
+            for (int i = 0; i<rotations; i++)
+            {
+                var income = new Incomes { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
+                db.Add(income);
+                int id = income.Id;
+                DataEntry newIncome = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
+                Income.Add(newIncome);
+                dateUse = dateUse.AddMonths(1);
+            }
             db.SaveChanges();
-            int id = income.Id;
-            DataEntry newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
-            Income.Add(newIncome);
+
         }
 
-        public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var db = new DatabaseContext();
             var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
@@ -81,7 +103,24 @@ namespace DataManager
             Expenses.Add(newExpense);
         }
 
-        public void RemoveIncome(int id)
+        public void AddMonthlyExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        {
+            var db = new DatabaseContext();
+            var dateUse = date;
+            var rotations = isMonthly ? 12 : 1;
+            for (int i = 0; i < rotations; i++)
+            {
+                var expense = new Expenses { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
+                db.Add(expense);
+                int id = expense.Id;
+                DataEntry newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
+                Expenses.Add(newExpense);
+                dateUse.AddMonths(1);
+            }
+            db.SaveChanges();
+		}
+
+		public void RemoveIncome(int id)
         {
             var db = new DatabaseContext();
             var index = db.Incomes.FirstOrDefault(x => x.Id == id);
@@ -156,14 +195,15 @@ namespace DataManager
         }
 
 		/*Methods that allows to edit different parts of already existing entries*/
+		/*NEW*/
         public bool EditGoal(int id, string title, decimal value)
         {
             var db = new DatabaseContext();
             var temp = db.Goals.FirstOrDefault(x => x.Id == id);
             if (temp != null)
             {
-                goal.Title = title;
-                goal.Price = value;
+                temp.Title = title;
+                temp.Price = value;
                 db.SaveChanges();
                 return true;
             }
@@ -173,13 +213,14 @@ namespace DataManager
             }
 		}
 
+		/*NEW*/
         public bool EditGoalPlaceInQueue(int id, int placeInQueue)
         {
             var db = new DatabaseContext();
             var temp = db.Goals.FirstOrDefault(x => x.Id == id);
             if (temp != null)
             {
-                goal.PlaceInQueue = placeInQueue;
+                temp.PlaceInQueue = placeInQueue;
                 db.SaveChanges();
                 return true;
             }

@@ -263,7 +263,7 @@
             this.buttonGoals.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.buttonGoals.Size = new System.Drawing.Size(250, 40);
             this.buttonGoals.TabIndex = 0;
-            this.buttonGoals.Text = "Goals";
+            this.buttonGoals.Text = "GoalsList";
             this.buttonGoals.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonGoals.UseVisualStyleBackColor = false;
             this.buttonGoals.Click += new System.EventHandler(this.ButtonGoals_Click);
