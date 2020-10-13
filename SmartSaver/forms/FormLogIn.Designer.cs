@@ -1,4 +1,6 @@
-﻿namespace Forms
+﻿using ePiggy.forms.customcontrols;
+
+namespace ePiggy.forms
 {
     partial class FormLogIn
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogIn));
             this.logoPic = new System.Windows.Forms.PictureBox();
             this.signInText = new System.Windows.Forms.Label();
             this.emailLabel = new System.Windows.Forms.Label();
@@ -35,7 +38,7 @@
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordInput = new System.Windows.Forms.TextBox();
             this.forgotPassLink = new System.Windows.Forms.LinkLabel();
-            this.loginButton = new ePOSOne.btnProduct.Button_WOC();
+            this.loginButton = new ButtonWoc();
             this.errorMessage = new System.Windows.Forms.Label();
             this.noAccLable = new System.Windows.Forms.Label();
             this.noAccLink = new System.Windows.Forms.LinkLabel();
@@ -45,17 +48,20 @@
             // 
             // logoPic
             // 
+            this.logoPic.BackColor = System.Drawing.Color.Transparent;
+            this.logoPic.Image = ((System.Drawing.Image)(resources.GetObject("logoPic.Image")));
             this.logoPic.InitialImage = null;
-            this.logoPic.Location = new System.Drawing.Point(145, 19);
+            this.logoPic.Location = new System.Drawing.Point(231, 12);
             this.logoPic.Name = "logoPic";
-            this.logoPic.Size = new System.Drawing.Size(268, 69);
+            this.logoPic.Size = new System.Drawing.Size(69, 69);
+            this.logoPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logoPic.TabIndex = 10;
             this.logoPic.TabStop = false;
             // 
             // signInText
             // 
-            this.signInText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.signInText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.signInText.AutoSize = true;
             this.signInText.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -68,8 +74,8 @@
             // 
             // emailLabel
             // 
-            this.emailLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.emailLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.emailLabel.AutoSize = true;
             this.emailLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -82,9 +88,10 @@
             // 
             // emailInput
             // 
-            this.emailInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.emailInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.emailInput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.emailInput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.emailInput.Location = new System.Drawing.Point(171, 151);
             this.emailInput.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -105,6 +112,7 @@
             // 
             // passwordInput
             // 
+            this.passwordInput.BackColor = System.Drawing.Color.WhiteSmoke;
             this.passwordInput.Location = new System.Drawing.Point(171, 215);
             this.passwordInput.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.passwordInput.Name = "passwordInput";
@@ -204,11 +212,11 @@
             this.AcceptButton = this.loginButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Highlight;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(534, 461);
+            this.Controls.Add(this.logoPic);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.errorMessage);
-            this.Controls.Add(this.logoPic);
             this.Controls.Add(this.signInText);
             this.Controls.Add(this.quoteText);
             this.Controls.Add(this.noAccLink);
@@ -219,6 +227,7 @@
             this.Controls.Add(this.passwordInput);
             this.Controls.Add(this.emailInput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "FormLogIn";
@@ -243,6 +252,6 @@
         private System.Windows.Forms.LinkLabel noAccLink;
         private System.Windows.Forms.Label noAccLable;
         private System.Windows.Forms.Label errorMessage;
-        private ePOSOne.btnProduct.Button_WOC loginButton;
+        private ButtonWoc loginButton;
     }
 }

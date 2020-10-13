@@ -1,10 +1,10 @@
-﻿using EPiggy;
+﻿using DataManager;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
-using DataBases;
 
-namespace DataManager
+namespace ePiggy
 {
     public class Handler
     {
@@ -20,11 +20,14 @@ namespace DataManager
 
         public DataCalculations DataCalculations { get; }
 
+        public static HttpClient HttpClient = new HttpClient();
         public static int UserId { get; set; }
+
 
         public Handler()
         {
             Time = DateTime.Now;
+            HttpClient = new HttpClient();
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
@@ -35,7 +38,6 @@ namespace DataManager
             //DataJSON.ReadIncomeFromFile();
             //DataJSON.ReadExpensesFromFile();
         }
-
-
+        
     }
 }

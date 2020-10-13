@@ -1,5 +1,4 @@
-﻿using Forms;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection.Metadata;
 
 namespace DataManager
@@ -14,7 +13,7 @@ namespace DataManager
         
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
-        public decimal CheckBalance()
+        public decimal CheckBalance()/*Checks even future data*/
         {
             decimal sum = 0;
             foreach (DataEntry data in data.Income)
@@ -28,7 +27,7 @@ namespace DataManager
             return sum;
         }
 
-        public bool IsBalancePositive()
+        public bool IsBalancePositive()/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
         {
             if (CheckBalance() >= 0)
             {
@@ -40,18 +39,18 @@ namespace DataManager
             }
         }
         //Code below is still very much WIP
-        public bool CheckGoal()
+        public bool CheckGoal(Goal goal)
         {
             if (IsBalancePositive())
             {
-                Goal goal = new Goal();
+               // Goal goal = new Goal();
                 if((CheckBalance() - goal.Price) >= 0)
                 {
                     return true;    //can already buy this month
                 }
                 else
                 {
-                    return SavingMoney(); //needs saving
+                    return SavingMoney(goal); //needs saving
                 }
             }
             else
@@ -60,10 +59,10 @@ namespace DataManager
             }
         }
         
-        private bool SavingMoney()
+        private bool SavingMoney(Goal goal)
         {
             decimal savedAmount = 0;
-            Goal goal = new Goal();
+            //Goal goal = new Goal();
             decimal neededAmount = (goal.Price - CheckBalance());
             
             while ((neededAmount - savedAmount) > 0) //while(can't afford goal)

@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace ePiggy.forms
 {
     partial class FormMain
     {
@@ -183,7 +183,7 @@
             this.buttonIncomevExpenses.Text = "Income v Expenses";
             this.buttonIncomevExpenses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonIncomevExpenses.UseVisualStyleBackColor = false;
-            this.buttonIncomevExpenses.Click += new System.EventHandler(this.ButtonIncomevExpenses_Click);
+            this.buttonIncomevExpenses.Click += new System.EventHandler(this.ButtonIncomeVExpenses_Click);
             // 
             // buttonNetWorth
             // 
@@ -263,7 +263,7 @@
             this.buttonGoals.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.buttonGoals.Size = new System.Drawing.Size(250, 40);
             this.buttonGoals.TabIndex = 0;
-            this.buttonGoals.Text = "Goals";
+            this.buttonGoals.Text = "GoalsList";
             this.buttonGoals.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonGoals.UseVisualStyleBackColor = false;
             this.buttonGoals.Click += new System.EventHandler(this.ButtonGoals_Click);
@@ -376,6 +376,7 @@
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ePiggy";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SaveOnClose);
             this.panelSideMenu.ResumeLayout(false);
             this.panelReportsSubMenu.ResumeLayout(false);
             this.panelFinancesSubMenu.ResumeLayout(false);

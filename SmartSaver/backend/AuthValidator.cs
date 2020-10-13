@@ -1,7 +1,7 @@
-﻿using Forms;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using ePiggy.forms;
 
 namespace DataManager
 {
@@ -21,13 +21,20 @@ namespace DataManager
             return true;
         }
 
-        public static bool IsValidPassword(FormRegister form, string password, string confirmPass)
+        private static bool IsValidPassword(FormRegister form, string password, string confirmPass)
         {
             if (password.Length < 8)
             {
                 form.ChangeErrorText(1);
                 return false;
             }
+
+            if (!IsPasswordComplex(password))
+            {
+                form.ChangeErrorText(3);
+                return false;
+            }
+
             if (!password.Equals(confirmPass))
             {
                 form.ChangeErrorText(2);
@@ -36,7 +43,7 @@ namespace DataManager
             return true;
         }
 
-        public static bool IsValidEmail(string email)
+        private static bool IsValidEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 return false;
@@ -78,6 +85,36 @@ namespace DataManager
             {
                 return false;
             }
+        }
+
+        private static bool IsPasswordComplex(string pass)
+        {
+            //var letters = 0;
+            var digits = 0;
+            var uppers = 0;
+            var symbols = 0;
+            foreach (var ch in pass)
+            {
+                /* if (char.IsLetter(ch))
+                 {
+                     letters++;
+                     if (char.IsUpper(ch)) uppers++;
+                 }*/
+                if(char.IsUpper(ch)) uppers++;
+
+                if (char.IsDigit(ch)) digits++;
+
+                if (char.IsSymbol(ch))
+                {
+                    symbols++;
+                }else if (char.IsPunctuation(ch)) symbols++;
+
+            }
+
+            if (uppers < 1) return false;
+            if (digits < 1) return false;
+            if (symbols < 1) return false;
+            return true;
         }
     }
 }

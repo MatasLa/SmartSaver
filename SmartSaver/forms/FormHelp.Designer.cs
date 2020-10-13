@@ -1,4 +1,4 @@
-﻿namespace Forms
+﻿namespace ePiggy.forms
 {
     partial class FormHelp
     {
