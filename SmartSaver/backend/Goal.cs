@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ePiggy.utilities;
 
 namespace DataManager
 {
@@ -62,15 +63,14 @@ namespace DataManager
             {
                 Task.Run(() => InternetParser.GetHTMLAsync(itemName)).Wait();
 
-                System.IO.StreamReader file = new System.IO.StreamReader("priceInfo.txt");
-                string line;
+                var file = new System.IO.StreamReader("priceInfo.txt");
                 Title = file.ReadLine();
                 var pricestr = file.ReadLine();
-                var Price = Convert.ToDouble(pricestr, System.Globalization.CultureInfo.InvariantCulture);
+                Price = Convert.ToDecimal(pricestr, System.Globalization.CultureInfo.InvariantCulture);
                 file.Close();
             }catch(Exception e)
             {
-
+                ExceptionHandler.Log(e.ToString());
             }
         }
 
