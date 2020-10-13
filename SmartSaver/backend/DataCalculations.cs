@@ -77,18 +77,18 @@ namespace DataManager
             {   //todo: improve saving
                 foreach (DataEntry data in data.Income)
                 {
-                    savedAmount += SwitchCalculation(data, savedAmount, "Income");
+                    savedAmount += SwitchCalculation(data, savedAmount, EntryType.Income);
                 }
                 foreach (DataEntry data in data.Expenses)
                 {
-                    savedAmount += SwitchCalculation(data, savedAmount, "Expenses");
+                    savedAmount += SwitchCalculation(data, savedAmount, EntryType.Expense);
                 }
 
             }
             return true; // after having saved enough
         }
 
-        private decimal SwitchCalculation(DataEntry data, decimal savedAmount, string moneyType)
+        private decimal SwitchCalculation(DataEntry data, decimal savedAmount, EntryType entryType)
         {
             switch (data.Importance)
             {
@@ -96,16 +96,16 @@ namespace DataManager
                     return savedAmount; //importance of necessary - unchangable income
 
                 case (int)Importance.High:
-                    return ImportanceCalculation(data, savedAmount, 1M, moneyType);                    
+                    return ImportanceCalculation(data, savedAmount, 1M, entryType);                    
 
                 case (int)Importance.Medium:
-                    return ImportanceCalculation(data, savedAmount, 2M, moneyType);
+                    return ImportanceCalculation(data, savedAmount, 2M, entryType);
 
                 case (int)Importance.Low:
-                    return ImportanceCalculation(data, savedAmount, 3M, moneyType);                 
+                    return ImportanceCalculation(data, savedAmount, 3M, entryType);                 
 
                 case (int)Importance.Unnecesary:
-                    return ImportanceCalculation(data, savedAmount, 4M, moneyType);
+                    return ImportanceCalculation(data, savedAmount, 4M, entryType);
 
                 default:
                     return savedAmount;
@@ -113,16 +113,16 @@ namespace DataManager
             }
         }
         
-        private decimal ImportanceCalculation(DataEntry data, decimal savedAmount, decimal percentage, string moneyType)
+        private decimal ImportanceCalculation(DataEntry data, decimal savedAmount, decimal percentage, EntryType entryType)
         {
             if (SavingChoice == "Minimal")
             {
                 savedAmount += (data.Amount * (0.1M * percentage));
-                if(moneyType == "Income")
+                if(entryType == EntryType.Income)
                 {
                     AddToIncomeOfferList(data.ID, data.Amount * (0.1M * percentage));
                 }
-                else if(moneyType == "Expenses")
+                else if(entryType == EntryType.Expense)
                 {
                     AddToExpensesOfferList(data.ID, data.Amount * (0.1M * percentage));
                 }
@@ -153,11 +153,11 @@ namespace DataManager
                 }
 
                 savedAmount += (data.Amount * temp);
-                if (moneyType == "Income")
+                if (entryType == EntryType.Income)
                 {
                     AddToIncomeOfferList(data.ID, data.Amount * temp);
                 }
-                else if (moneyType == "Expenses")
+                else if (entryType == EntryType.Expense)
                 {
                     AddToExpensesOfferList(data.ID, data.Amount * temp);
                 }
@@ -167,11 +167,11 @@ namespace DataManager
             else
             {
                 savedAmount += (data.Amount * (0.25M * percentage));
-                if(moneyType == "Income")
+                if(entryType == EntryType.Income)
                 {
                     AddToIncomeOfferList(data.ID, data.Amount * (0.25M * percentage));
                 }
-                else if(moneyType == "Expenses")
+                else if(entryType == EntryType.Expense)
                 {
                     AddToExpensesOfferList(data.ID, data.Amount * (0.25M * percentage));
                 }
