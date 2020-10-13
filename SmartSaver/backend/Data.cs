@@ -455,7 +455,19 @@ namespace DataManager
             }
         }
 
-        public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
+		public void ReadGoalsFromDb()
+		{
+			using (var context = new DatabaseContext())
+			{
+				var goals = context.Goals; // define query
+				foreach (var goal in goals.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
+				{
+                    Goal newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price, goal.PlaceInQueue);
+                    GoalsList.Add(newGoal);
+                }
+			}
+		}
+		public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
         {
             switch (entryType)
             {

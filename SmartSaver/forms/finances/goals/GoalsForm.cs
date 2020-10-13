@@ -128,7 +128,8 @@ namespace ePiggy.forms.finances.goals
         {
             //WIP
             //CHECK STUFF
-            _goals.Remove(goal);
+            _handler.Data.RemoveGoal(goal.ID);
+            //_goals.Remove(goal);
 
         }
 
