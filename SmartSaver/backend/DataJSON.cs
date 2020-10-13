@@ -2,62 +2,53 @@
 using System.Text.Json;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using ePiggy.utilities;
 
 namespace DataManager
 {
     public class DataJSON
     {
-		private Data data;
+		private readonly Data _data;
 		public DataJSON(Data data)
 		{
-			this.data = data;
+			this._data = data;
 		}
 
 		/*Writing/reading JSON files*/
 		public void WriteIncomeToFile()
 		{
 			File.WriteAllText("userIncome.json", "");
-			using (StreamWriter sw = File.AppendText("userIncome.json"))
-			{
-				string output;
-				foreach (DataEntry data in data.Income)
-				{
-					output = JsonSerializer.Serialize(data);
-
-					sw.Write(output + "\n");
-				}
-			}
-		}
+            using var sw = File.AppendText("userIncome.json");
+            foreach (var output in _data.Income.Select(data => JsonSerializer.Serialize(data)))
+            {
+                sw.Write(output + "\n");
+            }
+        }
 
 		public void WriteExpensesToFile()
 		{
 			File.WriteAllText("userExpenses.json", "");
-			using (StreamWriter sw = File.AppendText("userExpenses.json"))
-			{
-				string output;
-				foreach (DataEntry data in data.Expenses)
-				{
-					output = JsonSerializer.Serialize(data);
-
-					sw.Write(output + "\n");
-				}
-			}
-		}
+            using var sw = File.AppendText("userExpenses.json");
+            foreach (var output in _data.Expenses.Select(data => JsonSerializer.Serialize(data)))
+            {
+                sw.Write(output + "\n");
+            }
+        }
 
 		public void ReadIncomeFromFile()
 		{
-			string line;
-			try
+            try
 			{
-				System.IO.StreamReader file = new System.IO.StreamReader("userIncome.json");
+				var file = new System.IO.StreamReader("userIncome.json");
 
-				while ((line = file.ReadLine()) != null)
+                string line;
+                while ((line = file.ReadLine()) != null)
 				{
 					try
 					{
 						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
-						data.Income.Add(dataEntry);
+						_data.Income.Add(dataEntry);
 					}
 					catch (Exception e)
 					{
@@ -76,17 +67,17 @@ namespace DataManager
 
 		public void ReadExpensesFromFile()
 		{
-			string line;
-			try
+            try
 			{
-				System.IO.StreamReader file = new System.IO.StreamReader("userExpenses.json");
-				while ((line = file.ReadLine()) != null)
+				var file = new System.IO.StreamReader("userExpenses.json");
+                string line;
+                while ((line = file.ReadLine()) != null)
 				{
 
 					try
 					{
 						var dataEntry = JsonSerializer.Deserialize<DataEntry>(line);//TRY CATCH
-						data.Expenses.Add(dataEntry);
+						_data.Expenses.Add(dataEntry);
 					}
 					catch (Exception e)
 					{
