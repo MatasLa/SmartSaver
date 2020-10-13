@@ -36,12 +36,9 @@ namespace DataManager
                 return false;
             }
 
-            if (!password.Equals(confirmPass))
-            {
-                form.ChangeErrorText(2);
-                return false;
-            }
-            return true;
+            if (password.Equals(confirmPass)) return true;
+            form.ChangeErrorText(2);
+            return false;
         }
 
         private static bool IsValidEmail(string email)
