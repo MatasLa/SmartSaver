@@ -11,6 +11,12 @@
         High,
         Medium,
         Low,
-        Unnecesary,
-    };
+        Unnecesary
+    }
+    public enum SavingType
+    {
+        Maximal,
+        Regular,
+        Minimal
+    }
 }

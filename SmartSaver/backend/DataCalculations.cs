@@ -17,7 +17,7 @@ namespace DataManager
         }
         
         //Temporary local string 
-        private string SavingChoice;
+        private SavingType SavingChoice;
         
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
@@ -115,7 +115,7 @@ namespace DataManager
         
         private decimal ImportanceCalculation(DataEntry data, decimal savedAmount, decimal percentage, EntryType entryType)
         {
-            if (SavingChoice == "Minimal")
+            if (SavingChoice == SavingType.Minimal)
             {
                 savedAmount += (data.Amount * (0.1M * percentage));
                 if(entryType == EntryType.Income)
@@ -129,12 +129,11 @@ namespace DataManager
                 return savedAmount;
             }
 
-            else if (SavingChoice == "Maximal")
+            else if (SavingChoice == SavingType.Maximal) // change from string to enum
             {
-                bool maximalSaving;
                 decimal temp;
 
-                maximalSaving = (0.5M * percentage) >= 1;
+                bool maximalSaving = (0.5M * percentage) >= 1;
 
                 if (maximalSaving)
                 {
@@ -157,7 +156,7 @@ namespace DataManager
                 return savedAmount;
             }
 
-            else
+            else if (SavingChoice == SavingType.Regular)
             {
                 savedAmount += (data.Amount * (0.25M * percentage));
                 if(entryType == EntryType.Income)
@@ -170,6 +169,7 @@ namespace DataManager
                 }
                 return savedAmount;
             }
+            return savedAmount;
         }
 
         private void AddToIncomeOfferList(int id, decimal amount)
