@@ -143,8 +143,8 @@ namespace DataManager
         }
         private void AddToExpensesOfferList(int id, decimal amount)
         {
-            OfferData newIncomeOffers = new OfferData(id, amount);
-            IncomeOffers.Add(newIncomeOffers);
+            OfferData newExpensesOffers = new OfferData(id, amount);
+            ExpensesOffers.Add(newExpensesOffers);
         }
     }
 }
