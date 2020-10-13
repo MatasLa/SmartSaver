@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Linq;
 using ePiggy.forms;
 
 namespace DataManager
@@ -35,12 +36,9 @@ namespace DataManager
                 return false;
             }
 
-            if (!password.Equals(confirmPass))
-            {
-                form.ChangeErrorText(2);
-                return false;
-            }
-            return true;
+            if (password.Equals(confirmPass)) return true;
+            form.ChangeErrorText(2);
+            return false;
         }
 
         private static bool IsValidEmail(string email)
@@ -89,28 +87,11 @@ namespace DataManager
 
         private static bool IsPasswordComplex(string pass)
         {
-            //var letters = 0;
-            var digits = 0;
-            var uppers = 0;
-            var symbols = 0;
-            foreach (var ch in pass)
-            {
-                /* if (char.IsLetter(ch))
-                 {
-                     letters++;
-                     if (char.IsUpper(ch)) uppers++;
-                 }*/
-                if(char.IsUpper(ch)) uppers++;
-
-                if (char.IsDigit(ch)) digits++;
-
-                if (char.IsSymbol(ch))
-                {
-                    symbols++;
-                }else if (char.IsPunctuation(ch)) symbols++;
-
-            }
-
+            var uppers = pass.Count(char.IsUpper);
+            var digits = pass.Count(char.IsDigit);
+            var symbols = pass.Count(char.IsSymbol);
+            symbols += pass.Count(char.IsPunctuation);
+            
             if (uppers < 1) return false;
             if (digits < 1) return false;
             if (symbols < 1) return false;
