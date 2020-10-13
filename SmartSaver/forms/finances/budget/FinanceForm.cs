@@ -177,7 +177,7 @@ namespace ePiggy.forms.finances.budget
                 }
                 else
                 {
-                    FormChanger.OpenChildForm(ref _activeForm, new EntryForm(new DataEntry(), EntryType, _handler, EntryForm.Type.Add), splitContainer.Panel2);
+                    FormUtilities.OpenChildForm(ref _activeForm, new EntryForm(new DataEntry(), EntryType, _handler, EntryForm.Type.Add), splitContainer.Panel2);
                 }
             } 
             else if (dataGridView.SelectedRows.Count > 1)
@@ -200,17 +200,17 @@ namespace ePiggy.forms.finances.budget
 
         public void CloseSideForm()
         {
-            FormChanger.CloseChildForm(ref _activeForm);
+            FormUtilities.CloseChildForm(ref _activeForm);
         }
 
         private void OpenMultiEntryInfoForm(List<DataEntry> entries)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new MultiEntryInfoForm(entries, _handler), splitContainer.Panel2);
+            FormUtilities.OpenChildForm(ref _activeForm, new MultiEntryInfoForm(entries, _handler), splitContainer.Panel2);
         }
 
         public void OpenEntryInfoForm(DataEntry entry)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(entry, _handler, this), splitContainer.Panel2);
+            FormUtilities.OpenChildForm(ref _activeForm, new EntryInfoForm(entry, _handler, this), splitContainer.Panel2);
         }
 
         private bool OpenEntryForm(DataEntry entry, EntryForm.Type entryFormType)
@@ -245,7 +245,7 @@ namespace ePiggy.forms.finances.budget
         private void PanelTop_Click(object sender, EventArgs e)
         {
             dataGridView.ClearSelection();
-            FormChanger.CloseChildForm(ref _activeForm);
+            FormUtilities.CloseChildForm(ref _activeForm);
         }
 
         private void ButtonAddEntry_Click(object sender, EventArgs e)
@@ -286,19 +286,13 @@ namespace ePiggy.forms.finances.budget
         private void DisplayBalance()
         {
             var balance = _dataFilter.GetBalance(_handler.Time);
-            labelBalance.BackColor = labelBalance.BackColor;
-            var currencyWithColor = NumberFormatter.FormatCurrencyWithColor(balance);
-            labelBalance.ForeColor = currencyWithColor.Color;
-            labelBalance.Text = currencyWithColor.Number;
+            FormUtilities.DisplayCurrencyTextWithColor(labelBalance, balance);
         }
 
         private void DisplayTotalBalance()
         {
             var balance = _handler.DataFilter.GetBalance();
-            labelTotalBalanceValue.BackColor = labelTotalBalanceValue.BackColor;
-            var currencyWithColor = NumberFormatter.FormatCurrencyWithColor(balance);
-            labelTotalBalanceValue.ForeColor = currencyWithColor.Color;
-            labelTotalBalanceValue.Text = currencyWithColor.Number;
+            FormUtilities.DisplayCurrencyTextWithColor(labelTotalBalanceValue, balance);
         }
 
         private void DisplayDate()

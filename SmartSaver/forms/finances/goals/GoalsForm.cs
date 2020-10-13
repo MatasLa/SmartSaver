@@ -62,19 +62,19 @@ namespace ePiggy.forms.finances.goals
             switch (position)
             {
                 case 0:
-                    FormChanger.OpenChildForm(ref _goalForm0, new GoalForm(goal, _handler, this), panelGoal0);
+                    FormUtilities.OpenChildForm(ref _goalForm0, new GoalForm(goal, _handler, this), panelGoal0);
                     break;
                 case 1:
-                    FormChanger.OpenChildForm(ref _goalForm1, new GoalForm(goal, _handler, this), panelGoal1);
+                    FormUtilities.OpenChildForm(ref _goalForm1, new GoalForm(goal, _handler, this), panelGoal1);
                     break;
                 case 2:
-                    FormChanger.OpenChildForm(ref _goalForm2, new GoalForm(goal, _handler, this), panelGoal2);
+                    FormUtilities.OpenChildForm(ref _goalForm2, new GoalForm(goal, _handler, this), panelGoal2);
                     break;
                 case 3:
-                    FormChanger.OpenChildForm(ref _goalForm3, new GoalForm(goal, _handler, this), panelGoal3);
+                    FormUtilities.OpenChildForm(ref _goalForm3, new GoalForm(goal, _handler, this), panelGoal3);
                     break;
                 case 4:
-                    FormChanger.OpenChildForm(ref _goalForm4, new GoalForm(goal, _handler, this), panelGoal4);
+                    FormUtilities.OpenChildForm(ref _goalForm4, new GoalForm(goal, _handler, this), panelGoal4);
                     break;
             }
         }
@@ -85,31 +85,31 @@ namespace ePiggy.forms.finances.goals
             switch (position)
             {
                 case 0:
-                    FormChanger.CloseChildForm(ref _goalForm0);
+                    FormUtilities.CloseChildForm(ref _goalForm0);
                     break;
                 case 1:
-                    FormChanger.CloseChildForm(ref _goalForm1);
+                    FormUtilities.CloseChildForm(ref _goalForm1);
                     break;
                 case 2:
-                    FormChanger.CloseChildForm(ref _goalForm2);
+                    FormUtilities.CloseChildForm(ref _goalForm2);
                     break;
                 case 3:
-                    FormChanger.CloseChildForm(ref _goalForm3);
+                    FormUtilities.CloseChildForm(ref _goalForm3);
                     break;
                 case 4:
-                    FormChanger.CloseChildForm(ref _goalForm4);
+                    FormUtilities.CloseChildForm(ref _goalForm4);
                     break;
             }
         }
 
         private void CloseExpandedForm()
         {
-            FormChanger.CloseChildForm(ref _expandedGoalForm);
+            FormUtilities.CloseChildForm(ref _expandedGoalForm);
         }
 
         public void DisplayExpandedGoal(Goal goal)
         {
-            FormChanger.OpenChildForm(ref _expandedGoalForm, new ExpandedGoalForm(goal, _handler, this), panelMain);
+            FormUtilities.OpenChildForm(ref _expandedGoalForm, new ExpandedGoalForm(goal, _handler, this), panelMain);
 
         }
 

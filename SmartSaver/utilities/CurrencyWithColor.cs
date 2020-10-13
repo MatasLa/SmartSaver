@@ -5,7 +5,6 @@ using System.Text;
 
 namespace ePiggy.utilities
 {
-
     public readonly struct CurrencyWithColor
     {
         public string Number { get;  }
