@@ -120,18 +120,21 @@ namespace ePiggy.forms.finances.goals
         {
             var goal = new Goal();
             if (!OpenGoalDialog(goal)) return;
-            _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price, 0);
+            if (goal.Price == 0)
+            {
+                _handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
+            }
+            else
+            {
+                _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price, 0);
+            }
             //_handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
             UpdateDisplay();
         }
 
         public void RemoveGoal(Goal goal)
         {
-            //WIP
-            //CHECK STUFF
             _handler.Data.RemoveGoal(goal.ID);
-            //_goals.Remove(goal);
-
         }
 
         private bool OpenGoalDialog(Goal goal)

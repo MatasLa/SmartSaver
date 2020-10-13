@@ -43,8 +43,9 @@ namespace DataManager
 			if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
             var newGoal = new Goal(title, placeInQueue);
             var price = newGoal.Price;
-            var db = new DatabaseContext();
-            var goal = new Goals { UserId = userid, Title = title, Price = price, PlaceInQueue = placeInQueue };
+            var parsedTitle = newGoal.Title;
+			var db = new DatabaseContext();
+            var goal = new Goals { UserId = userid, Title = parsedTitle, Price = price, PlaceInQueue = placeInQueue };
             db.Add(goal);
             db.SaveChanges();
             var id = goal.Id;

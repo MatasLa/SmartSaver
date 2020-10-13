@@ -43,7 +43,6 @@ namespace ePiggy.forms.finances.goals
             _progress = CalculateProgress(_saved, _target);
 
             labelTitle.Text = Goal.Title;
-            labelDate.Text = @"Deadline: " + DateTime.Today.ToString("d");
             labelProgress.Text =
                 NumberFormatter.FormatCurrency(_saved) + @" of " + NumberFormatter.FormatCurrency(_target);
             DisplayProgressBar();
