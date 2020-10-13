@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Reflection.Metadata;
 
 namespace DataManager
@@ -18,6 +19,9 @@ namespace DataManager
             Low,
             Unnecesary,
         };
+
+        //Temporary local string 
+        private string SavingChoice;
         
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
@@ -83,24 +87,89 @@ namespace DataManager
                             break; //importance of necessary - unchangable income
 
                         case (int)Importance.High:
-                            savedAmount += (data.Amount * 0.25M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.25M);
-                            break;
+                            if (SavingChoice == "Minimal")
+                            {
+                                savedAmount += (data.Amount * 0.1M);
+                                AddToIncomeOfferList(data.ID, data.Amount * 0.1M);
+                                break;
+                            }
+                            else if(SavingChoice == "Maximal")
+                            {
+                                savedAmount += (data.Amount * 0.5M);
+                                AddToIncomeOfferList(data.ID, data.Amount * 0.5M);
+                                break;
+                            }
+                            else
+                            {
+                                savedAmount += (data.Amount * 0.25M);
+                                AddToIncomeOfferList(data.ID, data.Amount * 0.25M);
+                                break;
+                            }
+                            
 
                         case (int)Importance.Medium:
-                            savedAmount += (data.Amount * 0.5M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.5M);
-                            break;
-
+                            if (SavingChoice == "Minimal")
+                            {
+                                savedAmount += (data.Amount * 0.2M);
+                                AddToIncomeOfferList(data.ID, data.Amount * 0.2M);
+                                break;
+                            }
+                            else if (SavingChoice == "Maximal")
+                            {
+                                savedAmount += (data.Amount);
+                                AddToIncomeOfferList(data.ID, data.Amount);
+                                break;
+                            }
+                            else
+                            {
+                                savedAmount += (data.Amount * 0.5M);
+                                AddToIncomeOfferList(data.ID, data.Amount * 0.5M);
+                                break;
+                            }
+                            
                         case (int)Importance.Low:
-                            savedAmount += (data.Amount * 0.75M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.75M);
-                            break;
+                            if (SavingChoice == "Minimal")
+                            {
+                                savedAmount += (data.Amount * 0.3M);
+                                AddToIncomeOfferList(data.ID, data.Amount * 0.3M);
+                                break;
+                            }
+                            else if (SavingChoice == "Maximal")
+                            {
+                                savedAmount += (data.Amount);
+                                AddToIncomeOfferList(data.ID, data.Amount);
+                                break;
+                            }
+                            else
+                            {
+                                savedAmount += (data.Amount * 0.75M);
+                                AddToIncomeOfferList(data.ID, data.Amount * 0.75M);
+                                break;
+                            }
+
 
                         case (int)Importance.Unnecesary:
-                            savedAmount += (data.Amount);
-                            AddToIncomeOfferList(data.ID, data.Amount);
-                            break;
+                            if (SavingChoice == "Minimal")
+                            {
+                                savedAmount += (data.Amount * 0.4M);
+                                AddToIncomeOfferList(data.ID, data.Amount * 0.4M);
+                                break;
+                            }
+                            /*
+                            else if (SavingChoice == "Maximal")
+                            {
+                                savedAmount += (data.Amount);
+                                AddToIncomeOfferList(data.ID, data.Amount);
+                                break;
+                            }
+                            */
+                            else
+                            {
+                                savedAmount += (data.Amount);
+                                AddToIncomeOfferList(data.ID, data.Amount);
+                                break;
+                            }
+                            
 
                     }
                 }
@@ -112,30 +181,96 @@ namespace DataManager
                             break; //importance of necessary - unavoidable expense
 
                         case (int)Importance.High:
-                            savedAmount += (data.Amount * 0.25M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.25M);
-                            break;
+                            if (SavingChoice == "Minimal")
+                            {
+                                savedAmount += (data.Amount * 0.1M);
+                                AddToExpensesOfferList(data.ID, data.Amount * 0.1M);
+                                break;
+                            }
+                            else if (SavingChoice == "Maximal")
+                            {
+                                savedAmount += (data.Amount * 0.5M);
+                                AddToExpensesOfferList(data.ID, data.Amount * 0.5M);
+                                break;
+                            }
+                            else
+                            {
+                                savedAmount += (data.Amount * 0.25M);
+                                AddToExpensesOfferList(data.ID, data.Amount * 0.25M);
+                                break;
+                            }
+
 
                         case (int)Importance.Medium:
-                            savedAmount += (data.Amount * 0.5M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.5M);
-                            break;
+                            if (SavingChoice == "Minimal")
+                            {
+                                savedAmount += (data.Amount * 0.2M);
+                                AddToExpensesOfferList(data.ID, data.Amount * 0.2M);
+                                break;
+                            }
+                            else if (SavingChoice == "Maximal")
+                            {
+                                savedAmount += (data.Amount);
+                                AddToExpensesOfferList(data.ID, data.Amount);
+                                break;
+                            }
+                            else
+                            {
+                                savedAmount += (data.Amount * 0.5M);
+                                AddToExpensesOfferList(data.ID, data.Amount * 0.5M);
+                                break;
+                            }
+                            
 
                         case (int)Importance.Low:
-                            savedAmount += (data.Amount * 0.75M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.75M);
-                            break;
-
+                            if (SavingChoice == "Minimal")
+                            {
+                                savedAmount += (data.Amount * 0.3M);
+                                AddToExpensesOfferList(data.ID, data.Amount * 0.3M);
+                                break;
+                            }
+                            else if (SavingChoice == "Maximal")
+                            {
+                                savedAmount += (data.Amount);
+                                AddToExpensesOfferList(data.ID, data.Amount);
+                                break;
+                            }
+                            else
+                            {
+                                savedAmount += (data.Amount * 0.75M);
+                                AddToExpensesOfferList(data.ID, data.Amount * 0.75M);
+                                break;
+                            }
+                            
                         case (int)Importance.Unnecesary:
-                            savedAmount += (data.Amount);
-                            AddToIncomeOfferList(data.ID, data.Amount);
-                            break;
+                            if (SavingChoice == "Minimal")
+                            {
+                                savedAmount += (data.Amount * 0.4M);
+                                AddToExpensesOfferList(data.ID, data.Amount * 0.4M);
+                                break;
+                            }
+                            /*
+                            else if (SavingChoice == "Maximal")
+                            {
+                                savedAmount += (data.Amount);
+                                AddToExpensesOfferList(data.ID, data.Amount);
+                                break
+                            }
+                            */
+                            else
+                            {
+                                savedAmount += (data.Amount);
+                                AddToExpensesOfferList(data.ID, data.Amount);
+                                break;
+                            }
+
                     }
                 }
 
             }
             return true; // after having saved enough
         }
+
         private void AddToIncomeOfferList(int id, decimal amount)
         {
             OfferData newIncomeOffers = new OfferData(id, amount);
