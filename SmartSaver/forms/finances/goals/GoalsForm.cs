@@ -23,8 +23,8 @@ namespace ePiggy.forms.finances.goals
             InitializeComponent();
             _handler = handler;
 
-            //_goals = _handler.GoalsList;
-            _goals = new List<Goal>();
+            _goals = _handler.Data.GoalsList;
+            //_goals = new List<Goal>();
 
             Init();
         }
@@ -119,7 +119,7 @@ namespace ePiggy.forms.finances.goals
         {
             var goal = new Goal();
             if (!OpenGoalDialog(goal)) return;
-            _goals.Add(goal);
+            _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price, 0);
             UpdateDisplay();
         }
 

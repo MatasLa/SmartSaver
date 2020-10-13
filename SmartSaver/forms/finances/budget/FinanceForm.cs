@@ -273,16 +273,18 @@ namespace ePiggy.forms.finances.budget
         {
             var balance = _dataFilter.GetBalance(_handler.Time);
             labelBalance.BackColor = labelBalance.BackColor;
-            labelBalance.ForeColor = balance >= decimal.Zero ? Color.Green : Color.Red;
-            labelBalance.Text = NumberFormatter.FormatCurrency(balance);
+            var currencyWithColor = NumberFormatter.FormatCurrencyWithColor(balance);
+            labelBalance.ForeColor = currencyWithColor.Color;
+            labelBalance.Text = currencyWithColor.Number;
         }
 
         private void DisplayTotalBalance()
         {
             var balance = _handler.DataFilter.GetBalance();
-            labelTotalBalanceValue.BackColor = labelBalance.BackColor;
-            labelTotalBalanceValue.ForeColor = balance >= decimal.Zero ? Color.Green : Color.Red;
-            labelTotalBalanceValue.Text = NumberFormatter.FormatCurrency(balance);
+            labelTotalBalanceValue.BackColor = labelTotalBalanceValue.BackColor;
+            var currencyWithColor = NumberFormatter.FormatCurrencyWithColor(balance);
+            labelTotalBalanceValue.ForeColor = currencyWithColor.Color;
+            labelTotalBalanceValue.Text = currencyWithColor.Number;
         }
 
         private void DisplayDate()

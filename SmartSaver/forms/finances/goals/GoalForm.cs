@@ -52,14 +52,23 @@ namespace ePiggy.forms.finances.goals
 
         private void DisplayProgressBar()
         {
-           progressBar.Value = _progress >= 100 ? progressBar.Maximum : _progress;
+            progressBar.Value = _progress;
         }
 
         #region Calculation to be moved elsewhere
 
         private static int CalculateProgress(decimal saved, decimal target)
         {
-            return (int)(saved * 100 / target);
+            if (saved < 0)
+            {
+                return 0;
+            }
+            if (target <= 0)
+            {
+                return 100;
+            }
+            var progress = (int)(saved * 100 / target);
+            return progress > 100 ? 100 : progress;
         }
 
         #endregion
