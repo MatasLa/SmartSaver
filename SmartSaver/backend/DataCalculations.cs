@@ -1,4 +1,5 @@
-﻿using System.CodeDom.Compiler;
+﻿using ePiggy.utilities;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Configuration;
@@ -14,15 +15,7 @@ namespace DataManager
         {
             this.data = data;
         }
-        private enum Importance
-        {
-            Necessary = 1,
-            High,
-            Medium,
-            Low,
-            Unnecesary,
-        };
-
+        
         //Temporary local string 
         private string SavingChoice;
         

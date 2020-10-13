@@ -5,4 +5,12 @@
         Income,
         Expense
     }
+    public enum Importance
+    {
+        Necessary = 1,
+        High,
+        Medium,
+        Low,
+        Unnecesary,
+    };
 }
