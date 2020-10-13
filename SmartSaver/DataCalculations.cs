@@ -91,7 +91,7 @@ namespace DataManager
             double neededAmount = (goal.price - CheckBalance());
             
             while ((neededAmount - savedAmount) > 0) //while(can't afford goal)
-            {   //todo: implement saving, export the categories/things needed to save on
+            {   //todo: improve saving
                 foreach (DataEntry data in data.Income)
                 {
                     switch (data.Importance)
