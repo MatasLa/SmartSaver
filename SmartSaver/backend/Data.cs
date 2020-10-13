@@ -433,14 +433,12 @@ namespace DataManager
 		}
         public void ReadIncomeFromDb()
         {
-            Debug.WriteLine("ReadIncomeFromDB");
-			using (var context = new DatabaseContext())
+            using (var context = new DatabaseContext())
             {
                 var incomes = context.Incomes; // define query
                 foreach (var income in incomes.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
                 {
-                    Debug.WriteLine("ReadIncomeFromDB555");
-					DataEntry newIncome = new DataEntry(income.Id, income.UserId, income.Amount, income.Title, income.Date, income.IsMonthly, income.Importance);
+                    DataEntry newIncome = new DataEntry(income.Id, income.UserId, income.Amount, income.Title, income.Date, income.IsMonthly, income.Importance);
                     Income.Add(newIncome);
                 }
             }

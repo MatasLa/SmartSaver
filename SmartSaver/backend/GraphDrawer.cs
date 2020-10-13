@@ -22,7 +22,12 @@ namespace ePiggy.backend
             var exp = expenses.ToString(nfi);
             var chartInfo = $"a:{inc},{exp}";
 
-            var pie = new ImageCharts().cht("p").chl("Incomes|Expenses").chco("00b7ff|eb5244").chd(chartInfo).chs("300x300");
+            var pie = new ImageCharts()
+                .cht("p")
+                .chl("Incomes|Expenses")
+                .chco("00b7ff|eb5244")
+                .chd(chartInfo)
+                .chs("400x400");
 
             using var ms = new MemoryStream(pie.toBuffer());
             var bitmap = new Bitmap(ms);
