@@ -74,6 +74,7 @@ namespace DataManager
                 DataEntry newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
                 Income.Add(newIncome);
         }
+
 		public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var dateUse = date;
@@ -117,9 +118,9 @@ namespace DataManager
 				int id = expense.Id;
                 DataEntry newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
                 Expenses.Add(newExpense);
-                dateUse.AddMonths(1);
-            }
-        }
+                dateUse = dateUse.AddMonths(1);
+			}
+		}
 
 		public void RemoveIncome(int id)
         {

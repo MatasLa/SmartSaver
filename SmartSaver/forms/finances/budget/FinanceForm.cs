@@ -76,11 +76,25 @@ namespace ePiggy.forms.finances.budget
         {
             if (EntryType == EntryType.Income)
             {
-                _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                if (entry.IsMonthly)
+                {
+                    _data.AddMonthlyIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                }
+                else
+                {
+                    _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                }
             }
             else
             {
-                _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                if (entry.IsMonthly)
+                {
+                    _data.AddMonthlyExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                }
+                else
+                {
+                    _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                }
             }
         }
 

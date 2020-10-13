@@ -54,7 +54,7 @@ namespace ePiggy.forms.finances.goals
             progressBar.Value = _progress;
         }
 
-        #region Calculation to be moved elsewhere
+        #region Calculation of progress bar
 
         private static int CalculateProgress(decimal saved, decimal target)
         {

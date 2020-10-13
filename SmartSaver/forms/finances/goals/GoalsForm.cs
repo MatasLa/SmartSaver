@@ -24,7 +24,6 @@ namespace ePiggy.forms.finances.goals
             _handler = handler;
 
             _goals = _handler.Data.GoalsList;
-            //_goals = new List<Goal>();
 
             Init();
         }
