@@ -46,9 +46,10 @@ namespace ePiggy.forms.finances.goals
         {
             for (var i = 0; i < _goals.Count; i++)
             {
+                if (i > 4) return;
                 DisplayMiniGoal(_goals[i], i);
             }
-            if (_goals.Count > 4) return;
+            if (_goals.Count > 4) return; // If somehow we get more goals we just stop showing them
             for (var i = _goals.Count; i <= 4; i++)
             {
                 CloseMiniGoalForm(i);
