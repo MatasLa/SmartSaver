@@ -1,145 +1,104 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using DataManager;
-using Forms;
-using Utilities;
+using ePiggy.forms.finances;
+using ePiggy.forms.finances.budget;
+using ePiggy.forms.finances.goals;
+using ePiggy.forms.reports;
+using ePiggy.utilities;
 
-namespace Forms
+namespace ePiggy.forms
 {
    
     public partial class FormMain : Form
     {
-        public Handler DataHandler { get; }
+        public Handler Handler { get; }
+        //we need to store the previous form to close it to open the new form
+        private Form _activeForm;
 
-        public FormMain(Handler dataHandler)
+        public FormMain(Handler handler)
         {
             InitializeComponent();
             CustomizeDesign();
-            DataHandler = dataHandler;
+            Handler = handler;
         }
 
         private void CustomizeDesign()
         {
             panelFinancesSubMenu.Visible = false;
             panelReportsSubMenu.Visible = false;
+            label2.Text = DateTime.Now.ToString("D");
         }
+
+        private void SaveOnClose(object sender, FormClosedEventArgs e)
+        {
+            Handler.DataJSON.WriteIncomeToFile();
+            Handler.DataJSON.WriteExpensesToFile();
+        }
+
+        #region button event handlers
 
         private void ButtonFinances_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(panelFinancesSubMenu);
+            FormChanger.ShowOrHideControl(panelFinancesSubMenu);
         }
 
         private void ButtonReports_Click(object sender, EventArgs e)
         {
-            ShowSubMenu(panelReportsSubMenu);
-        }
-
-        private void ButtonBudget_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormBudget.FormBudget(DataHandler));
+            FormChanger.ShowOrHideControl(panelReportsSubMenu);
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormIncome.FormIncome(DataHandler));
+            FormChanger.OpenChildForm(ref _activeForm, new FinanceForm(Handler, EntryType.Income), panelMain);
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormExpenses.FormExpenses(DataHandler));
+            FormChanger.OpenChildForm(ref _activeForm, new FinanceForm(Handler, EntryType.Expense), panelMain);
         }
 
         private void ButtonGoals_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormGoals());
+            FormChanger.OpenChildForm(ref _activeForm, new GoalsForm(Handler), panelMain);
         }
 
         private void ButtonSpending_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormSpending());
+            FormChanger.OpenChildForm(ref _activeForm, new FormSpending(), panelMain);
         }
-
 
         private void ButtonNetWorth_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormNetWorth());
+            FormChanger.OpenChildForm(ref _activeForm, new FormNetWorth(), panelMain);
         }
 
-        private void ButtonIncomevExpenses_Click(object sender, EventArgs e)
+        private void ButtonIncomeVExpenses_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormIncomevExpenses());
+            FormChanger.OpenChildForm(ref _activeForm, new FormIncomeVExpenses(), panelMain);
         }
 
         private void ButtonGoalReport_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormGoalReports());
+            FormChanger.OpenChildForm(ref _activeForm, new FormGoalReports(), panelMain);
         }
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormHelp());
+            FormChanger.OpenChildForm(ref _activeForm, new FormHelp(), panelMain);
         }
 
         private void ButtonLogOut_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            FormChanger.ChangeForm(this, new FormLogIn(Handler));
         }
 
         private void MenuLogo_Click(object sender, EventArgs e)
         {
-            CloseChildForm();
+            FormChanger.CloseChildForm(ref _activeForm);
         }
 
+        #endregion
 
-        private void ShowSubMenu(Panel subMenu)
-        {
-            if (subMenu.Visible == false)
-            {
-                subMenu.Visible = true;
-            }
-            else
-            {
-                subMenu.Visible = false;
-            }
-        }
-
-        //we need to store the previous form to close it to open the new form
-        private Form activeForm = null;
-        private void OpenChildForm(Form childForm)
-        {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-            }
-            activeForm = childForm;
-            //it will behave like a control
-            childForm.TopLevel = false;
-            // make the form the up the whole panel
-            childForm.Dock = DockStyle.Fill;
-            //add the form to the list of the controls in the container panel
-            panelMain.Controls.Add(childForm);
-            // associate the form with the container panel
-            panelMain.Tag = childForm;
-            // to hide the logo
-            childForm.BringToFront();
-            childForm.Show();
-        }
-
-        private void CloseChildForm()
-        {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-                activeForm = null;
-            }
-        }
     }
-    
+
 }

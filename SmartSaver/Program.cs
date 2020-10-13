@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DataManager;
-using Forms;
-using Utilities;
+using ePiggy;
+using ePiggy.forms;
 
-namespace SmartSaver.forms
+namespace EPiggy
 {
     static class Program
     {
@@ -24,8 +23,9 @@ namespace SmartSaver.forms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Handler dataHandler = new Handler();
-            Application.Run(new FormMain(dataHandler));
+            var handler = new Handler();
+            Application.Run(new FormMain(handler));
+            //Application.Run(new FormLogIn(dataHandler));
         }
     }
 }
