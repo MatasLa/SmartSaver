@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection.Metadata;
 
 namespace DataManager
@@ -13,31 +14,27 @@ namespace DataManager
         
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
+
+        public decimal GetTotalIncome()
+        {
+            return data.Income.Sum(entry => entry.Amount);
+        }
+
+        public decimal GetTotalExpenses()
+        {
+            return data.Expenses.Sum(entry => entry.Amount);
+        }
+
         public decimal CheckBalance()/*Checks even future data*/
         {
-            decimal sum = 0;
-            foreach (DataEntry data in data.Income)
-            {
-                sum += data.Amount;
-            }
-            foreach (DataEntry data in data.Expenses)
-            {
-                sum -= data.Amount;
-            }
-            return sum;
+            return GetTotalIncome() - GetTotalExpenses();
         }
 
         public bool IsBalancePositive()/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
         {
-            if (CheckBalance() >= 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return CheckBalance() >= 0;
         }
+
         //Code below is still very much WIP
         public bool CheckGoal(Goal goal)
         {

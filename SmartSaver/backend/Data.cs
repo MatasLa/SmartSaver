@@ -93,7 +93,7 @@ namespace DataManager
 
         }
 
-public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var db = new DatabaseContext();
             var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };

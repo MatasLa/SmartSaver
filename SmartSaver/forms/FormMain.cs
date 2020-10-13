@@ -78,7 +78,7 @@ namespace ePiggy.forms
 
         private void ButtonIncomeVExpenses_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FormIncomeVExpenses(), panelMain);
+            FormChanger.OpenChildForm(ref _activeForm, new FormIncomeVExpenses(Handler), panelMain);
         }
 
         private void ButtonGoalReport_Click(object sender, EventArgs e)

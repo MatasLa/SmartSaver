@@ -12,7 +12,51 @@ namespace DataManager
         public DataFilter(Data data)
         {
             this.data = data;
+		}
+
+		/*Arno kodas*/
+
+        public decimal GetTotaledIncome()
+        {
+            return data.Income.Sum(entry => entry.Amount);
+		}
+
+        public decimal GetTotaledIncome(DateTime date)
+        {
+			return GetIncomeByDate(date).Sum(entry => entry.Amount);
+		}
+
+        public decimal GetTotaledExpenses()
+        {
+            return data.Expenses.Sum(entry => entry.Amount);
         }
+
+		public decimal GetTotaledExpenses(DateTime date)
+        {
+            return GetExpensesByDate(date).Sum(entry => entry.Amount);
+        }
+
+		public decimal GetBalance()/*Checks even future data*/
+        {
+            return GetTotaledIncome() - GetTotaledExpenses();
+		}
+
+        public decimal GetBalance(DateTime date)/*Checks even future data*/
+        {
+            return GetTotaledIncome(date) - GetTotaledExpenses(date);
+        }
+
+		public bool IsBalancePositive()/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
+        {
+            return GetBalance() >= 0;
+		}
+
+        public bool IsBalancePositive(DateTime date)/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
+        {
+            return GetBalance(date) >= 0;
+        }
+
+		/* baigiasi Arno kodas */
 
 		public List<DataEntry> GetIncomeHigherThan(decimal amount)
 		{
@@ -24,32 +68,6 @@ namespace DataManager
 		{
 			List<DataEntry> temp = data.Expenses.Where(x => x.Amount >= amount).ToList();
 			return temp;
-		}
-
-		public decimal GetBalanceByDate(DateTime dateTime)
-        {
-			decimal sum = 0;
-			foreach (DataEntry data in GetIncomeByDate(dateTime))
-			{
-				sum += data.Amount;
-			}
-			foreach (DataEntry data in GetExpensesByDate(dateTime))
-			{
-				sum -= data.Amount;
-			}
-			return sum;
-		}
-
-		public bool IsBalancePositiveByDate(DateTime dateTime)
-		{
-			if (GetBalanceByDate(dateTime) >= 0)
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
 		}
 
 		public List<DataEntry> GetIncomeByDate(DateTime dateTime)

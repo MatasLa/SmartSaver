@@ -271,7 +271,7 @@ namespace ePiggy.forms.finances.budget
     
         private void DisplayBalance()
         {
-            var balance = _dataFilter.GetBalanceByDate(_handler.Time);
+            var balance = _dataFilter.GetBalance(_handler.Time);
             labelBalance.BackColor = labelBalance.BackColor;
             labelBalance.ForeColor = balance >= decimal.Zero ? Color.Green : Color.Red;
             labelBalance.Text = NumberFormatter.FormatCurrency(balance);
@@ -279,7 +279,7 @@ namespace ePiggy.forms.finances.budget
 
         private void DisplayTotalBalance()
         {
-            var balance = _handler.DataCalculations.CheckBalance();
+            var balance = _handler.DataFilter.GetBalance();
             labelTotalBalanceValue.BackColor = labelBalance.BackColor;
             labelTotalBalanceValue.ForeColor = balance >= decimal.Zero ? Color.Green : Color.Red;
             labelTotalBalanceValue.Text = NumberFormatter.FormatCurrency(balance);
