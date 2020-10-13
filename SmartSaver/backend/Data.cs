@@ -39,19 +39,18 @@ namespace DataManager
 		/*NEW*/
         public bool AddGoal(int userid, string title, int placeInQueue)//parsing from internet
         {
-            if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
-            var db = new DatabaseContext();
-            var goal = new Goals { UserId = userid, Title = title, Price = 0, PlaceInQueue = placeInQueue };
-			db.Add(goal);
-            int id = goal.Id;
+			if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
             var newGoal = new Goal(title, placeInQueue);
-            newGoal.ID = id;
             var price = newGoal.Price;
-            goal.Price = price;
-            GoalsList.Add(newGoal);
+            var db = new DatabaseContext();
+            var goal = new Goals { UserId = userid, Title = title, Price = price, PlaceInQueue = placeInQueue };
+            db.Add(goal);
             db.SaveChanges();
-			return true;
-        }
+            var id = goal.Id;
+            newGoal.ID = id;
+            GoalsList.Add(newGoal);
+            return true;
+		}
 		/*NEW*/
         public void RemoveGoal(int id)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace DataManager
 {
     public class Goal
     {
+        private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\parsedGoal.txt";
         private int id;
         private string title;
         private decimal price;
@@ -31,7 +33,7 @@ namespace DataManager
         }
 
         public Goal(int id, string title, decimal price, int placeInQueue)
-            :this(title, price, placeInQueue)
+            : this(title, price, placeInQueue)
         {
             ID = id;
             PlaceInQueue = placeInQueue;
@@ -45,8 +47,9 @@ namespace DataManager
 
         public Goal(string title, int placeInQueue)
         {
-            SetGoalFromWeb(title);
             PlaceInQueue = placeInQueue;
+            SetGoalFromWeb(title);
+
         }
 
         public Goal()
@@ -62,13 +65,14 @@ namespace DataManager
             {
                 Task.Run(() => InternetParser.GetHTMLAsync(itemName)).Wait();
 
-                System.IO.StreamReader file = new System.IO.StreamReader("priceInfo.txt");
-                string line;
+                var file = new System.IO.StreamReader(ResourceDirectoryParsedGoal);
+                file.ReadLine();
                 Title = file.ReadLine();
                 var pricestr = file.ReadLine();
-                var Price = Convert.ToDouble(pricestr, System.Globalization.CultureInfo.InvariantCulture);
+                Price = Convert.ToDecimal(pricestr, System.Globalization.CultureInfo.InvariantCulture);
                 file.Close();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
 
             }
