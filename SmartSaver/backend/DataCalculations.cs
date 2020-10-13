@@ -10,6 +10,14 @@ namespace DataManager
         {
             this.data = data;
         }
+        private enum Importance
+        {
+            Necessary = 1,
+            High,
+            Medium,
+            Low,
+            Unnecesary,
+        };
         
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
@@ -43,7 +51,7 @@ namespace DataManager
         {
             if (IsBalancePositive())
             {
-               // Goal goal = new Goal();
+                //Goal goal = new Goal();
                 if((CheckBalance() - goal.Price) >= 0)
                 {
                     return true;    //can already buy this month
@@ -71,39 +79,56 @@ namespace DataManager
                 {
                     switch (data.Importance)
                     {
-                        case 1:
-                            break; //importance of 1 - unchangable income
-                        case 2:
+                        case (int)Importance.Necessary:
+                            break; //importance of necessary - unchangable income
+
+                        case (int)Importance.High:
                             savedAmount += (data.Amount * 0.25M);
                             AddToIncomeOfferList(data.ID, data.Amount * 0.25M);
                             break;
-                        case 3:
+
+                        case (int)Importance.Medium:
                             savedAmount += (data.Amount * 0.5M);
                             AddToIncomeOfferList(data.ID, data.Amount * 0.5M);
                             break;
-                        case 4:
+
+                        case (int)Importance.Low:
                             savedAmount += (data.Amount * 0.75M);
                             AddToIncomeOfferList(data.ID, data.Amount * 0.75M);
                             break;
+
+                        case (int)Importance.Unnecesary:
+                            savedAmount += (data.Amount);
+                            AddToIncomeOfferList(data.ID, data.Amount);
+                            break;
+
                     }
                 }
                 foreach (DataEntry data in data.Expenses)
                 {
                     switch (data.Importance)
                     {
-                        case 1: //importance of 1 - necessary expense
-                            break;
-                        case 2:
+                        case (int)Importance.Necessary:
+                            break; //importance of necessary - unavoidable expense
+
+                        case (int)Importance.High:
                             savedAmount += (data.Amount * 0.25M);
                             AddToExpensesOfferList(data.ID, data.Amount * 0.25M);
                             break;
-                        case 3:
+
+                        case (int)Importance.Medium:
                             savedAmount += (data.Amount * 0.5M);
                             AddToExpensesOfferList(data.ID, data.Amount * 0.5M);
                             break;
-                        case 4:
+
+                        case (int)Importance.Low:
                             savedAmount += (data.Amount * 0.75M);
                             AddToExpensesOfferList(data.ID, data.Amount * 0.75M);
+                            break;
+
+                        case (int)Importance.Unnecesary:
+                            savedAmount += (data.Amount);
+                            AddToIncomeOfferList(data.ID, data.Amount);
                             break;
                     }
                 }
