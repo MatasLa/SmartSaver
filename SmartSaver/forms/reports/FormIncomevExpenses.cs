@@ -8,7 +8,8 @@ namespace ePiggy.forms.reports
         public FormIncomeVExpenses()
         {
             InitializeComponent();
-            GraphDrawer.DrawIncomesExpensesPieChart(1000,1000);
+            //Example
+            GraphDrawer.DrawIncomesExpensesPieChart(1500,1000);
         }
     }
 }

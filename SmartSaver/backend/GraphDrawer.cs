@@ -22,19 +22,13 @@ namespace ePiggy.backend
             string exp = expenses.ToString(nfi);
             string chartInfo = String.Format("a:{0},{1}", inc, exp);
 
-            ImageCharts pie = new ImageCharts().cht("p").chl("Incomes|Expenses").chd(chartInfo).chs("400x400");
-
-            string path1 = @"resources/charts";
-            Debug.WriteLine(path1);
+            ImageCharts pie = new ImageCharts().cht("p").chl("Incomes|Expenses").chco("00b7ff|eb5244").chd(chartInfo).chs("400x400");
 
             string projectDirectory = System.IO.Directory.GetCurrentDirectory().Replace("\\bin\\Debug\\netcoreapp3.1", "");
 
             string fullPath = projectDirectory + "/resources/charts/PieChart.png";
-            // string fullPaths = String.Format("{1}/PieChart.png", fullPath);
 
-            //Debug.WriteLine(fullPaths);
-
-            pie.toFile(fullPath); //
+            pie.toFile(fullPath); //Create chart png file
         }
     }
 }
