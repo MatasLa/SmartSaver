@@ -134,14 +134,7 @@ namespace DataManager
                 bool maximalSaving;
                 decimal temp;
 
-                if((0.5M * percentage) >= 1)
-                {
-                    maximalSaving = true;
-                }
-                else
-                {
-                    maximalSaving = false;
-                }
+                maximalSaving = (0.5M * percentage) >= 1;
 
                 if (maximalSaving)
                 {
