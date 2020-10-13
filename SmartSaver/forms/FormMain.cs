@@ -24,6 +24,7 @@ namespace ePiggy.forms
             Handler.Data.Expenses.Clear();
             Handler.Data.ReadExpensesFromDb();
             Handler.Data.ReadIncomeFromDb();
+            Handler.Data.ReadGoalsFromDb();
         }
 
         private void CustomizeDesign()

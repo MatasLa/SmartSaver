@@ -8,11 +8,16 @@ namespace DataManager
     public class Goal
     {
         private int id;
+        private int userId;
         private string title;
         private decimal price;
         private int placeInQueue;
 
         public int ID
+        {
+            get; set;
+        }
+        public int UserId
         {
             get; set;
         }
@@ -30,10 +35,11 @@ namespace DataManager
             get; set;
         }
 
-        public Goal(int id, string title, decimal price, int placeInQueue)
+        public Goal(int id, int userId, string title, decimal price, int placeInQueue)
             :this(title, price, placeInQueue)
         {
             ID = id;
+            UserId = userId;
             PlaceInQueue = placeInQueue;
         }
 
@@ -52,6 +58,7 @@ namespace DataManager
         public Goal()
         {
             ID = 0;
+            UserId = 0;
             Title = "unnamed";
             Price = 0;
         }
