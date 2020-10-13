@@ -9,10 +9,10 @@ namespace DataManager
 {
     public class DataTableConverter
     {
-        private Data data;
+        private readonly Data _data;
         public DataTableConverter(Data data)
         {
-            this.data = data;
+            this._data = data;
         }
 
         public DataTable GenerateTable(EntryType entryType)//All entries
@@ -20,14 +20,14 @@ namespace DataManager
             var dt = GenerateHeaders();
             if(entryType == EntryType.Income)
             {
-                foreach (DataEntry data in data.Income)
+                foreach (var data in _data.Income)
                 {
                     dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
                 }
             }
             else if(entryType == EntryType.Expense)
             {
-                foreach (DataEntry data in data.Expenses)
+                foreach (var data in _data.Expenses)
                 {
                     dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
                 }
@@ -69,7 +69,7 @@ namespace DataManager
             dt.Columns.Add("Recurring", typeof(bool));
             dt.Columns.Add("Importance", typeof(int));
 
-            foreach(DataEntry data in data.Income)
+            foreach(var data in _data.Income)
             {
                 dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
@@ -86,7 +86,7 @@ namespace DataManager
             dt.Columns.Add("Recurring", typeof(bool));
             dt.Columns.Add("Importance", typeof(int));
 
-            foreach (DataEntry data in data.Expenses)
+            foreach (var data in _data.Expenses)
             {
                 dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
