@@ -16,8 +16,12 @@ namespace DataManager
             this.data = data;
         }
         
-        //Temporary local string 
+        //Temporary hardcoded local parameters (should be taken from front-end later)
         private SavingType SavingChoice;
+        private decimal regularSavingValue = 0.25M;
+        private decimal maximalSavingValue = 0.5M;
+        private decimal minimalSavingValue = 0.1M;
+
         
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
@@ -104,7 +108,7 @@ namespace DataManager
                 case (int)Importance.Low:
                     return ImportanceCalculation(data, savedAmount, 3M, entryType);                 
 
-                case (int)Importance.Unnecesary:
+                case (int)Importance.Unnecessary:
                     return ImportanceCalculation(data, savedAmount, 4M, entryType);
 
                 default:
@@ -117,14 +121,14 @@ namespace DataManager
         {
             if (SavingChoice == SavingType.Minimal)
             {
-                savedAmount += (data.Amount * (0.1M * percentage));
+                savedAmount += (data.Amount * (minimalSavingValue * percentage));
                 if(entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.ID, data.Amount * (0.1M * percentage));
+                    AddToIncomeOfferList(data.ID, data.Amount * (minimalSavingValue * percentage));
                 }
                 else if(entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.ID, data.Amount * (0.1M * percentage));
+                    AddToExpensesOfferList(data.ID, data.Amount * (minimalSavingValue * percentage));
                 }
                 return savedAmount;
             }
@@ -133,15 +137,15 @@ namespace DataManager
             {
                 decimal temp;
 
-                bool maximalSaving = (0.5M * percentage) >= 1;
+                bool maximalSaving = (maximalSavingValue * percentage) >= 1;
 
                 if (maximalSaving)
                 {
-                    temp = 1M;
+                    temp = 1M; //Hardcoded 1, due to nature of maximal saving theory
                 }
                 else
                 {
-                    temp = 0.5M;
+                    temp = maximalSavingValue;
                 }
 
                 savedAmount += (data.Amount * temp);
@@ -158,14 +162,14 @@ namespace DataManager
 
             else if (SavingChoice == SavingType.Regular)
             {
-                savedAmount += (data.Amount * (0.25M * percentage));
+                savedAmount += (data.Amount * (regularSavingValue * percentage));
                 if(entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.ID, data.Amount * (0.25M * percentage));
+                    AddToIncomeOfferList(data.ID, data.Amount * (regularSavingValue * percentage));
                 }
                 else if(entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.ID, data.Amount * (0.25M * percentage));
+                    AddToExpensesOfferList(data.ID, data.Amount * (regularSavingValue * percentage));
                 }
                 return savedAmount;
             }

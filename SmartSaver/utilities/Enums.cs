@@ -11,7 +11,7 @@
         High,
         Medium,
         Low,
-        Unnecesary
+        Unnecessary
     }
     public enum SavingType
     {
