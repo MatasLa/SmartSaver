@@ -13,13 +13,10 @@ namespace ePiggy.backend
     class GraphDrawer
     {
         
-        public static Bitmap DrawIncomesExpensesPieChart(decimal incomes, decimal expenses)
+        public static Bitmap DrawIncomesExpensesPieChart(decimal size1, decimal size2)
         {
-
-            var nfi = CultureInfo.CurrentCulture.NumberFormat;
-
-            var inc = incomes.ToString(nfi);
-            var exp = expenses.ToString(nfi);
+            var inc = size1.ToString(CultureInfo.CurrentCulture.NumberFormat);
+            var exp = size2.ToString(CultureInfo.CurrentCulture.NumberFormat);
             var chartInfo = $"a:{inc},{exp}";
 
             var pie = new ImageCharts()
