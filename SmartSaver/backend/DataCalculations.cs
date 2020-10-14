@@ -21,6 +21,7 @@ namespace DataManager
         private decimal regularSavingValue = 0.25M;
         private decimal maximalSavingValue = 0.5M;
         private decimal minimalSavingValue = 0.1M;
+        private decimal savingRatio = 1M;
 
         
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
@@ -81,18 +82,18 @@ namespace DataManager
             {   //todo: improve saving
                 foreach (DataEntry data in data.Income)
                 {
-                    savedAmount += SwitchCalculation(data, savedAmount, EntryType.Income);
+                    savedAmount += ChoosingImportance(data, savedAmount, EntryType.Income);
                 }
                 foreach (DataEntry data in data.Expenses)
                 {
-                    savedAmount += SwitchCalculation(data, savedAmount, EntryType.Expense);
+                    savedAmount += ChoosingImportance(data, savedAmount, EntryType.Expense);
                 }
 
             }
             return true; // after having saved enough
         }
 
-        private decimal SwitchCalculation(DataEntry data, decimal savedAmount, EntryType entryType)
+        private decimal ChoosingImportance(DataEntry data, decimal savedAmount, EntryType entryType)
         {
             switch (data.Importance)
             {
@@ -100,16 +101,16 @@ namespace DataManager
                     return savedAmount; //importance of necessary - unchangable income
 
                 case (int)Importance.High:
-                    return ImportanceCalculation(data, savedAmount, 1M, entryType);                    
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio, entryType);                    
 
                 case (int)Importance.Medium:
-                    return ImportanceCalculation(data, savedAmount, 2M, entryType);
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 2, entryType);
 
                 case (int)Importance.Low:
-                    return ImportanceCalculation(data, savedAmount, 3M, entryType);                 
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 3, entryType);                 
 
                 case (int)Importance.Unnecessary:
-                    return ImportanceCalculation(data, savedAmount, 4M, entryType);
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 4, entryType);
 
                 default:
                     return savedAmount;
@@ -117,18 +118,18 @@ namespace DataManager
             }
         }
         
-        private decimal ImportanceCalculation(DataEntry data, decimal savedAmount, decimal percentage, EntryType entryType)
+        private decimal ImportanceBasedCalculation(DataEntry data, decimal savedAmount, decimal savingRatio, EntryType entryType)
         {
             if (SavingChoice == SavingType.Minimal)
             {
-                savedAmount += (data.Amount * (minimalSavingValue * percentage));
+                savedAmount += (data.Amount * (minimalSavingValue * savingRatio));
                 if(entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.ID, data.Amount * (minimalSavingValue * percentage));
+                    AddToIncomeOfferList(data.ID, data.Amount * (minimalSavingValue * savingRatio));
                 }
                 else if(entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.ID, data.Amount * (minimalSavingValue * percentage));
+                    AddToExpensesOfferList(data.ID, data.Amount * (minimalSavingValue * savingRatio));
                 }
                 return savedAmount;
             }
@@ -137,7 +138,7 @@ namespace DataManager
             {
                 decimal temp;
 
-                bool maximalSaving = (maximalSavingValue * percentage) >= 1;
+                bool maximalSaving = (maximalSavingValue * savingRatio) >= 1;
 
                 if (maximalSaving)
                 {
@@ -162,14 +163,14 @@ namespace DataManager
 
             else if (SavingChoice == SavingType.Regular)
             {
-                savedAmount += (data.Amount * (regularSavingValue * percentage));
+                savedAmount += (data.Amount * (regularSavingValue * savingRatio));
                 if(entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.ID, data.Amount * (regularSavingValue * percentage));
+                    AddToIncomeOfferList(data.ID, data.Amount * (regularSavingValue * savingRatio));
                 }
                 else if(entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.ID, data.Amount * (regularSavingValue * percentage));
+                    AddToExpensesOfferList(data.ID, data.Amount * (regularSavingValue * savingRatio));
                 }
                 return savedAmount;
             }
