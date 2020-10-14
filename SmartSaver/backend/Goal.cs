@@ -69,7 +69,7 @@ namespace DataManager
                 file.ReadLine();
                 Title = file.ReadLine();
                 var pricestr = file.ReadLine();
-                Price = Convert.ToDecimal(pricestr, System.Globalization.CultureInfo.InvariantCulture);
+                Price = Convert.ToDecimal(pricestr, System.Globalization.CultureInfo.CurrentCulture);
                 file.Close();
             }
             catch (Exception e)
