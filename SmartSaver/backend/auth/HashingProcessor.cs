@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ePiggy.backend
+namespace ePiggy.backend.auth
 {
     class HashingProcessor
     {

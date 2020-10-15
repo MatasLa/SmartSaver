@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using DataBases;
-using DataManager;
+using ePiggy.backend.auth;
 using ePiggy.utilities;
 
 namespace ePiggy.forms
@@ -29,7 +28,7 @@ namespace ePiggy.forms
             var email = emailInput.Text;
             var pass = passwordInput1.Text;
             var passConfirm = passwordInput2.Text;
-            if (!AuthValidator.RegisterValidation(this, email, pass, passConfirm)) return;
+            if (!InputValidator.RegisterValidation(this, email, pass, passConfirm)) return;
             UserAuth.Registration(email: email, pass: pass);
             FormUtilities.ChangeForm(this, new FormMain(DataHandler));
         }

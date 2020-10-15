@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using EPiggy;
-using ePiggy.utilities;
+using ePiggy.backend.dataHandling;
 
-namespace DataManager
+namespace ePiggy.utilities
 {
     public class DataTableConverter
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using ePiggy.forms.finances;
 using ePiggy.forms.finances.budget;
 using ePiggy.forms.finances.goals;
 using ePiggy.forms.reports;

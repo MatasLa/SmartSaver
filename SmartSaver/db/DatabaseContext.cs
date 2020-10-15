@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ePiggy.db.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataBases
+namespace ePiggy.db
 {
     public class DatabaseContext : DbContext
     {

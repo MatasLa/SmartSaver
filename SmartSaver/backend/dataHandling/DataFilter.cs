@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
-namespace DataManager
+namespace ePiggy.backend.dataHandling
 {
 	/*Requires datamanager object, methods filter data by provided criteria*/
     public class DataFilter

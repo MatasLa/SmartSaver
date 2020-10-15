@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
-using ePiggy.backend;
 using ePiggy.utilities;
 
 namespace ePiggy.forms.reports

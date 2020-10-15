@@ -1,32 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DataBases
+namespace ePiggy.db.Migrations
 {
-    public partial class @new : Migration
+    public partial class test1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Goals",
+                name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    Title = table.Column<string>(maxLength: 255, nullable: true),
-                    PlaceInQueue = table.Column<int>(nullable: false)
+                    Email = table.Column<string>(maxLength: 255, nullable: true),
+                    Password = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Goals", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Goals");
+                name: "Users");
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DataManager
+namespace ePiggy.backend.dataHandling
 {
 	public class DataEntry : IComparable
 	{

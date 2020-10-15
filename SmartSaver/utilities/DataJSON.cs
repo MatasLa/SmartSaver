@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Text.Json;
-using System.Diagnostics;
 using System.IO;
-using ePiggy.utilities;
+using System.Text.Json;
+using ePiggy.backend.dataHandling;
 
-namespace DataManager
+namespace ePiggy.utilities
 {
     public class DataJSON
     {
