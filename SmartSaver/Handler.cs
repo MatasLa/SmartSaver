@@ -39,6 +39,16 @@ namespace ePiggy
             //DataJSON.ReadIncomeFromFile();
             //DataJSON.ReadExpensesFromFile();
         }
+
+        public void ClearData()
+        {
+            Data.Income.Clear();
+            Data.Expenses.Clear();
+            Data.GoalsList.Clear();
+            Data.ReadExpensesFromDb();
+            Data.ReadIncomeFromDb();
+            Data.ReadGoalsFromDb();
+        }
         
     }
 }

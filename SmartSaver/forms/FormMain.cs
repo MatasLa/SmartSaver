@@ -20,12 +20,7 @@ namespace ePiggy.forms
             InitializeComponent();
             CustomizeDesign();
             Handler = handler;
-            Handler.Data.Income.Clear();
-            Handler.Data.Expenses.Clear();
-            Handler.Data.GoalsList.Clear();
-            Handler.Data.ReadExpensesFromDb();
-            Handler.Data.ReadIncomeFromDb();
-            Handler.Data.ReadGoalsFromDb();
+            Handler.ClearData();
         }
 
         private void CustomizeDesign()
@@ -45,62 +40,62 @@ namespace ePiggy.forms
 
         private void ButtonFinances_Click(object sender, EventArgs e)
         {
-            FormChanger.ShowOrHideControl(panelFinancesSubMenu);
+            FormUtilities.ShowOrHideControl(panelFinancesSubMenu);
         }
 
         private void ButtonReports_Click(object sender, EventArgs e)
         {
-            FormChanger.ShowOrHideControl(panelReportsSubMenu);
+            FormUtilities.ShowOrHideControl(panelReportsSubMenu);
         }
 
         private void ButtonIncome_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FinanceForm(Handler, EntryType.Income), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FinanceForm(Handler, EntryType.Income), panelMain);
         }
 
         private void ButtonExpenses_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FinanceForm(Handler, EntryType.Expense), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FinanceForm(Handler, EntryType.Expense), panelMain);
         }
 
         private void ButtonGoals_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new GoalsForm(Handler), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new GoalsForm(Handler), panelMain);
         }
 
         private void ButtonSpending_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FormSpending(), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FormSpending(), panelMain);
         }
 
         private void ButtonNetWorth_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FormNetWorth(), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FormNetWorth(), panelMain);
         }
 
         private void ButtonIncomeVExpenses_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FormIncomeVExpenses(), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FormIncomeVExpenses(Handler), panelMain);
         }
 
         private void ButtonGoalReport_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FormGoalReports(), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FormGoalReports(), panelMain);
         }
 
         private void ButtonHelp_Click(object sender, EventArgs e)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new FormHelp(), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FormHelp(), panelMain);
         }
 
         private void ButtonLogOut_Click(object sender, EventArgs e)
         {
-            FormChanger.ChangeForm(this, new FormLogIn(Handler));
+            FormUtilities.ChangeForm(this, new FormLogIn(Handler));
         }
 
         private void MenuLogo_Click(object sender, EventArgs e)
         {
-            FormChanger.CloseChildForm(ref _activeForm);
+            FormUtilities.CloseChildForm(ref _activeForm);
         }
 
         #endregion

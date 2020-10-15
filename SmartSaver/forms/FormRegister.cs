@@ -21,7 +21,7 @@ namespace ePiggy.forms
         
         private void backToLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormChanger.ChangeForm(this, new FormLogIn(DataHandler));
+            FormUtilities.ChangeForm(this, new FormLogIn(DataHandler));
         }
 
         private void registerButton_Click(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace ePiggy.forms
             var passConfirm = passwordInput2.Text;
             if (!AuthValidator.RegisterValidation(this, email, pass, passConfirm)) return;
             UserAuth.Registration(email: email, pass: pass);
-            FormChanger.ChangeForm(this, new FormMain(DataHandler));
+            FormUtilities.ChangeForm(this, new FormMain(DataHandler));
         }
 
         public void ChangeErrorText(int id)

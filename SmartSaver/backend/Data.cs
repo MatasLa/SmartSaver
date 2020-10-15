@@ -44,7 +44,11 @@ namespace DataManager
             var newGoal = new Goal(title, placeInQueue);
             var price = newGoal.Price;
             var parsedTitle = newGoal.Title;
+<<<<<<< HEAD
+			var db = new DatabaseContext();
+=======
             var db = new DatabaseContext();
+>>>>>>> dev
             var goal = new Goals { UserId = userid, Title = parsedTitle, Price = price, PlaceInQueue = placeInQueue };
             db.Add(goal);
             db.SaveChanges();
@@ -74,6 +78,7 @@ namespace DataManager
                 DataEntry newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
                 Income.Add(newIncome);
         }
+
 		public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var dateUse = date;
@@ -93,7 +98,7 @@ namespace DataManager
 
         }
 
-public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var db = new DatabaseContext();
             var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
@@ -117,9 +122,9 @@ public void AddExpense(int userid, decimal value, string title, DateTime date, b
 				int id = expense.Id;
                 DataEntry newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
                 Expenses.Add(newExpense);
-                dateUse.AddMonths(1);
-            }
-        }
+                dateUse = dateUse.AddMonths(1);
+			}
+		}
 
 		public void RemoveIncome(int id)
         {
