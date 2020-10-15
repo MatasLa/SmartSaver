@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 using DataManager;
 using ePiggy;
 using ePiggy.forms;
+using ImageChartsLib;
+using System.Globalization;
+using DataBases;
 
 namespace EPiggy
 {
