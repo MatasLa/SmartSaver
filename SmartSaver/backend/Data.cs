@@ -44,11 +44,7 @@ namespace DataManager
             var newGoal = new Goal(title, placeInQueue);
             var price = newGoal.Price;
             var parsedTitle = newGoal.Title;
-<<<<<<< HEAD
-			var db = new DatabaseContext();
-=======
             var db = new DatabaseContext();
->>>>>>> dev
             var goal = new Goals { UserId = userid, Title = parsedTitle, Price = price, PlaceInQueue = placeInQueue };
             db.Add(goal);
             db.SaveChanges();
