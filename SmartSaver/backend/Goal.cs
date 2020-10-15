@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -7,6 +8,7 @@ namespace DataManager
 {
     public class Goal
     {
+        private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\parsedGoal.txt";
         private int id;
         private int userId;
         private string title;
@@ -51,8 +53,9 @@ namespace DataManager
 
         public Goal(string title, int placeInQueue)
         {
-            SetGoalFromWeb(title);
             PlaceInQueue = placeInQueue;
+            SetGoalFromWeb(title);
+
         }
 
         public Goal()
@@ -69,13 +72,14 @@ namespace DataManager
             {
                 Task.Run(() => InternetParser.GetHTMLAsync(itemName)).Wait();
 
-                System.IO.StreamReader file = new System.IO.StreamReader("priceInfo.txt");
-                string line;
+                var file = new System.IO.StreamReader(ResourceDirectoryParsedGoal);
+                file.ReadLine();
                 Title = file.ReadLine();
                 var pricestr = file.ReadLine();
-                var Price = Convert.ToDouble(pricestr, System.Globalization.CultureInfo.InvariantCulture);
+                Price = Convert.ToDecimal(pricestr, System.Globalization.CultureInfo.CurrentCulture);
                 file.Close();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
 
             }
