@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Text.Json;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using ePiggy.utilities;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
-    public class DataJSON
+    public class DataJson
     {
 		private readonly Data _data;
-		public DataJSON(Data data)
+		public DataJson(Data data)
 		{
 			this._data = data;
 		}
@@ -40,7 +39,7 @@ namespace DataManager
 		{
             try
 			{
-				var file = new System.IO.StreamReader("userIncome.json");
+				var file = new StreamReader("userIncome.json");
 
                 string line;
                 while ((line = file.ReadLine()) != null)
@@ -69,7 +68,7 @@ namespace DataManager
 		{
             try
 			{
-				var file = new System.IO.StreamReader("userExpenses.json");
+				var file = new StreamReader("userExpenses.json");
                 string line;
                 while ((line = file.ReadLine()) != null)
 				{
