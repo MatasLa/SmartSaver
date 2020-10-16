@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using EPiggy;
 using ePiggy.utilities;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
     public class DataTableConverter
     {
@@ -22,14 +20,14 @@ namespace DataManager
             {
                 foreach (var data in _data.Income)
                 {
-                    dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                    dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
                 }
             }
             else if(entryType == EntryType.Expense)
             {
                 foreach (var data in _data.Expenses)
                 {
-                    dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                    dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
                 }
             }
             return dt;
@@ -41,7 +39,7 @@ namespace DataManager
             var dt = GenerateHeaders();
             foreach (var dataEntry in customList)
             {
-                dt.Rows.Add(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, dataEntry.Importance);
+                dt.Rows.Add(dataEntry.Id, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, dataEntry.Importance);
             }
 
             return dt;
@@ -71,7 +69,7 @@ namespace DataManager
 
             foreach(var data in _data.Income)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
             return dt;
         }
@@ -88,7 +86,7 @@ namespace DataManager
 
             foreach (var data in _data.Expenses)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
             return dt;
         }
