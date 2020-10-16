@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using DataBases;
 
 namespace ePiggy
 {
@@ -33,10 +34,20 @@ namespace ePiggy
             DataFilter = new DataFilter(Data);
             DataCalculations = new DataCalculations(Data);
             DataJSON = new DataJSON(Data);
-            Data.ReadIncomeFromDb();
-            Data.ReadExpensesFromDb();
+            //Data.ReadIncomeFromDb();
+            //Data.ReadExpensesFromDb();
             //DataJSON.ReadIncomeFromFile();
             //DataJSON.ReadExpensesFromFile();
+        }
+
+        public void ClearData()
+        {
+            Data.Income.Clear();
+            Data.Expenses.Clear();
+            Data.GoalsList.Clear();
+            Data.ReadExpensesFromDb();
+            Data.ReadIncomeFromDb();
+            Data.ReadGoalsFromDb();
         }
         
     }

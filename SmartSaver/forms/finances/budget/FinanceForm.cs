@@ -76,11 +76,25 @@ namespace ePiggy.forms.finances.budget
         {
             if (EntryType == EntryType.Income)
             {
-                _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                if (entry.IsMonthly)
+                {
+                    _data.AddMonthlyIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                }
+                else
+                {
+                    _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                }
             }
             else
             {
-                _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                if (entry.IsMonthly)
+                {
+                    _data.AddMonthlyExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                }
+                else
+                {
+                    _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                }
             }
         }
 
@@ -163,7 +177,7 @@ namespace ePiggy.forms.finances.budget
                 }
                 else
                 {
-                    FormChanger.OpenChildForm(ref _activeForm, new EntryForm(new DataEntry(), EntryType, _handler, EntryForm.Type.Add), splitContainer.Panel2);
+                    FormUtilities.OpenChildForm(ref _activeForm, new EntryForm(new DataEntry(), EntryType, _handler, EntryForm.Type.Add), splitContainer.Panel2);
                 }
             } 
             else if (dataGridView.SelectedRows.Count > 1)
@@ -186,17 +200,17 @@ namespace ePiggy.forms.finances.budget
 
         public void CloseSideForm()
         {
-            FormChanger.CloseChildForm(ref _activeForm);
+            FormUtilities.CloseChildForm(ref _activeForm);
         }
 
         private void OpenMultiEntryInfoForm(List<DataEntry> entries)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new MultiEntryInfoForm(entries, _handler), splitContainer.Panel2);
+            FormUtilities.OpenChildForm(ref _activeForm, new MultiEntryInfoForm(entries, _handler), splitContainer.Panel2);
         }
 
         public void OpenEntryInfoForm(DataEntry entry)
         {
-            FormChanger.OpenChildForm(ref _activeForm, new EntryInfoForm(entry, _handler, this), splitContainer.Panel2);
+            FormUtilities.OpenChildForm(ref _activeForm, new EntryInfoForm(entry, _handler, this), splitContainer.Panel2);
         }
 
         private bool OpenEntryForm(DataEntry entry, EntryForm.Type entryFormType)
@@ -231,7 +245,7 @@ namespace ePiggy.forms.finances.budget
         private void PanelTop_Click(object sender, EventArgs e)
         {
             dataGridView.ClearSelection();
-            FormChanger.CloseChildForm(ref _activeForm);
+            FormUtilities.CloseChildForm(ref _activeForm);
         }
 
         private void ButtonAddEntry_Click(object sender, EventArgs e)
@@ -271,18 +285,14 @@ namespace ePiggy.forms.finances.budget
     
         private void DisplayBalance()
         {
-            var balance = _dataFilter.GetBalanceByDate(_handler.Time);
-            labelBalance.BackColor = labelBalance.BackColor;
-            labelBalance.ForeColor = balance >= decimal.Zero ? Color.Green : Color.Red;
-            labelBalance.Text = NumberFormatter.FormatCurrency(balance);
+            var balance = _dataFilter.GetBalance(_handler.Time);
+            FormUtilities.DisplayCurrencyTextWithColor(labelBalance, balance);
         }
 
         private void DisplayTotalBalance()
         {
-            var balance = _handler.DataCalculations.CheckBalance();
-            labelTotalBalanceValue.BackColor = labelBalance.BackColor;
-            labelTotalBalanceValue.ForeColor = balance >= decimal.Zero ? Color.Green : Color.Red;
-            labelTotalBalanceValue.Text = NumberFormatter.FormatCurrency(balance);
+            var balance = _handler.DataFilter.GetBalance();
+            FormUtilities.DisplayCurrencyTextWithColor(labelTotalBalanceValue, balance);
         }
 
         private void DisplayDate()

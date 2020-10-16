@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using DataBases;
+using ePiggy;
 using ePiggy.utilities;
 
 namespace DataManager
@@ -39,19 +40,19 @@ namespace DataManager
 		/*NEW*/
         public bool AddGoal(int userid, string title, int placeInQueue)//parsing from internet
         {
-            if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
-            var db = new DatabaseContext();
-            var goal = new Goals { UserId = userid, Title = title, Price = 0, PlaceInQueue = placeInQueue };
-			db.Add(goal);
-            int id = goal.Id;
+			if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
             var newGoal = new Goal(title, placeInQueue);
-            newGoal.ID = id;
             var price = newGoal.Price;
-            goal.Price = price;
-            GoalsList.Add(newGoal);
+            var parsedTitle = newGoal.Title;
+			var db = new DatabaseContext();
+            var goal = new Goals { UserId = userid, Title = parsedTitle, Price = price, PlaceInQueue = placeInQueue };
+            db.Add(goal);
             db.SaveChanges();
-			return true;
-        }
+            var id = goal.Id;
+            newGoal.ID = id;
+            GoalsList.Add(newGoal);
+            return true;
+		}
 		/*NEW*/
         public void RemoveGoal(int id)
         {
@@ -73,6 +74,7 @@ namespace DataManager
                 DataEntry newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
                 Income.Add(newIncome);
         }
+
 		public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var dateUse = date;
@@ -92,7 +94,7 @@ namespace DataManager
 
         }
 
-public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var db = new DatabaseContext();
             var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
@@ -116,9 +118,9 @@ public void AddExpense(int userid, decimal value, string title, DateTime date, b
 				int id = expense.Id;
                 DataEntry newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
                 Expenses.Add(newExpense);
-                dateUse.AddMonths(1);
-            }
-        }
+                dateUse = dateUse.AddMonths(1);
+			}
+		}
 
 		public void RemoveIncome(int id)
         {
@@ -435,7 +437,7 @@ public void AddExpense(int userid, decimal value, string title, DateTime date, b
             using (var context = new DatabaseContext())
             {
                 var incomes = context.Incomes; // define query
-                foreach (var income in incomes) // query executed and data obtained from database
+                foreach (var income in incomes.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
                 {
                     DataEntry newIncome = new DataEntry(income.Id, income.UserId, income.Amount, income.Title, income.Date, income.IsMonthly, income.Importance);
                     Income.Add(newIncome);
@@ -447,7 +449,7 @@ public void AddExpense(int userid, decimal value, string title, DateTime date, b
             using (var context = new DatabaseContext())
             {
                 var expenses = context.Expenses; // define query
-                foreach (var expense in expenses) // query executed and data obtained from database
+                foreach (var expense in expenses.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
                 {
                     DataEntry newExpense = new DataEntry(expense.Id, expense.UserId, expense.Amount, expense.Title, expense.Date, expense.IsMonthly, expense.Importance);
                     Expenses.Add(newExpense);
@@ -455,7 +457,19 @@ public void AddExpense(int userid, decimal value, string title, DateTime date, b
             }
         }
 
-        public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
+		public void ReadGoalsFromDb()
+		{
+			using (var context = new DatabaseContext())
+			{
+				var goals = context.Goals; // define query
+				foreach (var goal in goals.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
+				{
+                    Goal newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price, goal.PlaceInQueue);
+                    GoalsList.Add(newGoal);
+                }
+			}
+		}
+		public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
         {
             switch (entryType)
             {

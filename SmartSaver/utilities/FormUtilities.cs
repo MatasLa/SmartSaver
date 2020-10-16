@@ -5,7 +5,7 @@ using ePiggy.forms.finances.goals;
 
 namespace ePiggy.utilities
 {
-    public static class FormChanger
+    public static class FormUtilities
     {
         public static void ChangeForm(Form currentForm, Form newForm)
         {
@@ -75,6 +75,13 @@ namespace ePiggy.utilities
         public static void ShowOrHideControl(Control control)
         {
             control.Visible = !control.Visible;
+        }
+
+        public static void DisplayCurrencyTextWithColor(Label label, decimal value)
+        {
+            var currencyWithColor = NumberFormatter.FormatCurrencyWithColor(value);
+            label.ForeColor = currencyWithColor.Color;
+            label.Text = currencyWithColor.Number;
         }
     }
 }
