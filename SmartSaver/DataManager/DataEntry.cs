@@ -1,15 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ePiggy.DataManager
 {
 	public class DataEntry : IComparable
 	{
+        /*Properties*/
+        public string Title
+        {
+            get; set;
+        }
+        public decimal Amount
+        {
+            get; set;
+        }
+        public int Id
+        {
+            get; set;
+        }
+        public int UserId
+        {
+            get; set;
+        }
+        public DateTime Date
+        {
+            get; set;
+        }
+        public bool IsMonthly
+        {
+            get; set;
+        }
 
-		/*Constructor*/
+        public int Importance
+        {
+            get; set;
+        }
 
-        public DataEntry(decimal amount, string title, DateTime date, bool isMonthly, int importance)
+		/*Constructors*/
+		public DataEntry(decimal amount, string title, DateTime date, bool isMonthly, int importance)
         {
             Amount = amount;
             Title = title;
@@ -21,13 +48,13 @@ namespace ePiggy.DataManager
         public DataEntry(int id, int userId, decimal amount, string title, DateTime date, bool isMonthly, int importance)
             :this(amount, title, date, isMonthly, importance)
 		{
-			ID = id;
+			Id = id;
             UserId = userId;
         }
 
 		public DataEntry()
 		{
-			ID = 0;
+			Id = 0;
             UserId = 0;
 			Amount = 0;
 			Title = "unnamed";
@@ -38,56 +65,12 @@ namespace ePiggy.DataManager
 
         public int CompareTo(object obj)
         {
-            if (obj == null) return 1;
-
-            var otherEntry = obj as DataEntry;
-            if (otherEntry != null)
-                return this.Amount.CompareTo(otherEntry.Amount);
-            else
-                throw new ArgumentException("Object is not a DataEntry");
+            return obj switch
+            {
+                null => 1,
+                DataEntry otherEntry => this.Amount.CompareTo(otherEntry.Amount),
+                _ => throw new ArgumentException("Object is not a DataEntry")
+            };
         }
-
-		/*Getters and Setters*/
-		public string Title
-		{
-			get;
-			set;
-		}
-
-		public decimal Amount
-		{
-			get;
-			set;
-		}
-
-		public int ID
-		{
-			get;
-			set;
-		}
-
-        public int UserId
-        {
-            get;
-            set;
-        }
-
-		public DateTime Date
-		{
-			get;
-			set;
-		}
-
-		public bool IsMonthly
-		{
-			get;
-			set;
-		}
-
-		public int Importance
-		{
-			get;
-			set;
-		}
     }
 }

@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection.Metadata;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
     public class DataCalculations
     {
