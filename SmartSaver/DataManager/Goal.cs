@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using ePiggy.utilities;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
     public class Goal
     {
+        private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\parsedGoal.txt";
         private int id;
+        private int userId;
         private string title;
         private decimal price;
         private int placeInQueue;
@@ -17,10 +20,16 @@ namespace DataManager
         {
             get; set;
         }
+        public int UserId
+        {
+            get; set;
+        }
+
         public string Title
         {
             get; set;
         }
+
         public decimal Price
         {
             get; set;
@@ -31,10 +40,11 @@ namespace DataManager
             get; set;
         }
 
-        public Goal(int id, string title, decimal price, int placeInQueue)
+        public Goal(int id, int userId, string title, decimal price, int placeInQueue)
             :this(title, price, placeInQueue)
         {
             ID = id;
+            UserId = userId;
             PlaceInQueue = placeInQueue;
         }
 
@@ -46,13 +56,15 @@ namespace DataManager
 
         public Goal(string title, int placeInQueue)
         {
-            SetGoalFromWeb(title);
             PlaceInQueue = placeInQueue;
+            SetGoalFromWeb(title);
+
         }
 
         public Goal()
         {
             ID = 0;
+            UserId = 0;
             Title = "unnamed";
             Price = 0;
         }
@@ -63,12 +75,14 @@ namespace DataManager
             {
                 Task.Run(() => InternetParser.GetHTMLAsync(itemName)).Wait();
 
-                var file = new System.IO.StreamReader("priceInfo.txt");
+                var file = new System.IO.StreamReader(ResourceDirectoryParsedGoal);
+                file.ReadLine();
                 Title = file.ReadLine();
                 var pricestr = file.ReadLine();
-                Price = Convert.ToDecimal(pricestr, System.Globalization.CultureInfo.InvariantCulture);
+                Price = Convert.ToDecimal(pricestr, System.Globalization.CultureInfo.CurrentCulture);
                 file.Close();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 ExceptionHandler.Log(e.ToString());
             }

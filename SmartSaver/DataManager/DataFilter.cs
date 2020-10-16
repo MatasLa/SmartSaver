@@ -12,7 +12,51 @@ namespace DataManager
         public DataFilter(Data data)
         {
             this._data = data;
+		}
+
+		/*Arno kodas*/
+
+        public decimal GetTotaledIncome()
+        {
+            return _data.Income.Sum(entry => entry.Amount);
+		}
+
+        public decimal GetTotaledIncome(DateTime date)
+        {
+			return GetIncomeByDate(date).Sum(entry => entry.Amount);
+		}
+
+        public decimal GetTotaledExpenses()
+        {
+            return _data.Expenses.Sum(entry => entry.Amount);
         }
+
+		public decimal GetTotaledExpenses(DateTime date)
+        {
+            return GetExpensesByDate(date).Sum(entry => entry.Amount);
+        }
+
+		public decimal GetBalance()/*Checks even future data*/
+        {
+            return GetTotaledIncome() - GetTotaledExpenses();
+		}
+
+        public decimal GetBalance(DateTime date)/*Checks even future data*/
+        {
+            return GetTotaledIncome(date) - GetTotaledExpenses(date);
+        }
+
+		public bool IsBalancePositive()/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
+        {
+            return GetBalance() >= 0;
+		}
+
+        public bool IsBalancePositive(DateTime date)/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
+        {
+            return GetBalance(date) >= 0;
+        }
+
+		/* baigiasi Arno kodas */
 
 		public List<DataEntry> GetIncomeHigherThan(decimal amount)
 		{
@@ -25,17 +69,6 @@ namespace DataManager
 			var temp = _data.Expenses.Where(x => x.Amount >= amount).ToList();
 			return temp;
 		}
-
-		public decimal GetBalanceByDate(DateTime dateTime)
-        {
-			var sum = GetIncomeByDate(dateTime).Sum(data => data.Amount);
-            return GetExpensesByDate(dateTime).Aggregate(sum, (current, data) => current - data.Amount);
-		}
-
-		public bool IsBalancePositiveByDate(DateTime dateTime)
-        {
-            return GetBalanceByDate(dateTime) >= 0;
-        }
 
 		public List<DataEntry> GetIncomeByDate(DateTime dateTime)
 		{

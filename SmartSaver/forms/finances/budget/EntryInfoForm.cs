@@ -43,6 +43,7 @@ namespace ePiggy.forms.finances.budget
             labelValue.Text = NumberFormatter.FormatCurrency(DataEntry.Amount);
             labelDate.Text = DataEntry.Date.ToString("d");
             labelRecurring.Text = DataEntry.IsMonthly.ToString();
+            labelImportance.Text = DataEntry.Importance.ToString();
         }
 
         private void ButtonEdit_Click(object sender, System.EventArgs e)
@@ -57,5 +58,6 @@ namespace ePiggy.forms.finances.budget
             _handler.Data.RemoveIncome(_dataEntry);
             _parentForm.UpdateDisplay();
         }
+
     }
 }

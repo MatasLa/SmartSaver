@@ -4,14 +4,18 @@ namespace ePiggy.utilities
 {
     class TimeManager
     {
+        private static readonly DateTime TwoMonthsAhead = DateTime.Today.AddMonths(2);
+
         public static DateTime ChangeYear(DateTime dateTime, int newYear)
         {
-            return dateTime.AddYears(newYear - dateTime.Year);
+            var temp = dateTime.AddYears(newYear - dateTime.Year);
+            return temp >= TwoMonthsAhead ? dateTime : temp;
         }
 
         public static DateTime ChangeMonth(DateTime dateTime, int newMonth)
         {
-            return dateTime.AddMonths(newMonth - dateTime.Month);
+            var temp = dateTime.AddMonths(newMonth - dateTime.Month);
+            return temp >= TwoMonthsAhead ? dateTime : temp;
         }
 
         public static DateTime MoveToNextMonth(DateTime dateTime)

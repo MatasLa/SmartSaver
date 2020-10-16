@@ -59,7 +59,7 @@ namespace ePiggy.forms
 
         private void noAccLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            FormChanger.ChangeForm(this, new FormRegister(DataHandler));
+            FormUtilities.ChangeForm(this, new FormRegister(DataHandler));
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -68,7 +68,7 @@ namespace ePiggy.forms
             var pass = passwordInput.Text;
             if (UserAuth.Login(email, pass))
             {
-                FormChanger.ChangeForm(this, new FormMain(DataHandler));
+                FormUtilities.ChangeForm(this, new FormMain(DataHandler));
             }
             else
             {
