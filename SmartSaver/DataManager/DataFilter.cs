@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
-	/*Requires datamanager object, methods filter data by provided criteria*/
+	/*Requires DataManager object, methods filter data by provided criteria*/
     public class DataFilter
     {
-        private Data data;
+        private readonly Data _data;
         public DataFilter(Data data)
         {
-            this.data = data;
+            this._data = data;
 		}
-
-		/*Arno kodas*/
 
         public decimal GetTotaledIncome()
         {
-            return data.Income.Sum(entry => entry.Amount);
+            return _data.Income.Sum(entry => entry.Amount);
 		}
 
         public decimal GetTotaledIncome(DateTime date)
@@ -28,7 +25,7 @@ namespace DataManager
 
         public decimal GetTotaledExpenses()
         {
-            return data.Expenses.Sum(entry => entry.Amount);
+            return _data.Expenses.Sum(entry => entry.Amount);
         }
 
 		public decimal GetTotaledExpenses(DateTime date)
@@ -56,41 +53,40 @@ namespace DataManager
             return GetBalance(date) >= 0;
         }
 
-		/* baigiasi Arno kodas */
 
 		public List<DataEntry> GetIncomeHigherThan(decimal amount)
 		{
-			List<DataEntry> temp = data.Income.Where(x => x.Amount >= amount).ToList();
+			var temp = _data.Income.Where(x => x.Amount >= amount).ToList();
 			return temp;
 		}
 
 		public List<DataEntry> GetExpensesHigherThan(decimal amount)
 		{
-			List<DataEntry> temp = data.Expenses.Where(x => x.Amount >= amount).ToList();
+			var temp = _data.Expenses.Where(x => x.Amount >= amount).ToList();
 			return temp;
 		}
 
 		public List<DataEntry> GetIncomeByDate(DateTime dateTime)
 		{
-			List<DataEntry> temp = data.Income.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();
+			var temp = _data.Income.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();
 			return temp;
 		}
 
 		public List<DataEntry> GetExpensesByDate(DateTime dateTime)
 		{
-			List<DataEntry> temp = data.Expenses.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();
+			var temp = _data.Expenses.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();
 			return temp;
 		}
 
-		public List<DataEntry> GetReccuringIncome()
+		public List<DataEntry> GetRecurringIncome()
 		{
-			List<DataEntry> temp = data.Income.Where(x => x.IsMonthly).ToList();
+			var temp = _data.Income.Where(x => x.IsMonthly).ToList();
 			return temp;
 		}
 
-		public List<DataEntry> GetReccuringExpenses()
+		public List<DataEntry> GetRecurringExpenses()
 		{
-			List<DataEntry> temp = data.Expenses.Where(x => x.IsMonthly).ToList();
+			var temp = _data.Expenses.Where(x => x.IsMonthly).ToList();
 			return temp;
 		}
 	}

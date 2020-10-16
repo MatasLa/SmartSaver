@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
+using ePiggy.utilities;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
     public class DataCalculations
     {
@@ -11,7 +11,7 @@ namespace DataManager
         {
             this.data = data;
         }
-        
+
         //Temporary hardcoded local parameters (should be taken from front-end later)
         private SavingType SavingChoice;
         private decimal regularSavingValue = 0.25M;
@@ -19,7 +19,7 @@ namespace DataManager
         private decimal minimalSavingValue = 0.1M;
         private decimal savingRatio = 1M;
 
-        
+
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
 
@@ -48,7 +48,7 @@ namespace DataManager
             if (IsBalancePositive())
             {
                 //Goal goal = new Goal();
-                if((CheckBalance() - goal.Price) >= 0)
+                if ((CheckBalance() - goal.Price) >= 0)
                 {
                     return true;    //can already buy this month
                 }
@@ -62,13 +62,13 @@ namespace DataManager
                 return false;   //user already in debt(negative balance) without adding goal expenses
             }
         }
-        
+
         private bool SavingMoney(Goal goal)
         {
             decimal savedAmount = 0;
             //Goal goal = new Goal();
             decimal neededAmount = (goal.Price - CheckBalance());
-            
+
             while ((neededAmount - savedAmount) > 0) //while(can't afford goal)
             {   //todo: improve saving
                 foreach (DataEntry data in data.Income)
@@ -92,13 +92,13 @@ namespace DataManager
                     return savedAmount; //importance of necessary - unchangable income
 
                 case (int)Importance.High:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio, entryType);                    
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio, entryType);
 
                 case (int)Importance.Medium:
                     return ImportanceBasedCalculation(data, savedAmount, savingRatio * 2, entryType);
 
                 case (int)Importance.Low:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 3, entryType);                 
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 3, entryType);
 
                 case (int)Importance.Unnecessary:
                     return ImportanceBasedCalculation(data, savedAmount, savingRatio * 4, entryType);
@@ -108,19 +108,19 @@ namespace DataManager
 
             }
         }
-        
+
         private decimal ImportanceBasedCalculation(DataEntry data, decimal savedAmount, decimal savingRatio, EntryType entryType)
         {
             if (SavingChoice == SavingType.Minimal)
             {
                 savedAmount += (data.Amount * (minimalSavingValue * savingRatio));
-                if(entryType == EntryType.Income)
+                if (entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.ID, data.Amount * (minimalSavingValue * savingRatio));
+                    AddToIncomeOfferList(data.Id, data.Amount * (minimalSavingValue * savingRatio));
                 }
-                else if(entryType == EntryType.Expense)
+                else if (entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.ID, data.Amount * (minimalSavingValue * savingRatio));
+                    AddToExpensesOfferList(data.Id, data.Amount * (minimalSavingValue * savingRatio));
                 }
                 return savedAmount;
             }
@@ -143,11 +143,11 @@ namespace DataManager
                 savedAmount += (data.Amount * temp);
                 if (entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.ID, data.Amount * temp);
+                    AddToIncomeOfferList(data.Id, data.Amount * temp);
                 }
                 else if (entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.ID, data.Amount * temp);
+                    AddToExpensesOfferList(data.Id, data.Amount * temp);
                 }
                 return savedAmount;
             }
@@ -155,13 +155,13 @@ namespace DataManager
             else if (SavingChoice == SavingType.Regular)
             {
                 savedAmount += (data.Amount * (regularSavingValue * savingRatio));
-                if(entryType == EntryType.Income)
+                if (entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.ID, data.Amount * (regularSavingValue * savingRatio));
+                    AddToIncomeOfferList(data.Id, data.Amount * (regularSavingValue * savingRatio));
                 }
-                else if(entryType == EntryType.Expense)
+                else if (entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.ID, data.Amount * (regularSavingValue * savingRatio));
+                    AddToExpensesOfferList(data.Id, data.Amount * (regularSavingValue * savingRatio));
                 }
                 return savedAmount;
             }

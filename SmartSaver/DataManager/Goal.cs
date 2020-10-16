@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading.Tasks;
+using ePiggy.utilities;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
     public class Goal
     {
-        private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\parsedGoal.txt";
-        private int id;
-        private int userId;
-        private string title;
-        private decimal price;
-        private int placeInQueue;
-
-        public int ID
+        private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory)
+                                                                         .Parent?.Parent?.FullName +
+                                                                     @"\resources\textData\parsedGoal.txt";
+        public int Id
         {
             get; set;
         }
@@ -42,15 +37,15 @@ namespace DataManager
         public Goal(int id, int userId, string title, decimal price, int placeInQueue)
             :this(title, price, placeInQueue)
         {
-            ID = id;
+            Id = id;
             UserId = userId;
-            PlaceInQueue = placeInQueue;
         }
 
         public Goal(string title, decimal price, int placeInQueue)
         {
             Title = title;
             Price = price;
+            PlaceInQueue = placeInQueue;
         }
 
         public Goal(string title, int placeInQueue)
@@ -62,7 +57,7 @@ namespace DataManager
 
         public Goal()
         {
-            ID = 0;
+            Id = 0;
             UserId = 0;
             Title = "unnamed";
             Price = 0;
@@ -72,18 +67,18 @@ namespace DataManager
         {
             try
             {
-                Task.Run(() => InternetParser.GetHTMLAsync(itemName)).Wait();
+                Task.Run(() => InternetParser.ReadPriceFromCamel(itemName)).Wait();
 
-                var file = new System.IO.StreamReader(ResourceDirectoryParsedGoal);
+                var file = new StreamReader(ResourceDirectoryParsedGoal);
                 file.ReadLine();
                 Title = file.ReadLine();
-                var pricestr = file.ReadLine();
-                Price = Convert.ToDecimal(pricestr, System.Globalization.CultureInfo.CurrentCulture);
+                var priceString = file.ReadLine();
+                Price = Convert.ToDecimal(priceString, System.Globalization.CultureInfo.CurrentCulture);
                 file.Close();
             }
             catch (Exception e)
             {
-
+                ExceptionHandler.Log(e.ToString());
             }
         }
 

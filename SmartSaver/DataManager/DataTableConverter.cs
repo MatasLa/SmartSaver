@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using EPiggy;
 using ePiggy.utilities;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
     public class DataTableConverter
     {
-        private Data data;
+        private readonly Data _data;
         public DataTableConverter(Data data)
         {
-            this.data = data;
+            this._data = data;
         }
 
         public DataTable GenerateTable(EntryType entryType)//All entries
@@ -20,16 +18,16 @@ namespace DataManager
             var dt = GenerateHeaders();
             if(entryType == EntryType.Income)
             {
-                foreach (DataEntry data in data.Income)
+                foreach (var data in _data.Income)
                 {
-                    dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                    dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
                 }
             }
             else if(entryType == EntryType.Expense)
             {
-                foreach (DataEntry data in data.Expenses)
+                foreach (var data in _data.Expenses)
                 {
-                    dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                    dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
                 }
             }
             return dt;
@@ -41,7 +39,7 @@ namespace DataManager
             var dt = GenerateHeaders();
             foreach (var dataEntry in customList)
             {
-                dt.Rows.Add(dataEntry.ID, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, dataEntry.Importance);
+                dt.Rows.Add(dataEntry.Id, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, dataEntry.Importance);
             }
 
             return dt;
@@ -69,9 +67,9 @@ namespace DataManager
             dt.Columns.Add("Recurring", typeof(bool));
             dt.Columns.Add("Importance", typeof(int));
 
-            foreach(DataEntry data in data.Income)
+            foreach(var data in _data.Income)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
             return dt;
         }
@@ -86,9 +84,9 @@ namespace DataManager
             dt.Columns.Add("Recurring", typeof(bool));
             dt.Columns.Add("Importance", typeof(int));
 
-            foreach (DataEntry data in data.Expenses)
+            foreach (var data in _data.Expenses)
             {
-                dt.Rows.Add(data.ID, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
             }
             return dt;
         }

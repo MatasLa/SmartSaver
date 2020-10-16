@@ -1,16 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using DataBases;
-using ePiggy;
 using ePiggy.utilities;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
 	/*Main data processing class*/
 	public class Data
@@ -22,7 +16,7 @@ namespace DataManager
 
 		/*Methods that creates new instance of class and adds to List*/
 
-		/*NEW*/
+		/*GOALS*/
         public bool AddGoal(int userid, string title, decimal value, int placeInQueue)//manual
         {
             if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
@@ -30,14 +24,12 @@ namespace DataManager
             var goal = new Goals {UserId = userid, Title = title, Price = value, PlaceInQueue = placeInQueue};
             db.Add(goal);
             db.SaveChanges();
-            int id = goal.Id;
-			var newGoal = new Goal(title, value, placeInQueue);
-            newGoal.ID = id;
+            var id = goal.Id;
+            var newGoal = new Goal(title, value, placeInQueue) {Id = id};
             GoalsList.Add(newGoal);
             return true;
         }
 
-		/*NEW*/
         public bool AddGoal(int userid, string title, int placeInQueue)//parsing from internet
         {
 			if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
@@ -49,59 +41,49 @@ namespace DataManager
             db.Add(goal);
             db.SaveChanges();
             var id = goal.Id;
-            newGoal.ID = id;
+            newGoal.Id = id;
             GoalsList.Add(newGoal);
             return true;
 		}
-		/*NEW*/
-        public void RemoveGoal(int id)
-        {
-            var db = new DatabaseContext();
-            var index = db.Goals.FirstOrDefault(x => x.Id == id);
-            db.Goals.Remove(index);
-            db.SaveChanges();
-            var goal = GoalsList.FirstOrDefault(x => x.ID == id);
-            GoalsList.Remove(goal);
-        }
 
+		/*INCOMES*/
         public void AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var db = new DatabaseContext();
             var income = new Incomes { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
-                db.Add(income);
-                db.SaveChanges();
-			    int id = income.Id;
-                DataEntry newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
-                Income.Add(newIncome);
+            db.Add(income);
+            db.SaveChanges();
+            var id = income.Id;
+            var newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
+            Income.Add(newIncome);
         }
 
-		public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var dateUse = date;
             var db = new DatabaseContext();
             var rotations = isMonthly ? 12 : 1;
-            for (int i = 0; i<rotations; i++)
+            for (var i = 0; i < rotations; i++)
             {
                 var income = new Incomes { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
                 db.Add(income);
                 db.SaveChanges();
-				int id = income.Id;
-                DataEntry newIncome = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
+                var id = income.Id;
+                var newIncome = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
                 Income.Add(newIncome);
                 dateUse = dateUse.AddMonths(1);
             }
-            
-
         }
 
+		/*EXPENSES*/
         public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var db = new DatabaseContext();
             var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
             db.Add(expense);
             db.SaveChanges();
-            int id = expense.Id;
-            DataEntry newExpense = new DataEntry(id, userid, value, title, date, isMonthly, importance);
+            var id = expense.Id;
+            var newExpense = new DataEntry(id, userid, value, title, date, isMonthly, importance);
             Expenses.Add(newExpense);
         }
 
@@ -110,44 +92,116 @@ namespace DataManager
             var db = new DatabaseContext();
             var dateUse = date;
             var rotations = isMonthly ? 12 : 1;
-            for (int i = 0; i < rotations; i++)
+            for (var i = 0; i < rotations; i++)
             {
                 var expense = new Expenses { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
                 db.Add(expense);
                 db.SaveChanges();
-				int id = expense.Id;
-                DataEntry newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
+                var id = expense.Id;
+                var newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
                 Expenses.Add(newExpense);
                 dateUse = dateUse.AddMonths(1);
+            }
+        }
+
+		/*Methods for removal*/
+
+        public void RemoveGoal(int id)
+        {
+            var db = new DatabaseContext();
+            try
+            {
+                var index = db.Goals.FirstOrDefault(x => x.Id == id);
+                db.Goals.Remove(index ?? throw new InvalidOperationException());
+                db.SaveChanges();
 			}
-		}
+            catch (InvalidOperationException ex)
+            {
+                ExceptionHandler.Log(ex.ToString());
+            }
+            var goal = GoalsList.FirstOrDefault(x => x.Id == id);
+            GoalsList.Remove(goal);
+        }
+
+       
 
 		public void RemoveIncome(int id)
         {
             var db = new DatabaseContext();
-            var index = db.Incomes.FirstOrDefault(x => x.Id == id);
-            db.Incomes.Remove(index);
-            db.SaveChanges();
-
-            var dataEntry = Income.FirstOrDefault(x => x.ID == id);
+            try
+            {
+                var index = db.Incomes.FirstOrDefault(x => x.Id == id);
+                db.Incomes.Remove(index ?? throw new InvalidOperationException());
+                db.SaveChanges();
+            }
+            catch (InvalidOperationException ex)
+            {
+				ExceptionHandler.Log(ex.ToString());
+            }
+            var dataEntry = Income.FirstOrDefault(x => x.Id == id);
             Income.Remove(dataEntry);
 		}
 
         public void RemoveIncome(DataEntry dataEntry)
         {
             var db = new DatabaseContext();
-            var index = db.Incomes.FirstOrDefault(x => x.Id == dataEntry.ID);
-            db.Incomes.Remove(index);
-            db.SaveChanges();
+            try
+            {
+                var index = db.Incomes.FirstOrDefault(x => x.Id == dataEntry.Id);
+                db.Incomes.Remove(index ?? throw new InvalidOperationException());
+                db.SaveChanges();
+            }
+            catch(InvalidOperationException ex)
+            {
+				ExceptionHandler.Log(ex.ToString());
+            }
+            
 
             Income.Remove(dataEntry);
         }
 
-        public void RemoveIncomes(List<DataEntry> entries)
+        public void RemoveExpense(DataEntry dataEntry)
+        {
+            var db = new DatabaseContext();
+            try
+            {
+                var index = db.Expenses.FirstOrDefault(x => x.Id == dataEntry.Id);
+                db.Expenses.Remove(index ?? throw new InvalidOperationException());
+                db.SaveChanges();
+            }
+            catch (InvalidOperationException ex)
+            {
+                ExceptionHandler.Log(ex.ToString());
+            }
+            
+
+            Expenses.Remove(dataEntry);
+        }
+
+        public void RemoveExpense(int id)
+        {
+            var db = new DatabaseContext();
+            try
+            {
+                var index = db.Expenses.FirstOrDefault(x => x.Id == id);
+                db.Expenses.Remove(index ?? throw new InvalidOperationException());
+                db.SaveChanges();
+            }
+            catch (InvalidOperationException ex)
+            {
+                ExceptionHandler.Log(ex.ToString());
+            }
+            
+
+            var dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
+            Expenses.Remove(dataEntry);
+        }
+
+		public void RemoveIncomes(List<DataEntry> entries)
         {
             foreach (var entry in entries)
             {
-                RemoveIncome(entry.ID);
+                RemoveIncome(entry.Id);
             }
         }
 
@@ -159,32 +213,12 @@ namespace DataManager
             }
 		}
 
-		public void RemoveExpense(DataEntry dataEntry)
-        {
-            var db = new DatabaseContext();
-            var index = db.Expenses.FirstOrDefault(x => x.Id == dataEntry.ID);
-            db.Expenses.Remove(index);
-            db.SaveChanges();
-
-            Expenses.Remove(dataEntry);
-        }
-
-		public void RemoveExpense(int id)
-        {
-            var db = new DatabaseContext();
-            var index = db.Expenses.FirstOrDefault(x => x.Id == id);
-            db.Expenses.Remove(index);
-            db.SaveChanges();
-
-            var dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
-            Expenses.Remove(dataEntry);
-        }
 
         public void RemoveExpenses(List<DataEntry> entries)
         {
             foreach (var entry in entries)
             {
-                RemoveExpense(entry.ID);
+                RemoveExpense(entry.Id);
             }
         }
 
@@ -197,7 +231,6 @@ namespace DataManager
         }
 
 		/*Methods that allows to edit different parts of already existing entries*/
-		/*NEW*/
         public bool EditGoal(int id, string title, decimal value)
         {
             var db = new DatabaseContext();
@@ -215,7 +248,6 @@ namespace DataManager
             }
 		}
 
-		/*NEW*/
         public bool EditGoalPlaceInQueue(int id, int placeInQueue)
         {
             var db = new DatabaseContext();
@@ -434,50 +466,44 @@ namespace DataManager
 		}
         public void ReadIncomeFromDb()
         {
-            using (var context = new DatabaseContext())
+            using var context = new DatabaseContext();
+            var incomes = context.Incomes; // define query
+            foreach (var income in incomes.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
             {
-                var incomes = context.Incomes; // define query
-                foreach (var income in incomes.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
-                {
-                    DataEntry newIncome = new DataEntry(income.Id, income.UserId, income.Amount, income.Title, income.Date, income.IsMonthly, income.Importance);
-                    Income.Add(newIncome);
-                }
+                var newIncome = new DataEntry(income.Id, income.UserId, income.Amount, income.Title, income.Date, income.IsMonthly, income.Importance);
+                Income.Add(newIncome);
             }
         }
         public void ReadExpensesFromDb()
         {
-            using (var context = new DatabaseContext())
+            using var context = new DatabaseContext();
+            var expenses = context.Expenses; // define query
+            foreach (var expense in expenses.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
             {
-                var expenses = context.Expenses; // define query
-                foreach (var expense in expenses.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
-                {
-                    DataEntry newExpense = new DataEntry(expense.Id, expense.UserId, expense.Amount, expense.Title, expense.Date, expense.IsMonthly, expense.Importance);
-                    Expenses.Add(newExpense);
-                }
+                var newExpense = new DataEntry(expense.Id, expense.UserId, expense.Amount, expense.Title, expense.Date, expense.IsMonthly, expense.Importance);
+                Expenses.Add(newExpense);
             }
         }
 
 		public void ReadGoalsFromDb()
-		{
-			using (var context = new DatabaseContext())
-			{
-				var goals = context.Goals; // define query
-				foreach (var goal in goals.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
-				{
-                    Goal newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price, goal.PlaceInQueue);
-                    GoalsList.Add(newGoal);
-                }
-			}
-		}
+        {
+            using var context = new DatabaseContext();
+            var goals = context.Goals; // define query
+            foreach (var goal in goals.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
+            {
+                var newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price, goal.PlaceInQueue);
+                GoalsList.Add(newGoal);
+            }
+        }
 		public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
         {
             switch (entryType)
             {
 				case EntryType.Income:
-                    dataEntry = Income.FirstOrDefault(x => x.ID == id);
+                    dataEntry = Income.FirstOrDefault(x => x.Id == id);
 					return dataEntry is { };
 				case EntryType.Expense:
-                    dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
+                    dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
                     return dataEntry is { };
                 default:
                     throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);

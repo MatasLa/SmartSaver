@@ -2,8 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
-using DataBases;
+using ePiggy.DataManager;
 
 namespace ePiggy
 {
@@ -17,7 +16,7 @@ namespace ePiggy
 
         public DataFilter DataFilter { get; }
 
-        public DataJSON DataJSON { get; }
+        public DataJson DataJson{ get; }
 
         public DataCalculations DataCalculations { get; }
 
@@ -33,7 +32,7 @@ namespace ePiggy
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
             DataCalculations = new DataCalculations(Data);
-            DataJSON = new DataJSON(Data);
+            DataJson = new DataJson(Data);
             //Data.ReadIncomeFromDb();
             //Data.ReadExpensesFromDb();
             //DataJSON.ReadIncomeFromFile();
