@@ -1,4 +1,4 @@
-﻿namespace ePiggy.forms.finances.budget
+﻿namespace ePiggy.Forms.Finances.Budget
 {
     partial class MultiEntryInfoForm
     {

@@ -1,4 +1,4 @@
-﻿namespace ePiggy.forms
+﻿namespace ePiggy.Forms
 {
     partial class FormMain
     {

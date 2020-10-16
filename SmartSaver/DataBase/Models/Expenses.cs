@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace DataBases
+namespace ePiggy.DataBase.Models
 {
-    public class Goals
+    public class Expenses
     {
         [Key]
         public int Id { get; set; }
         public int UserId { get; set; }
-        public decimal Price { get; set; }
+        public decimal Amount { get; set; }
         [StringLength(255)]
         public string Title { get; set; }
-        public int PlaceInQueue { get; set; }
+        public DateTime Date { get; set; }
+        public bool IsMonthly { get; set; }
+        public int Importance { get; set; }
 
     }
 

@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DataBases;
-using ePiggy.utilities;
+using ePiggy.DataBase;
+using ePiggy.DataBase.Models;
+using ePiggy.Utilities;
 
-namespace ePiggy.DataManager
+namespace ePiggy.DataManagement
 {
 	/*Main data processing class*/
 	public class Data

@@ -10,9 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\charts\**" />
+    <EmbeddedResource Remove="Resources\charts\**" />
+    <None Remove="Resources\charts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
-    <Compile Remove="Migrations\20200927151042_InitialCreate.cs" />
-    <Compile Remove="Migrations\20200927151042_InitialCreate.Designer.cs" />
+    <Compile Remove="DataBase\Migrations\20200927151042_InitialCreate.cs" />
+    <Compile Remove="DataBase\Migrations\20200927151042_InitialCreate.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,8 +31,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="forms\finances\budget\MultiEntryInfoForm.cs" />
-    <Compile Update="forms\finances\budget\FinanceForm.cs" />
+    <Compile Update="Forms\Finances\Budget\MultiEntryInfoForm.cs" />
+    <Compile Update="Forms\Finances\Budget\FinanceForm.cs" />
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -39,10 +45,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="resources\charts\" />
   </ItemGroup>
 
 </Project>

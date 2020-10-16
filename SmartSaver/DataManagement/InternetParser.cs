@@ -1,12 +1,12 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using ePiggy.utilities;
+using ePiggy.Utilities;
+using HtmlAgilityPack;
 
-namespace ePiggy.DataManager
+namespace ePiggy.DataManagement
 {
     public static class InternetParser
     {

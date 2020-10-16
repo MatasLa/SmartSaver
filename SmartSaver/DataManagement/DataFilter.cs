@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ePiggy.DataManager
+namespace ePiggy.DataManagement
 {
 	/*Requires DataManager object, methods filter data by provided criteria*/
     public class DataFilter

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Net.Http;
-using ePiggy.DataManager;
+using ePiggy.DataManagement;
 
 namespace ePiggy
 {

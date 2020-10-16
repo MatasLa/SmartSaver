@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Text;
-using System.Windows.Forms;
 using ImageChartsLib;
 
-namespace ePiggy.DataManager
+namespace ePiggy.Utilities
 {
     class GraphDrawer
     {

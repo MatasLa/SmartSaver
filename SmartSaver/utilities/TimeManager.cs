@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ePiggy.utilities
+namespace ePiggy.Utilities
 {
     class TimeManager
     {
