@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DataManager;
+using ePiggy.DataManager;
 using ePiggy.utilities;
 
 namespace ePiggy.forms.finances.budget

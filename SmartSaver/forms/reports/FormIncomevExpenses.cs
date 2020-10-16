@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using ePiggy.backend;
+using ePiggy.DataManager;
 using ePiggy.utilities;
 
 namespace ePiggy.forms.reports

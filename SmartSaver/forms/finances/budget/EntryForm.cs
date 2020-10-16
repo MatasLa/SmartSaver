@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
-using DataManager;
+using ePiggy.DataManager;
 using ePiggy.utilities;
 
 namespace ePiggy.forms.finances.budget

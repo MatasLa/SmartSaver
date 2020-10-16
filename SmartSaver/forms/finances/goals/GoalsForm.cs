@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DataManager;
+using ePiggy.DataManager;
 using ePiggy.utilities;
 
 namespace ePiggy.forms.finances.goals
@@ -133,7 +133,7 @@ namespace ePiggy.forms.finances.goals
 
         public void RemoveGoal(Goal goal)
         {
-            _handler.Data.RemoveGoal(goal.ID);
+            _handler.Data.RemoveGoal(goal.Id);
         }
 
         private bool OpenGoalDialog(Goal goal)

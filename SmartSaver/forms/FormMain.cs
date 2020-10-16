@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using ePiggy.forms.finances;
 using ePiggy.forms.finances.budget;
 using ePiggy.forms.finances.goals;
 using ePiggy.forms.reports;
@@ -11,7 +10,7 @@ namespace ePiggy.forms
    
     public partial class FormMain : Form
     {
-        public Handler Handler { get; }
+        private Handler Handler { get; }
         //we need to store the previous form to close it to open the new form
         private Form _activeForm;
 
@@ -32,8 +31,8 @@ namespace ePiggy.forms
 
         private void SaveOnClose(object sender, FormClosedEventArgs e)
         {
-            Handler.DataJSON.WriteIncomeToFile();
-            Handler.DataJSON.WriteExpensesToFile();
+            Handler.DataJson.WriteIncomeToFile();
+            Handler.DataJson.WriteExpensesToFile();
         }
 
         #region button event handlers

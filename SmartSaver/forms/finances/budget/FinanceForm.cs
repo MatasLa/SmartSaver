@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
-using DataManager;
+using ePiggy.DataManager;
 using ePiggy.utilities;
 
 namespace ePiggy.forms.finances.budget
@@ -102,11 +102,11 @@ namespace ePiggy.forms.finances.budget
         {
             if (EntryType == EntryType.Income)
             {
-                _data.EditIncomeItem(entry.ID, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
+                _data.EditIncomeItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
             }
             else
             {
-                _data.EditExpensesItem(entry.ID, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
+                _data.EditExpensesItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
             }
         }
 
@@ -114,11 +114,11 @@ namespace ePiggy.forms.finances.budget
         {
             if (EntryType == EntryType.Income)
             {
-                _data.RemoveIncome(entry.ID);
+                _data.RemoveIncome(entry.Id);
             }
             else
             {
-                _data.RemoveExpense(entry.ID);
+                _data.RemoveExpense(entry.Id);
             }
         }
 
