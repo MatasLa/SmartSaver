@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ePiggy.db.Migrations
+namespace ePiggy.DataBase.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20201012231338_update")]
-    partial class update
+    [Migration("20201012103657_new")]
+    partial class @new
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -119,10 +119,8 @@ namespace ePiggy.db.Migrations
                         .HasMaxLength(255);
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Salt")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 

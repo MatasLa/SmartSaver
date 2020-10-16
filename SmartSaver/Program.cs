@@ -1,6 +1,6 @@
 using System;
 using System.Windows.Forms;
-using ePiggy.forms;
+using ePiggy.Forms;
 
 namespace ePiggy
 {

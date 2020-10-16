@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ePiggy.utilities
+namespace ePiggy.Utilities
 {
     public readonly struct CurrencyWithColor
     {

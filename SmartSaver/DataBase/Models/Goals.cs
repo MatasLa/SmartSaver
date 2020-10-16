@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ePiggy.db.Models
+namespace ePiggy.DataBase.Models
 {
     public class Goals
     {

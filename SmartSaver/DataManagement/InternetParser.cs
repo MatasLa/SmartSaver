@@ -5,7 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 
-namespace ePiggy.backend.dataHandling
+namespace ePiggy.DataManagement
 {
     public static class InternetParser
     {

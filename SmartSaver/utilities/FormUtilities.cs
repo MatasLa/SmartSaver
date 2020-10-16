@@ -1,8 +1,8 @@
 ﻿using System.Windows.Forms;
-using ePiggy.forms.finances.budget;
-using ePiggy.forms.finances.goals;
+using ePiggy.Forms.Finances.Budget;
+using ePiggy.Forms.Finances.Goals;
 
-namespace ePiggy.utilities
+namespace ePiggy.Utilities
 {
     public static class FormUtilities
     {

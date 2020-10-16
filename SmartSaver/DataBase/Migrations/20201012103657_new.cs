@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ePiggy.db.Migrations
+namespace ePiggy.DataBase.Migrations
 {
     public partial class @new : Migration
     {

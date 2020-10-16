@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using ImageChartsLib;
 
-namespace ePiggy.utilities
+namespace ePiggy.Utilities
 {
     class GraphDrawer
     {

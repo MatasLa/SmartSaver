@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ePiggy.backend.dataHandling
+namespace ePiggy.DataManagement
 {
     public class Goal
     {

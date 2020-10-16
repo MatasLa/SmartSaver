@@ -2,10 +2,10 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using ePiggy.backend.auth;
-using ePiggy.utilities;
+using ePiggy.Auth;
+using ePiggy.Utilities;
 
-namespace ePiggy.forms
+namespace ePiggy.Forms
 {
     public partial class FormLogIn : Form
 

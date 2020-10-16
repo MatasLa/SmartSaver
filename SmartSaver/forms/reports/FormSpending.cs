@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace ePiggy.forms.reports
+namespace ePiggy.Forms.Reports
 {
     public partial class FormSpending : Form
     {

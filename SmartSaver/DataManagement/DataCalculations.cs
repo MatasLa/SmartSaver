@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ePiggy.backend.dataHandling;
 
-namespace ePiggy.backend.calculations
+namespace ePiggy.DataManagement
 {
     public class DataCalculations
     {

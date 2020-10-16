@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ePiggy.db.Models
+namespace ePiggy.DataBase.Models
 {
-    public class Incomes
+    public class Expenses
     {
         [Key]
         public int Id { get; set; }

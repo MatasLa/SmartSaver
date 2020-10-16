@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Globalization;
 
-namespace ePiggy.utilities
+namespace ePiggy.Utilities
 {
     public class NumberFormatter
     {

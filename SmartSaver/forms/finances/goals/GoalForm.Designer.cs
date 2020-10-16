@@ -1,4 +1,4 @@
-﻿namespace ePiggy.forms.finances.goals
+﻿namespace ePiggy.Forms.Finances.Goals
 {
     partial class GoalForm
     {

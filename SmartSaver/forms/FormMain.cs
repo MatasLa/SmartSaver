@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
-using ePiggy.forms.finances.budget;
-using ePiggy.forms.finances.goals;
-using ePiggy.forms.reports;
-using ePiggy.utilities;
+using ePiggy.Forms.Finances.Budget;
+using ePiggy.Forms.Finances.Goals;
+using ePiggy.Forms.Reports;
+using ePiggy.Utilities;
 
-namespace ePiggy.forms
+namespace ePiggy.Forms
 {
    
     public partial class FormMain : Form

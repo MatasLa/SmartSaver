@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ePiggy.backend.dataHandling
+namespace ePiggy.DataManagement
 {
 	public class DataEntry : IComparable
 	{

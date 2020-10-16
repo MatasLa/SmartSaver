@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ePiggy.db.Migrations
+namespace ePiggy.DataBase.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
     [Migration("20201001165255_test1")]

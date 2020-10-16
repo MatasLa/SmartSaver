@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using ePiggy.utilities;
+using ePiggy.Utilities;
 
-namespace ePiggy.forms.reports
+namespace ePiggy.Forms.Reports
 {
     public partial class FormIncomeVExpenses : Form
     {

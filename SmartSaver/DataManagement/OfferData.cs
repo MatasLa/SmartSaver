@@ -1,4 +1,4 @@
-﻿namespace ePiggy.backend.calculations
+﻿namespace ePiggy.DataManagement
 {
     public class OfferData
     {

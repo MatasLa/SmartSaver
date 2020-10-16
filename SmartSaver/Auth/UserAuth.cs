@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using ePiggy.db;
-using ePiggy.db.Models;
+using ePiggy.DataBase;
+using ePiggy.DataBase.Models;
 
-namespace ePiggy.backend.auth
+namespace ePiggy.Auth
 {
     public class UserAuth
     {

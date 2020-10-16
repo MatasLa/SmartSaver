@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Net.Http;
-using ePiggy.backend.calculations;
-using ePiggy.backend.dataHandling;
-using ePiggy.utilities;
+using ePiggy.DataManagement;
+using ePiggy.Utilities;
 
 namespace ePiggy
 {

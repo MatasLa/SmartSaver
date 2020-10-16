@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ePiggy.db.Migrations
+namespace ePiggy.DataBase.Migrations
 { 
     public partial class test3 : Migration
     {

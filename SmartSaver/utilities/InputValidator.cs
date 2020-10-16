@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using ePiggy.forms;
+using ePiggy.Forms;
 
-namespace ePiggy.utilities
+namespace ePiggy.Utilities
 {
     public class InputValidator
     {
