@@ -12,6 +12,14 @@ namespace DataManager
             this.data = data;
         }
         
+        //Temporary hardcoded local parameters (should be taken from front-end later)
+        private SavingType SavingChoice;
+        private decimal regularSavingValue = 0.25M;
+        private decimal maximalSavingValue = 0.5M;
+        private decimal minimalSavingValue = 0.1M;
+        private decimal savingRatio = 1M;
+
+        
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
 
@@ -35,12 +43,11 @@ namespace DataManager
             return CheckBalance() >= 0;
         }
 
-        //Code below is still very much WIP
         public bool CheckGoal(Goal goal)
         {
             if (IsBalancePositive())
             {
-               // Goal goal = new Goal();
+                //Goal goal = new Goal();
                 if((CheckBalance() - goal.Price) >= 0)
                 {
                     return true;    //can already buy this month
@@ -63,51 +70,104 @@ namespace DataManager
             decimal neededAmount = (goal.Price - CheckBalance());
             
             while ((neededAmount - savedAmount) > 0) //while(can't afford goal)
-            {   //todo: implement saving, export the categories/things needed to save on
+            {   //todo: improve saving
                 foreach (DataEntry data in data.Income)
                 {
-                    switch (data.Importance)
-                    {
-                        case 1:
-                            break; //importance of 1 - unchangable income
-                        case 2:
-                            savedAmount += (data.Amount * 0.25M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.25M);
-                            break;
-                        case 3:
-                            savedAmount += (data.Amount * 0.5M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.5M);
-                            break;
-                        case 4:
-                            savedAmount += (data.Amount * 0.75M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.75M);
-                            break;
-                    }
+                    savedAmount += ChoosingImportance(data, savedAmount, EntryType.Income);
                 }
                 foreach (DataEntry data in data.Expenses)
                 {
-                    switch (data.Importance)
-                    {
-                        case 1: //importance of 1 - necessary expense
-                            break;
-                        case 2:
-                            savedAmount += (data.Amount * 0.25M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.25M);
-                            break;
-                        case 3:
-                            savedAmount += (data.Amount * 0.5M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.5M);
-                            break;
-                        case 4:
-                            savedAmount += (data.Amount * 0.75M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.75M);
-                            break;
-                    }
+                    savedAmount += ChoosingImportance(data, savedAmount, EntryType.Expense);
                 }
 
             }
             return true; // after having saved enough
         }
+
+        private decimal ChoosingImportance(DataEntry data, decimal savedAmount, EntryType entryType)
+        {
+            switch (data.Importance)
+            {
+                case (int)Importance.Necessary:
+                    return savedAmount; //importance of necessary - unchangable income
+
+                case (int)Importance.High:
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio, entryType);                    
+
+                case (int)Importance.Medium:
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 2, entryType);
+
+                case (int)Importance.Low:
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 3, entryType);                 
+
+                case (int)Importance.Unnecessary:
+                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 4, entryType);
+
+                default:
+                    return savedAmount;
+
+            }
+        }
+        
+        private decimal ImportanceBasedCalculation(DataEntry data, decimal savedAmount, decimal savingRatio, EntryType entryType)
+        {
+            if (SavingChoice == SavingType.Minimal)
+            {
+                savedAmount += (data.Amount * (minimalSavingValue * savingRatio));
+                if(entryType == EntryType.Income)
+                {
+                    AddToIncomeOfferList(data.ID, data.Amount * (minimalSavingValue * savingRatio));
+                }
+                else if(entryType == EntryType.Expense)
+                {
+                    AddToExpensesOfferList(data.ID, data.Amount * (minimalSavingValue * savingRatio));
+                }
+                return savedAmount;
+            }
+
+            else if (SavingChoice == SavingType.Maximal) // change from string to enum
+            {
+                decimal temp;
+
+                bool maximalSaving = (maximalSavingValue * savingRatio) >= 1;
+
+                if (maximalSaving)
+                {
+                    temp = 1M; //Hardcoded 1, due to nature of maximal saving theory
+                }
+                else
+                {
+                    temp = maximalSavingValue;
+                }
+
+                savedAmount += (data.Amount * temp);
+                if (entryType == EntryType.Income)
+                {
+                    AddToIncomeOfferList(data.ID, data.Amount * temp);
+                }
+                else if (entryType == EntryType.Expense)
+                {
+                    AddToExpensesOfferList(data.ID, data.Amount * temp);
+                }
+                return savedAmount;
+            }
+
+            else if (SavingChoice == SavingType.Regular)
+            {
+                savedAmount += (data.Amount * (regularSavingValue * savingRatio));
+                if(entryType == EntryType.Income)
+                {
+                    AddToIncomeOfferList(data.ID, data.Amount * (regularSavingValue * savingRatio));
+                }
+                else if(entryType == EntryType.Expense)
+                {
+                    AddToExpensesOfferList(data.ID, data.Amount * (regularSavingValue * savingRatio));
+                }
+                return savedAmount;
+            }
+            return savedAmount;
+        }
+
         private void AddToIncomeOfferList(int id, decimal amount)
         {
             OfferData newIncomeOffers = new OfferData(id, amount);
@@ -115,8 +175,8 @@ namespace DataManager
         }
         private void AddToExpensesOfferList(int id, decimal amount)
         {
-            OfferData newIncomeOffers = new OfferData(id, amount);
-            IncomeOffers.Add(newIncomeOffers);
+            OfferData newExpensesOffers = new OfferData(id, amount);
+            ExpensesOffers.Add(newExpensesOffers);
         }
     }
 }
