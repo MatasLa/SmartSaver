@@ -64,7 +64,7 @@ namespace ePiggy.DataManager
             
             while ((neededAmount - savedAmount) > 0) //while(can't afford goal)
             {   //todo: implement saving, export the categories/things needed to save on
-                foreach (DataEntry data in data.Income)
+                foreach (var data in data.Income)
                 {
                     switch (data.Importance)
                     {
@@ -72,15 +72,15 @@ namespace ePiggy.DataManager
                             break; //importance of 1 - unchangable income
                         case 2:
                             savedAmount += (data.Amount * 0.25M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.25M);
+                            AddToIncomeOfferList(data.Id, data.Amount * 0.25M);
                             break;
                         case 3:
                             savedAmount += (data.Amount * 0.5M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.5M);
+                            AddToIncomeOfferList(data.Id, data.Amount * 0.5M);
                             break;
                         case 4:
                             savedAmount += (data.Amount * 0.75M);
-                            AddToIncomeOfferList(data.ID, data.Amount * 0.75M);
+                            AddToIncomeOfferList(data.Id, data.Amount * 0.75M);
                             break;
                     }
                 }
@@ -92,15 +92,15 @@ namespace ePiggy.DataManager
                             break;
                         case 2:
                             savedAmount += (data.Amount * 0.25M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.25M);
+                            AddToExpensesOfferList(data.Id, data.Amount * 0.25M);
                             break;
                         case 3:
                             savedAmount += (data.Amount * 0.5M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.5M);
+                            AddToExpensesOfferList(data.Id, data.Amount * 0.5M);
                             break;
                         case 4:
                             savedAmount += (data.Amount * 0.75M);
-                            AddToExpensesOfferList(data.ID, data.Amount * 0.75M);
+                            AddToExpensesOfferList(data.Id, data.Amount * 0.75M);
                             break;
                     }
                 }
