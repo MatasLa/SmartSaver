@@ -5,35 +5,13 @@ namespace ePiggy.DataManager
 	public class DataEntry : IComparable
 	{
         /*Properties*/
-        public string Title
-        {
-            get; set;
-        }
-        public decimal Amount
-        {
-            get; set;
-        }
-        public int Id
-        {
-            get; set;
-        }
-        public int UserId
-        {
-            get; set;
-        }
-        public DateTime Date
-        {
-            get; set;
-        }
-        public bool IsMonthly
-        {
-            get; set;
-        }
-
-        public int Importance
-        {
-            get; set;
-        }
+        public string Title {get; set; }
+        public decimal Amount { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public DateTime Date { get; set; }
+        public bool IsMonthly { get; set; }
+        public int Importance { get; set; }
 
 		/*Constructors*/
 		public DataEntry(decimal amount, string title, DateTime date, bool isMonthly, int importance)
