@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
-	/*Requires datamanager object, methods filter data by provided criteria*/
+	/*Requires DataManager object, methods filter data by provided criteria*/
     public class DataFilter
     {
         private readonly Data _data;
@@ -13,8 +13,6 @@ namespace DataManager
         {
             this._data = data;
 		}
-
-		/*Arno kodas*/
 
         public decimal GetTotaledIncome()
         {
@@ -56,7 +54,6 @@ namespace DataManager
             return GetBalance(date) >= 0;
         }
 
-		/* baigiasi Arno kodas */
 
 		public List<DataEntry> GetIncomeHigherThan(decimal amount)
 		{
@@ -82,13 +79,13 @@ namespace DataManager
 			return temp;
 		}
 
-		public List<DataEntry> GetReccuringIncome()
+		public List<DataEntry> GetRecurringIncome()
 		{
 			var temp = _data.Income.Where(x => x.IsMonthly).ToList();
 			return temp;
 		}
 
-		public List<DataEntry> GetReccuringExpenses()
+		public List<DataEntry> GetRecurringExpenses()
 		{
 			var temp = _data.Expenses.Where(x => x.IsMonthly).ToList();
 			return temp;

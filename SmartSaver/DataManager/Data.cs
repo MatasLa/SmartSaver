@@ -138,7 +138,7 @@ namespace ePiggy.DataManager
             {
 				ExceptionHandler.Log(ex.ToString());
             }
-            var dataEntry = Income.FirstOrDefault(x => x.ID == id);
+            var dataEntry = Income.FirstOrDefault(x => x.Id == id);
             Income.Remove(dataEntry);
 		}
 
@@ -147,7 +147,7 @@ namespace ePiggy.DataManager
             var db = new DatabaseContext();
             try
             {
-                var index = db.Incomes.FirstOrDefault(x => x.Id == dataEntry.ID);
+                var index = db.Incomes.FirstOrDefault(x => x.Id == dataEntry.Id);
                 db.Incomes.Remove(index ?? throw new InvalidOperationException());
                 db.SaveChanges();
             }
@@ -165,7 +165,7 @@ namespace ePiggy.DataManager
             var db = new DatabaseContext();
             try
             {
-                var index = db.Expenses.FirstOrDefault(x => x.Id == dataEntry.ID);
+                var index = db.Expenses.FirstOrDefault(x => x.Id == dataEntry.Id);
                 db.Expenses.Remove(index ?? throw new InvalidOperationException());
                 db.SaveChanges();
             }
@@ -193,7 +193,7 @@ namespace ePiggy.DataManager
             }
             
 
-            var dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
+            var dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
             Expenses.Remove(dataEntry);
         }
 
@@ -201,7 +201,7 @@ namespace ePiggy.DataManager
         {
             foreach (var entry in entries)
             {
-                RemoveIncome(entry.ID);
+                RemoveIncome(entry.Id);
             }
         }
 
@@ -218,7 +218,7 @@ namespace ePiggy.DataManager
         {
             foreach (var entry in entries)
             {
-                RemoveExpense(entry.ID);
+                RemoveExpense(entry.Id);
             }
         }
 
@@ -500,10 +500,10 @@ namespace ePiggy.DataManager
             switch (entryType)
             {
 				case EntryType.Income:
-                    dataEntry = Income.FirstOrDefault(x => x.ID == id);
+                    dataEntry = Income.FirstOrDefault(x => x.Id == id);
 					return dataEntry is { };
 				case EntryType.Expense:
-                    dataEntry = Expenses.FirstOrDefault(x => x.ID == id);
+                    dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
                     return dataEntry is { };
                 default:
                     throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
