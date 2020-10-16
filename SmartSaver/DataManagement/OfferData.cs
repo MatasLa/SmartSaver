@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ePiggy.DataManager
+﻿namespace ePiggy.DataManagement
 {
     public class OfferData
     {

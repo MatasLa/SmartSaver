@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Configuration;
-using System.Data;
-using System.Text;
-using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
 
-
-
-namespace DataBases
+namespace ePiggy.DataBase.Models
 {
-    public class Expenses
+    public class Incomes
     {
         [Key]
         public int Id { get; set; }

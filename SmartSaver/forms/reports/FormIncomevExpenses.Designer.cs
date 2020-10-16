@@ -1,4 +1,4 @@
-﻿namespace ePiggy.forms.reports
+﻿namespace ePiggy.Forms.Reports
 {
     partial class FormIncomeVExpenses
     {

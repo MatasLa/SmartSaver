@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
-using System.Linq;
-using ePiggy;
-using ePiggy.backend;
+﻿using System.Linq;
+using ePiggy.DataBase;
+using ePiggy.DataBase.Models;
 
-namespace DataBases
+namespace ePiggy.Authentication
 {
     public class UserAuth
     {

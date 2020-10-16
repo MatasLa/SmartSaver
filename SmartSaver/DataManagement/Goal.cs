@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
-using ePiggy.utilities;
+using ePiggy.Utilities;
 
-namespace ePiggy.DataManager
+namespace ePiggy.DataManagement
 {
     public class Goal
     {
