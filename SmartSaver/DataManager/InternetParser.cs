@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ePiggy;
 
-namespace DataManager
+namespace ePiggy.DataManager
 {
     public static class InternetParser
     {
@@ -19,7 +19,7 @@ namespace DataManager
          * Task.Run(() => InternetParser.GetHTMLAsync()).Wait();
         */
         private static readonly string resourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\parsedGoal.txt";
-        public static async Task GetHTMLAsync(string itemName)
+        public static async Task ReadPriceFromCammel(string itemName)
         {
             itemName = WebUtility.UrlEncode(itemName);
             var url = "https://uk.camelcamelcamel.com/search?sq=" + itemName;/*Need tweaking with symbols inside itemName*/
