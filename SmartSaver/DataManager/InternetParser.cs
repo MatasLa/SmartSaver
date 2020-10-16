@@ -1,15 +1,10 @@
 ﻿using HtmlAgilityPack;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using ePiggy;
+using ePiggy.utilities;
 
 namespace ePiggy.DataManager
 {
@@ -18,8 +13,10 @@ namespace ePiggy.DataManager
         /*Example of calling method:
          * Task.Run(() => InternetParser.GetHTMLAsync()).Wait();
         */
-        private static readonly string resourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\parsedGoal.txt";
-        public static async Task ReadPriceFromCammel(string itemName)
+        private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory)
+                                                                         .Parent?.Parent?.FullName +
+                                                                     @"\resources\textData\parsedGoal.txt";
+        public static async Task ReadPriceFromCamel(string itemName)
         {
             itemName = WebUtility.UrlEncode(itemName);
             var url = "https://uk.camelcamelcamel.com/search?sq=" + itemName;/*Need tweaking with symbols inside itemName*/
@@ -31,21 +28,31 @@ namespace ePiggy.DataManager
 
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(html);
-            var productHTML = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "")/*Everything on the page*/
+            var productHtml = htmlDocument.DocumentNode.Descendants("div").Where(node => node.GetAttributeValue("class", "")/*Everything on the page*/
                 .Equals("row column search_results")).ToList();
 
-            var productListItems = productHTML[0].Descendants("div").Where(node => node.GetAttributeValue("class", "")
+            var productListItems = productHtml[0].Descendants("div").Where(node => node.GetAttributeValue("class", "")
             .Equals("row")).ToList();
 
-            var name = productListItems[0].Descendants("strong").FirstOrDefault().InnerText;
-            name = name.Remove(name.Length - 13);
+         
+                var name = productListItems[0].Descendants("strong").FirstOrDefault()?.InnerText;
+                name = name?.Remove(name.Length - 13);
 
-            var pricestr = productListItems[0].Descendants("span").Where(node => node.GetAttributeValue("class", "")
-            .Equals("green")).FirstOrDefault().InnerText;
-            pricestr = pricestr.Substring(1).Trim();
+                var pricestr = productListItems[0].Descendants("span").FirstOrDefault(node => node.GetAttributeValue("class", "")
+                    .Equals("green"))
+                    ?.InnerText;
+                pricestr = pricestr?.Substring(1).Trim();
 
+
+                try
+            {
+                await File.WriteAllTextAsync(ResourceDirectoryParsedGoal, name + "\n" + pricestr);
+            }
+            catch (Exception ex)
+            {
+                ExceptionHandler.Log(ex.ToString());
+            }
             
-            File.WriteAllText(resourceDirectoryParsedGoal, name +"\n"+ pricestr);
             
         }
     }

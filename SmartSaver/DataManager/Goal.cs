@@ -67,7 +67,7 @@ namespace ePiggy.DataManager
         {
             try
             {
-                Task.Run(() => InternetParser.ReadPriceFromCammel(itemName)).Wait();
+                Task.Run(() => InternetParser.ReadPriceFromCamel(itemName)).Wait();
 
                 var file = new StreamReader(ResourceDirectoryParsedGoal);
                 file.ReadLine();
