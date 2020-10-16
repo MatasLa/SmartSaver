@@ -8,7 +8,7 @@ namespace ePiggy.DataManager
     public class Goal
     {
         private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory)
-                                                                         .Parent.Parent.FullName +
+                                                                         .Parent?.Parent?.FullName +
                                                                      @"\resources\textData\parsedGoal.txt";
         public int Id
         {
@@ -35,17 +35,17 @@ namespace ePiggy.DataManager
         }
 
         public Goal(int id, int userId, string title, decimal price, int placeInQueue)
-            :this(title, price)
+            :this(title, price, placeInQueue)
         {
             Id = id;
             UserId = userId;
-            PlaceInQueue = placeInQueue;
         }
 
-        public Goal(string title, decimal price)
+        public Goal(string title, decimal price, int placeInQueue)
         {
             Title = title;
             Price = price;
+            PlaceInQueue = placeInQueue;
         }
 
         public Goal(string title, int placeInQueue)

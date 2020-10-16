@@ -25,7 +25,7 @@ namespace ePiggy.DataManager
             db.Add(goal);
             db.SaveChanges();
             var id = goal.Id;
-            var newGoal = new Goal(title, value, placeInQueue) {ID = id};
+            var newGoal = new Goal(title, value, placeInQueue) {Id = id};
             GoalsList.Add(newGoal);
             return true;
         }
@@ -41,7 +41,7 @@ namespace ePiggy.DataManager
             db.Add(goal);
             db.SaveChanges();
             var id = goal.Id;
-            newGoal.ID = id;
+            newGoal.Id = id;
             GoalsList.Add(newGoal);
             return true;
 		}
@@ -119,7 +119,7 @@ namespace ePiggy.DataManager
             {
                 ExceptionHandler.Log(ex.ToString());
             }
-            var goal = GoalsList.FirstOrDefault(x => x.ID == id);
+            var goal = GoalsList.FirstOrDefault(x => x.Id == id);
             GoalsList.Remove(goal);
         }
 
