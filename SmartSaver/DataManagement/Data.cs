@@ -15,9 +15,8 @@ namespace ePiggy.DataManagement
 		public List<DataEntry> Expenses { get; } = new List<DataEntry>();
 		public List<Goal> GoalsList { get; } = new List<Goal>();
 
-		/*Methods that creates new instance of class and adds to List*/
-
-		/*GOALS*/
+        /*Methods that creates new instance of class and adds to List*/
+        /*GOALS*/
         public bool AddGoal(int userid, string title, decimal value, int placeInQueue)//manual
         {
             if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
@@ -59,7 +58,7 @@ namespace ePiggy.DataManagement
             Income.Add(newIncome);
         }
 
-        public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+    /*    public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var dateUse = date;
             var db = new DatabaseContext();
@@ -74,7 +73,7 @@ namespace ePiggy.DataManagement
                 Income.Add(newIncome);
                 dateUse = dateUse.AddMonths(1);
             }
-        }
+        }*/
 
 		/*EXPENSES*/
         public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
@@ -88,7 +87,7 @@ namespace ePiggy.DataManagement
             Expenses.Add(newExpense);
         }
 
-        public void AddMonthlyExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+       /* public void AddMonthlyExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var db = new DatabaseContext();
             var dateUse = date;
@@ -103,7 +102,7 @@ namespace ePiggy.DataManagement
                 Expenses.Add(newExpense);
                 dateUse = dateUse.AddMonths(1);
             }
-        }
+        }*/
 
 		/*Methods for removal*/
 
