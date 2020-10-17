@@ -53,16 +53,6 @@ namespace ePiggy.DataManagement
             return GetBalance(date) >= 0;
         }
 
-        public List<DataEntry> GetAllMonthlyIncomes()
-        {
-            var temp = _data.Income.Where(x => x.IsMonthly == true).ToList();
-            return temp;
-        }
-        public List<DataEntry> GetAllMonthlyExpenses()
-        {
-            var temp = _data.Expenses.Where(x => x.IsMonthly == true).ToList();
-            return temp;
-        }
 
 		public List<DataEntry> GetIncomeHigherThan(decimal amount)
 		{
