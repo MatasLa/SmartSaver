@@ -78,22 +78,22 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 if (entry.IsMonthly)
                 {
-                    _data.AddMonthlyIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                    _data.AddMonthlyIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, entry.Importance);
                 }
                 else
                 {
-                    _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                    _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, entry.Importance);
                 }
             }
             else
             {
                 if (entry.IsMonthly)
                 {
-                    _data.AddMonthlyExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                    _data.AddMonthlyExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, entry.Importance);
                 }
                 else
                 {
-                    _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                    _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, entry.Importance);
                 }
             }
         }
@@ -102,11 +102,11 @@ namespace ePiggy.Forms.Finances.Budget
         {
             if (EntryType == EntryType.Income)
             {
-                _data.EditIncomeItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
+                _data.EditIncomeItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, entry.Importance);
             }
             else
             {
-                _data.EditExpensesItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
+                _data.EditExpensesItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, entry.Importance);
             }
         }
 

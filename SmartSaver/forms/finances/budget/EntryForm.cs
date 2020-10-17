@@ -19,7 +19,7 @@ namespace ePiggy.Forms.Finances.Budget
         private readonly Type _type;
 
         private readonly Handler _handler;
-        private readonly DataEntry _dataEntry;
+        private readonly DataEntry _entry;
         private readonly EntryType _entryType;
         private readonly Size _collapsedSize;
         private readonly Size _expandedSize;
@@ -41,7 +41,7 @@ namespace ePiggy.Forms.Finances.Budget
             _expandedSize = Size;
             _collapsedSize = new Size(Size.Width, Size.Height - monthCalendar.Size.Height - 25);
 
-            _dataEntry = dataEntry ?? throw new Exception("Given null data entry");
+            _entry = dataEntry ?? throw new Exception("Given null data entry");
             _entryType = entryType;
             _handler = handler;
             _type = type;
@@ -82,6 +82,8 @@ namespace ePiggy.Forms.Finances.Budget
                 Text = AddExpenseTitle;
                 buttonOK.Text = AddButtonText;
             }
+
+            comboBoxImportance.SelectedIndex = 0;
         }
 
         private void SetUpEdit()
@@ -96,10 +98,11 @@ namespace ePiggy.Forms.Finances.Budget
                 Text = EditExpenseTitle;
                 buttonOK.Text = EditButtonText;
             }
-            Text += @" """ + _dataEntry.Title + @"""";
-            textBoxTitle.Text = _dataEntry.Title;
-            textBoxValue.Text = _dataEntry.Amount.ToString(CultureInfo.CurrentCulture);
-            checkBoxMonthly.Checked = _dataEntry.IsMonthly;
+            Text += @" """ + _entry.Title + @"""";
+            textBoxTitle.Text = _entry.Title;
+            textBoxValue.Text = _entry.Amount.ToString(CultureInfo.CurrentCulture);
+            checkBoxMonthly.Checked = _entry.IsMonthly;
+            comboBoxImportance.SelectedIndex = _entry.Importance - 1;
         }
         #endregion
 
@@ -121,10 +124,11 @@ namespace ePiggy.Forms.Finances.Budget
 
         private void TakeInput()
         {
-            _dataEntry.Amount = decimal.Round(decimal.Parse(textBoxValue.Text), 2);
-            _dataEntry.Title = textBoxTitle.Text;
-            _dataEntry.IsMonthly = checkBoxMonthly.Checked;
-            _dataEntry.Date = monthCalendar.SelectionStart;
+            _entry.Amount = decimal.Round(decimal.Parse(textBoxValue.Text), 2);
+            _entry.Title = textBoxTitle.Text;
+            _entry.IsMonthly = checkBoxMonthly.Checked;
+            _entry.Date = monthCalendar.SelectionStart;
+            _entry.Importance = comboBoxImportance.SelectedIndex + 1;
         }
 
         #endregion
