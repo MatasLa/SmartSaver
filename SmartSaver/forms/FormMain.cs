@@ -19,7 +19,7 @@ namespace ePiggy.Forms
             InitializeComponent();
             CustomizeDesign();
             Handler = handler;
-            Handler.ClearData();
+            Handler.Update();
         }
 
         private void CustomizeDesign()
