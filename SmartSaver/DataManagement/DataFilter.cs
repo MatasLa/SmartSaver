@@ -116,6 +116,20 @@ namespace ePiggy.DataManagement
             return temp;
         }
 
+        public List<DataEntry> GetIncome(DateTime from)//from some date until today
+        {
+            var today = DateTime.Today;
+            var temp = _data.Income.Where(x => (x.Date >= from) && (x.Date <= today)).ToList();
+            return temp;
+        }
+
+        public List<DataEntry> GetExpenses(DateTime from)//from some date until today
+        {
+            var today = DateTime.Today;
+            var temp = _data.Expenses.Where(x => (x.Date >= from) && (x.Date <= today)).ToList();
+            return temp;
+        }
+
         public List<DataEntry> GetIncome(DateTime from, DateTime to)
         {
             var temp = _data.Income.Where(x => (x.Date >= from) && (x.Date <= to)).ToList();
