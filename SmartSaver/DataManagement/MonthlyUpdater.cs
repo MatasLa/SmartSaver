@@ -25,7 +25,7 @@ namespace ePiggy.DataManagement
             foreach (var entry in entriesInc)
             {
                 var entryDate = entry.Date;
-                var differenceInMonths = ((todayDate.Year - entryDate.Year) * 12) + todayDate.Month - entryDate.Month;
+                var differenceInMonths = TimeManager.DifferenceInMonths(todayDate, entryDate);
 
                 UpdateMonthlyIncome(entry, differenceInMonths, userId);
             }
@@ -33,7 +33,7 @@ namespace ePiggy.DataManagement
             foreach (var entry in entriesExp)
             {
                 var entryDate = entry.Date;
-                var differenceInMonths = ((todayDate.Year - entryDate.Year) * 12) + todayDate.Month - entryDate.Month;
+                var differenceInMonths = TimeManager.DifferenceInMonths(todayDate, entryDate);
 
                 UpdateMonthlyExpense(entry, differenceInMonths, userId);
             }
