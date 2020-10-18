@@ -25,7 +25,7 @@ namespace ePiggy.DataManagement
             {
                 var entryDate = entry.Date;
                 var todayDate = DateTime.Today.Date;
-                var differenceInMonths = ((entryDate.Year - todayDate.Year) * 12) + entryDate.Month - todayDate.Month;
+                var differenceInMonths = ((todayDate.Year - entryDate.Year) * 12) + todayDate.Month - entryDate.Month;
 
                 UpdateMonthlyIncome(entry, differenceInMonths, userId);
             }
@@ -34,7 +34,7 @@ namespace ePiggy.DataManagement
             {
                 var entryDate = entry.Date;
                 var todayDate = DateTime.Today.Date;
-                var differenceInMonths = ((entryDate.Year - todayDate.Year) * 12) + entryDate.Month - todayDate.Month;
+                var differenceInMonths = ((todayDate.Year - entryDate.Year) * 12) + todayDate.Month - entryDate.Month;
 
                 UpdateMonthlyExpense(entry, differenceInMonths, userId);
             }
@@ -42,22 +42,29 @@ namespace ePiggy.DataManagement
 
         private void UpdateMonthlyIncome(DataEntry entry, int months, int userId)
         {
-            for (var i = 0; i < months; i++)
+            var nextMonth = entry.Date;//assigning current entry data
+            for (var i = 0; i < (months - 1); i++)// one less since last one has to keep isMonthly = true;
             {
-                var nextMonth = TimeManager.MoveToNextMonth(entry.Date);
-                _data.AddIncome(userId, entry.Amount, entry.Title, nextMonth, true, entry.Importance);
-                _data.EditIncomeItem(entry.Id, false);
+                nextMonth = TimeManager.MoveToNextMonth(nextMonth);//Adding new entry for each month according to date difference
+                _data.AddIncome(userId, entry.Amount, entry.Title, nextMonth, false, entry.Importance);
             }
+            /*Adding last entry, which has to keep isMonthly*/
+            nextMonth = TimeManager.MoveToNextMonth(nextMonth);
+            _data.AddIncome(userId, entry.Amount, entry.Title, nextMonth, true, entry.Importance);
+            _data.EditIncomeItem(entry.Id, false);//Moved here since no point to edit in each cycle rotation
         }
 
         private void UpdateMonthlyExpense(DataEntry entry, int months, int userId)
         {
-            for (var i = 0; i < months; i++)
+            var nextMonth = entry.Date;
+            for (var i = 0; i < (months - 1); i++)
             {
-                var nextMonth = TimeManager.MoveToNextMonth(entry.Date);
-                _data.AddExpense(userId, entry.Amount, entry.Title, nextMonth, true, entry.Importance);
-                _data.EditExpensesItem(entry.Id, false);
+                nextMonth = TimeManager.MoveToNextMonth(nextMonth);
+                _data.AddExpense(userId, entry.Amount, entry.Title, nextMonth, false, entry.Importance);
             }
+            nextMonth = TimeManager.MoveToNextMonth(nextMonth);
+            _data.AddExpense(userId, entry.Amount, entry.Title, nextMonth, true, entry.Importance);
+            _data.EditExpensesItem(entry.Id, false);
         }
 
     }

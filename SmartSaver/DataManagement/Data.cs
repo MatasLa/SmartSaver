@@ -316,9 +316,11 @@ namespace ePiggy.DataManagement
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
+            var tempLocal = Income.FirstOrDefault(x => x.Id == id);
+            if (temp != null && tempLocal != null)
 			{
 				temp.IsMonthly = isMonthly;
+                tempLocal.IsMonthly = isMonthly;
 				db.SaveChanges();
 				return true;
 			}
@@ -415,12 +417,14 @@ namespace ePiggy.DataManagement
 
 		public bool EditExpensesItem(int id, bool isMonthly)
 		{
-			var db = new DatabaseContext();
+            var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
+            var tempLocal = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp != null && tempLocal != null)
 			{
 				temp.IsMonthly = isMonthly;
-				db.SaveChanges();
+                tempLocal.IsMonthly = isMonthly;
+                db.SaveChanges();
 				return true;
 			}
 			else
