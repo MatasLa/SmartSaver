@@ -47,6 +47,8 @@ namespace ePiggy.DataManagement
                 nextMonth = TimeManager.MoveToNextMonth(nextMonth);//Adding new entry for each month according to date difference
                 _data.AddIncome(userId, entry.Amount, entry.Title, nextMonth, false, entry.Importance);
             }
+
+            if (months <= 0) return;//since if no difference this shouldnt be added
             /*Adding last entry, which has to keep isMonthly*/
             nextMonth = TimeManager.MoveToNextMonth(nextMonth);
             _data.AddIncome(userId, entry.Amount, entry.Title, nextMonth, true, entry.Importance);
@@ -61,6 +63,8 @@ namespace ePiggy.DataManagement
                 nextMonth = TimeManager.MoveToNextMonth(nextMonth);
                 _data.AddExpense(userId, entry.Amount, entry.Title, nextMonth, false, entry.Importance);
             }
+
+            if (months <= 0) return; 
             nextMonth = TimeManager.MoveToNextMonth(nextMonth);
             _data.AddExpense(userId, entry.Amount, entry.Title, nextMonth, true, entry.Importance);
             _data.EditExpensesItem(entry.Id, false);
