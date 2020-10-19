@@ -6,9 +6,9 @@ namespace ePiggy.Utilities
     {
         private static readonly DateTime TwoMonthsAhead = DateTime.Today.AddMonths(2);
 
-        public static int DifferenceInMonths(DateTime first, DateTime second)
+        public static int DifferenceInMonths(DateTime laterTime, DateTime earlierTime)
         {
-            return Math.Abs(((first.Year - second.Year) * 12) + first.Month - second.Month);
+            return ((laterTime.Year - earlierTime.Year) * 12) + laterTime.Month - earlierTime.Month;
         }
 
         public static DateTime ChangeYear(DateTime dateTime, int newYear)
