@@ -42,6 +42,7 @@
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.labelTotalBalanceValue = new System.Windows.Forms.Label();
             this.labelTotalBalance = new System.Windows.Forms.Label();
+            this.buttonShowAll = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
@@ -53,6 +54,7 @@
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelTop.Controls.Add(this.buttonShowAll);
             this.panelTop.Controls.Add(this.labelBalance);
             this.panelTop.Controls.Add(this.buttonAddEntry);
             this.panelTop.Controls.Add(this.buttonNextYear);
@@ -276,6 +278,23 @@
             this.labelTotalBalance.TabIndex = 9;
             this.labelTotalBalance.Text = "Total Balance:";
             // 
+            // buttonShowAll
+            // 
+            this.buttonShowAll.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.buttonShowAll.BackColor = System.Drawing.Color.Transparent;
+            this.buttonShowAll.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonShowAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonShowAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.buttonShowAll.Location = new System.Drawing.Point(992, 4);
+            this.buttonShowAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonShowAll.Name = "buttonShowAll";
+            this.buttonShowAll.Size = new System.Drawing.Size(118, 39);
+            this.buttonShowAll.TabIndex = 3;
+            this.buttonShowAll.Text = "Show All";
+            this.buttonShowAll.UseVisualStyleBackColor = false;
+            this.buttonShowAll.Click += new System.EventHandler(this.ButtonShowAll_Click);
+            // 
             // FinanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -316,5 +335,6 @@
         private System.Windows.Forms.Label labelYear;
         private System.Windows.Forms.Label labelTotalBalanceValue;
         private System.Windows.Forms.Label labelTotalBalance;
+        private System.Windows.Forms.Button buttonShowAll;
     }
 }
