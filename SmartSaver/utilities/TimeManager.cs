@@ -2,9 +2,14 @@
 
 namespace ePiggy.Utilities
 {
-    class TimeManager
+    public static class TimeManager
     {
         private static readonly DateTime TwoMonthsAhead = DateTime.Today.AddMonths(2);
+
+        public static int DifferenceInMonths(DateTime first, DateTime second)
+        {
+            return Math.Abs(((first.Year - second.Year) * 12) + first.Month - second.Month);
+        }
 
         public static DateTime ChangeYear(DateTime dateTime, int newYear)
         {
