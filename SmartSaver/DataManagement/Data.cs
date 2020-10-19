@@ -17,6 +17,8 @@ namespace ePiggy.DataManagement
 
         /*Methods that creates new instance of class and adds to List*/
         /*GOALS*/
+
+        /*for all add methods db method should be moved and shouldreturn int id*/
         public bool AddGoal(int userid, string title, decimal value, int placeInQueue)//manual
         {
             if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
@@ -58,22 +60,6 @@ namespace ePiggy.DataManagement
             Income.Add(newIncome);
         }
 
-    /*    public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
-        {
-            var dateUse = date;
-            var db = new DatabaseContext();
-            var rotations = isMonthly ? 12 : 1;
-            for (var i = 0; i < rotations; i++)
-            {
-                var income = new Incomes { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
-                db.Add(income);
-                db.SaveChanges();
-                var id = income.Id;
-                var newIncome = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
-                Income.Add(newIncome);
-                dateUse = dateUse.AddMonths(1);
-            }
-        }*/
 
 		/*EXPENSES*/
         public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
@@ -87,25 +73,19 @@ namespace ePiggy.DataManagement
             Expenses.Add(newExpense);
         }
 
-       /* public void AddMonthlyExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
-        {
-            var db = new DatabaseContext();
-            var dateUse = date;
-            var rotations = isMonthly ? 12 : 1;
-            for (var i = 0; i < rotations; i++)
-            {
-                var expense = new Expenses { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
-                db.Add(expense);
-                db.SaveChanges();
-                var id = expense.Id;
-                var newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
-                Expenses.Add(newExpense);
-                dateUse = dateUse.AddMonths(1);
-            }
-        }*/
 
 		/*Methods for removal*/
 
+        /*Methods that should be left here - normal, methods that are old and left only to copy code of db - commented*/
+
+        public void RemoveGoal(int id)
+        {
+            var goal = GoalsList.FirstOrDefault(x => x.Id == id);
+            if (goal != null) GoalsList.Remove(goal);
+            
+            //kvietinys analogiðkai funkcijai su DB
+        }
+        /*
         public void RemoveGoal(int id)
         {
             var db = new DatabaseContext();
@@ -121,11 +101,17 @@ namespace ePiggy.DataManagement
             }
             var goal = GoalsList.FirstOrDefault(x => x.Id == id);
             GoalsList.Remove(goal);
+        }*/
+
+
+        public void RemoveIncome(int id)
+        {
+            var income = Income.FirstOrDefault(x => x.Id == id);
+            if (income != null) Income.Remove(income);
+            //kvietinys analogiðkai funkcijai su DB
         }
-
-       
-
-		public void RemoveIncome(int id)
+        /*
+        public void RemoveIncome(int id)
         {
             var db = new DatabaseContext();
             try
@@ -140,8 +126,14 @@ namespace ePiggy.DataManagement
             }
             var dataEntry = Income.FirstOrDefault(x => x.Id == id);
             Income.Remove(dataEntry);
-		}
+		}*/
 
+        public void RemoveIncome(DataEntry dataEntry)
+        {
+            Income.Remove(dataEntry);
+            //kvietinys analogiðkai ið db
+        }
+        /*
         public void RemoveIncome(DataEntry dataEntry)
         {
             var db = new DatabaseContext();
@@ -158,8 +150,14 @@ namespace ePiggy.DataManagement
             
 
             Income.Remove(dataEntry);
-        }
+        }*/
 
+        public void RemoveExpense(DataEntry dataEntry)
+        {
+            Expenses.Remove(dataEntry);
+            //kvietinys db
+        }
+        /*
         public void RemoveExpense(DataEntry dataEntry)
         {
             var db = new DatabaseContext();
@@ -176,8 +174,15 @@ namespace ePiggy.DataManagement
             
 
             Expenses.Remove(dataEntry);
-        }
+        }*/
 
+        public void RemoveExpense(int id)
+        {
+            var dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
+            if (dataEntry != null) Expenses.Remove(dataEntry);
+            //kvietinys db
+        }
+        /*
         public void RemoveExpense(int id)
         {
             var db = new DatabaseContext();
@@ -195,7 +200,7 @@ namespace ePiggy.DataManagement
 
             var dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
             Expenses.Remove(dataEntry);
-        }
+        }*/
 
 		public void RemoveIncomes(List<DataEntry> entries)
         {
@@ -230,7 +235,17 @@ namespace ePiggy.DataManagement
             }
         }
 
-		/*Methods that allows to edit different parts of already existing entries*/
+        /*Methods that allows to edit different parts of already existing entries*/
+        public bool EditGoal(int id, string title, decimal value)
+        {
+            var temp = GoalsList.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Title = title;
+            temp.Price = value;
+            //return kvietinys db
+
+        }
+        /*
         public bool EditGoal(int id, string title, decimal value)
         {
             var db = new DatabaseContext();
@@ -246,8 +261,15 @@ namespace ePiggy.DataManagement
             {
                 return false;
             }
-		}
-
+		}*/
+        public bool EditGoalPlaceInQueue(int id, int placeInQueue)
+        {
+            var temp = GoalsList.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.PlaceInQueue = placeInQueue;
+            //return kvietinys db
+        }
+        /*
         public bool EditGoalPlaceInQueue(int id, int placeInQueue)
         {
             var db = new DatabaseContext();
@@ -262,25 +284,41 @@ namespace ePiggy.DataManagement
             {
                 return false;
             }
-		}
-		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
-		{
+		}*/
 
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Amount = value;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+        public bool EditIncomeItem(int id, decimal value)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Amount = value;
+            //return kvietinys db
+        }
 
-		public bool EditIncomeItem(int id, string value)
+        /* public bool EditIncomeItem(int id, decimal value)
+         {
+
+             var db = new DatabaseContext();
+             var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
+             if (temp != null)
+             {
+                 temp.Amount = value;
+                 db.SaveChanges();
+                 return true;
+             }
+             else
+             {
+                 return false;
+             }
+         }*/
+        public bool EditIncomeItem(int id, string value)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Title = value;
+            //return kvietinys db
+        }
+        /*
+        public bool EditIncomeItem(int id, string value)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
@@ -294,9 +332,17 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
+		}*/
 
-		public bool EditIncomeItem(int id, DateTime date)
+        public bool EditIncomeItem(int id, DateTime date)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Date = date;
+            //return kvietinys db
+        }
+        /*
+        public bool EditIncomeItem(int id, DateTime date)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
@@ -310,8 +356,16 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
+		}*/
 
+        public bool EditIncomeItem(int id, bool isMonthly)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.IsMonthly = isMonthly;
+            //return kvietinys db
+        }
+        /*
 		public bool EditIncomeItem(int id, bool isMonthly)
 		{
 			var db = new DatabaseContext();
@@ -328,9 +382,17 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
+		}*/
 
-		public bool EditIncomeItem(int id, int importance)
+        public bool EditIncomeItem(int id, int importance)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Importance = importance;
+            //return kvietinys db
+        }
+        /*
+        public bool EditIncomeItem(int id, int importance)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
@@ -344,9 +406,21 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
+		}*/
 
-		public bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
+        public bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Title = value;
+            temp.Amount = amount;
+            temp.Date = date;
+            temp.IsMonthly = isMonthly;
+            temp.Importance = importance;
+            //return kvietinys db
+        }
+        /*
+        public bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
@@ -364,9 +438,17 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
+		}*/
 
-		public bool EditExpensesItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
+        public bool EditExpensesItem(int id, decimal value)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Amount = value;
+            //return kvietinys db
+        }
+        /*
+        public bool EditExpensesItem(int id, decimal value)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
@@ -380,9 +462,17 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
+		}*/
 
-		public bool EditExpensesItem(int id, string value)
+        public bool EditExpensesItem(int id, string value)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Title = value;
+            //return kvietinys db
+        }
+        /*
+        public bool EditExpensesItem(int id, string value)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
@@ -397,9 +487,17 @@ namespace ePiggy.DataManagement
 				return false;
 			}
 
-		}
+		}*/
 
-		public bool EditExpensesItem(int id, DateTime date)
+        public bool EditExpensesItem(int id, DateTime date)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Date = date;
+            //return kvietinys db
+        }
+        /*
+        public bool EditExpensesItem(int id, DateTime date)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
@@ -414,8 +512,17 @@ namespace ePiggy.DataManagement
 				return false;
 			}
 		}
+        */
 
-		public bool EditExpensesItem(int id, bool isMonthly)
+        public bool EditExpensesItem(int id, bool isMonthly)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.IsMonthly = isMonthly;
+            //return kvietinys db
+        }
+        /*
+        public bool EditExpensesItem(int id, bool isMonthly)
 		{
             var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
@@ -431,9 +538,16 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
-
-		public bool EditExpensesItem(int id, int importance)
+		}*/
+        public bool EditExpensesItem(int id, int importance)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Importance = importance;
+            //return kvietinys db
+        }
+        /*
+        public bool EditExpensesItem(int id, int importance)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
@@ -447,9 +561,21 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
+		}*/
+        public bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null) return false;
+            temp.Title = value;
+            temp.Amount = amount;
+            temp.Date = date;
+            temp.IsMonthly = isMonthly;
+            temp.Importance = importance;
+            //return kvietinys db
+        }
 
-		public bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
+        /*
+        public bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
@@ -467,7 +593,7 @@ namespace ePiggy.DataManagement
 			{
 				return false;
 			}
-		}
+		}*/
         public void ReadIncomeFromDb()
         {
             using var context = new DatabaseContext();
@@ -526,3 +652,43 @@ namespace ePiggy.DataManagement
 
 	}
 }
+
+
+
+/*Legacy methods, just in case*/
+/*
+ public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        {
+            var dateUse = date;
+            var db = new DatabaseContext();
+            var rotations = isMonthly ? 12 : 1;
+            for (var i = 0; i < rotations; i++)
+            {
+                var income = new Incomes { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
+                db.Add(income);
+                db.SaveChanges();
+                var id = income.Id;
+                var newIncome = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
+                Income.Add(newIncome);
+                dateUse = dateUse.AddMonths(1);
+            }
+        }
+
+ public void AddMonthlyExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        {
+            var db = new DatabaseContext();
+            var dateUse = date;
+            var rotations = isMonthly ? 12 : 1;
+            for (var i = 0; i < rotations; i++)
+            {
+                var expense = new Expenses { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
+                db.Add(expense);
+                db.SaveChanges();
+                var id = expense.Id;
+                var newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
+                Expenses.Add(newExpense);
+                dateUse = dateUse.AddMonths(1);
+            }
+        }
+
+*/
