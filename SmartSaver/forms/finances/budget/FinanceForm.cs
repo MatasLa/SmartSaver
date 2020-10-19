@@ -76,26 +76,13 @@ namespace ePiggy.Forms.Finances.Budget
         {
             if (EntryType == EntryType.Income)
             {
-                if (entry.IsMonthly)
-                {
-                    _data.AddMonthlyIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
-                }
-                else
-                {
-                    _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
-                }
+                _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
             }
             else
             {
-                if (entry.IsMonthly)
-                {
-                    _data.AddMonthlyExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
-                }
-                else
-                {
-                    _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
-                }
+                _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
             }
+            _handler.MonthlyUpdater.UpdateMonthlyEntries(Handler.UserId);
         }
 
         private void EditEntry(DataEntry entry)
@@ -108,6 +95,7 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 _data.EditExpensesItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
             }
+            _handler.MonthlyUpdater.UpdateMonthlyEntries(Handler.UserId);
         }
 
         private void DeleteEntry(DataEntry entry)
