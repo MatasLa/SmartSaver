@@ -53,7 +53,7 @@
             this.textBoxTitle.MaxLength = 60;
             this.textBoxTitle.Name = "textBoxTitle";
             this.textBoxTitle.PlaceholderText = "Title";
-            this.textBoxTitle.Size = new System.Drawing.Size(220, 26);
+            this.textBoxTitle.Size = new System.Drawing.Size(220, 23);
             this.textBoxTitle.TabIndex = 0;
             this.textBoxTitle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UsualEscAndEnterKeyPress);
             // 
@@ -63,12 +63,12 @@
             this.textBoxValue.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanel1.SetFlowBreak(this.textBoxValue, true);
             this.textBoxValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textBoxValue.Location = new System.Drawing.Point(40, 106);
+            this.textBoxValue.Location = new System.Drawing.Point(40, 103);
             this.textBoxValue.Margin = new System.Windows.Forms.Padding(40, 20, 40, 40);
             this.textBoxValue.MaxLength = 12;
             this.textBoxValue.Name = "textBoxValue";
             this.textBoxValue.PlaceholderText = "Value";
-            this.textBoxValue.Size = new System.Drawing.Size(220, 26);
+            this.textBoxValue.Size = new System.Drawing.Size(220, 23);
             this.textBoxValue.TabIndex = 1;
             this.textBoxValue.TextChanged += new System.EventHandler(this.TextBoxValue_TextChanged);
             this.textBoxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxValue_KeyPress);
@@ -81,7 +81,7 @@
             this.flowLayoutPanel1.SetFlowBreak(this.checkBoxMonthly, true);
             this.checkBoxMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkBoxMonthly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.checkBoxMonthly.Location = new System.Drawing.Point(90, 496);
+            this.checkBoxMonthly.Location = new System.Drawing.Point(90, 441);
             this.checkBoxMonthly.Margin = new System.Windows.Forms.Padding(90, 10, 0, 0);
             this.checkBoxMonthly.Name = "checkBoxMonthly";
             this.checkBoxMonthly.Size = new System.Drawing.Size(100, 30);
@@ -98,7 +98,7 @@
             this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.buttonOK.Location = new System.Drawing.Point(175, 546);
+            this.buttonOK.Location = new System.Drawing.Point(175, 491);
             this.buttonOK.Margin = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(100, 30);
@@ -116,7 +116,7 @@
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.buttonCancel.Location = new System.Drawing.Point(25, 546);
+            this.buttonCancel.Location = new System.Drawing.Point(25, 491);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(25, 20, 25, 0);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(100, 30);
@@ -133,7 +133,7 @@
             this.flowLayoutPanel1.SetFlowBreak(this.buttonDate, true);
             this.buttonDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.buttonDate.Location = new System.Drawing.Point(75, 220);
+            this.buttonDate.Location = new System.Drawing.Point(75, 210);
             this.buttonDate.Margin = new System.Windows.Forms.Padding(75, 20, 0, 10);
             this.buttonDate.Name = "buttonDate";
             this.buttonDate.Size = new System.Drawing.Size(150, 30);
@@ -145,7 +145,7 @@
             // 
             // monthCalendar
             // 
-            this.monthCalendar.Location = new System.Drawing.Point(20, 270);
+            this.monthCalendar.Location = new System.Drawing.Point(20, 260);
             this.monthCalendar.Margin = new System.Windows.Forms.Padding(20, 10, 9, 9);
             this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.Name = "monthCalendar";
@@ -167,7 +167,7 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(300, 600);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(300, 550);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // labelImportance
@@ -175,10 +175,10 @@
             this.labelImportance.AutoSize = true;
             this.labelImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelImportance.Location = new System.Drawing.Point(25, 172);
+            this.labelImportance.Location = new System.Drawing.Point(25, 166);
             this.labelImportance.Margin = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.labelImportance.Name = "labelImportance";
-            this.labelImportance.Size = new System.Drawing.Size(115, 25);
+            this.labelImportance.Size = new System.Drawing.Size(94, 20);
             this.labelImportance.TabIndex = 6;
             this.labelImportance.Text = "Importance:";
             // 
@@ -193,18 +193,18 @@
             "Medium",
             "Low",
             "Unnecessary"});
-            this.comboBoxImportance.Location = new System.Drawing.Point(140, 172);
+            this.comboBoxImportance.Location = new System.Drawing.Point(119, 166);
             this.comboBoxImportance.Margin = new System.Windows.Forms.Padding(0);
             this.comboBoxImportance.Name = "comboBoxImportance";
-            this.comboBoxImportance.Size = new System.Drawing.Size(125, 28);
+            this.comboBoxImportance.Size = new System.Drawing.Size(125, 24);
             this.comboBoxImportance.TabIndex = 2;
             // 
             // EntryForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(300, 600);
+            this.ClientSize = new System.Drawing.Size(300, 550);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;

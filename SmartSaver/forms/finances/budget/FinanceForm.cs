@@ -279,7 +279,7 @@ namespace ePiggy.Forms.Finances.Budget
             dataGridView.Columns["ID"].Visible = false;
             dataGridView.Columns["Importance"].Visible = false;
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
-            dataGridView.Columns["Date"].DefaultCellStyle.Format = "dd (dddd)";
+            dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
         }
 
 

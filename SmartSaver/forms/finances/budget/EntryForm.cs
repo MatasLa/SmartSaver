@@ -39,7 +39,7 @@ namespace ePiggy.Forms.Finances.Budget
             InitializeComponent();
 
             _expandedSize = Size;
-            _collapsedSize = new Size(Size.Width, Size.Height - monthCalendar.Size.Height - 75);
+            _collapsedSize = new Size(Size.Width, Size.Height - monthCalendar.Size.Height - monthCalendar.Margin.Bottom - monthCalendar.Margin.Top);
 
             _entry = dataEntry ?? throw new Exception("Given null data entry");
             _entryType = entryType;
