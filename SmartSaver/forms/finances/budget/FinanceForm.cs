@@ -84,7 +84,6 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
             }
-
             _handler.MonthlyUpdater.UpdateMonthlyEntries(Handler.UserId);
         }
 
@@ -98,7 +97,6 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 _data.EditExpensesItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
             }
-
             _handler.MonthlyUpdater.UpdateMonthlyEntries(Handler.UserId);
         }
 
