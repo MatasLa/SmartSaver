@@ -19,7 +19,7 @@ namespace ePiggy.Forms.Finances.Budget
         private readonly Type _type;
 
         private readonly Handler _handler;
-        private readonly DataEntry _dataEntry;
+        private readonly DataEntry _entry;
         private readonly EntryType _entryType;
         private readonly Size _collapsedSize;
         private readonly Size _expandedSize;
@@ -39,22 +39,23 @@ namespace ePiggy.Forms.Finances.Budget
             InitializeComponent();
 
             _expandedSize = Size;
-            _collapsedSize = new Size(Size.Width, Size.Height - monthCalendar.Size.Height - 25);
+            _collapsedSize = new Size(Size.Width, Size.Height - panelCalendar.Size.Height);
 
-            _dataEntry = dataEntry ?? throw new Exception("Given null data entry");
+            _entry = dataEntry ?? throw new Exception("Given null data entry");
             _entryType = entryType;
             _handler = handler;
             _type = type;
 
-            SetCalendarTime();
+            CalendarSetUp();
             SetUpAddOrEdit();
             Collapse();
             Select();
         }
 
-        private void SetCalendarTime()
+        private void CalendarSetUp()
         {
             monthCalendar.SelectionStart = _handler.Time;
+            monthCalendar.MaxDate = TimeManager.OneMonthAhead;
         }
 
         #region Title setup
@@ -82,6 +83,8 @@ namespace ePiggy.Forms.Finances.Budget
                 Text = AddExpenseTitle;
                 buttonOK.Text = AddButtonText;
             }
+
+            comboBoxImportance.SelectedIndex = 0;
         }
 
         private void SetUpEdit()
@@ -96,10 +99,11 @@ namespace ePiggy.Forms.Finances.Budget
                 Text = EditExpenseTitle;
                 buttonOK.Text = EditButtonText;
             }
-            Text += @" """ + _dataEntry.Title + @"""";
-            textBoxTitle.Text = _dataEntry.Title;
-            textBoxValue.Text = _dataEntry.Amount.ToString(CultureInfo.CurrentCulture);
-            checkBoxMonthly.Checked = _dataEntry.IsMonthly;
+            Text += @" """ + _entry.Title + @"""";
+            textBoxTitle.Text = _entry.Title;
+            textBoxValue.Text = _entry.Amount.ToString(CultureInfo.CurrentCulture);
+            checkBoxMonthly.Checked = _entry.IsMonthly;
+            comboBoxImportance.SelectedIndex = _entry.Importance - 1;
         }
         #endregion
 
@@ -121,10 +125,11 @@ namespace ePiggy.Forms.Finances.Budget
 
         private void TakeInput()
         {
-            _dataEntry.Amount = decimal.Round(decimal.Parse(textBoxValue.Text), 2);
-            _dataEntry.Title = textBoxTitle.Text;
-            _dataEntry.IsMonthly = checkBoxMonthly.Checked;
-            _dataEntry.Date = monthCalendar.SelectionStart;
+            _entry.Amount = decimal.Round(decimal.Parse(textBoxValue.Text), 2);
+            _entry.Title = textBoxTitle.Text;
+            _entry.IsMonthly = checkBoxMonthly.Checked;
+            _entry.Date = monthCalendar.SelectionStart;
+            _entry.Importance = comboBoxImportance.SelectedIndex + 1;
         }
 
         #endregion
@@ -198,10 +203,22 @@ namespace ePiggy.Forms.Finances.Budget
         private void ButtonDate_Click(object sender, EventArgs e)
         {
             ChangeSize();
-        } 
+        }
         #endregion
 
         #region Size Changing
+
+        private void MonthCalendar_Resize(object sender, EventArgs e)
+        {
+            AdjustCalendarPosition();
+        }
+
+        private void AdjustCalendarPosition()
+        {
+            monthCalendar.Left = (panelCalendar.Width - monthCalendar.Width) / 2;
+            monthCalendar.Top = (panelCalendar.Height - monthCalendar.Height) / 2;
+        }
+
         private void ChangeSize()
         {
             if (Size == _collapsedSize)
@@ -217,13 +234,14 @@ namespace ePiggy.Forms.Finances.Budget
         private void Collapse()
         {
             Size = _collapsedSize;
-            monthCalendar.Hide();
+            //panelCalendar.Hide();
+            panelCalendar.Visible = false;
         }
 
         private void Expand()
         {
             Size = _expandedSize;
-            monthCalendar.Show();
+            panelCalendar.Visible = true;
         }
 
         #endregion
@@ -249,7 +267,8 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 _errorMessage = BadTitleErrorMessage + "\n" + BadNumberErrorMessage;
             }
-        } 
+        }
         #endregion
+
     }
 }
