@@ -26,16 +26,15 @@ namespace ePiggy.DataManagement
             {
                 var entryDate = entry.Date;
                 var differenceInMonths = TimeManager.DifferenceInMonths(todayDate, entryDate);
+                if (differenceInMonths > 0) UpdateMonthlyIncome(entry, differenceInMonths, userId);
 
-                UpdateMonthlyIncome(entry, differenceInMonths, userId);
             }
 
             foreach (var entry in entriesExp)
             {
                 var entryDate = entry.Date;
                 var differenceInMonths = TimeManager.DifferenceInMonths(todayDate, entryDate);
-
-                UpdateMonthlyExpense(entry, differenceInMonths, userId);
+                if (differenceInMonths > 0) UpdateMonthlyExpense(entry, differenceInMonths, userId);
             }
         }
 
@@ -47,6 +46,7 @@ namespace ePiggy.DataManagement
                 nextMonth = TimeManager.MoveToNextMonth(nextMonth);//Adding new entry for each month according to date difference
                 _data.AddIncome(userId, entry.Amount, entry.Title, nextMonth, false, entry.Importance);
             }
+
             /*Adding last entry, which has to keep isMonthly*/
             nextMonth = TimeManager.MoveToNextMonth(nextMonth);
             _data.AddIncome(userId, entry.Amount, entry.Title, nextMonth, true, entry.Importance);
@@ -61,6 +61,7 @@ namespace ePiggy.DataManagement
                 nextMonth = TimeManager.MoveToNextMonth(nextMonth);
                 _data.AddExpense(userId, entry.Amount, entry.Title, nextMonth, false, entry.Importance);
             }
+
             nextMonth = TimeManager.MoveToNextMonth(nextMonth);
             _data.AddExpense(userId, entry.Amount, entry.Title, nextMonth, true, entry.Importance);
             _data.EditExpensesItem(entry.Id, false);
