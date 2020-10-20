@@ -10,88 +10,57 @@ namespace ePiggy.DataManagement
         private readonly Data _data;
         public DataTableConverter(Data data)
         {
-            this._data = data;
+            _data = data;
         }
 
-        public DataTable GenerateTable(EntryType entryType)//All entries
+        public DataTable GenerateEntryTable(EntryType entryType)//All entries
         {
-            var dt = GenerateHeaders();
-            if(entryType == EntryType.Income)
+            var dt = GenerateEntryTableHeaders();
+            switch (entryType)
             {
-                foreach (var data in _data.Income)
+                case EntryType.Income:
                 {
-                    dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                    foreach (var data in _data.Income)
+                    {
+                        dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.Importance, data.IsMonthly);
+                    }
+                    break;
                 }
-            }
-            else if(entryType == EntryType.Expense)
-            {
-                foreach (var data in _data.Expenses)
+                case EntryType.Expense:
                 {
-                    dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
+                    foreach (var data in _data.Expenses)
+                    {
+                        dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.Importance, data.IsMonthly);
+                    }
+                    break;
                 }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
             }
             return dt;
         }
 
         /*Takes list from DataFilter and creates income or expenses DataTable, used to get DataTable of filtered List*/
-        public DataTable CustomTable(List<DataEntry> customList)
+        public static DataTable GenerateEntryTable(List<DataEntry> customList)
         {
-            var dt = GenerateHeaders();
+            var dt = GenerateEntryTableHeaders();
             foreach (var dataEntry in customList)
             {
-                dt.Rows.Add(dataEntry.Id, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.IsMonthly, dataEntry.Importance);
+                dt.Rows.Add(dataEntry.Id, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.Importance, dataEntry.IsMonthly);
             }
-
             return dt;
         }
 
-        private DataTable GenerateHeaders()
+        private static DataTable GenerateEntryTableHeaders()
         {
             var dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("Title", typeof(string));
             dt.Columns.Add("Amount", typeof(decimal));
             dt.Columns.Add("Date", typeof(DateTime));
+            dt.Columns.Add("Importance", typeof(Importance));
             dt.Columns.Add("Recurring", typeof(bool));
-            dt.Columns.Add("Importance", typeof(int));
             return dt;
         }
-
-        public DataTable IncomeTable()//All entries
-        {
-            var dt = new DataTable();
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Title", typeof(string));
-            dt.Columns.Add("Amount", typeof(decimal));
-            dt.Columns.Add("Date", typeof(DateTime));
-            dt.Columns.Add("Recurring", typeof(bool));
-            dt.Columns.Add("Importance", typeof(int));
-
-            foreach(var data in _data.Income)
-            {
-                dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
-            }
-            return dt;
-        }
-
-        public DataTable ExpensesTable()//All entries
-        {
-            var dt = new DataTable();
-            dt.Columns.Add("ID", typeof(int));
-            dt.Columns.Add("Title", typeof(string));
-            dt.Columns.Add("Amount", typeof(decimal));
-            dt.Columns.Add("Date", typeof(DateTime));
-            dt.Columns.Add("Recurring", typeof(bool));
-            dt.Columns.Add("Importance", typeof(int));
-
-            foreach (var data in _data.Expenses)
-            {
-                dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.IsMonthly, data.Importance);
-            }
-            return dt;
-        }
-
-
     }
-         
 }
