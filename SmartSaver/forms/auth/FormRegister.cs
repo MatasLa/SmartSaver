@@ -1,35 +1,37 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using ePiggy.Authentication;
 using ePiggy.Forms;
 using ePiggy.Utilities;
 
-namespace ePiggy.forms
+namespace ePiggy.forms.auth
 {
-    public partial class FormChangePass : Form
+    public partial class FormRegister : Form
     {
-        private readonly string _email;
         public Handler DataHandler { get; }
-        public FormChangePass(string email, Handler dataHandler)
+
+
+        public FormRegister(Handler dataHandler)
         {
             InitializeComponent();
-            errorMessage.Text = "";
-            _email = email;
             DataHandler = dataHandler;
+            errorMessage.Text = "";
+        }
+
+        
+        private void backToLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FormUtilities.ChangeForm(this, new FormLogIn(DataHandler));
         }
 
         private void registerButton_Click(object sender, EventArgs e)
         {
-            var pass = password.Text;
-            var passconfirm = confirmPassword.Text;
-            if (!InputValidator.IsValidPasswordConfirm(this, pass, passconfirm)) return;
-            UserAuth.ChangePassword(_email, pass);
-            FormUtilities.ChangeForm(this, new FormLogIn(DataHandler));
+            var email = emailInput.Text;
+            var pass = passwordInput1.Text;
+            var passConfirm = passwordInput2.Text;
+            if (!InputValidator.RegisterValidation(this, email, pass, passConfirm)) return;
+            UserAuth.Registration(email: email, pass: pass);
+            FormUtilities.ChangeForm(this, new FormMain(DataHandler));
         }
 
         public void ChangeErrorText(int id)
@@ -37,6 +39,9 @@ namespace ePiggy.forms
             string text;
             switch (id)
             {
+                case 0:
+                    text = "Provided e-mail is not valid!";
+                    break;
                 case 1:
                     text = "Password must be at least 8 characters long";
                     break;
@@ -53,4 +58,6 @@ namespace ePiggy.forms
             errorMessage.Text = text;
         }
     }
+
+        
 }

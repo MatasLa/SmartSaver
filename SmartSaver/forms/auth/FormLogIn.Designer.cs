@@ -1,6 +1,6 @@
 ﻿using ePiggy.Forms.CustomControls;
 
-namespace ePiggy.Forms
+namespace ePiggy.forms.auth
 {
     partial class FormLogIn
     {

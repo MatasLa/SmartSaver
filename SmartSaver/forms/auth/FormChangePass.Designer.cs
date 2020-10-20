@@ -1,4 +1,4 @@
-﻿namespace ePiggy.forms
+﻿namespace ePiggy.forms.auth
 {
     partial class FormChangePass
     {
