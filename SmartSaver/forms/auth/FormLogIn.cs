@@ -4,10 +4,10 @@ using System.IO;
 using System.Windows.Forms;
 using ePiggy.Authentication;
 using ePiggy.Forms;
-using ePiggy.forms.customforms;
+using ePiggy.Forms.CustomForms;
 using ePiggy.Utilities;
 
-namespace ePiggy.forms.auth
+namespace ePiggy.Forms.Auth
 {
     public partial class FormLogIn : Form
 

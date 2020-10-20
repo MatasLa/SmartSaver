@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using ePiggy.Utilities;
 
 
-namespace ePiggy.forms.customforms
+namespace ePiggy.Forms.CustomForms
 {
     public static class Prompt
     {

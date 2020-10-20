@@ -4,7 +4,7 @@ using ePiggy.Authentication;
 using ePiggy.Forms;
 using ePiggy.Utilities;
 
-namespace ePiggy.forms.auth
+namespace ePiggy.Forms.Auth
 {
     public partial class FormChangePass : Form
     {

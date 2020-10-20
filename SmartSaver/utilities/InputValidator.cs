@@ -2,9 +2,8 @@
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using ePiggy.forms;
 using ePiggy.Forms;
-using ePiggy.forms.auth;
+using ePiggy.Forms.Auth;
 
 namespace ePiggy.Utilities
 {
