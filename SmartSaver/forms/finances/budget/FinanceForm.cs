@@ -78,11 +78,11 @@ namespace ePiggy.Forms.Finances.Budget
         {
             if (EntryType == EntryType.Income)
             {
-                _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                _data.AddIncome(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, entry.Importance);
             }
             else
             {
-                _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, 1);
+                _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, entry.Importance);
             }
             _handler.MonthlyUpdater.UpdateMonthlyEntries(Handler.UserId);
         }
@@ -91,11 +91,11 @@ namespace ePiggy.Forms.Finances.Budget
         {
             if (EntryType == EntryType.Income)
             {
-                _data.EditIncomeItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
+                _data.EditIncomeItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, entry.Importance);
             }
             else
             {
-                _data.EditExpensesItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, 1);
+                _data.EditExpensesItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, entry.Importance);
             }
             _handler.MonthlyUpdater.UpdateMonthlyEntries(Handler.UserId);
         }
@@ -277,7 +277,7 @@ namespace ePiggy.Forms.Finances.Budget
             dataGridView.Columns["ID"].Visible = false;
             dataGridView.Columns["Importance"].Visible = false;
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
-            dataGridView.Columns["Date"].DefaultCellStyle.Format = "dd (dddd)";
+            dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
         }
 
 
