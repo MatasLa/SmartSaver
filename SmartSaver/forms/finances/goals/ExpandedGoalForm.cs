@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using ePiggy.DataManagement;
 using ePiggy.Utilities;
@@ -38,16 +39,25 @@ namespace ePiggy.Forms.Finances.Goals
 
         private void Init()
         {
-            labelTitle.Text = Goal.Title;
-            labelTarget.Text = NumberFormatter.FormatCurrency(Goal.Price);
-
-
             _target = Goal.Price;
             _saved = _handler.DataFilter.GetBalancesUntilToday();
             _progress = DataCalculations.CalculateProgress(_saved, _target);
 
+
             labelTitle.Text = Goal.Title;
+            labelTarget.Text =
+                NumberFormatter.FormatCurrency(_saved) + @" of " + NumberFormatter.FormatCurrency(_target);
             progressBar.Value = _progress;
+
+            DisplayTable();
+        }
+        private void DisplayTable()
+        {
+            dataGridView.DataSource = _handler.DataTableConverter.GenerateOfferTable(new List<OfferData>());
+
+            dataGridView.Columns["ID"].Visible = false;
+            dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
+            dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
         }
 
     }
