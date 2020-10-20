@@ -117,8 +117,21 @@ namespace ePiggy.Forms.Finances.Goals
 
         private void AddGoalButtonClick(object sender, EventArgs e)
         {
-            var goal = new Goal();
-            if (!OpenGoalDialog(goal)) return;
+            AddGoalWithDialog();
+        }
+
+        public void RemoveGoal(Goal goal)
+        {
+            _handler.Data.RemoveGoal(goal.Id);
+        }
+
+        private void EditGoal(Goal goal)
+        {
+            _handler.Data.EditGoal(goal.Id, goal.Title, goal.Price);
+        }
+
+        private void AddGoal(Goal goal)
+        {
             if (goal.Price == 0)
             {
                 _handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
@@ -127,19 +140,26 @@ namespace ePiggy.Forms.Finances.Goals
             {
                 _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price, 0);
             }
-            //_handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
+        }
+
+        private bool OpenGoalDialogForm(Goal goal, GoalDialogForm.Type type)
+        {
+            return new GoalDialogForm(goal, _handler, type).ShowDialog() == DialogResult.OK;
+        }
+
+        public void EditGoalWithDialog(Goal goal)
+        {
+            if (!OpenGoalDialogForm(goal, GoalDialogForm.Type.Edit)) return;
+            EditGoal(goal);
             UpdateDisplay();
         }
 
-        public void RemoveGoal(Goal goal)
+        private void AddGoalWithDialog()
         {
-            _handler.Data.RemoveGoal(goal.Id);
+            var goal = new Goal();
+            if (!OpenGoalDialogForm(goal, GoalDialogForm.Type.Add)) return;
+            AddGoal(goal);
+            UpdateDisplay();
         }
-
-        private bool OpenGoalDialog(Goal goal)
-        {
-            return new GoalDialogForm(goal, _handler).ShowDialog() == DialogResult.OK;
-        }
-        
     }
 }

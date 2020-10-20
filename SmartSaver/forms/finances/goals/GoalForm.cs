@@ -32,14 +32,13 @@ namespace ePiggy.Forms.Finances.Goals
             _handler = handler;
             Goal = goal ?? throw new Exception("Given null goal");
 
-
             Init();
         }
 
         private void Init()
         {
             _target = Goal.Price;
-            _saved = _handler.DataFilter.GetBalance();
+            _saved = _handler.DataFilter.GetBalancesUntilToday();
             _progress = CalculateProgress(_saved, _target);
 
             labelTitle.Text = Goal.Title;
@@ -74,6 +73,12 @@ namespace ePiggy.Forms.Finances.Goals
 
         #region Click Handling
 
+        private void ButtonEdit_Click(object sender, EventArgs e)
+        {
+            _parentForm.EditGoalWithDialog(Goal);
+            _parentForm.UpdateDisplay();
+        }
+
         private void ButtonRemoveGoal_Click(object sender, EventArgs e)
         {
             _parentForm.RemoveGoal(Goal);
@@ -82,9 +87,10 @@ namespace ePiggy.Forms.Finances.Goals
 
         private void GoalForm_Click(object sender, EventArgs e)
         {
-            _parentForm.DisplayExpandedGoal(_goal);
+            _parentForm.DisplayExpandedGoal(Goal);
         }
 
         #endregion
+
     }
 }
