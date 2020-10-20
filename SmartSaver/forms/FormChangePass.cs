@@ -27,11 +27,9 @@ namespace ePiggy.forms
         {
             var pass = password.Text;
             var passconfirm = confirmPassword.Text;
-            if (InputValidator.IsValidPasswordConfirm(this, pass, passconfirm))
-            {
-                UserAuth.ChangePassword(_email, pass);
-                FormUtilities.ChangeForm(this, new FormLogIn(DataHandler));
-            }
+            if (!InputValidator.IsValidPasswordConfirm(this, pass, passconfirm)) return;
+            UserAuth.ChangePassword(_email, pass);
+            FormUtilities.ChangeForm(this, new FormLogIn(DataHandler));
         }
 
         public void ChangeErrorText(int id)

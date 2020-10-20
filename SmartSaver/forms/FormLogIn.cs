@@ -13,9 +13,6 @@ namespace ePiggy.Forms
 
     {
         public Handler DataHandler { get; }
-        /*Add when new logo exists
-        private static readonly string resourceDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources";
-        private Image logo = Image.FromFile(resourceDirectory + @"\logo inverted.png");*/
 
         private static readonly string ResourceDirectoryQuotes = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + @"\resources\textData\quotes.txt";
         public FormLogIn(Handler dataHandler)
@@ -24,7 +21,6 @@ namespace ePiggy.Forms
             DataHandler = dataHandler;
             SetQuote();
             errorMessage.Text = "";
-           // logoPic.Image = logo;
         }
 
         private void SetQuote()
