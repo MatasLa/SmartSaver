@@ -29,7 +29,7 @@ namespace ePiggy.forms
             var passconfirm = confirmPassword.Text;
             if (InputValidator.IsValidPasswordConfirm(this, pass, passconfirm))
             {
-                //UserAuth.ChangePassword(_email, pass);
+                UserAuth.ChangePassword(_email, pass);
                 FormUtilities.ChangeForm(this, new FormLogIn(DataHandler));
             }
         }

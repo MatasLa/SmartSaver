@@ -59,12 +59,23 @@ namespace ePiggy.Forms
         private void forgotPassLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var email = Prompt.ShowDialog("Enter your email:", "Forgot password");
-            var sentCode = "test";//SendCode(email);
-            var receivedCode = Prompt.ShowDialog("Enter receiver code:", "Forgot password");
-            if (receivedCode == sentCode)
+            if (string.IsNullOrEmpty(email)) return;
+            var sentCode = UserAuth.SendCode(email);
+            try
             {
-                FormUtilities.ChangeForm(this, new FormChangePass(email, DataHandler));
+                var receivedCode = int.Parse(Prompt.ShowDialog("Enter receiver code:", "Forgot password"));
+                if (receivedCode == sentCode)
+                {
+                    FormUtilities.ChangeForm(this, new FormChangePass(email, DataHandler));
+                }
+                errorMessage.Text = @"Wrong confirmation code!";
             }
+            catch (Exception ex)
+            {
+                errorMessage.Text = @"Wrong confirmation code!";
+                ExceptionHandler.Log(ex.ToString());
+            }
+
         }
 
         private void registerButton_Click(object sender, EventArgs e)
