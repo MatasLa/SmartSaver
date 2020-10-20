@@ -64,7 +64,7 @@
             this.label2.Location = new System.Drawing.Point(139, 152);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(149, 19);
-            this.label2.TabIndex = 0;
+            this.label2.TabIndex = 3;
             this.label2.Text = "Confirm new password";
             // 
             // confirmPassword
@@ -73,7 +73,7 @@
             this.confirmPassword.Name = "confirmPassword";
             this.confirmPassword.PasswordChar = '•';
             this.confirmPassword.Size = new System.Drawing.Size(233, 23);
-            this.confirmPassword.TabIndex = 1;
+            this.confirmPassword.TabIndex = 4;
             // 
             // confirmButton
             // 
@@ -93,7 +93,7 @@
             this.confirmButton.OnHoverButtonColor = System.Drawing.Color.LightCyan;
             this.confirmButton.OnHoverTextColor = System.Drawing.Color.SteelBlue;
             this.confirmButton.Size = new System.Drawing.Size(117, 33);
-            this.confirmButton.TabIndex = 12;
+            this.confirmButton.TabIndex = 6;
             this.confirmButton.Text = "Confirm";
             this.confirmButton.TextColor = System.Drawing.Color.SteelBlue;
             this.confirmButton.UseVisualStyleBackColor = false;
@@ -106,7 +106,7 @@
             this.errorMessage.Location = new System.Drawing.Point(102, 225);
             this.errorMessage.Name = "errorMessage";
             this.errorMessage.Size = new System.Drawing.Size(294, 49);
-            this.errorMessage.TabIndex = 13;
+            this.errorMessage.TabIndex = 5;
             this.errorMessage.Text = "label3";
             this.errorMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
