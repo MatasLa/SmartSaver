@@ -53,10 +53,9 @@ namespace ePiggy
 
         public void Update()
         {
-            Time = DateTime.Now;
+            Time = DateTime.Today;
             ClearData();
             ReadFromDb();
-            Time = DateTime.Now;
             MonthlyUpdater.UpdateMonthlyEntries(UserId);
         }
         
