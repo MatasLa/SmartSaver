@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using ePiggy.Forms;
+using ePiggy.Forms.Auth;
 
 namespace ePiggy
 {

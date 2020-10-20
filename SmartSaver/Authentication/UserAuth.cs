@@ -98,6 +98,5 @@ namespace ePiggy.Authentication
                 return randomCode;
             }
         }
-
     }
 }

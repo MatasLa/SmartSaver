@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ePiggy.Forms;
+using ePiggy.Forms.Auth;
 
 namespace ePiggy.Utilities
 {
@@ -24,6 +25,25 @@ namespace ePiggy.Utilities
         }
 
         private static bool IsValidPassword(FormRegister form, string password, string confirmPass)
+        {
+            if (password.Length < 8)
+            {
+                form.ChangeErrorText(1);
+                return false;
+            }
+
+            if (!IsPasswordComplex(password))
+            {
+                form.ChangeErrorText(3);
+                return false;
+            }
+
+            if (password.Equals(confirmPass)) return true;
+            form.ChangeErrorText(2);
+            return false;
+        }
+
+        public static bool IsValidPasswordConfirm(FormChangePass form, string password, string confirmPass)
         {
             if (password.Length < 8)
             {
