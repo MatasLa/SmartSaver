@@ -11,6 +11,10 @@ namespace ePiggy.Forms.Finances.Goals
         private Goal _goal;
         private readonly GoalsForm _parentForm;
 
+        private decimal _target;
+        private decimal _saved;
+        private int _progress;
+
         public Goal Goal
         {
             get => _goal;
@@ -36,6 +40,15 @@ namespace ePiggy.Forms.Finances.Goals
         {
             labelTitle.Text = Goal.Title;
             labelTarget.Text = NumberFormatter.FormatCurrency(Goal.Price);
+
+
+            _target = Goal.Price;
+            _saved = _handler.DataFilter.GetBalancesUntilToday();
+            _progress = DataCalculations.CalculateProgress(_saved, _target);
+
+            labelTitle.Text = Goal.Title;
+            progressBar.Value = _progress;
         }
+
     }
 }

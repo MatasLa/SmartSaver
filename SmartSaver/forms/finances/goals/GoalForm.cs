@@ -39,35 +39,15 @@ namespace ePiggy.Forms.Finances.Goals
         {
             _target = Goal.Price;
             _saved = _handler.DataFilter.GetBalancesUntilToday();
-            _progress = CalculateProgress(_saved, _target);
+            _progress = DataCalculations.CalculateProgress(_saved, _target);
 
             labelTitle.Text = Goal.Title;
             labelProgress.Text =
                 NumberFormatter.FormatCurrency(_saved) + @" of " + NumberFormatter.FormatCurrency(_target);
-            DisplayProgressBar();
-        }
-
-
-        private void DisplayProgressBar()
-        {
             progressBar.Value = _progress;
         }
 
         #region Calculation of progress bar
-
-        private static int CalculateProgress(decimal saved, decimal target)
-        {
-            if (saved < 0)
-            {
-                return 0;
-            }
-            if (target <= 0)
-            {
-                return 100;
-            }
-            var progress = (int)(saved * 100 / target);
-            return progress > 100 ? 100 : progress;
-        }
 
         #endregion
 
