@@ -98,11 +98,8 @@ namespace ePiggy.DataBase
                 db.SaveChanges();
                 return true;
             }
-            else
-            {
-                return false;
-            }
-		}
+            return false;
+        }
 
         
         public static bool EditGoalPlaceInQueue(int id, int placeInQueue)
@@ -115,11 +112,8 @@ namespace ePiggy.DataBase
                 db.SaveChanges();
                 return true;
             }
-            else
-            {
-                return false;
-            }
-		}
+            return false;
+        }
          public static bool EditIncomeItem(int id, decimal value)
          {
 
@@ -131,10 +125,7 @@ namespace ePiggy.DataBase
                  db.SaveChanges();
                  return true;
              }
-             else
-             {
-                 return false;
-             }
+             return false;
          }
         
         public static bool EditIncomeItem(int id, string value)
@@ -147,11 +138,8 @@ namespace ePiggy.DataBase
 				db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
         
         public static bool EditIncomeItem(int id, DateTime date)
 		{
@@ -163,11 +151,8 @@ namespace ePiggy.DataBase
 				db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
         
 		public static bool EditIncomeItem(int id, bool isMonthly)
 		{
@@ -179,11 +164,8 @@ namespace ePiggy.DataBase
                 db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
         
        public static bool EditIncomeItem(int id, int importance)
        {
@@ -195,10 +177,7 @@ namespace ePiggy.DataBase
                db.SaveChanges();
                return true;
            }
-           else
-           {
-               return false;
-           }
+           return false;
        }
         
         public static bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
@@ -215,11 +194,8 @@ namespace ePiggy.DataBase
 				db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
         
         public static bool EditExpensesItem(int id, decimal value)
 		{
@@ -231,11 +207,8 @@ namespace ePiggy.DataBase
 				db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
         
         public static bool EditExpensesItem(int id, string value)
 		{
@@ -247,12 +220,9 @@ namespace ePiggy.DataBase
 				db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
+            return false;
 
-		}
+        }
         
         public static bool EditExpensesItem(int id, DateTime date)
 		{
@@ -264,11 +234,8 @@ namespace ePiggy.DataBase
 				db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
         
         
         public static bool EditExpensesItem(int id, bool isMonthly)
@@ -281,11 +248,8 @@ namespace ePiggy.DataBase
                 db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
         
         public static bool EditExpensesItem(int id, int importance)
 		{
@@ -297,11 +261,8 @@ namespace ePiggy.DataBase
 				db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
         
         public static bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
 		{
@@ -317,10 +278,7 @@ namespace ePiggy.DataBase
 				db.SaveChanges();
 				return true;
 			}
-			else
-			{
-				return false;
-			}
-		}
+            return false;
+        }
     }
 }
