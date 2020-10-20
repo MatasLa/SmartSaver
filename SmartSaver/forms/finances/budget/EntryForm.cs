@@ -55,7 +55,7 @@ namespace ePiggy.Forms.Finances.Budget
         private void CalendarSetUp()
         {
             monthCalendar.SelectionStart = _handler.Time;
-
+            monthCalendar.MaxDate = TimeManager.OneMonthAhead;
         }
 
         #region Title setup

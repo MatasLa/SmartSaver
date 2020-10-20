@@ -83,7 +83,7 @@
             this.flowLayoutPanel.SetFlowBreak(this.checkBoxMonthly, true);
             this.checkBoxMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkBoxMonthly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.checkBoxMonthly.Location = new System.Drawing.Point(90, 460);
+            this.checkBoxMonthly.Location = new System.Drawing.Point(90, 435);
             this.checkBoxMonthly.Margin = new System.Windows.Forms.Padding(90, 10, 0, 0);
             this.checkBoxMonthly.Name = "checkBoxMonthly";
             this.checkBoxMonthly.Size = new System.Drawing.Size(100, 30);
@@ -100,7 +100,7 @@
             this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.buttonOK.Location = new System.Drawing.Point(175, 510);
+            this.buttonOK.Location = new System.Drawing.Point(175, 485);
             this.buttonOK.Margin = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(100, 30);
@@ -118,7 +118,7 @@
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.buttonCancel.Location = new System.Drawing.Point(25, 510);
+            this.buttonCancel.Location = new System.Drawing.Point(25, 485);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(25, 20, 25, 0);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(100, 30);
@@ -209,7 +209,7 @@
             this.panelCalendar.Location = new System.Drawing.Point(0, 250);
             this.panelCalendar.Margin = new System.Windows.Forms.Padding(0);
             this.panelCalendar.Name = "panelCalendar";
-            this.panelCalendar.Size = new System.Drawing.Size(300, 200);
+            this.panelCalendar.Size = new System.Drawing.Size(300, 175);
             this.panelCalendar.TabIndex = 7;
             // 
             // EntryForm
