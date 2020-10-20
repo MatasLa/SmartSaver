@@ -288,7 +288,6 @@ namespace ePiggy.Forms.Finances.Budget
             dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
         }
 
-
         private bool DataTableErrorCheck()
         {
             if (dataGridView.Columns["ID"] is null)
@@ -328,16 +327,23 @@ namespace ePiggy.Forms.Finances.Budget
         private void DisplayBalances()
         {
             DisplayBalance();
+            DisplayMonthlyTotal();
             DisplayTotalBalance();
             DisplayBalanceUntilToday();
             DisplayBalanceUntilEndOfMonth();
             DisplayImportance();
         }
 
+        private void DisplayMonthlyTotal()
+        {
+            var value = EntryType == EntryType.Expense ? _dataFilter.GetTotaledExpenses(_handler.Time) : _dataFilter.GetTotaledIncome(_handler.Time);
+            FormUtilities.DisplayCurrency(labelValueMonths, value);
+        }
+
         private void DisplayBalance()
         {
             var balance = _dataFilter.GetBalance(_handler.Time);
-            FormUtilities.DisplayCurrencyTextWithColor(labelBalance, balance);
+            FormUtilities.DisplayCurrencyTextWithColor(labelValueMonthlyBalance, balance);
         }
 
         private void DisplayTotalBalance()
