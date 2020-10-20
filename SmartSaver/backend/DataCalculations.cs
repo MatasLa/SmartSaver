@@ -28,7 +28,7 @@ namespace DataManager
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
         public decimal CheckBalance()/*Checks even future data*/
         {
-            decimal sum = 0;
+            var sum = 0M;
             foreach (DataEntry data in data.Income)
             {
                 sum += data.Amount;
@@ -74,9 +74,9 @@ namespace DataManager
         
         private bool SavingMoney(Goal goal)
         {
-            decimal savedAmount = 0;
+            var savedAmount = 0M;
             //Goal goal = new Goal();
-            decimal neededAmount = (goal.Price - CheckBalance());
+            var neededAmount = (goal.Price - CheckBalance());
             
             while ((neededAmount - savedAmount) > 0) //while(can't afford goal)
             {   //todo: improve saving
@@ -138,7 +138,7 @@ namespace DataManager
             {
                 decimal temp;
 
-                bool maximalSaving = (maximalSavingValue * savingRatio) >= 1;
+                var maximalSaving = (maximalSavingValue * savingRatio) >= 1;
 
                 if (maximalSaving)
                 {
