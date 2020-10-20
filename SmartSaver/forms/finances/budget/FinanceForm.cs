@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Windows.Forms;
 using ePiggy.DataManagement;
@@ -29,14 +30,15 @@ namespace ePiggy.Forms.Finances.Budget
         private Form _activeForm;
 
         private EntryType _entryType;
-        public EntryType EntryType 
-        { 
+
+        public EntryType EntryType
+        {
             get => _entryType;
-            set 
+            set
             {
                 _entryType = value;
                 Init();
-            } 
+            }
         }
 
         public FinanceForm(Handler handler, EntryType entryType)
@@ -131,7 +133,7 @@ namespace ePiggy.Forms.Finances.Budget
             dataEntry = new DataEntry();
             var value = dataGridView.SelectedRows[0].Cells["ID"].Value;
             if (value is DBNull) return false;
-            var id = (int) value;
+            var id = (int)value;
             return _data.GetDataEntryById(id, out dataEntry, EntryType);
         }
 
@@ -145,6 +147,7 @@ namespace ePiggy.Forms.Finances.Budget
                 if (value is null) continue;
                 idList.Add((int)value);
             }
+
             return _data.GetListOfDataEntriesById(idList, entries, EntryType);
         }
 
@@ -165,9 +168,10 @@ namespace ePiggy.Forms.Finances.Budget
                 }
                 else
                 {
-                    FormUtilities.OpenChildForm(ref _activeForm, new EntryForm(new DataEntry(), EntryType, _handler, EntryForm.Type.Add), splitContainer.Panel2);
+                    FormUtilities.OpenChildForm(ref _activeForm,
+                        new EntryForm(new DataEntry(), EntryType, _handler, EntryForm.Type.Add), splitContainer.Panel2);
                 }
-            } 
+            }
             else if (dataGridView.SelectedRows.Count > 1)
             {
                 if (GetSelectedEntries(out var entries))
@@ -193,12 +197,14 @@ namespace ePiggy.Forms.Finances.Budget
 
         private void OpenMultiEntryInfoForm(List<DataEntry> entries)
         {
-            FormUtilities.OpenChildForm(ref _activeForm, new MultiEntryInfoForm(entries, _handler), splitContainer.Panel2);
+            FormUtilities.OpenChildForm(ref _activeForm, new MultiEntryInfoForm(entries, _handler),
+                splitContainer.Panel2);
         }
 
         public void OpenEntryInfoForm(DataEntry entry)
         {
-            FormUtilities.OpenChildForm(ref _activeForm, new EntryInfoForm(entry, _handler, this), splitContainer.Panel2);
+            FormUtilities.OpenChildForm(ref _activeForm, new EntryInfoForm(entry, _handler, this),
+                splitContainer.Panel2);
         }
 
         private bool OpenEntryForm(DataEntry entry, EntryForm.Type entryFormType)
@@ -223,12 +229,19 @@ namespace ePiggy.Forms.Finances.Budget
                 if (!GetSelectedEntries(out var entries)) return;
                 DeleteEntries(entries);
             }
+
             UpdateDisplay();
         }
 
         #endregion
 
         #region Mouse Click Handling
+
+        private void ButtonShowAll_Click(object sender, EventArgs e)
+        {
+            GenerateAllTable();
+            DisplayTable();
+        }
 
         private void PanelTop_Click(object sender, EventArgs e)
         {
@@ -249,12 +262,54 @@ namespace ePiggy.Forms.Finances.Budget
         public void UpdateDisplay()
         {
             DisplayDate();
+            GenerateTable();
             DisplayTable();
             DisplayBalance();
             DisplayTotalBalance();
         }
 
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private void DisplayTable()
+        {
+            dataGridView.DataSource = _dataTable;
+
+            if (!DataTableErrorCheck()) return;
+            dataGridView.Columns["ID"].Visible = false;
+            dataGridView.Columns["Importance"].Visible = false;
+            dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
+            dataGridView.Columns["Date"].DefaultCellStyle.Format = "dd (dddd)";
+        }
+
+
+        private bool DataTableErrorCheck()
+        {
+            if (dataGridView.Columns["ID"] is null)
+            {
+                ExceptionHandler.Log("Data Table Generation Error: NO ID COLUMN");
+                return false;
+            }
+            if (dataGridView.Columns["Importance"] is null)
+            {
+                ExceptionHandler.Log("Data Table Generation Error: NO IMPORTANCE COLUMN");
+                return false;
+            }
+            if (dataGridView.Columns["Amount"] is null)
+            {
+                ExceptionHandler.Log("Data Table Generation Error: NO AMOUNT COLUMN");
+                return false;
+            }
+            if (dataGridView.Columns["Date"] is null)
+            {
+                ExceptionHandler.Log("Data Table Generation Error: NO DATE COLUMN");
+                return false;
+            }
+
+            return true;
+        }
+
+
+
+        private void GenerateTable()
         {
             _dataTable = EntryType switch
             {
@@ -262,15 +317,18 @@ namespace ePiggy.Forms.Finances.Budget
                 EntryType.Expense => _dataTableConverter.CustomTable(_dataFilter.GetExpensesByDate(_handler.Time)),
                 _ => throw new ArgumentOutOfRangeException()
             };
-
-            dataGridView.DataSource = _dataTable;
-            dataGridView.Columns["ID"].Visible = false;
-            dataGridView.Columns["Importance"].Visible = false;
-
-            dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
-            dataGridView.Columns["Date"].DefaultCellStyle.Format = "dd (dddd)";
         }
-    
+
+        private void GenerateAllTable()
+        {
+            _dataTable = EntryType switch
+            {
+                EntryType.Income => _dataTableConverter.IncomeTable(),
+                EntryType.Expense => _dataTableConverter.ExpensesTable(),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
+
         private void DisplayBalance()
         {
             var balance = _dataFilter.GetBalance(_handler.Time);
