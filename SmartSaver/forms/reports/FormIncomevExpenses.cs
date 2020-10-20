@@ -36,7 +36,7 @@ namespace ePiggy.Forms.Reports
             var previousMonth = TimeManager.MoveToPreviousMonth(DateTime.Today);
             var income = _handler.DataFilter.GetTotaledIncome(previousMonth);
             var expenses = _handler.DataFilter.GetTotaledExpenses(previousMonth);
-            pictureBoxPrevious.Image = GraphDrawer.DrawIncomesExpensesPieChart("400.6,23.0,33.0,100.0","income1|income2|expense1|expense2", "00b7ff|00b7ff|eb5244|eb5244");
+            pictureBoxPrevious.Image = GraphDrawer.DrawIncomesExpensesPieChart(income, expenses);
         }
 
         private void ShowIncomesExpensesCurrentMonthPieChart()
