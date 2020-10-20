@@ -20,8 +20,10 @@ namespace ePiggy.DataManagement
         private decimal savingRatio = 1M;
 
 
-        public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
-        public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
+        private List<OfferData> IncomeOffers { get; } = new List<OfferData>();
+        private List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
+
+
 
         public decimal GetTotalIncome()
         {
@@ -43,6 +45,25 @@ namespace ePiggy.DataManagement
             return CheckBalance() >= 0;
         }
 
+        //WIP
+        public bool GetSuggestedExpensesOffers(List<DataEntry> entryList, SavingType saving, Goal goal, List<OfferData> offerList)
+        {
+            offerList = new List<OfferData>();
+
+            var dataFilter = new DataFilter(data);
+
+            for (int i = 5; i > 1; i--)
+            {
+                List<DataEntry> expenses = dataFilter.GetExpenses((Importance)i);
+
+            }
+
+            //offerListas = kazkas;
+
+            return true;
+        }
+        //
+
         public bool CheckGoal(Goal goal)
         {
             if (IsBalancePositive())
@@ -54,7 +75,7 @@ namespace ePiggy.DataManagement
                 }
                 else
                 {
-                    return SavingMoney(goal); //needs saving
+                    return GenerallySavingMoney(); //needs saving
                 }
             }
             else
@@ -63,57 +84,50 @@ namespace ePiggy.DataManagement
             }
         }
 
-        private bool SavingMoney(Goal goal)
+        private bool GenerallySavingMoney()
         {
-            var savedAmount = 0M;
             //Goal goal = new Goal();
-            var neededAmount = (goal.Price - CheckBalance());
             
-            while ((neededAmount - savedAmount) > 0) //while(can't afford goal)
+            foreach (DataEntry data in data.Income)
             {
-                foreach (DataEntry data in data.Income)
-                {
-                    savedAmount += ChoosingImportance(data, savedAmount, EntryType.Income);
-                }
-                foreach (DataEntry data in data.Expenses)
-                {
-                    savedAmount += ChoosingImportance(data, savedAmount, EntryType.Expense);
-                }
-
+                ChoosingImportance(data, EntryType.Income);
+            }
+            foreach (DataEntry data in data.Expenses)
+            {
+                ChoosingImportance(data, EntryType.Expense);
             }
             return true; // after having saved enough
         }
 
-        private decimal ChoosingImportance(DataEntry data, decimal savedAmount, EntryType entryType)
+        private bool ChoosingImportance(DataEntry data, EntryType entryType)
         {
             switch (data.Importance)
             {
                 case (int)Importance.Necessary:
-                    return savedAmount; //importance of necessary - unchangable income
+                    return true; //importance of necessary - unchangable income
 
                 case (int)Importance.High:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio, entryType);
+                    return ImportanceBasedCalculation(data, savingRatio, entryType);
 
                 case (int)Importance.Medium:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 2, entryType);
+                    return ImportanceBasedCalculation(data, savingRatio * 2, entryType);
 
                 case (int)Importance.Low:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 3, entryType);
+                    return ImportanceBasedCalculation(data, savingRatio * 3, entryType);
 
                 case (int)Importance.Unnecessary:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 4, entryType);
+                    return ImportanceBasedCalculation(data, savingRatio * 4, entryType);
 
                 default:
-                    return savedAmount;
+                    return true;
 
             }
         }
 
-        private decimal ImportanceBasedCalculation(DataEntry data, decimal savedAmount, decimal savingRatio, EntryType entryType)
+        private bool ImportanceBasedCalculation(DataEntry data, decimal savingRatio, EntryType entryType)
         {
             if (SavingChoice == SavingType.Minimal)
             {
-                savedAmount += (data.Amount * (minimalSavingValue * savingRatio));
                 if (entryType == EntryType.Income)
                 {
                     AddToIncomeOfferList(data.Id, data.Amount * (minimalSavingValue * savingRatio));
@@ -122,7 +136,7 @@ namespace ePiggy.DataManagement
                 {
                     AddToExpensesOfferList(data.Id, data.Amount * (minimalSavingValue * savingRatio));
                 }
-                return savedAmount;
+                return true;
             }
 
             else if (SavingChoice == SavingType.Maximal)
@@ -140,7 +154,6 @@ namespace ePiggy.DataManagement
                     temp = maximalSavingValue;
                 }
 
-                savedAmount += (data.Amount * temp);
                 if (entryType == EntryType.Income)
                 {
                     AddToIncomeOfferList(data.Id, data.Amount * temp);
@@ -149,12 +162,11 @@ namespace ePiggy.DataManagement
                 {
                     AddToExpensesOfferList(data.Id, data.Amount * temp);
                 }
-                return savedAmount;
+                return true;
             }
 
             else if (SavingChoice == SavingType.Regular)
             {
-                savedAmount += (data.Amount * (regularSavingValue * savingRatio));
                 if (entryType == EntryType.Income)
                 {
                     AddToIncomeOfferList(data.Id, data.Amount * (regularSavingValue * savingRatio));
@@ -163,9 +175,8 @@ namespace ePiggy.DataManagement
                 {
                     AddToExpensesOfferList(data.Id, data.Amount * (regularSavingValue * savingRatio));
                 }
-                return savedAmount;
             }
-            return savedAmount;
+            return true;
         }
 
         private void AddToIncomeOfferList(int id, decimal amount)
