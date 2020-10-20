@@ -314,8 +314,8 @@ namespace ePiggy.Forms.Finances.Budget
         {
             _dataTable = EntryType switch
             {
-                EntryType.Income => DataTableConverter.GenerateEntryTable(_dataFilter.GetIncomeByDate(_handler.Time)),
-                EntryType.Expense => DataTableConverter.GenerateEntryTable(_dataFilter.GetExpensesByDate(_handler.Time)),
+                EntryType.Income => DataTableConverter.GenerateEntryTable(_dataFilter.GetIncome(_handler.Time)),
+                EntryType.Expense => DataTableConverter.GenerateEntryTable(_dataFilter.GetExpenses(_handler.Time)),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
