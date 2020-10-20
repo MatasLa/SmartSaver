@@ -39,22 +39,23 @@ namespace ePiggy.Forms.Finances.Budget
             InitializeComponent();
 
             _expandedSize = Size;
-            _collapsedSize = new Size(Size.Width, Size.Height - monthCalendar.Size.Height - monthCalendar.Margin.Bottom - monthCalendar.Margin.Top);
+            _collapsedSize = new Size(Size.Width, Size.Height - panelCalendar.Size.Height);
 
             _entry = dataEntry ?? throw new Exception("Given null data entry");
             _entryType = entryType;
             _handler = handler;
             _type = type;
 
-            SetCalendarTime();
+            CalendarSetUp();
             SetUpAddOrEdit();
             Collapse();
             Select();
         }
 
-        private void SetCalendarTime()
+        private void CalendarSetUp()
         {
             monthCalendar.SelectionStart = _handler.Time;
+
         }
 
         #region Title setup
@@ -202,10 +203,22 @@ namespace ePiggy.Forms.Finances.Budget
         private void ButtonDate_Click(object sender, EventArgs e)
         {
             ChangeSize();
-        } 
+        }
         #endregion
 
         #region Size Changing
+
+        private void MonthCalendar_Resize(object sender, EventArgs e)
+        {
+            AdjustCalendarPosition();
+        }
+
+        private void AdjustCalendarPosition()
+        {
+            monthCalendar.Left = (panelCalendar.Width - monthCalendar.Width) / 2;
+            monthCalendar.Top = (panelCalendar.Height - monthCalendar.Height) / 2;
+        }
+
         private void ChangeSize()
         {
             if (Size == _collapsedSize)
@@ -221,13 +234,14 @@ namespace ePiggy.Forms.Finances.Budget
         private void Collapse()
         {
             Size = _collapsedSize;
-            monthCalendar.Hide();
+            //panelCalendar.Hide();
+            panelCalendar.Visible = false;
         }
 
         private void Expand()
         {
             Size = _expandedSize;
-            monthCalendar.Show();
+            panelCalendar.Visible = true;
         }
 
         #endregion
@@ -253,7 +267,8 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 _errorMessage = BadTitleErrorMessage + "\n" + BadNumberErrorMessage;
             }
-        } 
+        }
         #endregion
+
     }
 }

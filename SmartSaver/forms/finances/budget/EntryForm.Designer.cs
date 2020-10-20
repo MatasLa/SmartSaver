@@ -36,17 +36,19 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonDate = new System.Windows.Forms.Button();
             this.monthCalendar = new System.Windows.Forms.MonthCalendar();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.labelImportance = new System.Windows.Forms.Label();
             this.comboBoxImportance = new System.Windows.Forms.ComboBox();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.panelCalendar = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel.SuspendLayout();
+            this.panelCalendar.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxTitle
             // 
             this.textBoxTitle.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxTitle.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.SetFlowBreak(this.textBoxTitle, true);
+            this.flowLayoutPanel.SetFlowBreak(this.textBoxTitle, true);
             this.textBoxTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxTitle.Location = new System.Drawing.Point(40, 40);
             this.textBoxTitle.Margin = new System.Windows.Forms.Padding(40, 40, 40, 20);
@@ -61,7 +63,7 @@
             // 
             this.textBoxValue.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxValue.BackColor = System.Drawing.Color.White;
-            this.flowLayoutPanel1.SetFlowBreak(this.textBoxValue, true);
+            this.flowLayoutPanel.SetFlowBreak(this.textBoxValue, true);
             this.textBoxValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxValue.Location = new System.Drawing.Point(40, 103);
             this.textBoxValue.Margin = new System.Windows.Forms.Padding(40, 20, 40, 40);
@@ -78,10 +80,10 @@
             this.checkBoxMonthly.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkBoxMonthly.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.checkBoxMonthly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flowLayoutPanel1.SetFlowBreak(this.checkBoxMonthly, true);
+            this.flowLayoutPanel.SetFlowBreak(this.checkBoxMonthly, true);
             this.checkBoxMonthly.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.checkBoxMonthly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.checkBoxMonthly.Location = new System.Drawing.Point(90, 441);
+            this.checkBoxMonthly.Location = new System.Drawing.Point(90, 460);
             this.checkBoxMonthly.Margin = new System.Windows.Forms.Padding(90, 10, 0, 0);
             this.checkBoxMonthly.Name = "checkBoxMonthly";
             this.checkBoxMonthly.Size = new System.Drawing.Size(100, 30);
@@ -98,7 +100,7 @@
             this.buttonOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.buttonOK.Location = new System.Drawing.Point(175, 491);
+            this.buttonOK.Location = new System.Drawing.Point(175, 510);
             this.buttonOK.Margin = new System.Windows.Forms.Padding(25, 0, 0, 0);
             this.buttonOK.Name = "buttonOK";
             this.buttonOK.Size = new System.Drawing.Size(100, 30);
@@ -116,7 +118,7 @@
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.buttonCancel.Location = new System.Drawing.Point(25, 491);
+            this.buttonCancel.Location = new System.Drawing.Point(25, 510);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(25, 20, 25, 0);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(100, 30);
@@ -130,7 +132,7 @@
             this.buttonDate.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonDate.FlatAppearance.BorderSize = 0;
             this.buttonDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flowLayoutPanel1.SetFlowBreak(this.buttonDate, true);
+            this.flowLayoutPanel.SetFlowBreak(this.buttonDate, true);
             this.buttonDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.buttonDate.Location = new System.Drawing.Point(75, 210);
@@ -145,30 +147,31 @@
             // 
             // monthCalendar
             // 
-            this.monthCalendar.Location = new System.Drawing.Point(20, 260);
-            this.monthCalendar.Margin = new System.Windows.Forms.Padding(20, 10, 9, 9);
+            this.monthCalendar.Location = new System.Drawing.Point(37, 0);
+            this.monthCalendar.Margin = new System.Windows.Forms.Padding(0);
             this.monthCalendar.MaxSelectionCount = 1;
             this.monthCalendar.Name = "monthCalendar";
             this.monthCalendar.TabIndex = 6;
             this.monthCalendar.TitleBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.monthCalendar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UsualEscAndEnterKeyPress);
+            this.monthCalendar.Resize += new System.EventHandler(this.MonthCalendar_Resize);
             // 
-            // flowLayoutPanel1
+            // flowLayoutPanel
             // 
-            this.flowLayoutPanel1.Controls.Add(this.textBoxTitle);
-            this.flowLayoutPanel1.Controls.Add(this.textBoxValue);
-            this.flowLayoutPanel1.Controls.Add(this.labelImportance);
-            this.flowLayoutPanel1.Controls.Add(this.comboBoxImportance);
-            this.flowLayoutPanel1.Controls.Add(this.buttonDate);
-            this.flowLayoutPanel1.Controls.Add(this.monthCalendar);
-            this.flowLayoutPanel1.Controls.Add(this.checkBoxMonthly);
-            this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanel1.Controls.Add(this.buttonOK);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(300, 550);
-            this.flowLayoutPanel1.TabIndex = 7;
+            this.flowLayoutPanel.Controls.Add(this.textBoxTitle);
+            this.flowLayoutPanel.Controls.Add(this.textBoxValue);
+            this.flowLayoutPanel.Controls.Add(this.labelImportance);
+            this.flowLayoutPanel.Controls.Add(this.comboBoxImportance);
+            this.flowLayoutPanel.Controls.Add(this.buttonDate);
+            this.flowLayoutPanel.Controls.Add(this.panelCalendar);
+            this.flowLayoutPanel.Controls.Add(this.checkBoxMonthly);
+            this.flowLayoutPanel.Controls.Add(this.buttonCancel);
+            this.flowLayoutPanel.Controls.Add(this.buttonOK);
+            this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(300, 550);
+            this.flowLayoutPanel.TabIndex = 7;
             // 
             // labelImportance
             // 
@@ -185,7 +188,7 @@
             // comboBoxImportance
             // 
             this.comboBoxImportance.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.flowLayoutPanel1.SetFlowBreak(this.comboBoxImportance, true);
+            this.flowLayoutPanel.SetFlowBreak(this.comboBoxImportance, true);
             this.comboBoxImportance.FormattingEnabled = true;
             this.comboBoxImportance.Items.AddRange(new object[] {
             "Necessary",
@@ -199,13 +202,23 @@
             this.comboBoxImportance.Size = new System.Drawing.Size(125, 24);
             this.comboBoxImportance.TabIndex = 2;
             // 
+            // panelCalendar
+            // 
+            this.panelCalendar.Controls.Add(this.monthCalendar);
+            this.flowLayoutPanel.SetFlowBreak(this.panelCalendar, true);
+            this.panelCalendar.Location = new System.Drawing.Point(0, 250);
+            this.panelCalendar.Margin = new System.Windows.Forms.Padding(0);
+            this.panelCalendar.Name = "panelCalendar";
+            this.panelCalendar.Size = new System.Drawing.Size(300, 200);
+            this.panelCalendar.TabIndex = 7;
+            // 
             // EntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(300, 550);
-            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.flowLayoutPanel);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -216,8 +229,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Entry Form";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.UsualEscAndEnterKeyPress);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel.ResumeLayout(false);
+            this.flowLayoutPanel.PerformLayout();
+            this.panelCalendar.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -231,14 +245,9 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonDate;
         private System.Windows.Forms.MonthCalendar monthCalendar;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
         private System.Windows.Forms.ComboBox comboBoxImportance;
         private System.Windows.Forms.Label labelImportance;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel panelCalendar;
     }
 }
