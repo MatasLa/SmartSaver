@@ -387,7 +387,7 @@
             this.flowLayoutPanel.SetFlowBreak(this.labelValueBalanceEndOfMonth, true);
             this.labelValueBalanceEndOfMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelValueBalanceEndOfMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelValueBalanceEndOfMonth.Location = new System.Drawing.Point(3, 114);
+            this.labelValueBalanceEndOfMonth.Location = new System.Drawing.Point(3, 122);
             this.labelValueBalanceEndOfMonth.Name = "labelValueBalanceEndOfMonth";
             this.labelValueBalanceEndOfMonth.Size = new System.Drawing.Size(62, 26);
             this.labelValueBalanceEndOfMonth.TabIndex = 9;
@@ -400,8 +400,8 @@
             this.labelNecessary.BackColor = System.Drawing.Color.Transparent;
             this.labelNecessary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelNecessary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelNecessary.Location = new System.Drawing.Point(3, 163);
-            this.labelNecessary.Margin = new System.Windows.Forms.Padding(3, 15, 0, 0);
+            this.labelNecessary.Location = new System.Drawing.Point(3, 193);
+            this.labelNecessary.Margin = new System.Windows.Forms.Padding(3, 30, 0, 0);
             this.labelNecessary.Name = "labelNecessary";
             this.labelNecessary.Size = new System.Drawing.Size(121, 26);
             this.labelNecessary.TabIndex = 9;
@@ -415,8 +415,8 @@
             this.flowLayoutPanel.SetFlowBreak(this.labelValueNecessary, true);
             this.labelValueNecessary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelValueNecessary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelValueNecessary.Location = new System.Drawing.Point(127, 163);
-            this.labelValueNecessary.Margin = new System.Windows.Forms.Padding(3, 15, 3, 0);
+            this.labelValueNecessary.Location = new System.Drawing.Point(127, 193);
+            this.labelValueNecessary.Margin = new System.Windows.Forms.Padding(3, 30, 3, 0);
             this.labelValueNecessary.Name = "labelValueNecessary";
             this.labelValueNecessary.Size = new System.Drawing.Size(62, 26);
             this.labelValueNecessary.TabIndex = 9;
@@ -429,7 +429,7 @@
             this.labelHighImportance.BackColor = System.Drawing.Color.Transparent;
             this.labelHighImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelHighImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelHighImportance.Location = new System.Drawing.Point(3, 190);
+            this.labelHighImportance.Location = new System.Drawing.Point(3, 220);
             this.labelHighImportance.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
             this.labelHighImportance.Name = "labelHighImportance";
             this.labelHighImportance.Size = new System.Drawing.Size(177, 26);
@@ -444,7 +444,7 @@
             this.flowLayoutPanel.SetFlowBreak(this.labelValueHighImportance, true);
             this.labelValueHighImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelValueHighImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelValueHighImportance.Location = new System.Drawing.Point(183, 189);
+            this.labelValueHighImportance.Location = new System.Drawing.Point(183, 219);
             this.labelValueHighImportance.Name = "labelValueHighImportance";
             this.labelValueHighImportance.Size = new System.Drawing.Size(62, 26);
             this.labelValueHighImportance.TabIndex = 9;
@@ -457,7 +457,7 @@
             this.labelMediumImportance.BackColor = System.Drawing.Color.Transparent;
             this.labelMediumImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelMediumImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelMediumImportance.Location = new System.Drawing.Point(3, 217);
+            this.labelMediumImportance.Location = new System.Drawing.Point(3, 247);
             this.labelMediumImportance.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
             this.labelMediumImportance.Name = "labelMediumImportance";
             this.labelMediumImportance.Size = new System.Drawing.Size(210, 26);
@@ -472,7 +472,7 @@
             this.flowLayoutPanel.SetFlowBreak(this.labelValueMediumImportance, true);
             this.labelValueMediumImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelValueMediumImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelValueMediumImportance.Location = new System.Drawing.Point(216, 216);
+            this.labelValueMediumImportance.Location = new System.Drawing.Point(216, 246);
             this.labelValueMediumImportance.Name = "labelValueMediumImportance";
             this.labelValueMediumImportance.Size = new System.Drawing.Size(62, 26);
             this.labelValueMediumImportance.TabIndex = 9;
@@ -485,7 +485,7 @@
             this.labelLowImportance.BackColor = System.Drawing.Color.Transparent;
             this.labelLowImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelLowImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelLowImportance.Location = new System.Drawing.Point(3, 244);
+            this.labelLowImportance.Location = new System.Drawing.Point(3, 274);
             this.labelLowImportance.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
             this.labelLowImportance.Name = "labelLowImportance";
             this.labelLowImportance.Size = new System.Drawing.Size(172, 26);
@@ -500,7 +500,7 @@
             this.flowLayoutPanel.SetFlowBreak(this.labelValueLowImportance, true);
             this.labelValueLowImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelValueLowImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelValueLowImportance.Location = new System.Drawing.Point(178, 243);
+            this.labelValueLowImportance.Location = new System.Drawing.Point(178, 273);
             this.labelValueLowImportance.Name = "labelValueLowImportance";
             this.labelValueLowImportance.Size = new System.Drawing.Size(62, 26);
             this.labelValueLowImportance.TabIndex = 9;
@@ -513,7 +513,7 @@
             this.labelUnnecessary.BackColor = System.Drawing.Color.Transparent;
             this.labelUnnecessary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelUnnecessary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelUnnecessary.Location = new System.Drawing.Point(3, 271);
+            this.labelUnnecessary.Location = new System.Drawing.Point(3, 301);
             this.labelUnnecessary.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
             this.labelUnnecessary.Name = "labelUnnecessary";
             this.labelUnnecessary.Size = new System.Drawing.Size(145, 26);
@@ -528,7 +528,7 @@
             this.flowLayoutPanel.SetFlowBreak(this.labelValueUnnecessary, true);
             this.labelValueUnnecessary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelValueUnnecessary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelValueUnnecessary.Location = new System.Drawing.Point(151, 270);
+            this.labelValueUnnecessary.Location = new System.Drawing.Point(151, 300);
             this.labelValueUnnecessary.Name = "labelValueUnnecessary";
             this.labelValueUnnecessary.Size = new System.Drawing.Size(62, 26);
             this.labelValueUnnecessary.TabIndex = 9;
