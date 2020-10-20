@@ -40,12 +40,6 @@ namespace ePiggy.forms.auth
             
         }
 
-        private void FormLogIn_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
         private void noAccLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             FormUtilities.ChangeForm(this, new FormRegister(DataHandler));
