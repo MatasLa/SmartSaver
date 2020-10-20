@@ -70,7 +70,7 @@ namespace ePiggy.DataManagement
             var neededAmount = (goal.Price - CheckBalance());
             
             while ((neededAmount - savedAmount) > 0) //while(can't afford goal)
-            {   //todo: improve saving
+            {
                 foreach (DataEntry data in data.Income)
                 {
                     savedAmount += ChoosingImportance(data, savedAmount, EntryType.Income);
@@ -125,7 +125,7 @@ namespace ePiggy.DataManagement
                 return savedAmount;
             }
 
-            else if (SavingChoice == SavingType.Maximal) // change from string to enum
+            else if (SavingChoice == SavingType.Maximal)
             {
                 decimal temp;
 
