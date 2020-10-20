@@ -233,7 +233,6 @@ namespace ePiggy.forms.auth
             this.Name = "FormLogIn";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ePiggy";
-            this.Load += new System.EventHandler(this.FormLogIn_Load);
             ((System.ComponentModel.ISupportInitialize)(this.logoPic)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
