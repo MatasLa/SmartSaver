@@ -39,7 +39,7 @@ namespace ePiggy.Forms
             this.passwordInput2 = new System.Windows.Forms.TextBox();
             this.passwordLabel2 = new System.Windows.Forms.Label();
             this.errorMessage = new System.Windows.Forms.Label();
-            this.registerButton = new ButtonWoc();
+            this.registerButton = new ePiggy.Forms.CustomControls.ButtonWoc();
             this.backToLogin = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 

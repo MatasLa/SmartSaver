@@ -38,11 +38,11 @@ namespace ePiggy.Forms
             this.passwordLabel = new System.Windows.Forms.Label();
             this.passwordInput = new System.Windows.Forms.TextBox();
             this.forgotPassLink = new System.Windows.Forms.LinkLabel();
-            this.loginButton = new ButtonWoc();
             this.errorMessage = new System.Windows.Forms.Label();
             this.noAccLable = new System.Windows.Forms.Label();
             this.noAccLink = new System.Windows.Forms.LinkLabel();
             this.quoteText = new System.Windows.Forms.Label();
+            this.loginButton = new ePiggy.Forms.CustomControls.ButtonWoc();
             ((System.ComponentModel.ISupportInitialize)(this.logoPic)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,31 +133,7 @@ namespace ePiggy.Forms
             this.forgotPassLink.TabStop = true;
             this.forgotPassLink.Text = "Forgot Password?";
             this.forgotPassLink.VisitedLinkColor = System.Drawing.Color.Silver;
-            this.forgotPassLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // loginButton
-            // 
-            this.loginButton.BackColor = System.Drawing.Color.Transparent;
-            this.loginButton.BorderColor = System.Drawing.Color.Transparent;
-            this.loginButton.ButtonColor = System.Drawing.Color.MintCream;
-            this.loginButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
-            this.loginButton.FlatAppearance.BorderSize = 0;
-            this.loginButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.loginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loginButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.loginButton.ForeColor = System.Drawing.Color.Transparent;
-            this.loginButton.Location = new System.Drawing.Point(212, 269);
-            this.loginButton.Name = "loginButton";
-            this.loginButton.OnHoverBorderColor = System.Drawing.Color.Transparent;
-            this.loginButton.OnHoverButtonColor = System.Drawing.Color.LightCyan;
-            this.loginButton.OnHoverTextColor = System.Drawing.Color.SteelBlue;
-            this.loginButton.Size = new System.Drawing.Size(117, 33);
-            this.loginButton.TabIndex = 4;
-            this.loginButton.Text = "Login";
-            this.loginButton.TextColor = System.Drawing.Color.SteelBlue;
-            this.loginButton.UseVisualStyleBackColor = false;
-            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            this.forgotPassLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.forgotPassLink_LinkClicked);
             // 
             // errorMessage
             // 
@@ -207,6 +183,30 @@ namespace ePiggy.Forms
             this.quoteText.Text = "Qoute";
             this.quoteText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // loginButton
+            // 
+            this.loginButton.BackColor = System.Drawing.Color.Transparent;
+            this.loginButton.BorderColor = System.Drawing.Color.Transparent;
+            this.loginButton.ButtonColor = System.Drawing.Color.MintCream;
+            this.loginButton.FlatAppearance.BorderColor = System.Drawing.SystemColors.Highlight;
+            this.loginButton.FlatAppearance.BorderSize = 0;
+            this.loginButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.loginButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.loginButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loginButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.loginButton.ForeColor = System.Drawing.Color.Transparent;
+            this.loginButton.Location = new System.Drawing.Point(216, 274);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.OnHoverBorderColor = System.Drawing.Color.Transparent;
+            this.loginButton.OnHoverButtonColor = System.Drawing.Color.LightCyan;
+            this.loginButton.OnHoverTextColor = System.Drawing.Color.SteelBlue;
+            this.loginButton.Size = new System.Drawing.Size(117, 33);
+            this.loginButton.TabIndex = 12;
+            this.loginButton.Text = "Confirm";
+            this.loginButton.TextColor = System.Drawing.Color.SteelBlue;
+            this.loginButton.UseVisualStyleBackColor = false;
+            this.loginButton.Click += new System.EventHandler(this.registerButton_Click);
+            // 
             // FormLogIn
             // 
             this.AcceptButton = this.loginButton;
@@ -214,8 +214,8 @@ namespace ePiggy.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.ClientSize = new System.Drawing.Size(534, 461);
-            this.Controls.Add(this.logoPic);
             this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.logoPic);
             this.Controls.Add(this.errorMessage);
             this.Controls.Add(this.signInText);
             this.Controls.Add(this.quoteText);

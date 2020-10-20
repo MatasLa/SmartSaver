@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using ePiggy.Authentication;
+using ePiggy.forms;
+using ePiggy.forms.customforms;
 using ePiggy.Utilities;
 
 namespace ePiggy.Forms
@@ -42,19 +44,10 @@ namespace ePiggy.Forms
             
         }
 
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-
-        }
-
         private void FormLogIn_Load(object sender, EventArgs e)
         {
 
         }
-
-
-       
 
 
         private void noAccLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -62,7 +55,19 @@ namespace ePiggy.Forms
             FormUtilities.ChangeForm(this, new FormRegister(DataHandler));
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+
+        private void forgotPassLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var email = Prompt.ShowDialog("Enter your email:", "Forgot password");
+            var sentCode = "test";//SendCode(email);
+            var receivedCode = Prompt.ShowDialog("Enter receiver code:", "Forgot password");
+            if (receivedCode == sentCode)
+            {
+                FormUtilities.ChangeForm(this, new FormChangePass(email, DataHandler));
+            }
+        }
+
+        private void registerButton_Click(object sender, EventArgs e)
         {
             var email = emailInput.Text;
             var pass = passwordInput.Text;
@@ -75,7 +80,6 @@ namespace ePiggy.Forms
                 errorMessage.Text = @"Wrong e-mail or password!";
             }
         }
-
     }
     
 }
