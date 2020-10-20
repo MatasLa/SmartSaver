@@ -9,6 +9,12 @@ namespace ePiggy.Authentication
 {
     public class UserAuth
     {
+        private static readonly string EmailAddress = "smartsaverrecovery@gmail.com";
+        private static readonly string EmailPassword = "Smartsaver123456";
+        private static readonly string RecoveryMessageSubject = "Password Recovery";
+        private static readonly string RecoveryMessageBody = "Your password recovery code is: ";
+        
+
         public static bool Registration(string email, string pass)
         {
             using (var db = new DatabaseContext())
@@ -26,10 +32,7 @@ namespace ePiggy.Authentication
                     Handler.UserId = user.Id;
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
@@ -39,22 +42,13 @@ namespace ePiggy.Authentication
             {
                 var userInfo = db.Users.Where(a => a.Email == email).FirstOrDefault(); //Find user and pass in db and check if matches
 
-                if (userInfo != null)
+                if (userInfo == null) return false;
+                if (HashingProcessor.AreEqual(pass, userInfo.Password, userInfo.Salt))
                 {
-                    if (HashingProcessor.AreEqual(pass, userInfo.Password, userInfo.Salt))
-                    {
-                        Handler.UserId = userInfo.Id;
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    Handler.UserId = userInfo.Id;
+                    return true;
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
@@ -64,21 +58,16 @@ namespace ePiggy.Authentication
             {
                 var userInfo = db.Users.Where(a => a.Email == email).FirstOrDefault();
 
-                if (userInfo != null)
-                {
-                    var salt = HashingProcessor.CreateSalt(20);
-                    var passwordHash = HashingProcessor.GenerateHash(pass, salt);
+                if (userInfo == null) return false;
+                
+                var salt = HashingProcessor.CreateSalt(20);
+                var passwordHash = HashingProcessor.GenerateHash(pass, salt);
 
-                    userInfo.Password = passwordHash;
-                    userInfo.Salt = salt;
-                    db.SaveChanges();
+                userInfo.Password = passwordHash;
+                userInfo.Salt = salt;
+                db.SaveChanges();
 
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return true;
             }
         }
 
@@ -88,29 +77,25 @@ namespace ePiggy.Authentication
             {
                 var userInfo = db.Users.Where(a => a.Email == email).FirstOrDefault();
 
-                if (userInfo != null)
-                {
-                    string from, pass, messageBody;
-                    Random rand = new Random();
-                    int randomCode = rand.Next(999999);
-                    MailMessage message = new MailMessage();
-                    from = "smartsaverrecovery@gmail.com";
-                    pass = "Smartsaver123456";
-                    messageBody = "Your password recovery code is: " + randomCode;
-                    message.To.Add(email);
-                    message.From = new MailAddress(from);
-                    message.Body = messageBody;
-                    message.Subject = "Password Recovery";
-                    SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                    smtp.EnableSsl = true;
-                    smtp.Port = 587;
-                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    smtp.Credentials = new NetworkCredential(from, pass);
+                if (userInfo == null) return 0;
 
-                    smtp.Send(message);
-                    return randomCode;
-                }
-                else return 0;
+                Random rand = new Random();
+                var randomCode = rand.Next(999999);
+
+                var message = new MailMessage();
+                message.To.Add(email);
+                message.From = new MailAddress(EmailAddress);
+                message.Body = RecoveryMessageBody + randomCode;
+                message.Subject = RecoveryMessageSubject;
+
+                var smtp = new SmtpClient("smtp.gmail.com");
+                smtp.EnableSsl = true;
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Credentials = new NetworkCredential(EmailAddress, EmailPassword);
+                smtp.Send(message);
+
+                return randomCode;
             }
         }
 
