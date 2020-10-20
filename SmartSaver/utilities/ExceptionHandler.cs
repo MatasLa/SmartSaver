@@ -1,4 +1,4 @@
-﻿namespace ePiggy.utilities
+﻿namespace ePiggy.Utilities
 {
     static class ExceptionHandler
     {

@@ -1,8 +1,6 @@
-﻿using DataManager;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Net.Http;
-using System.Text;
+using ePiggy.DataManagement;
 
 namespace ePiggy
 {
@@ -16,9 +14,11 @@ namespace ePiggy
 
         public DataFilter DataFilter { get; }
 
-        public DataJSON DataJSON { get; }
+        public DataJson DataJson{ get; }
 
         public DataCalculations DataCalculations { get; }
+
+        public MonthlyUpdater MonthlyUpdater { get; }
 
         public static HttpClient HttpClient = new HttpClient();
         public static int UserId { get; set; }
@@ -26,17 +26,44 @@ namespace ePiggy
 
         public Handler()
         {
-            Time = DateTime.Now;
             HttpClient = new HttpClient();
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
             DataCalculations = new DataCalculations(Data);
-            DataJSON = new DataJSON(Data);
-            Data.ReadIncomeFromDb();
+            DataJson = new DataJson(Data);
+            MonthlyUpdater = new MonthlyUpdater(DataFilter, Data);
+
+            //Init();
+        }
+
+        private void Init()
+        {
+            Time = DateTime.Now;
+            ReadFromDb();
+            MonthlyUpdater.UpdateMonthlyEntries(UserId);
+        }
+
+        private void ReadFromDb()
+        {
             Data.ReadExpensesFromDb();
-            //DataJSON.ReadIncomeFromFile();
-            //DataJSON.ReadExpensesFromFile();
+            Data.ReadIncomeFromDb();
+            Data.ReadGoalsFromDb();
+        }
+
+        public void Update()
+        {
+            Time = DateTime.Today;
+            ClearData();
+            ReadFromDb();
+            MonthlyUpdater.UpdateMonthlyEntries(UserId);
+        }
+        
+        private void ClearData()
+        {
+            Data.Income.Clear();
+            Data.Expenses.Clear();
+            Data.GoalsList.Clear();
         }
         
     }

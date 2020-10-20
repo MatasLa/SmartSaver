@@ -1,4 +1,4 @@
-﻿namespace ePiggy.utilities
+﻿namespace ePiggy.Utilities
 {
     public enum EntryType
     {
@@ -20,3 +20,4 @@
         Minimal
     }
 }
+

@@ -1,9 +1,16 @@
-﻿using System.Globalization;
+﻿using System.Drawing;
+using System.Globalization;
 
-namespace ePiggy.utilities
+namespace ePiggy.Utilities
 {
     public class NumberFormatter
     {
+        public static CurrencyWithColor FormatCurrencyWithColor(decimal value)
+        {
+            var color = value >= 0 ? Color.Green : Color.Red;
+            return new CurrencyWithColor(FormatCurrency(value), color);
+        }
+        
         public static string FormatCurrency(decimal value)
         {
             var cultureInfo = CultureInfo.CurrentCulture;

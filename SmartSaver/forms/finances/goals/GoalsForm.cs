@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using DataManager;
-using ePiggy.utilities;
+using ePiggy.DataManagement;
+using ePiggy.Utilities;
 
-namespace ePiggy.forms.finances.goals
+namespace ePiggy.Forms.Finances.Goals
 {
     public partial class GoalsForm : Form
     {
@@ -23,8 +23,7 @@ namespace ePiggy.forms.finances.goals
             InitializeComponent();
             _handler = handler;
 
-            //_goals = _handler.GoalsList;
-            _goals = new List<Goal>();
+            _goals = _handler.Data.GoalsList;
 
             Init();
         }
@@ -46,9 +45,10 @@ namespace ePiggy.forms.finances.goals
         {
             for (var i = 0; i < _goals.Count; i++)
             {
+                if (i > 4) return;
                 DisplayMiniGoal(_goals[i], i);
             }
-            if (_goals.Count > 4) return;
+            if (_goals.Count > 4) return; // If somehow we get more goals we just stop showing them
             for (var i = _goals.Count; i <= 4; i++)
             {
                 CloseMiniGoalForm(i);
@@ -62,19 +62,19 @@ namespace ePiggy.forms.finances.goals
             switch (position)
             {
                 case 0:
-                    FormChanger.OpenChildForm(ref _goalForm0, new GoalForm(goal, _handler, this), panelGoal0);
+                    FormUtilities.OpenChildForm(ref _goalForm0, new GoalForm(goal, _handler, this), panelGoal0);
                     break;
                 case 1:
-                    FormChanger.OpenChildForm(ref _goalForm1, new GoalForm(goal, _handler, this), panelGoal1);
+                    FormUtilities.OpenChildForm(ref _goalForm1, new GoalForm(goal, _handler, this), panelGoal1);
                     break;
                 case 2:
-                    FormChanger.OpenChildForm(ref _goalForm2, new GoalForm(goal, _handler, this), panelGoal2);
+                    FormUtilities.OpenChildForm(ref _goalForm2, new GoalForm(goal, _handler, this), panelGoal2);
                     break;
                 case 3:
-                    FormChanger.OpenChildForm(ref _goalForm3, new GoalForm(goal, _handler, this), panelGoal3);
+                    FormUtilities.OpenChildForm(ref _goalForm3, new GoalForm(goal, _handler, this), panelGoal3);
                     break;
                 case 4:
-                    FormChanger.OpenChildForm(ref _goalForm4, new GoalForm(goal, _handler, this), panelGoal4);
+                    FormUtilities.OpenChildForm(ref _goalForm4, new GoalForm(goal, _handler, this), panelGoal4);
                     break;
             }
         }
@@ -85,31 +85,31 @@ namespace ePiggy.forms.finances.goals
             switch (position)
             {
                 case 0:
-                    FormChanger.CloseChildForm(ref _goalForm0);
+                    FormUtilities.CloseChildForm(ref _goalForm0);
                     break;
                 case 1:
-                    FormChanger.CloseChildForm(ref _goalForm1);
+                    FormUtilities.CloseChildForm(ref _goalForm1);
                     break;
                 case 2:
-                    FormChanger.CloseChildForm(ref _goalForm2);
+                    FormUtilities.CloseChildForm(ref _goalForm2);
                     break;
                 case 3:
-                    FormChanger.CloseChildForm(ref _goalForm3);
+                    FormUtilities.CloseChildForm(ref _goalForm3);
                     break;
                 case 4:
-                    FormChanger.CloseChildForm(ref _goalForm4);
+                    FormUtilities.CloseChildForm(ref _goalForm4);
                     break;
             }
         }
 
         private void CloseExpandedForm()
         {
-            FormChanger.CloseChildForm(ref _expandedGoalForm);
+            FormUtilities.CloseChildForm(ref _expandedGoalForm);
         }
 
         public void DisplayExpandedGoal(Goal goal)
         {
-            FormChanger.OpenChildForm(ref _expandedGoalForm, new ExpandedGoalForm(goal, _handler, this), panelMain);
+            FormUtilities.OpenChildForm(ref _expandedGoalForm, new ExpandedGoalForm(goal, _handler, this), panelMain);
 
         }
 
@@ -119,16 +119,21 @@ namespace ePiggy.forms.finances.goals
         {
             var goal = new Goal();
             if (!OpenGoalDialog(goal)) return;
-            _goals.Add(goal);
+            if (goal.Price == 0)
+            {
+                _handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
+            }
+            else
+            {
+                _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price, 0);
+            }
+            //_handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
             UpdateDisplay();
         }
 
         public void RemoveGoal(Goal goal)
         {
-            //WIP
-            //CHECK STUFF
-            _goals.Remove(goal);
-
+            _handler.Data.RemoveGoal(goal.Id);
         }
 
         private bool OpenGoalDialog(Goal goal)

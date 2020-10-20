@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using DataManager;
-using ePiggy.utilities;
+using ePiggy.DataManagement;
+using ePiggy.Utilities;
 
-namespace ePiggy.forms.finances.goals
+namespace ePiggy.Forms.Finances.Goals
 {
     public partial class GoalDialogForm : Form
     {
@@ -20,6 +20,7 @@ namespace ePiggy.forms.finances.goals
             InitializeComponent();
             _goal = goal ?? throw new Exception("Given null goal");
             _handler = handler;
+            Select();
         }
 
 
@@ -50,13 +51,22 @@ namespace ePiggy.forms.finances.goals
 
         private bool IsInputValid()
         {
+            if (textBoxValue.Text.Length == 0)
+            {
+                return InputValidator.IsNameValid(textBoxTitle.Text);
+            }
             return InputValidator.IsCurrencyInputValid(textBoxValue.Text) && InputValidator.IsNameValid(textBoxTitle.Text);
         }
 
         private void TakeInput()
         {
             _goal.Title = textBoxTitle.Text;
-            _goal.Price = decimal.Round(decimal.Parse(textBoxValue.Text), 2);
+
+            if (textBoxValue.Text.Length == 0) return;
+            
+                _goal.Price = decimal.Round(decimal.Parse(textBoxValue.Text), 2);
+
+
             //_goal.Date = monthCalendar.SelectionStart;
         }
 

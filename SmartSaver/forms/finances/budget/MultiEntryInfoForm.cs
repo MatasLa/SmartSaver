@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DataManager;
-using ePiggy.utilities;
+using ePiggy.DataManagement;
+using ePiggy.Utilities;
 
-namespace ePiggy.forms.finances.budget
+namespace ePiggy.Forms.Finances.Budget
 {
     public partial class MultiEntryInfoForm : Form
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using DataManager;
-using ePiggy.utilities;
+using ePiggy.DataManagement;
+using ePiggy.Utilities;
 
-namespace ePiggy.forms.finances.goals
+namespace ePiggy.Forms.Finances.Goals
 {
     public partial class GoalForm : Form
     {
@@ -39,11 +39,10 @@ namespace ePiggy.forms.finances.goals
         private void Init()
         {
             _target = Goal.Price;
-            _saved = _handler.DataCalculations.CheckBalance();
+            _saved = _handler.DataFilter.GetBalance();
             _progress = CalculateProgress(_saved, _target);
 
             labelTitle.Text = Goal.Title;
-            labelDate.Text = @"Deadline: " + DateTime.Today.ToString("d");
             labelProgress.Text =
                 NumberFormatter.FormatCurrency(_saved) + @" of " + NumberFormatter.FormatCurrency(_target);
             DisplayProgressBar();
@@ -52,14 +51,23 @@ namespace ePiggy.forms.finances.goals
 
         private void DisplayProgressBar()
         {
-           progressBar.Value = _progress >= 100 ? progressBar.Maximum : _progress;
+            progressBar.Value = _progress;
         }
 
-        #region Calculation to be moved elsewhere
+        #region Calculation of progress bar
 
         private static int CalculateProgress(decimal saved, decimal target)
         {
-            return (int)(saved * 100 / target);
+            if (saved < 0)
+            {
+                return 0;
+            }
+            if (target <= 0)
+            {
+                return 100;
+            }
+            var progress = (int)(saved * 100 / target);
+            return progress > 100 ? 100 : progress;
         }
 
         #endregion

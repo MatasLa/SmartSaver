@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
-using DataManager;
-using ePiggy.utilities;
+using ePiggy.DataManagement;
+using ePiggy.Utilities;
 
-namespace ePiggy.forms.finances.goals
+namespace ePiggy.Forms.Finances.Goals
 {
     public partial class ExpandedGoalForm : Form
     {

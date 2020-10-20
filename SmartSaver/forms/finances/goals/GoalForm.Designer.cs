@@ -1,4 +1,4 @@
-﻿namespace ePiggy.forms.finances.goals
+﻿namespace ePiggy.Forms.Finances.Goals
 {
     partial class GoalForm
     {
@@ -33,7 +33,6 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.labelTitle = new System.Windows.Forms.Label();
             this.labelProgress = new System.Windows.Forms.Label();
-            this.labelDate = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,9 +51,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0012F));
             this.tableLayoutPanel1.Controls.Add(this.buttonRemoveGoal, 8, 0);
             this.tableLayoutPanel1.Controls.Add(this.progressBar, 1, 5);
-            this.tableLayoutPanel1.Controls.Add(this.labelTitle, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelTitle, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelProgress, 1, 7);
-            this.tableLayoutPanel1.Controls.Add(this.labelDate, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -109,7 +107,7 @@
             this.labelTitle.BackColor = System.Drawing.Color.Transparent;
             this.tableLayoutPanel1.SetColumnSpan(this.labelTitle, 6);
             this.labelTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelTitle.Location = new System.Drawing.Point(61, 22);
+            this.labelTitle.Location = new System.Drawing.Point(61, 44);
             this.labelTitle.Name = "labelTitle";
             this.tableLayoutPanel1.SetRowSpan(this.labelTitle, 2);
             this.labelTitle.Size = new System.Drawing.Size(170, 44);
@@ -130,21 +128,9 @@
             this.labelProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelProgress.Click += new System.EventHandler(this.GoalForm_Click);
             // 
-            // labelDate
-            // 
-            this.tableLayoutPanel1.SetColumnSpan(this.labelDate, 8);
-            this.labelDate.Location = new System.Drawing.Point(32, 66);
-            this.labelDate.Name = "labelDate";
-            this.tableLayoutPanel1.SetRowSpan(this.labelDate, 2);
-            this.labelDate.Size = new System.Drawing.Size(229, 44);
-            this.labelDate.TabIndex = 3;
-            this.labelDate.Text = "Date";
-            this.labelDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelDate.Click += new System.EventHandler(this.GoalForm_Click);
-            // 
             // GoalForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(300, 225);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -164,7 +150,6 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelProgress;
-        private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Button buttonRemoveGoal;
     }
 }

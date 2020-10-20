@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using DataManager;
-using ePiggy;
-using ePiggy.forms;
+using ePiggy.Forms;
+using ePiggy.Forms.Auth;
 
-namespace EPiggy
+namespace ePiggy
 {
     static class Program
     {
@@ -25,7 +22,8 @@ namespace EPiggy
 
             var handler = new Handler();
             Application.Run(new FormMain(handler));
-            //Application.Run(new FormLogIn(dataHandler));
+
+            //Application.Run(new FormLogIn(handler));
         }
     }
 }
