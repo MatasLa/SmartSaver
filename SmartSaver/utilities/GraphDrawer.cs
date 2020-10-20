@@ -5,13 +5,16 @@ using ImageChartsLib;
 
 namespace ePiggy.Utilities
 {
-    class GraphDrawer
+    public class GraphDrawer
     {
         
         public static Bitmap DrawIncomesExpensesPieChart(decimal size1, decimal size2)
         {
-            var inc = size1.ToString(CultureInfo.CurrentCulture.NumberFormat);
-            var exp = size2.ToString(CultureInfo.CurrentCulture.NumberFormat);
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+
+            var inc = size1.ToString(nfi);
+            var exp = size2.ToString(nfi);
             var chartInfo = $"a:{inc},{exp}";
 
             var pie = new ImageCharts()
