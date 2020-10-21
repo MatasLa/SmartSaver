@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using ePiggy.DataBase.Models;
 using ePiggy.Utilities;
 
 namespace ePiggy.DataManagement
@@ -130,7 +130,29 @@ namespace ePiggy.DataManagement
 
         #endregion
 
-
+        public List<ImportanceGroup> GroupByImportance()
+        {
+            var enumList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
+           
+           return enumList.GroupJoin(_data.Expenses,
+                importance => importance,
+                entry => (Importance)entry.Importance,
+                 (importance, entries) =>
+                                new ImportanceGroup()
+                                {
+                                    Importance = importance.ToString(),
+                                    Entries = entries.Select(entry => entry).ToList()
+                                }).ToList();
+        }
+        /*Example of usage:
+         foreach (var test in temp)
+            {
+                Debug.WriteLine("\n" + test.Importance+":");
+                foreach (var smth in test.Entries)
+                {
+                    Debug.WriteLine(smth.Title + "\t" + smth.Amount);
+                }
+            }*/
 
         public List<DataEntry> GetIncome(decimal amount) // higher than parameter amount
         {
@@ -184,7 +206,7 @@ namespace ePiggy.DataManagement
             var today = DateTime.Today;
             var temp = _data.Income.Where(x => (x.Date >= from) && (x.Date <= today)).ToList();
             return temp;
-        }*/ 
+        }*/
         public List<DataEntry> GetExpenses(decimal amount) //higher than amount
         {
             return _data.Expenses.Where(x => x.Amount >= amount).ToList();
