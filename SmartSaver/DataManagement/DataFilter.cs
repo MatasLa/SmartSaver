@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ePiggy.DataBase.Models;
 using ePiggy.Utilities;
 
 namespace ePiggy.DataManagement
@@ -133,52 +134,49 @@ namespace ePiggy.DataManagement
 
         public List<DataEntry> GetIncome(decimal amount) // higher than parameter amount
         {
-            var temp = _data.Income.Where(x => x.Amount >= amount).ToList();
-            return temp;
+            return _data.Income.Where(x => x.Amount >= amount).ToList();
         }
 
         public List<DataEntry> GetIncome(DateTime dateTime) //by date
         {
-            var temp = _data.Income.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();
-            return temp;
+            return _data.Income.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();
         }
 
         public List<DataEntry> GetIncome(Importance importance, DateTime dateTime)
         {
-            var temp = _data.Income.Where(x => x.Importance == (int)importance
+            return _data.Income.Where(x => x.Importance == (int)importance
                                                && x.Date.Year == dateTime.Year && x.Date.Month == dateTime.Month).ToList();
-            return temp;
         }
 
         public List<DataEntry> GetIncome(DateTime from, DateTime to)
         {
-            var temp = _data.Income.Where(x => (x.Date >= from) && (x.Date <= to)).ToList();
-            return temp;
+            return _data.Income.Where(x => (x.Date >= from) && (x.Date <= to)).ToList();
         }
 
         public List<DataEntry> GetIncome(Importance importance)
         {
-            var temp = _data.Income.Where(x => x.Importance == (int)importance).ToList();
-            return temp;
+            return _data.Income.Where(x => x.Importance == (int)importance).ToList();
         }
 
         public List<DataEntry> GetIncome(bool isMonthly = true)
         {
-            var temp = _data.Income.Where(x => x.IsMonthly == isMonthly).ToList();
+            var temp =
+                    (from income in _data.Income
+                    where income.IsMonthly == isMonthly
+                    select income).ToList();
+            //var temp = _data.Income.Where(x => x.IsMonthly == isMonthly).ToList();
             return temp;
         }
 
         public List<DataEntry> GetIncomeUntilToday()
         {
-            var temp = _data.Income.Where(x => x.Date <= DateTime.Today).ToList();
-            return temp;
+            return _data.Income.Where(x => x.Date <= DateTime.Today).ToList();
         }
 
         public List<DataEntry> GetIncomeUntilEndOfThisMonth()
         {
             var today = DateTime.Today;
-            var temp = _data.Income.Where(x => (x.Date.Year <= today.Year) && (x.Date.Month <= today.Month)).ToList();
-            return temp;
+            return _data.Income.Where(x => (x.Date.Year <= today.Year) && (x.Date.Month <= today.Month)).ToList();
         }
 
       /*  public List<DataEntry> GetIncome(DateTime from)//from some date until today
@@ -189,51 +187,51 @@ namespace ePiggy.DataManagement
         }*/ 
         public List<DataEntry> GetExpenses(decimal amount) //higher than amount
         {
-            var temp = _data.Expenses.Where(x => x.Amount >= amount).ToList();
-            return temp;
+            return _data.Expenses.Where(x => x.Amount >= amount).ToList();
         }
 
         public List<DataEntry> GetExpenses(DateTime dateTime)//by date
         {
-            var temp = _data.Expenses.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month)).ToList();
-            return temp;
+            return _data.Expenses.Where(x => (x.Date.Year == dateTime.Year) && (x.Date.Month == dateTime.Month))
+                .ToList();
         }
 
         public List<DataEntry> GetExpenses(bool isMonthly = true)
         {
-            var temp = _data.Expenses.Where(x => x.IsMonthly == isMonthly).ToList();
+            var temp =
+                 (from expense in _data.Expenses
+                 where expense.IsMonthly == isMonthly
+                 select expense).ToList();
+            //var temp = _data.Expenses.Where(x => x.IsMonthly == isMonthly).ToList();
             return temp;
         }
 
          public List<DataEntry> GetExpenses(DateTime from, DateTime to)
          {
-            var temp = _data.Expenses.Where(x => (x.Date >= from) && (x.Date <= to)).ToList();
-            return temp;
+            return _data.Expenses.Where(x => (x.Date >= from) && (x.Date <= to)).ToList();
          }
 
         public List<DataEntry> GetExpenses(Importance importance)
         {
-          var temp = _data.Expenses.Where(x => x.Importance == (int)importance).ToList();
-          return temp;
+            return _data.Expenses.Where(x => x.Importance == (int)importance).ToList();
         }
 
         public List<DataEntry> GetExpenses(Importance importance, DateTime dateTime)
-        {
-          var temp = _data.Expenses.Where(x => x.Importance == (int)importance && x.Date.Year == dateTime.Year && x.Date.Month == dateTime.Month).ToList();
-          return temp;
+        { 
+            return _data.Expenses.Where(x =>
+                    x.Importance == (int) importance && x.Date.Year == dateTime.Year && x.Date.Month == dateTime.Month)
+                    .ToList();
         }
 
         public List<DataEntry> GetExpensesUntilToday()
         {
-            var temp = _data.Expenses.Where(x => x.Date <= DateTime.Today).ToList();
-            return temp;
+            return _data.Expenses.Where(x => x.Date <= DateTime.Today).ToList();
         }
 
         public List<DataEntry> GetExpensesUntilEndOfThisMonth()
         {
             var today = DateTime.Today;
-            var temp = _data.Expenses.Where(x => (x.Date.Year <= today.Year) && (x.Date.Month <= today.Month)).ToList();
-            return temp;
+            return _data.Expenses.Where(x => (x.Date.Year <= today.Year) && (x.Date.Month <= today.Month)).ToList();
         }
 
     
