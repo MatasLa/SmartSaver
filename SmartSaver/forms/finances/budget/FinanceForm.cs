@@ -281,32 +281,9 @@ namespace ePiggy.Forms.Finances.Budget
         private void DisplayTable()
         {
             dataGridView.DataSource = _dataTable;
-
-            if (!DataTableErrorCheck()) return;
             dataGridView.Columns["ID"].Visible = false;
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
             dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
-        }
-
-        private bool DataTableErrorCheck()
-        {
-            if (dataGridView.Columns["ID"] is null)
-            {
-                ExceptionHandler.Log("Data Table Generation Error: NO ID COLUMN");
-                return false;
-            }
-            if (dataGridView.Columns["Amount"] is null)
-            {
-                ExceptionHandler.Log("Data Table Generation Error: NO AMOUNT COLUMN");
-                return false;
-            }
-            if (dataGridView.Columns["Date"] is null)
-            {
-                ExceptionHandler.Log("Data Table Generation Error: NO DATE COLUMN");
-                return false;
-            }
-
-            return true;
         }
 
         private void GenerateTable()
