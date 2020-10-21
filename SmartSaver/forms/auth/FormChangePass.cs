@@ -21,8 +21,8 @@ namespace ePiggy.Forms.Auth
         private void registerButton_Click(object sender, EventArgs e)
         {
             var pass = password.Text;
-            var passconfirm = confirmPassword.Text;
-            if (!InputValidator.IsValidPasswordConfirm(this, pass, passconfirm)) return;
+            var passConfirm = confirmPassword.Text;
+            if (!InputValidator.IsValidPasswordConfirm(this, pass, passConfirm)) return;
             UserAuth.ChangePassword(_email, pass);
             FormUtilities.ChangeForm(this, new FormLogIn(DataHandler));
         }

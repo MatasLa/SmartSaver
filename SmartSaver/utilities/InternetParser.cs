@@ -34,16 +34,16 @@ namespace ePiggy.Utilities
             .Equals("row")).ToList();
 
          
-                var name = productListItems[0].Descendants("strong").FirstOrDefault()?.InnerText;
-                name = name?.Remove(name.Length - 13);
+            var name = productListItems[0].Descendants("strong").FirstOrDefault()?.InnerText;
+            name = name?.Remove(name.Length - 13);
 
-                var pricestr = productListItems[0].Descendants("span").FirstOrDefault(node => node.GetAttributeValue("class", "")
+            var pricestr = productListItems[0].Descendants("span").FirstOrDefault(node => node.GetAttributeValue("class", "")
                     .Equals("green"))
                     ?.InnerText;
-                pricestr = pricestr?.Substring(1).Trim();
+            pricestr = pricestr?.Substring(1).Trim();
 
 
-                try
+            try
             {
                 await File.WriteAllTextAsync(ResourceDirectoryParsedGoal, name + "\n" + pricestr);
             }

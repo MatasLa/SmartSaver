@@ -10,29 +10,14 @@ namespace ePiggy.DataManagement
         private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory)
                                                                          .Parent?.Parent?.FullName +
                                                                      @"\resources\textData\parsedGoal.txt";
-        public int Id
-        {
-            get; set;
-        }
-        public int UserId
-        {
-            get; set;
-        }
+        public int Id { get; set; }
+        public int UserId { get; set; }
 
-        public string Title
-        {
-            get; set;
-        }
+        public string Title { get; set; }
 
-        public decimal Price
-        {
-            get; set;
-        }
+        public decimal Price { get; set; }
 
-        public int PlaceInQueue
-        {
-            get; set;
-        }
+        public int PlaceInQueue { get; set; }
 
         public Goal(int id, int userId, string title, decimal price, int placeInQueue)
             :this(title, price, placeInQueue)

@@ -162,7 +162,7 @@ namespace ePiggy.DataManagement
             return temp;
         }
 
-        public List<DataEntry> GetIncome(bool isMonthly)
+        public List<DataEntry> GetIncome(bool isMonthly = true)
         {
             var temp = _data.Income.Where(x => x.IsMonthly == isMonthly).ToList();
             return temp;
@@ -199,11 +199,11 @@ namespace ePiggy.DataManagement
             return temp;
         }
 
-         public List<DataEntry> GetExpenses(bool isMonthly)
-         {
+        public List<DataEntry> GetExpenses(bool isMonthly = true)
+        {
             var temp = _data.Expenses.Where(x => x.IsMonthly == isMonthly).ToList();
             return temp;
-         }
+        }
 
          public List<DataEntry> GetExpenses(DateTime from, DateTime to)
          {
