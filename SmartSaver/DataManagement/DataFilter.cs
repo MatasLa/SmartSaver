@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using ePiggy.Utilities;
 
@@ -12,7 +11,7 @@ namespace ePiggy.DataManagement
         private readonly Data _data;
         public DataFilter(Data data)
         {
-            this._data = data;
+            _data = data;
         }
 
 

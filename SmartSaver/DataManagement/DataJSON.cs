@@ -11,7 +11,7 @@ namespace ePiggy.DataManagement
 		private readonly Data _data;
 		public DataJson(Data data)
 		{
-			this._data = data;
+			_data = data;
 		}
 
 		/*Writing/reading JSON files*/
@@ -41,7 +41,7 @@ namespace ePiggy.DataManagement
                 using var sw = File.AppendText("userExpenses.json");
                 foreach (var output in _data.Expenses.Select(data => JsonSerializer.Serialize(data)))
                 {
-                    sw.Write(output + "\n");
+                    sw.WriteLine(output);
                 }
             }
             catch (Exception e)

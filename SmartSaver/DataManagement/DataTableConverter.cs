@@ -10,7 +10,7 @@ namespace ePiggy.DataManagement
         private readonly Data _data;
         public DataTableConverter(Data data)
         {
-            this._data = data;
+            _data = data;
         }
 
         public DataTable GenerateTable(EntryType entryType)//All entries
