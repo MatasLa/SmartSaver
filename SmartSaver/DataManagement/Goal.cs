@@ -17,25 +17,22 @@ namespace ePiggy.DataManagement
 
         public decimal Price { get; set; }
 
-        public int PlaceInQueue { get; set; }
 
-        public Goal(int id, int userId, string title, decimal price, int placeInQueue)
-            :this(title, price, placeInQueue)
+        public Goal(int id, int userId, string title, decimal price)
+            :this(title, price)
         {
             Id = id;
             UserId = userId;
         }
 
-        public Goal(string title, decimal price, int placeInQueue)
+        public Goal(string title, decimal price)
         {
             Title = title;
             Price = price;
-            PlaceInQueue = placeInQueue;
         }
 
-        public Goal(string title, int placeInQueue)
+        public Goal(string title)
         {
-            PlaceInQueue = placeInQueue;
             SetGoalFromWeb(title);
 
         }

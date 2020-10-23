@@ -25,7 +25,7 @@ namespace ePiggy.DataManagement
             db.Add(goal);
             db.SaveChanges();
             var id = goal.Id;
-            var newGoal = new Goal(title, value, placeInQueue) {Id = id};
+            var newGoal = new Goal(title, value) {Id = id};
             GoalsList.Add(newGoal);
             return true;
         }
@@ -37,7 +37,7 @@ namespace ePiggy.DataManagement
             var price = newGoal.Price;
             var parsedTitle = newGoal.Title;
 			var db = new DatabaseContext();
-            var goal = new Goals { UserId = userid, Title = parsedTitle, Price = price, PlaceInQueue = placeInQueue };
+            var goal = new Goals { UserId = userid, Title = parsedTitle, Price = price};
             db.Add(goal);
             db.SaveChanges();
             var id = goal.Id;
@@ -248,7 +248,7 @@ namespace ePiggy.DataManagement
             }
 		}
 
-        public bool EditGoalPlaceInQueue(int id, int placeInQueue)
+       /* public bool EditGoalPlaceInQueue(int id, int placeInQueue)
         {
             var db = new DatabaseContext();
             var temp = db.Goals.FirstOrDefault(x => x.Id == id);
@@ -262,7 +262,7 @@ namespace ePiggy.DataManagement
             {
                 return false;
             }
-		}
+		}*/
 		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
 		{
 
@@ -495,7 +495,7 @@ namespace ePiggy.DataManagement
             var goals = context.Goals; // define query
             foreach (var goal in goals.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
             {
-                var newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price, goal.PlaceInQueue);
+                var newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price);
                 GoalsList.Add(newGoal);
             }
         }
