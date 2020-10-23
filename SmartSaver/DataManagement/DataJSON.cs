@@ -23,7 +23,7 @@ namespace ePiggy.DataManagement
                 using var sw = File.AppendText("userIncome.json");
                 foreach (var output in _data.Income.Select(data => JsonSerializer.Serialize(data)))
                 {
-                    sw.Write(output + "\n");
+                    sw.WriteLine(output);
                 }
             }
             catch (Exception e)
