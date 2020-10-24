@@ -6,7 +6,7 @@ using ePiggy.Utilities;
 
 namespace ePiggy.DataBase
 {
-    public class DatabaseUpdate
+    public class DatabaseUpdater
     {
         public static int AddGoal(int userid, string title, decimal value)
         {
@@ -16,6 +16,7 @@ namespace ePiggy.DataBase
             db.SaveChanges();
             return goal.Id;
         }
+
         public static int AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly,
             int importance)
         {
