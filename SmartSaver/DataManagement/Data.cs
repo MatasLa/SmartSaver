@@ -19,30 +19,28 @@ namespace ePiggy.DataManagement
         /*GOALS*/
 
         /*for all add methods db method should be moved and shouldreturn int id*/
-        public bool AddGoal(int userid, string title, decimal value, int placeInQueue)//manual
+        public bool AddGoal(int userid, string title, decimal value)//manual
         {
-            if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
-            var db = new DatabaseContext();
-            var goal = new Goals {UserId = userid, Title = title, Price = value, PlaceInQueue = placeInQueue};
-            db.Add(goal);
-            db.SaveChanges();
-            var id = goal.Id;
-            var newGoal = new Goal(title, value, placeInQueue) {Id = id};
+            if (GoalsList.Count >= 10)//if 10 entries already in, does not allow to add
+            {
+                return false;
+            }
+            var id = DatabaseUpdate.AddGoal(userid, title, value);
+            var newGoal = new Goal(title, value) {Id = id};
             GoalsList.Add(newGoal);
             return true;
         }
 
-        public bool AddGoal(int userid, string title, int placeInQueue)//parsing from internet
+        public bool AddGoal(int userid, string title)//parsing from internet
         {
-			if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
-            var newGoal = new Goal(title, placeInQueue);
+            if (GoalsList.Count >= 10)//if 10 entries already in, does not allow to add
+            {
+                return false;
+            }
+            var newGoal = new Goal(title);
             var price = newGoal.Price;
             var parsedTitle = newGoal.Title;
-			var db = new DatabaseContext();
-            var goal = new Goals { UserId = userid, Title = parsedTitle, Price = price, PlaceInQueue = placeInQueue };
-            db.Add(goal);
-            db.SaveChanges();
-            var id = goal.Id;
+            var id = DatabaseUpdate.AddGoal(userid, parsedTitle, price);
             newGoal.Id = id;
             GoalsList.Add(newGoal);
             return true;
@@ -51,11 +49,7 @@ namespace ePiggy.DataManagement
 		/*INCOMES*/
         public void AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
-            var db = new DatabaseContext();
-            var income = new Incomes { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
-            db.Add(income);
-            db.SaveChanges();
-            var id = income.Id;
+            var id = DatabaseUpdate.AddIncome(userid, value, title, date, isMonthly, importance);
             var newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
             Income.Add(newIncome);
         }
@@ -64,11 +58,7 @@ namespace ePiggy.DataManagement
 		/*EXPENSES*/
         public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
-            var db = new DatabaseContext();
-            var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
-            db.Add(expense);
-            db.SaveChanges();
-            var id = expense.Id;
+            var id = DatabaseUpdate.AddExpense(userid, value, title, date, isMonthly, importance);
             var newExpense = new DataEntry(id, userid, value, title, date, isMonthly, importance);
             Expenses.Add(newExpense);
         }
@@ -165,7 +155,7 @@ namespace ePiggy.DataManagement
 
         }
         
-        public bool EditGoalPlaceInQueue(int id, int placeInQueue)
+       /* public bool EditGoalPlaceInQueue(int id, int placeInQueue)
         {
             var temp = GoalsList.FirstOrDefault(x => x.Id == id);
             if (temp == null)
@@ -174,7 +164,7 @@ namespace ePiggy.DataManagement
             }
             temp.PlaceInQueue = placeInQueue;
             return DatabaseUpdate.EditGoalPlaceInQueue(id, placeInQueue);
-        }
+        }*/
         
 
         public bool EditIncomeItem(int id, decimal value)

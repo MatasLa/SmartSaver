@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using ePiggy.DataBase.Models;
 using ePiggy.DataManagement;
 using ePiggy.Utilities;
 
@@ -9,6 +8,34 @@ namespace ePiggy.DataBase
 {
     public class DatabaseUpdate
     {
+        public static int AddGoal(int userid, string title, decimal value)
+        {
+            var db = new DatabaseContext();
+            var goal = new Goals { UserId = userid, Title = title, Price = value };
+            db.Add(goal);
+            db.SaveChanges();
+            return goal.Id;
+        }
+        public static int AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly,
+            int importance)
+        {
+            var db = new DatabaseContext();
+            var income = new Incomes { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
+            db.Add(income);
+            db.SaveChanges();
+            return income.Id;
+        }
+        public static int AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly,
+            int importance)
+        {
+            var db = new DatabaseContext();
+            var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
+            db.Add(expense);
+            db.SaveChanges();
+            return expense.Id;
+        }
+
+
         public static void RemoveGoal(int id)
         {
             var db = new DatabaseContext();
