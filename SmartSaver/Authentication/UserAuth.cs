@@ -13,14 +13,21 @@ namespace ePiggy.Authentication
         private const string EmailPassword = "Smartsaver123456";
         private const string RecoveryMessageSubject = "Password Recovery";
         private const string RecoveryMessageBody = "Your password recovery code is: ";
+        private const int MaxRandValue = 999999;
+        private const string SmtpEmail = "smtp.gmail.com";
+        private const int PortConst = 587;
+        private const int SaltSize = 20;
 
 
         public static bool Registration(string email, string pass)
         {
             using var db = new DatabaseContext();
             var userInfo = db.Users.FirstOrDefault(a => a.Email == email); //Find if email is in db
-            if (userInfo != null) return false;
-            var salt = HashingProcessor.CreateSalt(20);
+            if (userInfo != null)
+            {
+                return false;
+            }
+            var salt = HashingProcessor.CreateSalt(SaltSize);
             var passwordHash = HashingProcessor.GenerateHash(pass, salt);
 
             var user = new User { Email = email, Password = passwordHash, Salt = salt };
@@ -55,7 +62,7 @@ namespace ePiggy.Authentication
                 return false;
             }
                 
-            var salt = HashingProcessor.CreateSalt(20);
+            var salt = HashingProcessor.CreateSalt(SaltSize);
             var passwordHash = HashingProcessor.GenerateHash(pass, salt);
 
             userInfo.Password = passwordHash;
@@ -76,7 +83,7 @@ namespace ePiggy.Authentication
             }
 
             var rand = new Random();
-            var randomCode = rand.Next(999999);
+            var randomCode = rand.Next(MaxRandValue);
 
             var message = new MailMessage();
             message.To.Add(email);
@@ -84,10 +91,10 @@ namespace ePiggy.Authentication
             message.Body = RecoveryMessageBody + randomCode;
             message.Subject = RecoveryMessageSubject;
 
-            var smtp = new SmtpClient("smtp.gmail.com")
+            var smtp = new SmtpClient(SmtpEmail)
             {
                 EnableSsl = true,
-                Port = 587,
+                Port = PortConst,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 Credentials = new NetworkCredential(EmailAddress, EmailPassword)
             };
