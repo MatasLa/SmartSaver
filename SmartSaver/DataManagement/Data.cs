@@ -81,8 +81,8 @@ namespace ePiggy.DataManagement
         public void RemoveGoal(int id)
         {
             var goal = GoalsList.FirstOrDefault(x => x.Id == id);
-            if (goal != null) GoalsList.Remove(goal);
-            
+            if (goal == null) return;
+            GoalsList.Remove(goal);
             DatabaseUpdate.RemoveGoal(id);
         }
 
@@ -90,7 +90,8 @@ namespace ePiggy.DataManagement
         public void RemoveIncome(int id)
         {
             var income = Income.FirstOrDefault(x => x.Id == id);
-            if (income != null) Income.Remove(income);
+            if (income == null) return;
+            Income.Remove(income);
             DatabaseUpdate.RemoveIncome(id);
         }
 
@@ -111,7 +112,8 @@ namespace ePiggy.DataManagement
         public void RemoveExpense(int id)
         {
             var dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
-            if (dataEntry != null) Expenses.Remove(dataEntry);
+            if (dataEntry == null) return;
+            Expenses.Remove(dataEntry);
             DatabaseUpdate.RemoveExpense(id);
         }
         
@@ -153,7 +155,10 @@ namespace ePiggy.DataManagement
         public bool EditGoal(int id, string title, decimal value)
         {
             var temp = GoalsList.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Title = title;
             temp.Price = value;
             return DatabaseUpdate.EditGoal(id, title, value);
@@ -163,7 +168,10 @@ namespace ePiggy.DataManagement
         public bool EditGoalPlaceInQueue(int id, int placeInQueue)
         {
             var temp = GoalsList.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.PlaceInQueue = placeInQueue;
             return DatabaseUpdate.EditGoalPlaceInQueue(id, placeInQueue);
         }
@@ -172,7 +180,10 @@ namespace ePiggy.DataManagement
         public bool EditIncomeItem(int id, decimal value)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Amount = value;
             return DatabaseUpdate.EditIncomeItem(id, value);
         }
@@ -181,7 +192,10 @@ namespace ePiggy.DataManagement
         public bool EditIncomeItem(int id, string value)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Title = value;
             return DatabaseUpdate.EditIncomeItem(id, value);
         }
@@ -190,7 +204,10 @@ namespace ePiggy.DataManagement
         public bool EditIncomeItem(int id, DateTime date)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Date = date;
             return DatabaseUpdate.EditIncomeItem(id, date);
         }
@@ -199,7 +216,10 @@ namespace ePiggy.DataManagement
         public bool EditIncomeItem(int id, bool isMonthly)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.IsMonthly = isMonthly;
             return DatabaseUpdate.EditIncomeItem(id, isMonthly);
         }
@@ -208,7 +228,10 @@ namespace ePiggy.DataManagement
         public bool EditIncomeItem(int id, int importance)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Importance = importance;
             return DatabaseUpdate.EditIncomeItem(id, importance);
         }
@@ -217,7 +240,10 @@ namespace ePiggy.DataManagement
         public bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Title = value;
             temp.Amount = amount;
             temp.Date = date;
@@ -230,7 +256,10 @@ namespace ePiggy.DataManagement
         public bool EditExpensesItem(int id, decimal value)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Amount = value;
             return DatabaseUpdate.EditExpensesItem(id, value);
         }
@@ -239,7 +268,10 @@ namespace ePiggy.DataManagement
         public bool EditExpensesItem(int id, string value)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Title = value;
             return DatabaseUpdate.EditExpensesItem(id, value);
         }
@@ -248,7 +280,10 @@ namespace ePiggy.DataManagement
         public bool EditExpensesItem(int id, DateTime date)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Date = date;
             return DatabaseUpdate.EditExpensesItem(id, date);
         }
@@ -257,7 +292,10 @@ namespace ePiggy.DataManagement
         public bool EditExpensesItem(int id, bool isMonthly)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.IsMonthly = isMonthly;
             return DatabaseUpdate.EditExpensesItem(id, isMonthly);
         }
@@ -265,7 +303,10 @@ namespace ePiggy.DataManagement
         public bool EditExpensesItem(int id, int importance)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Importance = importance;
             return DatabaseUpdate.EditExpensesItem(id, importance);
         }
@@ -273,7 +314,10 @@ namespace ePiggy.DataManagement
         public bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
-            if (temp == null) return false;
+            if (temp == null)
+            {
+                return false;
+            }
             temp.Title = value;
             temp.Amount = amount;
             temp.Date = date;
