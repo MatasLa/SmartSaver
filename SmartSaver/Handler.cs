@@ -18,33 +18,52 @@ namespace ePiggy
 
         public DataCalculations DataCalculations { get; }
 
+        public MonthlyUpdater MonthlyUpdater { get; }
+
         public static HttpClient HttpClient = new HttpClient();
         public static int UserId { get; set; }
 
 
         public Handler()
         {
-            Time = DateTime.Now;
             HttpClient = new HttpClient();
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
             DataCalculations = new DataCalculations(Data);
             DataJson = new DataJson(Data);
-            //Data.ReadIncomeFromDb();
-            //Data.ReadExpensesFromDb();
-            //DataJSON.ReadIncomeFromFile();
-            //DataJSON.ReadExpensesFromFile();
+            MonthlyUpdater = new MonthlyUpdater(DataFilter, Data);
+
+            //Init();
         }
 
-        public void ClearData()
+        private void Init()
+        {
+            Time = DateTime.Now;
+            ReadFromDb();
+            MonthlyUpdater.UpdateMonthlyEntries(UserId);
+        }
+
+        private void ReadFromDb()
+        {
+            Data.ReadExpensesFromDb();
+            Data.ReadIncomeFromDb();
+            Data.ReadGoalsFromDb();
+        }
+
+        public void Update()
+        {
+            Time = DateTime.Today;
+            ClearData();
+            ReadFromDb();
+            MonthlyUpdater.UpdateMonthlyEntries(UserId);
+        }
+        
+        private void ClearData()
         {
             Data.Income.Clear();
             Data.Expenses.Clear();
             Data.GoalsList.Clear();
-            Data.ReadExpensesFromDb();
-            Data.ReadIncomeFromDb();
-            Data.ReadGoalsFromDb();
         }
         
     }

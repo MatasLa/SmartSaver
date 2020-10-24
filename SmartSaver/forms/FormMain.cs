@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using ePiggy.Forms.Auth;
 using ePiggy.Forms.Finances.Budget;
 using ePiggy.Forms.Finances.Goals;
 using ePiggy.Forms.Reports;
@@ -19,7 +20,7 @@ namespace ePiggy.Forms
             InitializeComponent();
             CustomizeDesign();
             Handler = handler;
-            Handler.ClearData();
+            Handler.Update();
         }
 
         private void CustomizeDesign()

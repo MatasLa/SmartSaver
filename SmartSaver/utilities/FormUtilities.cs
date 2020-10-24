@@ -82,5 +82,11 @@ namespace ePiggy.Utilities
             label.ForeColor = currencyWithColor.Color;
             label.Text = currencyWithColor.Number;
         }
+
+        public static void DisplayCurrency(Label label, decimal value)
+        {
+            var strCurrency = NumberFormatter.FormatCurrency(value);
+            label.Text = strCurrency;
+        }
     }
 }

@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FinanceForm));
             this.panelTop = new System.Windows.Forms.Panel();
-            this.labelBalance = new System.Windows.Forms.Label();
+            this.buttonShowAll = new System.Windows.Forms.Button();
             this.buttonAddEntry = new System.Windows.Forms.Button();
             this.buttonNextYear = new System.Windows.Forms.Button();
             this.buttonPreviousYear = new System.Windows.Forms.Button();
@@ -38,22 +38,42 @@
             this.buttonPreviousMonth = new System.Windows.Forms.Button();
             this.labelYear = new System.Windows.Forms.Label();
             this.labelMonth = new System.Windows.Forms.Label();
+            this.labelValueMonthlyBalance = new System.Windows.Forms.Label();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.labelValueMonths = new System.Windows.Forms.Label();
+            this.labelMonthsTotal = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.labelTotalBalanceValue = new System.Windows.Forms.Label();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelMonthlyBalance = new System.Windows.Forms.Label();
             this.labelTotalBalance = new System.Windows.Forms.Label();
+            this.labelValueTotalBalance = new System.Windows.Forms.Label();
+            this.labelBalanceUntilToday = new System.Windows.Forms.Label();
+            this.labelValueBalanceUntilToday = new System.Windows.Forms.Label();
+            this.labelBalanceEndOfMonth = new System.Windows.Forms.Label();
+            this.labelValueBalanceEndOfMonth = new System.Windows.Forms.Label();
+            this.labelNecessary = new System.Windows.Forms.Label();
+            this.labelValueNecessary = new System.Windows.Forms.Label();
+            this.labelHighImportance = new System.Windows.Forms.Label();
+            this.labelValueHighImportance = new System.Windows.Forms.Label();
+            this.labelMediumImportance = new System.Windows.Forms.Label();
+            this.labelValueMediumImportance = new System.Windows.Forms.Label();
+            this.labelLowImportance = new System.Windows.Forms.Label();
+            this.labelValueLowImportance = new System.Windows.Forms.Label();
+            this.labelUnnecessary = new System.Windows.Forms.Label();
+            this.labelValueUnnecessary = new System.Windows.Forms.Label();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
+            this.flowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panelTop.Controls.Add(this.labelBalance);
+            this.panelTop.Controls.Add(this.buttonShowAll);
             this.panelTop.Controls.Add(this.buttonAddEntry);
             this.panelTop.Controls.Add(this.buttonNextYear);
             this.panelTop.Controls.Add(this.buttonPreviousYear);
@@ -69,18 +89,22 @@
             this.panelTop.TabIndex = 0;
             this.panelTop.Click += new System.EventHandler(this.PanelTop_Click);
             // 
-            // labelBalance
+            // buttonShowAll
             // 
-            this.labelBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelBalance.AutoSize = true;
-            this.labelBalance.BackColor = System.Drawing.Color.Transparent;
-            this.labelBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelBalance.Location = new System.Drawing.Point(874, 42);
-            this.labelBalance.Name = "labelBalance";
-            this.labelBalance.Size = new System.Drawing.Size(112, 31);
-            this.labelBalance.TabIndex = 9;
-            this.labelBalance.Text = "Balance";
+            this.buttonShowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonShowAll.BackColor = System.Drawing.Color.Transparent;
+            this.buttonShowAll.FlatAppearance.BorderColor = System.Drawing.Color.WhiteSmoke;
+            this.buttonShowAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonShowAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonShowAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.buttonShowAll.Location = new System.Drawing.Point(992, 4);
+            this.buttonShowAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonShowAll.Name = "buttonShowAll";
+            this.buttonShowAll.Size = new System.Drawing.Size(118, 39);
+            this.buttonShowAll.TabIndex = 3;
+            this.buttonShowAll.Text = "Show All";
+            this.buttonShowAll.UseVisualStyleBackColor = false;
+            this.buttonShowAll.Click += new System.EventHandler(this.ButtonShowAll_Click);
             // 
             // buttonAddEntry
             // 
@@ -147,7 +171,7 @@
             this.buttonNextMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNextMonth.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.buttonNextMonth.Image = ((System.Drawing.Image)(resources.GetObject("buttonNextMonth.Image")));
-            this.buttonNextMonth.Location = new System.Drawing.Point(559, 48);
+            this.buttonNextMonth.Location = new System.Drawing.Point(559, 44);
             this.buttonNextMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonNextMonth.Name = "buttonNextMonth";
             this.buttonNextMonth.Size = new System.Drawing.Size(51, 48);
@@ -166,7 +190,7 @@
             this.buttonPreviousMonth.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPreviousMonth.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.buttonPreviousMonth.Image = ((System.Drawing.Image)(resources.GetObject("buttonPreviousMonth.Image")));
-            this.buttonPreviousMonth.Location = new System.Drawing.Point(453, 48);
+            this.buttonPreviousMonth.Location = new System.Drawing.Point(453, 44);
             this.buttonPreviousMonth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonPreviousMonth.Name = "buttonPreviousMonth";
             this.buttonPreviousMonth.Size = new System.Drawing.Size(51, 48);
@@ -184,7 +208,7 @@
             this.labelYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.labelYear.Location = new System.Drawing.Point(501, 12);
             this.labelYear.Name = "labelYear";
-            this.labelYear.Size = new System.Drawing.Size(88, 31);
+            this.labelYear.Size = new System.Drawing.Size(74, 26);
             this.labelYear.TabIndex = 6;
             this.labelYear.Text = "YEAR";
             this.labelYear.Click += new System.EventHandler(this.LabelYear_Click);
@@ -198,9 +222,23 @@
             this.labelMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
             this.labelMonth.Location = new System.Drawing.Point(505, 55);
             this.labelMonth.Name = "labelMonth";
-            this.labelMonth.Size = new System.Drawing.Size(77, 31);
+            this.labelMonth.Size = new System.Drawing.Size(63, 26);
             this.labelMonth.TabIndex = 7;
             this.labelMonth.Text = "MON";
+            // 
+            // labelValueMonthlyBalance
+            // 
+            this.labelValueMonthlyBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelValueMonthlyBalance.AutoSize = true;
+            this.labelValueMonthlyBalance.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueMonthlyBalance, true);
+            this.labelValueMonthlyBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueMonthlyBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueMonthlyBalance.Location = new System.Drawing.Point(169, 0);
+            this.labelValueMonthlyBalance.Name = "labelValueMonthlyBalance";
+            this.labelValueMonthlyBalance.Size = new System.Drawing.Size(62, 26);
+            this.labelValueMonthlyBalance.TabIndex = 9;
+            this.labelValueMonthlyBalance.Text = "NUM";
             // 
             // splitContainer
             // 
@@ -219,14 +257,40 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.BackColor = System.Drawing.Color.White;
-            this.splitContainer.Panel2.Controls.Add(this.labelTotalBalanceValue);
-            this.splitContainer.Panel2.Controls.Add(this.labelTotalBalance);
+            this.splitContainer.Panel2.Controls.Add(this.flowLayoutPanel);
             this.splitContainer.Panel2MinSize = 300;
             this.splitContainer.Size = new System.Drawing.Size(1110, 621);
             this.splitContainer.SplitterDistance = 749;
             this.splitContainer.SplitterWidth = 5;
             this.splitContainer.TabIndex = 1;
             this.splitContainer.Text = "splitContainer1";
+            // 
+            // labelValueMonths
+            // 
+            this.labelValueMonths.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelValueMonths.AutoSize = true;
+            this.labelValueMonths.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueMonths, true);
+            this.labelValueMonths.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueMonths.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueMonths.Location = new System.Drawing.Point(181, 353);
+            this.labelValueMonths.Name = "labelValueMonths";
+            this.labelValueMonths.Size = new System.Drawing.Size(91, 26);
+            this.labelValueMonths.TabIndex = 9;
+            this.labelValueMonths.Text = "Balance";
+            // 
+            // labelMonthsTotal
+            // 
+            this.labelMonthsTotal.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelMonthsTotal.AutoSize = true;
+            this.labelMonthsTotal.BackColor = System.Drawing.Color.Transparent;
+            this.labelMonthsTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelMonthsTotal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelMonthsTotal.Location = new System.Drawing.Point(3, 353);
+            this.labelMonthsTotal.Name = "labelMonthsTotal";
+            this.labelMonthsTotal.Size = new System.Drawing.Size(172, 26);
+            this.labelMonthsTotal.TabIndex = 9;
+            this.labelMonthsTotal.Text = "Total this month:";
             // 
             // dataGridView
             // 
@@ -250,18 +314,47 @@
             this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
             this.dataGridView.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DataGridView_KeyPress);
             // 
-            // labelTotalBalanceValue
+            // flowLayoutPanel
             // 
-            this.labelTotalBalanceValue.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelTotalBalanceValue.AutoSize = true;
-            this.labelTotalBalanceValue.BackColor = System.Drawing.Color.Transparent;
-            this.labelTotalBalanceValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelTotalBalanceValue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelTotalBalanceValue.Location = new System.Drawing.Point(119, 350);
-            this.labelTotalBalanceValue.Name = "labelTotalBalanceValue";
-            this.labelTotalBalanceValue.Size = new System.Drawing.Size(112, 31);
-            this.labelTotalBalanceValue.TabIndex = 9;
-            this.labelTotalBalanceValue.Text = "Balance";
+            this.flowLayoutPanel.Controls.Add(this.labelMonthsTotal);
+            this.flowLayoutPanel.Controls.Add(this.labelValueMonths);
+            this.flowLayoutPanel.Controls.Add(this.labelMonthlyBalance);
+            this.flowLayoutPanel.Controls.Add(this.labelValueMonthlyBalance);
+            this.flowLayoutPanel.Controls.Add(this.labelTotalBalance);
+            this.flowLayoutPanel.Controls.Add(this.labelValueTotalBalance);
+            this.flowLayoutPanel.Controls.Add(this.labelBalanceUntilToday);
+            this.flowLayoutPanel.Controls.Add(this.labelValueBalanceUntilToday);
+            this.flowLayoutPanel.Controls.Add(this.labelBalanceEndOfMonth);
+            this.flowLayoutPanel.Controls.Add(this.labelValueBalanceEndOfMonth);
+            this.flowLayoutPanel.Controls.Add(this.labelNecessary);
+            this.flowLayoutPanel.Controls.Add(this.labelValueNecessary);
+            this.flowLayoutPanel.Controls.Add(this.labelHighImportance);
+            this.flowLayoutPanel.Controls.Add(this.labelValueHighImportance);
+            this.flowLayoutPanel.Controls.Add(this.labelMediumImportance);
+            this.flowLayoutPanel.Controls.Add(this.labelValueMediumImportance);
+            this.flowLayoutPanel.Controls.Add(this.labelLowImportance);
+            this.flowLayoutPanel.Controls.Add(this.labelValueLowImportance);
+            this.flowLayoutPanel.Controls.Add(this.labelUnnecessary);
+            this.flowLayoutPanel.Controls.Add(this.labelValueUnnecessary);
+            this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(356, 621);
+            this.flowLayoutPanel.TabIndex = 10;
+            // 
+            // labelMonthlyBalance
+            // 
+            this.labelMonthlyBalance.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.labelMonthlyBalance.AutoSize = true;
+            this.labelMonthlyBalance.BackColor = System.Drawing.Color.Transparent;
+            this.labelMonthlyBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelMonthlyBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelMonthlyBalance.Location = new System.Drawing.Point(3, 0);
+            this.labelMonthlyBalance.Name = "labelMonthlyBalance";
+            this.labelMonthlyBalance.Size = new System.Drawing.Size(160, 26);
+            this.labelMonthlyBalance.TabIndex = 9;
+            this.labelMonthlyBalance.Text = "Month balance:";
             // 
             // labelTotalBalance
             // 
@@ -270,15 +363,227 @@
             this.labelTotalBalance.BackColor = System.Drawing.Color.Transparent;
             this.labelTotalBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTotalBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelTotalBalance.Location = new System.Drawing.Point(106, 307);
+            this.labelTotalBalance.Location = new System.Drawing.Point(3, 27);
+            this.labelTotalBalance.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
             this.labelTotalBalance.Name = "labelTotalBalance";
-            this.labelTotalBalance.Size = new System.Drawing.Size(188, 31);
+            this.labelTotalBalance.Size = new System.Drawing.Size(147, 26);
             this.labelTotalBalance.TabIndex = 9;
-            this.labelTotalBalance.Text = "Total Balance:";
+            this.labelTotalBalance.Text = "Total balance:";
+            // 
+            // labelValueTotalBalance
+            // 
+            this.labelValueTotalBalance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelValueTotalBalance.AutoSize = true;
+            this.labelValueTotalBalance.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueTotalBalance, true);
+            this.labelValueTotalBalance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueTotalBalance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueTotalBalance.Location = new System.Drawing.Point(153, 26);
+            this.labelValueTotalBalance.Name = "labelValueTotalBalance";
+            this.labelValueTotalBalance.Size = new System.Drawing.Size(62, 26);
+            this.labelValueTotalBalance.TabIndex = 9;
+            this.labelValueTotalBalance.Text = "NUM";
+            // 
+            // labelBalanceUntilToday
+            // 
+            this.labelBalanceUntilToday.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelBalanceUntilToday.AutoSize = true;
+            this.labelBalanceUntilToday.BackColor = System.Drawing.Color.Transparent;
+            this.labelBalanceUntilToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelBalanceUntilToday.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelBalanceUntilToday.Location = new System.Drawing.Point(3, 54);
+            this.labelBalanceUntilToday.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
+            this.labelBalanceUntilToday.Name = "labelBalanceUntilToday";
+            this.labelBalanceUntilToday.Size = new System.Drawing.Size(202, 26);
+            this.labelBalanceUntilToday.TabIndex = 9;
+            this.labelBalanceUntilToday.Text = "Balance until today:";
+            // 
+            // labelValueBalanceUntilToday
+            // 
+            this.labelValueBalanceUntilToday.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelValueBalanceUntilToday.AutoSize = true;
+            this.labelValueBalanceUntilToday.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueBalanceUntilToday, true);
+            this.labelValueBalanceUntilToday.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueBalanceUntilToday.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueBalanceUntilToday.Location = new System.Drawing.Point(208, 53);
+            this.labelValueBalanceUntilToday.Name = "labelValueBalanceUntilToday";
+            this.labelValueBalanceUntilToday.Size = new System.Drawing.Size(62, 26);
+            this.labelValueBalanceUntilToday.TabIndex = 9;
+            this.labelValueBalanceUntilToday.Text = "NUM";
+            // 
+            // labelBalanceEndOfMonth
+            // 
+            this.labelBalanceEndOfMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelBalanceEndOfMonth.AutoSize = true;
+            this.labelBalanceEndOfMonth.BackColor = System.Drawing.Color.Transparent;
+            this.labelBalanceEndOfMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelBalanceEndOfMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelBalanceEndOfMonth.Location = new System.Drawing.Point(3, 81);
+            this.labelBalanceEndOfMonth.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
+            this.labelBalanceEndOfMonth.Name = "labelBalanceEndOfMonth";
+            this.labelBalanceEndOfMonth.Size = new System.Drawing.Size(318, 52);
+            this.labelBalanceEndOfMonth.TabIndex = 9;
+            this.labelBalanceEndOfMonth.Text = "Balance until the end of current month:";
+            // 
+            // labelValueBalanceEndOfMonth
+            // 
+            this.labelValueBalanceEndOfMonth.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelValueBalanceEndOfMonth.AutoSize = true;
+            this.labelValueBalanceEndOfMonth.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueBalanceEndOfMonth, true);
+            this.labelValueBalanceEndOfMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueBalanceEndOfMonth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueBalanceEndOfMonth.Location = new System.Drawing.Point(3, 148);
+            this.labelValueBalanceEndOfMonth.Name = "labelValueBalanceEndOfMonth";
+            this.labelValueBalanceEndOfMonth.Size = new System.Drawing.Size(62, 26);
+            this.labelValueBalanceEndOfMonth.TabIndex = 9;
+            this.labelValueBalanceEndOfMonth.Text = "NUM";
+            // 
+            // labelNecessary
+            // 
+            this.labelNecessary.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelNecessary.AutoSize = true;
+            this.labelNecessary.BackColor = System.Drawing.Color.Transparent;
+            this.labelNecessary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelNecessary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelNecessary.Location = new System.Drawing.Point(3, 219);
+            this.labelNecessary.Margin = new System.Windows.Forms.Padding(3, 30, 0, 0);
+            this.labelNecessary.Name = "labelNecessary";
+            this.labelNecessary.Size = new System.Drawing.Size(121, 26);
+            this.labelNecessary.TabIndex = 9;
+            this.labelNecessary.Text = "Necessary:";
+            // 
+            // labelValueNecessary
+            // 
+            this.labelValueNecessary.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelValueNecessary.AutoSize = true;
+            this.labelValueNecessary.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueNecessary, true);
+            this.labelValueNecessary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueNecessary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueNecessary.Location = new System.Drawing.Point(127, 219);
+            this.labelValueNecessary.Margin = new System.Windows.Forms.Padding(3, 30, 3, 0);
+            this.labelValueNecessary.Name = "labelValueNecessary";
+            this.labelValueNecessary.Size = new System.Drawing.Size(62, 26);
+            this.labelValueNecessary.TabIndex = 9;
+            this.labelValueNecessary.Text = "NUM";
+            // 
+            // labelHighImportance
+            // 
+            this.labelHighImportance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelHighImportance.AutoSize = true;
+            this.labelHighImportance.BackColor = System.Drawing.Color.Transparent;
+            this.labelHighImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelHighImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelHighImportance.Location = new System.Drawing.Point(3, 246);
+            this.labelHighImportance.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
+            this.labelHighImportance.Name = "labelHighImportance";
+            this.labelHighImportance.Size = new System.Drawing.Size(177, 26);
+            this.labelHighImportance.TabIndex = 9;
+            this.labelHighImportance.Text = "High importance:";
+            // 
+            // labelValueHighImportance
+            // 
+            this.labelValueHighImportance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelValueHighImportance.AutoSize = true;
+            this.labelValueHighImportance.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueHighImportance, true);
+            this.labelValueHighImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueHighImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueHighImportance.Location = new System.Drawing.Point(183, 245);
+            this.labelValueHighImportance.Name = "labelValueHighImportance";
+            this.labelValueHighImportance.Size = new System.Drawing.Size(62, 26);
+            this.labelValueHighImportance.TabIndex = 9;
+            this.labelValueHighImportance.Text = "NUM";
+            // 
+            // labelMediumImportance
+            // 
+            this.labelMediumImportance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelMediumImportance.AutoSize = true;
+            this.labelMediumImportance.BackColor = System.Drawing.Color.Transparent;
+            this.labelMediumImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelMediumImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelMediumImportance.Location = new System.Drawing.Point(3, 273);
+            this.labelMediumImportance.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
+            this.labelMediumImportance.Name = "labelMediumImportance";
+            this.labelMediumImportance.Size = new System.Drawing.Size(210, 26);
+            this.labelMediumImportance.TabIndex = 9;
+            this.labelMediumImportance.Text = "Medium importance:";
+            // 
+            // labelValueMediumImportance
+            // 
+            this.labelValueMediumImportance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelValueMediumImportance.AutoSize = true;
+            this.labelValueMediumImportance.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueMediumImportance, true);
+            this.labelValueMediumImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueMediumImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueMediumImportance.Location = new System.Drawing.Point(216, 272);
+            this.labelValueMediumImportance.Name = "labelValueMediumImportance";
+            this.labelValueMediumImportance.Size = new System.Drawing.Size(62, 26);
+            this.labelValueMediumImportance.TabIndex = 9;
+            this.labelValueMediumImportance.Text = "NUM";
+            // 
+            // labelLowImportance
+            // 
+            this.labelLowImportance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelLowImportance.AutoSize = true;
+            this.labelLowImportance.BackColor = System.Drawing.Color.Transparent;
+            this.labelLowImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelLowImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelLowImportance.Location = new System.Drawing.Point(3, 300);
+            this.labelLowImportance.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
+            this.labelLowImportance.Name = "labelLowImportance";
+            this.labelLowImportance.Size = new System.Drawing.Size(172, 26);
+            this.labelLowImportance.TabIndex = 9;
+            this.labelLowImportance.Text = "Low importance:";
+            // 
+            // labelValueLowImportance
+            // 
+            this.labelValueLowImportance.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelValueLowImportance.AutoSize = true;
+            this.labelValueLowImportance.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueLowImportance, true);
+            this.labelValueLowImportance.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueLowImportance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueLowImportance.Location = new System.Drawing.Point(178, 299);
+            this.labelValueLowImportance.Name = "labelValueLowImportance";
+            this.labelValueLowImportance.Size = new System.Drawing.Size(62, 26);
+            this.labelValueLowImportance.TabIndex = 9;
+            this.labelValueLowImportance.Text = "NUM";
+            // 
+            // labelUnnecessary
+            // 
+            this.labelUnnecessary.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelUnnecessary.AutoSize = true;
+            this.labelUnnecessary.BackColor = System.Drawing.Color.Transparent;
+            this.labelUnnecessary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelUnnecessary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelUnnecessary.Location = new System.Drawing.Point(3, 327);
+            this.labelUnnecessary.Margin = new System.Windows.Forms.Padding(3, 1, 0, 0);
+            this.labelUnnecessary.Name = "labelUnnecessary";
+            this.labelUnnecessary.Size = new System.Drawing.Size(145, 26);
+            this.labelUnnecessary.TabIndex = 9;
+            this.labelUnnecessary.Text = "Unnecessary:";
+            // 
+            // labelValueUnnecessary
+            // 
+            this.labelValueUnnecessary.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.labelValueUnnecessary.AutoSize = true;
+            this.labelValueUnnecessary.BackColor = System.Drawing.Color.Transparent;
+            this.flowLayoutPanel.SetFlowBreak(this.labelValueUnnecessary, true);
+            this.labelValueUnnecessary.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelValueUnnecessary.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
+            this.labelValueUnnecessary.Location = new System.Drawing.Point(151, 326);
+            this.labelValueUnnecessary.Name = "labelValueUnnecessary";
+            this.labelValueUnnecessary.Size = new System.Drawing.Size(62, 26);
+            this.labelValueUnnecessary.TabIndex = 9;
+            this.labelValueUnnecessary.Text = "NUM";
             // 
             // FinanceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1110, 721);
             this.Controls.Add(this.splitContainer);
@@ -292,10 +597,11 @@
             this.panelTop.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
-            this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.flowLayoutPanel.ResumeLayout(false);
+            this.flowLayoutPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -311,10 +617,29 @@
         private System.Windows.Forms.DataGridView dataGridView
             ;
         private System.Windows.Forms.Button buttonAddEntry;
-        private System.Windows.Forms.Label labelBalance;
+        private System.Windows.Forms.Label labelValueMonthlyBalance;
         private System.Windows.Forms.Label labelMonth;
         private System.Windows.Forms.Label labelYear;
-        private System.Windows.Forms.Label labelTotalBalanceValue;
+        private System.Windows.Forms.Label labelValueBalanceUntilToday;
+        private System.Windows.Forms.Label labelBalanceEndOfMonth;
+        private System.Windows.Forms.Button buttonShowAll;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
+        private System.Windows.Forms.Label labelValueTotalBalance;
+        private System.Windows.Forms.Label labelBalanceUntilToday;
+        private System.Windows.Forms.Label labelValueBalanceEndOfMonth;
+        private System.Windows.Forms.Label labelNecessary;
         private System.Windows.Forms.Label labelTotalBalance;
+        private System.Windows.Forms.Label labelValueNecessary;
+        private System.Windows.Forms.Label labelHighImportance;
+        private System.Windows.Forms.Label labelValueHighImportance;
+        private System.Windows.Forms.Label labelMediumImportance;
+        private System.Windows.Forms.Label labelValueMediumImportance;
+        private System.Windows.Forms.Label labelLowImportance;
+        private System.Windows.Forms.Label labelValueLowImportance;
+        private System.Windows.Forms.Label labelUnnecessary;
+        private System.Windows.Forms.Label labelValueUnnecessary;
+        private System.Windows.Forms.Label labelMonthlyBalance;
+        private System.Windows.Forms.Label labelValueMonths;
+        private System.Windows.Forms.Label labelMonthsTotal;
     }
 }
