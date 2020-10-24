@@ -55,10 +55,13 @@ namespace ePiggy.DataManagement
             for (int i = 5; i > 1; i--)
             {
                 List<DataEntry> expenses = dataFilter.GetExpenses((Importance)i);
-
+                foreach(DataEntry entry in expenses)
+                {
+                    //AddToIncomeOfferList()
+                }
             }
 
-            //offerListas = kazkas;
+            //offerList = smth;
 
             return true;
         }
@@ -130,11 +133,11 @@ namespace ePiggy.DataManagement
             {
                 if (entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.Id, data.Amount * (minimalSavingValue * savingRatio));
+                    AddToIncomeOfferList(data, data.Amount * (minimalSavingValue * savingRatio));
                 }
                 else if (entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.Id, data.Amount * (minimalSavingValue * savingRatio));
+                    AddToExpensesOfferList(data, data.Amount * (minimalSavingValue * savingRatio));
                 }
                 return true;
             }
@@ -156,11 +159,11 @@ namespace ePiggy.DataManagement
 
                 if (entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.Id, data.Amount * temp);
+                    AddToIncomeOfferList(data, data.Amount * temp);
                 }
                 else if (entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.Id, data.Amount * temp);
+                    AddToExpensesOfferList(data, data.Amount * temp);
                 }
                 return true;
             }
@@ -169,24 +172,24 @@ namespace ePiggy.DataManagement
             {
                 if (entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data.Id, data.Amount * (regularSavingValue * savingRatio));
+                    AddToIncomeOfferList(data, data.Amount * (regularSavingValue * savingRatio));
                 }
                 else if (entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data.Id, data.Amount * (regularSavingValue * savingRatio));
+                    AddToExpensesOfferList(data, data.Amount * (regularSavingValue * savingRatio));
                 }
             }
             return true;
         }
 
-        private void AddToIncomeOfferList(int id, decimal amount)
+        private void AddToIncomeOfferList(DataEntry entry, decimal amountAfterSaving)
         {
-            OfferData newIncomeOffers = new OfferData(id, amount);
+            OfferData newIncomeOffers = new OfferData(entry, amountAfterSaving);
             IncomeOffers.Add(newIncomeOffers);
         }
-        private void AddToExpensesOfferList(int id, decimal amount)
+        private void AddToExpensesOfferList(DataEntry entry, decimal amountAfterSaving)
         {
-            OfferData newExpensesOffers = new OfferData(id, amount);
+            OfferData newExpensesOffers = new OfferData(entry, amountAfterSaving);
             ExpensesOffers.Add(newExpensesOffers);
         }
     }

@@ -2,20 +2,19 @@
 {
     public class OfferData
     {
-        public OfferData(int id, decimal amount)
+        public OfferData(DataEntry entry, decimal amount)
         {
-            ID = id;
+            Entry = entry;
             Amount = amount;
 
         }
 
         public OfferData()
         {
-            ID = 0;
             Amount = 0;
         }
 
-        public int ID
+        public DataEntry Entry
         {
             get;
             set;
