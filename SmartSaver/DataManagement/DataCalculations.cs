@@ -26,6 +26,20 @@ namespace ePiggy.DataManagement
 
 
 
+        public static int CalculateProgress(decimal saved, decimal target)
+        {
+            if (saved < 0)
+            {
+                return 0;
+            }
+            if (target <= 0)
+            {
+                return 100;
+            }
+            var progress = (int)(saved * 100 / target);
+            return progress > 100 ? 100 : progress;
+        }
+
         public decimal GetTotalIncome()
         {
             return _data.Income.Sum(entry => entry.Amount);
