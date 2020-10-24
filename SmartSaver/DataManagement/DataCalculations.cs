@@ -6,19 +6,20 @@ namespace ePiggy.DataManagement
 {
     public class DataCalculations
     {
-        private Data data;
+        private readonly Data _data;
         public DataCalculations(Data data)
         {
-            this.data = data;
+            _data = data;
         }
 
-        //Temporary hardcoded local parameters (should be taken from front-end later)
-        private SavingType SavingChoice;
-        private decimal regularSavingValue = 0.25M;
-        private decimal maximalSavingValue = 0.5M;
-        private decimal minimalSavingValue = 0.1M;
-        private decimal savingRatio = 1M;
+        private SavingType _savingType;
+        private const decimal _savingRatio = 1M;
 
+        //Temporary hardcoded local parameters (should be taken from front-end later)
+        private const decimal _regularSavingValue = 0.25M;
+        private const decimal _maximalSavingValue = 0.5M;
+        private const decimal _minimalSavingValue = 0.1M;
+        
 
         private List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         private List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
@@ -27,12 +28,12 @@ namespace ePiggy.DataManagement
 
         public decimal GetTotalIncome()
         {
-            return data.Income.Sum(entry => entry.Amount);
+            return _data.Income.Sum(entry => entry.Amount);
         }
 
         public decimal GetTotalExpenses()
         {
-            return data.Expenses.Sum(entry => entry.Amount);
+            return _data.Expenses.Sum(entry => entry.Amount);
         }
 
         public decimal CheckBalance()/*Checks even future data*/
@@ -46,29 +47,57 @@ namespace ePiggy.DataManagement
         }
 
         //WIP
-        public bool GetSuggestedExpensesOffers(List<DataEntry> entryList, SavingType saving, Goal goal, List<OfferData> offerList)
+        public bool GetSuggestedExpensesOffers(Goal goal, SavingType savingType, List<OfferData> offerList)
         {
-            offerList = new List<OfferData>();
-
-            var dataFilter = new DataFilter(data);
-
-            for (int i = 5; i > 1; i--)
+            _savingType = savingType;
+            var savedAmount = 0M;
+            var dataFilter = new DataFilter(_data);
+            
+            for (int i = 2; i >= 5; i++)
             {
                 List<DataEntry> expenses = dataFilter.GetExpenses((Importance)i);
-                foreach(DataEntry entry in expenses)
+                foreach (DataEntry entry in expenses)
                 {
-                    //AddToIncomeOfferList()
-                }
+                    decimal amountAfterSaving;
+
+                    if (_savingType == SavingType.Minimal)
+                    {
+                        amountAfterSaving = entry.Amount * _savingRatio * (i - 1) * _minimalSavingValue;
+                    }
+                    else if (_savingType == SavingType.Regular)
+                    {
+                        amountAfterSaving = entry.Amount * _savingRatio * (i - 1) * _regularSavingValue;
+                    }
+                    else
+                    {
+                        decimal temp;
+                        var maximalSaving = (_maximalSavingValue * _savingRatio * (i - 1)) >= 1;
+                        if (maximalSaving)
+                        {
+                            temp = 1M; //Hardcoded 1, due to nature of maximal saving theory
+                        }
+                        else
+                        {
+                            temp = _maximalSavingValue;
+                        }
+                        amountAfterSaving = entry.Amount * temp;
+                    }
+                    AddToExpensesOfferList(entry, amountAfterSaving, offerList);
+
+                    savedAmount += entry.Amount - amountAfterSaving;
+                    if(goal.Price <= savedAmount)
+                    {
+                        return true; //Saved enough
+                    }
+                }               
             }
-
-            //offerList = smth;
-
-            return true;
+            return false; //Didn't save enough
         }
         //
 
-        public bool CheckGoal(Goal goal)
+        public bool CheckGoal(Goal goal, SavingType savingType)
         {
+            _savingType = savingType;
             if (IsBalancePositive())
             {
                 //Goal goal = new Goal();
@@ -89,17 +118,15 @@ namespace ePiggy.DataManagement
 
         private bool GenerallySavingMoney()
         {
-            //Goal goal = new Goal();
-            
-            foreach (DataEntry data in data.Income)
+            foreach (DataEntry data in _data.Income)
             {
                 ChoosingImportance(data, EntryType.Income);
             }
-            foreach (DataEntry data in data.Expenses)
+            foreach (DataEntry data in _data.Expenses)
             {
                 ChoosingImportance(data, EntryType.Expense);
             }
-            return true; // after having saved enough
+            return true;
         }
 
         private bool ChoosingImportance(DataEntry data, EntryType entryType)
@@ -110,16 +137,16 @@ namespace ePiggy.DataManagement
                     return true; //importance of necessary - unchangable income
 
                 case (int)Importance.High:
-                    return ImportanceBasedCalculation(data, savingRatio, entryType);
+                    return ImportanceBasedCalculation(data, _savingRatio, entryType);
 
                 case (int)Importance.Medium:
-                    return ImportanceBasedCalculation(data, savingRatio * 2, entryType);
+                    return ImportanceBasedCalculation(data, _savingRatio * 2, entryType);
 
                 case (int)Importance.Low:
-                    return ImportanceBasedCalculation(data, savingRatio * 3, entryType);
+                    return ImportanceBasedCalculation(data, _savingRatio * 3, entryType);
 
                 case (int)Importance.Unnecessary:
-                    return ImportanceBasedCalculation(data, savingRatio * 4, entryType);
+                    return ImportanceBasedCalculation(data, _savingRatio * 4, entryType);
 
                 default:
                     return true;
@@ -127,26 +154,26 @@ namespace ePiggy.DataManagement
             }
         }
 
-        private bool ImportanceBasedCalculation(DataEntry data, decimal savingRatio, EntryType entryType)
+        private bool ImportanceBasedCalculation(DataEntry data, decimal importanceBasedSavingRatio, EntryType entryType)
         {
-            if (SavingChoice == SavingType.Minimal)
+              if (_savingType == SavingType.Minimal)
             {
                 if (entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data, data.Amount * (minimalSavingValue * savingRatio));
+                    AddToIncomeOfferList(data, data.Amount * (_minimalSavingValue * importanceBasedSavingRatio));
                 }
                 else if (entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data, data.Amount * (minimalSavingValue * savingRatio));
+                    AddToExpensesOfferList(data, data.Amount * (_minimalSavingValue * importanceBasedSavingRatio));
                 }
                 return true;
             }
 
-            else if (SavingChoice == SavingType.Maximal)
+            else if (_savingType == SavingType.Maximal)
             {
                 decimal temp;
 
-                var maximalSaving = (maximalSavingValue * savingRatio) >= 1;
+                var maximalSaving = (_maximalSavingValue * importanceBasedSavingRatio) >= 1;
 
                 if (maximalSaving)
                 {
@@ -154,7 +181,7 @@ namespace ePiggy.DataManagement
                 }
                 else
                 {
-                    temp = maximalSavingValue;
+                    temp = _maximalSavingValue;
                 }
 
                 if (entryType == EntryType.Income)
@@ -168,15 +195,15 @@ namespace ePiggy.DataManagement
                 return true;
             }
 
-            else if (SavingChoice == SavingType.Regular)
+            else if (_savingType == SavingType.Regular)
             {
                 if (entryType == EntryType.Income)
                 {
-                    AddToIncomeOfferList(data, data.Amount * (regularSavingValue * savingRatio));
+                    AddToIncomeOfferList(data, data.Amount * (_regularSavingValue * importanceBasedSavingRatio));
                 }
                 else if (entryType == EntryType.Expense)
                 {
-                    AddToExpensesOfferList(data, data.Amount * (regularSavingValue * savingRatio));
+                    AddToExpensesOfferList(data, data.Amount * (_regularSavingValue * importanceBasedSavingRatio));
                 }
             }
             return true;
@@ -184,13 +211,18 @@ namespace ePiggy.DataManagement
 
         private void AddToIncomeOfferList(DataEntry entry, decimal amountAfterSaving)
         {
-            OfferData newIncomeOffers = new OfferData(entry, amountAfterSaving);
-            IncomeOffers.Add(newIncomeOffers);
+            OfferData newIncomeOffer = new OfferData(entry, amountAfterSaving);
+            IncomeOffers.Add(newIncomeOffer);
         }
         private void AddToExpensesOfferList(DataEntry entry, decimal amountAfterSaving)
         {
-            OfferData newExpensesOffers = new OfferData(entry, amountAfterSaving);
-            ExpensesOffers.Add(newExpensesOffers);
+            OfferData newExpensesOffer = new OfferData(entry, amountAfterSaving);
+            ExpensesOffers.Add(newExpensesOffer);
+        }
+        private void AddToExpensesOfferList(DataEntry entry, decimal amountAfterSaving, List<OfferData> expensesOfferlist)
+        {
+            OfferData newExpensesOffer = new OfferData(entry, amountAfterSaving);
+            expensesOfferlist.Add(newExpensesOffer);
         }
     }
 }
