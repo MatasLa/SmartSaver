@@ -23,6 +23,20 @@ namespace ePiggy.DataManagement
         public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
         public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
 
+        public static int CalculateProgress(decimal saved, decimal target)
+        {
+            if (saved < 0)
+            {
+                return 0;
+            }
+            if (target <= 0)
+            {
+                return 100;
+            }
+            var progress = (int)(saved * 100 / target);
+            return progress > 100 ? 100 : progress;
+        }
+
         public decimal GetTotalIncome()
         {
             return data.Income.Sum(entry => entry.Amount);

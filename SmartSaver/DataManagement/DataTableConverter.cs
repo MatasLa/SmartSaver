@@ -13,29 +13,33 @@ namespace ePiggy.DataManagement
             _data = data;
         }
 
+        public DataTable GenerateOfferTable(List<OfferData> dataOffers)
+        {
+            var dt = GenerateOfferTableHeaders();
+
+            foreach (var dataOffer in dataOffers)
+            {
+                //dt.Rows.Add(dataOffer.Entry.Id, dataOffer.Entry.Title, dataOffer.Entry.Amount,
+                //    dataOffer.Entry.Date, dataOffer.Entry.IsMonthly, dataEntry.Entry.Importance, dataOffer.Amount);
+            }
+
+            return dt;
+        }
+
+        private DataTable GenerateOfferTableHeaders()
+        {
+            var dt = GenerateEntryTableHeaders();
+            dt.Columns.Add("Suggested Amount", typeof(decimal));
+            return dt;
+        }
+
         public DataTable GenerateEntryTable(EntryType entryType)//All entries
         {
             var dt = GenerateEntryTableHeaders();
-            switch (entryType)
+            var dataEntries = entryType == EntryType.Expense ? _data.Expenses : _data.Income;
+            foreach (var data in dataEntries)
             {
-                case EntryType.Income:
-                {
-                    foreach (var data in _data.Income)
-                    {
-                        dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.Importance, data.IsMonthly);
-                    }
-                    break;
-                }
-                case EntryType.Expense:
-                {
-                    foreach (var data in _data.Expenses)
-                    {
-                        dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.Importance, data.IsMonthly);
-                    }
-                    break;
-                }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
+                dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.Importance, data.IsMonthly);
             }
             return dt;
         }

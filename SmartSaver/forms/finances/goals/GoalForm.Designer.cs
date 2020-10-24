@@ -33,6 +33,7 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.labelTitle = new System.Windows.Forms.Label();
             this.labelProgress = new System.Windows.Forms.Label();
+            this.buttonEdit = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +54,7 @@
             this.tableLayoutPanel1.Controls.Add(this.progressBar, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.labelTitle, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.labelProgress, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.buttonEdit, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -83,12 +85,13 @@
             // buttonRemoveGoal
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.buttonRemoveGoal, 2);
+            this.buttonRemoveGoal.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonRemoveGoal.Location = new System.Drawing.Point(237, 3);
             this.buttonRemoveGoal.Name = "buttonRemoveGoal";
             this.tableLayoutPanel1.SetRowSpan(this.buttonRemoveGoal, 2);
             this.buttonRemoveGoal.Size = new System.Drawing.Size(60, 38);
             this.buttonRemoveGoal.TabIndex = 4;
-            this.buttonRemoveGoal.Text = "x";
+            this.buttonRemoveGoal.Text = "🗑";
             this.buttonRemoveGoal.UseVisualStyleBackColor = true;
             this.buttonRemoveGoal.Click += new System.EventHandler(this.ButtonRemoveGoal_Click);
             // 
@@ -128,6 +131,19 @@
             this.labelProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelProgress.Click += new System.EventHandler(this.GoalForm_Click);
             // 
+            // button1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.buttonEdit, 2);
+            this.buttonEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonEdit.Location = new System.Drawing.Point(3, 3);
+            this.buttonEdit.Name = "buttonEdit";
+            this.tableLayoutPanel1.SetRowSpan(this.buttonEdit, 2);
+            this.buttonEdit.Size = new System.Drawing.Size(52, 38);
+            this.buttonEdit.TabIndex = 5;
+            this.buttonEdit.Text = "✎";
+            this.buttonEdit.UseVisualStyleBackColor = true;
+            this.buttonEdit.Click += new System.EventHandler(this.ButtonEdit_Click);
+            // 
             // GoalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -151,5 +167,6 @@
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.Label labelProgress;
         private System.Windows.Forms.Button buttonRemoveGoal;
+        private System.Windows.Forms.Button buttonEdit;
     }
 }
