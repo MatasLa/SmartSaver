@@ -129,11 +129,13 @@ namespace ePiggy.DataManagement
 
         #endregion
 
-        public List<ImportanceGroup> GroupByImportance()
-        {
+        public QueueList<ImportanceGroup> GroupByImportance()//should return queue where least important are first
+        { 
             var enumList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
-           
-           return enumList.GroupJoin(_data.Expenses,
+            enumList.Reverse();
+            var queue = new QueueList<ImportanceGroup>();
+            
+            var temp = enumList.GroupJoin(_data.Expenses,
                 importance => importance,
                 entry => (Importance)entry.Importance,
                  (importance, entries) =>
@@ -141,17 +143,14 @@ namespace ePiggy.DataManagement
                                 {
                                     Importance = importance.ToString(),
                                     Entries = entries.Select(entry => entry).ToList()
-                                }).ToList();
-        }
-        /*Example of usage:
-         foreach (var test in temp)
+                                });
+            foreach (var entry in temp)
             {
-                Debug.WriteLine("\n" + test.Importance+":");
-                foreach (var smth in test.Entries)
-                {
-                    Debug.WriteLine(smth.Title + "\t" + smth.Amount);
-                }
-            }*/
+                queue.Add(entry);
+            }
+
+            return queue;
+        }
 
         public List<DataEntry> GetIncome(decimal amount) // higher than parameter amount
         {
