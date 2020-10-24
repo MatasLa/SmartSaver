@@ -13,11 +13,11 @@ namespace ePiggy.DataManagement
             _data = data;
         }
 
-        public DataTable GenerateOfferTable(List<OfferData> dataOffers)
+        public DataTable GenerateSuggestionTable(List<EntrySuggestion> entrySuggestions)
         {
-            var dt = GenerateOfferTableHeaders();
+            var dt = GenerateSuggestionTableHeaders();
 
-            foreach (var dataOffer in dataOffers)
+            foreach (var dataOffer in entrySuggestions)
             {
                 //dt.Rows.Add(dataOffer.Entry.Id, dataOffer.Entry.Title, dataOffer.Entry.Amount,
                 //    dataOffer.Entry.Date, dataOffer.Entry.IsMonthly, dataEntry.Entry.Importance, dataOffer.Amount);
@@ -26,7 +26,7 @@ namespace ePiggy.DataManagement
             return dt;
         }
 
-        private DataTable GenerateOfferTableHeaders()
+        private DataTable GenerateSuggestionTableHeaders()
         {
             var dt = GenerateEntryTableHeaders();
             dt.Columns.Add("Suggested Amount", typeof(decimal));
