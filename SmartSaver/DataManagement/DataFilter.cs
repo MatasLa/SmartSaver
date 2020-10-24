@@ -151,6 +151,28 @@ namespace ePiggy.DataManagement
 
             return queue;
         }
+        public QueueList<ImportanceGroup> GroupByImportance(List<DataEntry> customList)//should return queue where least important are first
+        {
+            var enumList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
+            enumList.Reverse();
+            var queue = new QueueList<ImportanceGroup>();
+
+            var temp = enumList.GroupJoin(customList,
+                importance => importance,
+                entry => (Importance)entry.Importance,
+                (importance, entries) =>
+                    new ImportanceGroup()
+                    {
+                        Importance = importance.ToString(),
+                        Entries = entries.Select(entry => entry).ToList()
+                    });
+            foreach (var entry in temp)
+            {
+                queue.Add(entry);
+            }
+
+            return queue;
+        }
 
         public List<DataEntry> GetIncome(decimal amount) // higher than parameter amount
         {
