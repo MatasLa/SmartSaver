@@ -166,30 +166,41 @@ namespace ePiggy.DataManagement
             return DatabaseUpdate.EditGoalPlaceInQueue(id, placeInQueue);
         }*/
         
+      
+		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
+		{
 
-        public bool EditIncomeItem(int id, decimal value)
-        {
-            var temp = Income.FirstOrDefault(x => x.Id == id);
-            if (temp == null)
-            {
-                return false;
-            }
-            temp.Amount = value;
-            return DatabaseUpdater.EditIncomeItem(id, value);
-        }
+			var db = new DatabaseContext();
+			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
+			if (temp != null)
+			{
+				temp.Amount = value;
+				db.SaveChanges();
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 
-        
-        public bool EditIncomeItem(int id, string value)
-        {
-            var temp = Income.FirstOrDefault(x => x.Id == id);
-            if (temp == null)
-            {
-                return false;
-            }
-            temp.Title = value;
-            return DatabaseUpdater.EditIncomeItem(id, value);
-        }
-        
+		public bool EditIncomeItem(int id, string value)
+		{
+			var db = new DatabaseContext();
+			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
+			if (temp != null)
+			{
+				temp.Title = value;
+				db.SaveChanges();
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+
 
         public bool EditIncomeItem(int id, DateTime date)
         {
@@ -344,7 +355,7 @@ namespace ePiggy.DataManagement
             var goals = context.Goals; // define query
             foreach (var goal in goals.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
             {
-                var newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price, goal.PlaceInQueue);
+                var newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price);
                 GoalsList.Add(newGoal);
             }
         }
