@@ -2,7 +2,7 @@
 
 namespace ePiggy.DataManagement
 {
-	public class DataEntry : IComparable
+	public class DataEntry : IComparable, IEquatable<DataEntry>
 	{
         /*Properties*/
         public string Title {get; set; }
@@ -46,9 +46,19 @@ namespace ePiggy.DataManagement
             return obj switch
             {
                 null => 1,
-                DataEntry otherEntry => this.Amount.CompareTo(otherEntry.Amount),
+                DataEntry otherEntry => Amount.CompareTo(otherEntry.Amount),
                 _ => throw new ArgumentException("Object is not a DataEntry")
             };
+        }
+
+        public bool Equals(DataEntry other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            return Amount == other.Amount;
         }
     }
 }
