@@ -25,7 +25,7 @@ namespace ePiggy.DataManagement
             {
                 return false;
             }
-            var id = DatabaseUpdate.AddGoal(userid, title, value);
+            var id = DatabaseUpdater.AddGoal(userid, title, value);
             var newGoal = new Goal(title, value) {Id = id};
             GoalsList.Add(newGoal);
             return true;
@@ -40,7 +40,7 @@ namespace ePiggy.DataManagement
             var newGoal = new Goal(title);
             var price = newGoal.Price;
             var parsedTitle = newGoal.Title;
-            var id = DatabaseUpdate.AddGoal(userid, parsedTitle, price);
+            var id = DatabaseUpdater.AddGoal(userid, parsedTitle, price);
             newGoal.Id = id;
             GoalsList.Add(newGoal);
             return true;
@@ -49,7 +49,7 @@ namespace ePiggy.DataManagement
 		/*INCOMES*/
         public void AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
-            var id = DatabaseUpdate.AddIncome(userid, value, title, date, isMonthly, importance);
+            var id = DatabaseUpdater.AddIncome(userid, value, title, date, isMonthly, importance);
             var newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
             Income.Add(newIncome);
         }
@@ -58,7 +58,7 @@ namespace ePiggy.DataManagement
 		/*EXPENSES*/
         public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
-            var id = DatabaseUpdate.AddExpense(userid, value, title, date, isMonthly, importance);
+            var id = DatabaseUpdater.AddExpense(userid, value, title, date, isMonthly, importance);
             var newExpense = new DataEntry(id, userid, value, title, date, isMonthly, importance);
             Expenses.Add(newExpense);
         }
@@ -73,7 +73,7 @@ namespace ePiggy.DataManagement
             var goal = GoalsList.FirstOrDefault(x => x.Id == id);
             if (goal == null) return;
             GoalsList.Remove(goal);
-            DatabaseUpdate.RemoveGoal(id);
+            DatabaseUpdater.RemoveGoal(id);
         }
 
 
@@ -82,20 +82,20 @@ namespace ePiggy.DataManagement
             var income = Income.FirstOrDefault(x => x.Id == id);
             if (income == null) return;
             Income.Remove(income);
-            DatabaseUpdate.RemoveIncome(id);
+            DatabaseUpdater.RemoveIncome(id);
         }
 
         public void RemoveIncome(DataEntry dataEntry)
         {
             Income.Remove(dataEntry);
-            DatabaseUpdate.RemoveIncome(dataEntry);
+            DatabaseUpdater.RemoveIncome(dataEntry);
         }
         
 
         public void RemoveExpense(DataEntry dataEntry)
         {
             Expenses.Remove(dataEntry);
-            DatabaseUpdate.RemoveExpense(dataEntry);
+            DatabaseUpdater.RemoveExpense(dataEntry);
         }
         
 
@@ -104,7 +104,7 @@ namespace ePiggy.DataManagement
             var dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
             if (dataEntry == null) return;
             Expenses.Remove(dataEntry);
-            DatabaseUpdate.RemoveExpense(id);
+            DatabaseUpdater.RemoveExpense(id);
         }
         
 
@@ -151,7 +151,7 @@ namespace ePiggy.DataManagement
             }
             temp.Title = title;
             temp.Price = value;
-            return DatabaseUpdate.EditGoal(id, title, value);
+            return DatabaseUpdater.EditGoal(id, title, value);
 
         }
         
@@ -175,7 +175,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.Amount = value;
-            return DatabaseUpdate.EditIncomeItem(id, value);
+            return DatabaseUpdater.EditIncomeItem(id, value);
         }
 
         
@@ -187,7 +187,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.Title = value;
-            return DatabaseUpdate.EditIncomeItem(id, value);
+            return DatabaseUpdater.EditIncomeItem(id, value);
         }
         
 
@@ -199,7 +199,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.Date = date;
-            return DatabaseUpdate.EditIncomeItem(id, date);
+            return DatabaseUpdater.EditIncomeItem(id, date);
         }
 
 
@@ -211,7 +211,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.IsMonthly = isMonthly;
-            return DatabaseUpdate.EditIncomeItem(id, isMonthly);
+            return DatabaseUpdater.EditIncomeItem(id, isMonthly);
         }
         
 
@@ -223,7 +223,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.Importance = importance;
-            return DatabaseUpdate.EditIncomeItem(id, importance);
+            return DatabaseUpdater.EditIncomeItem(id, importance);
         }
        
 
@@ -239,7 +239,7 @@ namespace ePiggy.DataManagement
             temp.Date = date;
             temp.IsMonthly = isMonthly;
             temp.Importance = importance;
-            return DatabaseUpdate.EditIncomeItem(id, value, amount, date, isMonthly, importance);
+            return DatabaseUpdater.EditIncomeItem(id, value, amount, date, isMonthly, importance);
         }
         
 
@@ -251,7 +251,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.Amount = value;
-            return DatabaseUpdate.EditExpensesItem(id, value);
+            return DatabaseUpdater.EditExpensesItem(id, value);
         }
         
 
@@ -263,7 +263,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.Title = value;
-            return DatabaseUpdate.EditExpensesItem(id, value);
+            return DatabaseUpdater.EditExpensesItem(id, value);
         }
         
 
@@ -275,7 +275,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.Date = date;
-            return DatabaseUpdate.EditExpensesItem(id, date);
+            return DatabaseUpdater.EditExpensesItem(id, date);
         }
         
 
@@ -287,7 +287,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.IsMonthly = isMonthly;
-            return DatabaseUpdate.EditExpensesItem(id, isMonthly);
+            return DatabaseUpdater.EditExpensesItem(id, isMonthly);
         }
         
         public bool EditExpensesItem(int id, int importance)
@@ -298,7 +298,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
             temp.Importance = importance;
-            return DatabaseUpdate.EditExpensesItem(id, importance);
+            return DatabaseUpdater.EditExpensesItem(id, importance);
         }
         
         public bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
@@ -313,7 +313,7 @@ namespace ePiggy.DataManagement
             temp.Date = date;
             temp.IsMonthly = isMonthly;
             temp.Importance = importance;
-            return DatabaseUpdate.EditExpensesItem(id, value, amount, date, isMonthly, importance);
+            return DatabaseUpdater.EditExpensesItem(id, value, amount, date, isMonthly, importance);
         }
 
         

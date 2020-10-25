@@ -119,18 +119,18 @@ namespace ePiggy.DataBase
         {
             var db = new DatabaseContext();
             var temp = db.Goals.FirstOrDefault(x => x.Id == id);
-            if (temp != null)
+            if (temp == null)
             {
-                temp.Title = title;
-                temp.Price = value;
-                db.SaveChanges();
-                return true;
+                return false;
             }
-            return false;
+            temp.Title = title;
+            temp.Price = value;
+            db.SaveChanges();
+            return true;
         }
 
         
-        public static bool EditGoalPlaceInQueue(int id, int placeInQueue)
+        /*public static bool EditGoalPlaceInQueue(int id, int placeInQueue)
         {
             var db = new DatabaseContext();
             var temp = db.Goals.FirstOrDefault(x => x.Id == id);
@@ -141,114 +141,114 @@ namespace ePiggy.DataBase
                 return true;
             }
             return false;
-        }
+        }*/
          public static bool EditIncomeItem(int id, decimal value)
          {
 
              var db = new DatabaseContext();
              var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-             if (temp != null)
+             if (temp == null)
              {
-                 temp.Amount = value;
-                 db.SaveChanges();
-                 return true;
+                 return false;
              }
-             return false;
+             temp.Amount = value;
+             db.SaveChanges();
+             return true;
          }
         
         public static bool EditIncomeItem(int id, string value)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            db.SaveChanges();
+            return true;
         }
         
         public static bool EditIncomeItem(int id, DateTime date)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Date = date;
-				db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Date = date;
+            db.SaveChanges();
+            return true;
         }
         
 		public static bool EditIncomeItem(int id, bool isMonthly)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-            if (temp != null)
-			{
-				temp.IsMonthly = isMonthly;
-                db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.IsMonthly = isMonthly;
+            db.SaveChanges();
+            return true;
         }
         
        public static bool EditIncomeItem(int id, int importance)
        {
            var db = new DatabaseContext();
            var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-           if (temp != null)
+           if (temp == null)
            {
-               temp.Importance = importance;
-               db.SaveChanges();
-               return true;
+               return false;
            }
-           return false;
+           temp.Importance = importance;
+           db.SaveChanges();
+           return true;
        }
         
         public static bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				temp.Amount = amount;
-				temp.Date = date;
-				temp.IsMonthly = isMonthly;
-				temp.Importance = importance;
-				db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            temp.Amount = amount;
+            temp.Date = date;
+            temp.IsMonthly = isMonthly;
+            temp.Importance = importance;
+            db.SaveChanges();
+            return true;
         }
         
         public static bool EditExpensesItem(int id, decimal value)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Amount = value;
-				db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Amount = value;
+            db.SaveChanges();
+            return true;
         }
         
         public static bool EditExpensesItem(int id, string value)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            db.SaveChanges();
+            return true;
 
         }
         
@@ -256,13 +256,13 @@ namespace ePiggy.DataBase
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Date = date;
-				db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Date = date;
+            db.SaveChanges();
+            return true;
         }
         
         
@@ -270,43 +270,43 @@ namespace ePiggy.DataBase
 		{
             var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-            if (temp != null)
-			{
-				temp.IsMonthly = isMonthly;
-                db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.IsMonthly = isMonthly;
+            db.SaveChanges();
+            return true;
         }
         
         public static bool EditExpensesItem(int id, int importance)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Importance = importance;
-				db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Importance = importance;
+            db.SaveChanges();
+            return true;
         }
         
         public static bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
 		{
 			var db = new DatabaseContext();
 			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				temp.Amount = amount;
-				temp.Date = date;
-				temp.IsMonthly = isMonthly;
-				temp.Importance = importance;
-				db.SaveChanges();
-				return true;
-			}
-            return false;
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            temp.Amount = amount;
+            temp.Date = date;
+            temp.IsMonthly = isMonthly;
+            temp.Importance = importance;
+            db.SaveChanges();
+            return true;
         }
     }
 }
