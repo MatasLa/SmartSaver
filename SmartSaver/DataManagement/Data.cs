@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ePiggy.DataBase;
-using ePiggy.DataBase.Models;
 using ePiggy.Utilities;
 
 namespace ePiggy.DataManagement
@@ -154,51 +153,41 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditGoal(id, title, value);
 
         }
-        
-       /* public bool EditGoalPlaceInQueue(int id, int placeInQueue)
+
+        /* public bool EditGoalPlaceInQueue(int id, int placeInQueue)
+         {
+             var temp = GoalsList.FirstOrDefault(x => x.Id == id);
+             if (temp == null)
+             {
+                 return false;
+             }
+             temp.PlaceInQueue = placeInQueue;
+             return DatabaseUpdate.EditGoalPlaceInQueue(id, placeInQueue);
+         }*/
+
+
+        public bool EditIncomeItem(int id, decimal value)
         {
-            var temp = GoalsList.FirstOrDefault(x => x.Id == id);
+            var temp = Income.FirstOrDefault(x => x.Id == id);
             if (temp == null)
             {
                 return false;
             }
-            temp.PlaceInQueue = placeInQueue;
-            return DatabaseUpdate.EditGoalPlaceInQueue(id, placeInQueue);
-        }*/
-        
-      
-		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
-		{
+            temp.Amount = value;
+            return DatabaseUpdater.EditIncomeItem(id, value);
+        }
 
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Amount = value;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
 
-		public bool EditIncomeItem(int id, string value)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+        public bool EditIncomeItem(int id, string value)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            return DatabaseUpdater.EditIncomeItem(id, value);
+        }
 
 
 
