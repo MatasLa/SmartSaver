@@ -69,6 +69,7 @@ namespace ePiggy.DataManagement
         //WIP
         public bool GetSuggestedExpensesOffers(Goal goal, SavingType savingType, List<EntrySuggestion> offerList)
         {
+            // we need to keep in mind that this method should take in a EntryList as a variable
             _savingType = savingType;
             var savedAmount = 0M;
             var dataFilter = new DataFilter(_data);
@@ -79,6 +80,8 @@ namespace ePiggy.DataManagement
             // also these hardcoded numbers are bad, so I switched to Importance enum
             for(var i = (int)Importance.Unnecessary; i >= (int)Importance.High; i++)
             {
+                //Use groupjoin from filter once it's available
+
                 var expenses = dataFilter.GetExpenses((Importance)i);
                 foreach (var entry in expenses)
                 {

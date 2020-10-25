@@ -9,12 +9,6 @@
 
         }
 
-        public EntrySuggestion()
-        {
-            Amount = 0;
-            Entry = new DataEntry();
-        }
-
         public DataEntry Entry { get; set; }
         public decimal Amount { get; set; }
     }
