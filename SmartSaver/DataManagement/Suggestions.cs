@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ePiggy.DataManagement
 {
-    public class DataEntries
+    public class Suggestions : List<EntrySuggestion>
     {
 
     }
