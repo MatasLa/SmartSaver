@@ -134,11 +134,11 @@ namespace ePiggy.Forms.Finances.Goals
         {
             if (goal.Price == 0)
             {
-                _handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
+                _handler.Data.AddGoal(Handler.UserId, goal.Title);
             }
             else
             {
-                _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price, 0);
+                _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price);
             }
         }
 
