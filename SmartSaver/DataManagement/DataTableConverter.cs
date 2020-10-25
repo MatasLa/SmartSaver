@@ -13,7 +13,7 @@ namespace ePiggy.DataManagement
             _data = data;
         }
 
-        public DataTable GenerateOfferTable(List<OfferData> dataOffers)
+        public DataTable GenerateOfferTable(List<EntrySuggestion> dataOffers)
         {
             var dt = GenerateOfferTableHeaders();
 

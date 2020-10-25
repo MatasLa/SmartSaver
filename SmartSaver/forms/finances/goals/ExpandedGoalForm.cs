@@ -53,7 +53,7 @@ namespace ePiggy.Forms.Finances.Goals
         }
         private void DisplayTable()
         {
-            dataGridView.DataSource = _handler.DataTableConverter.GenerateOfferTable(new List<OfferData>());
+            dataGridView.DataSource = _handler.DataTableConverter.GenerateOfferTable(new List<EntrySuggestion>());
 
             dataGridView.Columns["ID"].Visible = false;
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";

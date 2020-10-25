@@ -20,8 +20,8 @@ namespace ePiggy.DataManagement
         private decimal savingRatio = 1M;
 
 
-        public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
-        public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
+        public List<EntrySuggestion> IncomeOffers { get; } = new List<EntrySuggestion>();
+        public List<EntrySuggestion> ExpensesOffers { get; } = new List<EntrySuggestion>();
 
         public static int CalculateProgress(decimal saved, decimal target)
         {
@@ -184,13 +184,14 @@ namespace ePiggy.DataManagement
 
         private void AddToIncomeOfferList(int id, decimal amount)
         {
-            OfferData newIncomeOffers = new OfferData(id, amount);
-            IncomeOffers.Add(newIncomeOffers);
+            //OfferData newIncomeOffers = new OfferData(id, amount);
+            //IncomeOffers.Add(newIncomeOffers);
         }
+
         private void AddToExpensesOfferList(int id, decimal amount)
         {
-            OfferData newExpensesOffers = new OfferData(id, amount);
-            ExpensesOffers.Add(newExpensesOffers);
+            //OfferData newExpensesOffers = new OfferData(id, amount);
+            //ExpensesOffers.Add(newExpensesOffers);
         }
     }
 }
