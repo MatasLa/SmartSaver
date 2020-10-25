@@ -4,7 +4,7 @@ namespace ePiggy.DataManagement
 {
     public class ImportanceGroup
     {
-        public string Importance { get; set; }
+        public int Importance { get; set; }
         public List<DataEntry> Entries { get; set; }
     }
 }

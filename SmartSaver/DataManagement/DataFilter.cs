@@ -141,7 +141,7 @@ namespace ePiggy.DataManagement
                  (importance, entries) =>
                                 new ImportanceGroup()
                                 {
-                                    Importance = importance.ToString(),
+                                    Importance = (int) importance,
                                     Entries = entries.Select(entry => entry).ToList()
                                 });
             foreach (var entry in temp)
@@ -163,7 +163,7 @@ namespace ePiggy.DataManagement
                 (importance, entries) =>
                     new ImportanceGroup()
                     {
-                        Importance = importance.ToString(),
+                        Importance = (int) importance,
                         Entries = entries.Select(entry => entry).ToList()
                     });
             foreach (var entry in temp)
