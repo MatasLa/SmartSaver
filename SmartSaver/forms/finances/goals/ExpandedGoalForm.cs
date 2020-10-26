@@ -57,7 +57,7 @@ namespace ePiggy.Forms.Finances.Goals
             var entries = _handler.DataFilter.GetExpensesUntilEndOfThisMonth();
             _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, SavingType.Regular, entrySuggestions);
 
-            MessageBox.Show(entrySuggestions.Count + " " + entries.Count);
+            //MessageBox.Show(entrySuggestions.Count + " " + entries.Count);
 
             dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(entrySuggestions);
 
