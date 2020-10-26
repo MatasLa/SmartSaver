@@ -71,12 +71,12 @@ namespace ePiggy.DataBase
         {
             var db = new DatabaseContext();
             List<Incomes> list = new List<Incomes>();
+
             foreach (var z in entries)
             {
                 var index = db.Incomes.FirstOrDefault(x => x.Id == z.Id);
                 list.Add(index);
             }
-
             try
             {
                 db.Incomes.RemoveRange(list ?? throw new InvalidOperationException());

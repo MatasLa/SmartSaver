@@ -112,6 +112,7 @@ namespace ePiggy.DataManagement
 
 		public void RemoveIncomes(List<DataEntry> entries)
         {
+            DatabaseUpdater.RemoveIncomes(entries);
             Income.RemoveAll(l => entries.Contains(l));
         }
 
