@@ -8,9 +8,13 @@ namespace ePiggy.DataManagement
     public class DataCalculations
     {
         private readonly Data _data;
-        public DataCalculations(Data data)
+        private readonly DataFilter _dataFilter;
+        private readonly DataTotalsCalculator _dataTotalsCalculator;
+        public DataCalculations(Data data, DataFilter dataFilter, DataTotalsCalculator dataTotalsCalculator)
         {
             _data = data;
+            _dataFilter = dataFilter;
+            _dataTotalsCalculator = dataTotalsCalculator;
         }
 
         private SavingType _savingType;
@@ -28,8 +32,8 @@ namespace ePiggy.DataManagement
         //private const decimal UnnecessaryRatio = 4M;
 
         // These two lists are updated but never used according to resharper
-        private List<EntrySuggestion> IncomeOffers { get; } = new List<EntrySuggestion>();
-        private List<EntrySuggestion> ExpensesOffers { get; } = new List<EntrySuggestion>();
+        public List<EntrySuggestion> IncomeOffers { get; } = new List<EntrySuggestion>();
+        public List<EntrySuggestion> ExpensesOffers { get; } = new List<EntrySuggestion>();
         
 
         public static int CalculateProgress(decimal saved, decimal target)
@@ -46,24 +50,10 @@ namespace ePiggy.DataManagement
             return progress > 100 ? 100 : progress;
         }
 
-        public decimal GetTotalIncome()
-        {
-            return _data.Income.Sum(entry => entry.Amount);
-        }
-
-        public decimal GetTotalExpenses()
-        {
-            return _data.Expenses.Sum(entry => entry.Amount);
-        }
-
-        public decimal CheckBalance()/*Checks even future data*/
-        {
-            return GetTotalIncome() - GetTotalExpenses();
-        }
-
+        
         public bool IsBalancePositive()/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
         {
-            return CheckBalance() >= 0;
+            return _dataTotalsCalculator.GetBalance() >= 0;
         }
 
         //WIP
@@ -71,8 +61,7 @@ namespace ePiggy.DataManagement
         {
             _savingType = savingType;
             var savedAmount = 0M;
-            var dataFilter = new DataFilter(_data);
-            var groupedByImportance = dataFilter.GroupByImportance(entryList);
+            var groupedByImportance = _dataFilter.GroupByImportance(entryList);
 
             for(var i = (int)Importance.Unnecessary; i <= (int)Importance.High; i++)
             {
@@ -116,7 +105,7 @@ namespace ePiggy.DataManagement
             if (IsBalancePositive())
             {
                 //Goal goal = new Goal();
-                return (CheckBalance() - goal.Price) >= 0 || GenerallySavingMoney();
+                return (_dataTotalsCalculator.GetBalance() - goal.Price) >= 0 || GenerallySavingMoney();
             }
 
             return false;   //user already in debt(negative balance) without adding goal expenses
@@ -137,10 +126,10 @@ namespace ePiggy.DataManagement
 
         private bool ChoosingImportance(DataEntry dataEntry, EntryType entryType)
         {
-            //Since at the moment you have the ratios set as nearly the Enum values, i switched to a shorter return expression
             return dataEntry.Importance == (int)Importance.Necessary 
                    || ImportanceBasedCalculation(dataEntry, SavingRatio * (dataEntry.Importance - 1), entryType);
 
+            //Worth keeping, if we ever want to adjust calculation ratios for balancing
 
             //switch (dataEntry.Importance)
             //{
@@ -166,7 +155,7 @@ namespace ePiggy.DataManagement
         }
 
         // ImportanceBasedCalculation always returns true, doesn't really make sense for a method to always return true
-        private bool ImportanceBasedCalculation(DataEntry data, decimal importanceBasedSavingRatio, EntryType entryType)
+        private bool ImportanceBasedCalculation(DataEntry dataEntry, decimal importanceBasedSavingRatio, EntryType entryType)
         {
               switch (_savingType)
               {
@@ -174,10 +163,10 @@ namespace ePiggy.DataManagement
                       switch (entryType)
                       {
                           case EntryType.Income:
-                              AddToIncomeOfferList(data, data.Amount * (MinimalSavingValue * importanceBasedSavingRatio));
+                              AddToIncomeOfferList(dataEntry, dataEntry.Amount * (MinimalSavingValue * importanceBasedSavingRatio));
                               break;
                           case EntryType.Expense:
-                              AddToExpensesOfferList(data, data.Amount * (MinimalSavingValue * importanceBasedSavingRatio));
+                              AddToExpensesOfferList(dataEntry, dataEntry.Amount * (MinimalSavingValue * importanceBasedSavingRatio));
                               break;
                           default:
                               throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
@@ -192,10 +181,10 @@ namespace ePiggy.DataManagement
                       switch (entryType)
                       {
                           case EntryType.Income:
-                              AddToIncomeOfferList(data, data.Amount * temp);
+                              AddToIncomeOfferList(dataEntry, dataEntry.Amount * temp);
                               break;
                           case EntryType.Expense:
-                              AddToExpensesOfferList(data, data.Amount * temp);
+                              AddToExpensesOfferList(dataEntry, dataEntry.Amount * temp);
                               break;
                           default:
                               throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
@@ -206,10 +195,10 @@ namespace ePiggy.DataManagement
                       switch (entryType)
                       {
                           case EntryType.Income:
-                              AddToIncomeOfferList(data, data.Amount * (RegularSavingValue * importanceBasedSavingRatio));
+                              AddToIncomeOfferList(dataEntry, dataEntry.Amount * (RegularSavingValue * importanceBasedSavingRatio));
                               break;
                           case EntryType.Expense:
-                              AddToExpensesOfferList(data, data.Amount * (RegularSavingValue * importanceBasedSavingRatio));
+                              AddToExpensesOfferList(dataEntry, dataEntry.Amount * (RegularSavingValue * importanceBasedSavingRatio));
                               break;
                           default:
                               throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
