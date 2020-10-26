@@ -67,7 +67,26 @@ namespace ePiggy.DataBase
 				ExceptionHandler.Log(ex.ToString());
             }
         }
+        public static void RemoveIncomes(List<DataEntry> entries)
+        {
+            var db = new DatabaseContext();
+            List<Incomes> list = new List<Incomes>();
+            foreach (var z in entries)
+            {
+                var index = db.Incomes.FirstOrDefault(x => x.Id == z.Id);
+                list.Add(index);
+            }
 
+            try
+            {
+                db.Incomes.RemoveRange(list ?? throw new InvalidOperationException());
+                db.SaveChanges();
+            }
+            catch (InvalidOperationException ex)
+            {
+                ExceptionHandler.Log(ex.ToString());
+            }
+        }
         public static void RemoveIncome(DataEntry dataEntry)
         {
             var db = new DatabaseContext();
