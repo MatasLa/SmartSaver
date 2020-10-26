@@ -15,7 +15,7 @@ namespace ePiggy.Forms.Finances.Budget
         private readonly Data _data;
         private readonly DataTableConverter _dataTableConverter;
         private readonly DataFilter _dataFilter;
-        private readonly DataTotals _dataTotals;
+        private readonly DataTotalsCalculator _dataTotalsCalculator;
         private DataTable _dataTable;
 
         private readonly Image _selectedLessButton = new Bitmap(Properties.Resources.lessButtonSelected);
@@ -50,7 +50,7 @@ namespace ePiggy.Forms.Finances.Budget
             _data = handler.Data;
             _dataTableConverter = handler.DataTableConverter;
             _dataFilter = handler.DataFilter;
-            _dataTotals = handler.DataTotals;
+            _dataTotalsCalculator = handler.DataTotalsCalculator;
             _entryType = entryType;
 
             _importanceLabelList.Add(labelValueNecessary);
@@ -315,31 +315,31 @@ namespace ePiggy.Forms.Finances.Budget
 
         private void DisplayMonthlyTotal()
         {
-            var value = EntryType == EntryType.Expense ? _dataTotals.GetTotaledExpenses(_handler.Time) : _dataTotals.GetTotaledIncome(_handler.Time);
+            var value = EntryType == EntryType.Expense ? _dataTotalsCalculator.GetTotaledExpenses(_handler.Time) : _dataTotalsCalculator.GetTotaledIncome(_handler.Time);
             FormUtilities.DisplayCurrency(labelValueMonths, value);
         }
 
         private void DisplayBalance()
         {
-            var balance = _dataTotals.GetBalance(_handler.Time);
+            var balance = _dataTotalsCalculator.GetBalance(_handler.Time);
             FormUtilities.DisplayCurrencyTextWithColor(labelValueMonthlyBalance, balance);
         }
 
         private void DisplayTotalBalance()
         {
-            var balance = _handler.DataTotals.GetBalance();
+            var balance = _handler.DataTotalsCalculator.GetBalance();
             FormUtilities.DisplayCurrencyTextWithColor(labelValueTotalBalance, balance);
         }
 
         private void DisplayBalanceUntilToday()
         {
-            var balance = _handler.DataTotals.GetBalancesUntilToday();
+            var balance = _handler.DataTotalsCalculator.GetBalancesUntilToday();
             FormUtilities.DisplayCurrencyTextWithColor(labelValueBalanceUntilToday, balance);
         }
 
         private void DisplayBalanceUntilEndOfMonth()
         {
-            var balance = _handler.DataTotals.GetBalanceUntilEndOfThisMonth();
+            var balance = _handler.DataTotalsCalculator.GetBalanceUntilEndOfThisMonth();
             FormUtilities.DisplayCurrencyTextWithColor(labelValueBalanceEndOfMonth, balance);
         }
 
@@ -349,8 +349,8 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 var value = EntryType switch
                 {
-                    EntryType.Income => _handler.DataTotals.GetTotaledIncome((Importance)i, _handler.Time),
-                    EntryType.Expense => _handler.DataTotals.GetTotaledExpenses((Importance)i, _handler.Time),
+                    EntryType.Income => _handler.DataTotalsCalculator.GetTotaledIncome((Importance)i, _handler.Time),
+                    EntryType.Expense => _handler.DataTotalsCalculator.GetTotaledExpenses((Importance)i, _handler.Time),
                     _ => throw new ArgumentOutOfRangeException()
                 };
                 FormUtilities.DisplayCurrency(_importanceLabelList[i - 1], value);

@@ -4,11 +4,11 @@ using ePiggy.Utilities;
 
 namespace ePiggy.DataManagement
 {
-    public class DataTotals
+    public class DataTotalsCalculator
     {
         private readonly Data _data;
         private readonly DataFilter _dataFilter;
-        public DataTotals(Data data, DataFilter dataFilter)
+        public DataTotalsCalculator(Data data, DataFilter dataFilter)
         {
             _data = data;
             _dataFilter = dataFilter;
