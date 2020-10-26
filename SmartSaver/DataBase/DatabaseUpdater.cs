@@ -101,8 +101,26 @@ namespace ePiggy.DataBase
 				ExceptionHandler.Log(ex.ToString());
             }
         }
+        public static void RemoveExpenses(List<DataEntry> entries)
+        {
+            var db = new DatabaseContext();
+            List<Expenses> list = new List<Expenses>();
 
-        
+            foreach (var z in entries)
+            {
+                var index = db.Expenses.FirstOrDefault(x => x.Id == z.Id);
+                list.Add(index);
+            }
+            try
+            {
+                db.Expenses.RemoveRange(list ?? throw new InvalidOperationException());
+                db.SaveChanges();
+            }
+            catch (InvalidOperationException ex)
+            {
+                ExceptionHandler.Log(ex.ToString());
+            }
+        }
         public static void RemoveExpense(DataEntry dataEntry)
         {
             var db = new DatabaseContext();

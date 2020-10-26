@@ -109,7 +109,6 @@ namespace ePiggy.DataManagement
             DatabaseUpdater.RemoveExpense(id);
         }
         
-
 		public void RemoveIncomes(List<DataEntry> entries)
         {
             DatabaseUpdater.RemoveIncomes(entries);
@@ -127,10 +126,8 @@ namespace ePiggy.DataManagement
 
         public void RemoveExpenses(List<DataEntry> entries)
         {
-            foreach (var entry in entries)
-            {
-                RemoveExpense(entry.Id);
-            }
+            DatabaseUpdater.RemoveExpenses(entries);
+            Expenses.RemoveAll(l => entries.Contains(l));
         }
 
         public void RemoveExpenses(List<int> idList)
