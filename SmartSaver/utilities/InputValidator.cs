@@ -115,9 +115,20 @@ namespace ePiggy.Utilities
             var symbols = pass.Count(char.IsSymbol);
             symbols += pass.Count(char.IsPunctuation);
 
-            if (uppers < 1) return false;
-            if (digits < 1) return false;
-            if (symbols < 1) return false;
+            if (uppers < 1)
+            {
+                return false;
+            }
+
+            if (digits < 1)
+            {
+                return false;
+            }
+
+            if (symbols < 1)
+            {
+                return false;
+            }
             return true;
         }
 
