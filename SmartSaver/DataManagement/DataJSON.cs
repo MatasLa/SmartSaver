@@ -11,28 +11,44 @@ namespace ePiggy.DataManagement
 		private readonly Data _data;
 		public DataJson(Data data)
 		{
-			this._data = data;
+			_data = data;
 		}
 
 		/*Writing/reading JSON files*/
 		public void WriteIncomeToFile()
 		{
-			File.WriteAllText("userIncome.json", "");
-            using var sw = File.AppendText("userIncome.json");
-            foreach (var output in _data.Income.Select(data => JsonSerializer.Serialize(data)))
+            try
             {
-                sw.Write(output + "\n");
+                File.WriteAllText("userIncome.json", "");
+                using var sw = File.AppendText("userIncome.json");
+                foreach (var output in _data.Income.Select(data => JsonSerializer.Serialize(data)))
+                {
+                    sw.WriteLine(output);
+                }
             }
+            catch (Exception e)
+            {
+				ExceptionHandler.Log(e.ToString());
+            }
+			
         }
 
 		public void WriteExpensesToFile()
 		{
-			File.WriteAllText("userExpenses.json", "");
-            using var sw = File.AppendText("userExpenses.json");
-            foreach (var output in _data.Expenses.Select(data => JsonSerializer.Serialize(data)))
+            try
             {
-                sw.Write(output + "\n");
+                File.WriteAllText("userExpenses.json", "");
+                using var sw = File.AppendText("userExpenses.json");
+                foreach (var output in _data.Expenses.Select(data => JsonSerializer.Serialize(data)))
+                {
+                    sw.WriteLine(output);
+                }
             }
+            catch (Exception e)
+            {
+				ExceptionHandler.Log(e.ToString());
+            }
+			
         }
 
 		public void ReadIncomeFromFile()
