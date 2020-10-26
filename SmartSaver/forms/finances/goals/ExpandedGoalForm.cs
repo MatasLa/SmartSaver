@@ -53,11 +53,33 @@ namespace ePiggy.Forms.Finances.Goals
         }
         private void DisplayTable()
         {
-            dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(new List<EntrySuggestion>());
+            var entrySuggestions = new List<EntrySuggestion>();
+            var entries = _handler.DataFilter.GetExpensesUntilEndOfThisMonth();
+            _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, SavingType.Regular, entrySuggestions);
+
+            MessageBox.Show(entrySuggestions.Count + " " + entries.Count);
+
+            dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(entrySuggestions);
 
             dataGridView.Columns["ID"].Visible = false;
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
             dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
+
+
+
+
+            //if (_handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, SavingType.Regular,
+            //    entrySuggestions))
+            //{
+            //    MessageBox.Show("");
+
+            //    dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(entrySuggestions);
+
+            //    dataGridView.Columns["ID"].Visible = false;
+            //    dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
+            //    dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
+            //}
+
         }
 
     }
