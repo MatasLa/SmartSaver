@@ -11,7 +11,6 @@ namespace ePiggy.Utilities
 {
     public class GraphDrawer
     {
-        
         public static Bitmap DrawIncomesExpensesPieChart(decimal size1, decimal size2)
         {
             NumberFormatInfo nfi = new NumberFormatInfo();
@@ -53,6 +52,33 @@ namespace ePiggy.Utilities
                 .chs(chartSize);
 
             using var ms = new MemoryStream(pie.toBuffer());
+            var bitmap = new Bitmap(ms);
+
+            return bitmap;
+        }
+
+        public static Bitmap DrawMultipleVarBarChart(string name, List<Decimal> valuesList, List<String> namesList, int highestValue)
+        {
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+
+            var values = string.Join(",", valuesList.Select(d => d.ToString(nfi)));
+            var names = string.Join("|", namesList);
+
+            var chartInfo = $"a:{values}";
+            var barNames = $"0:|{names}";
+
+            var bar = new ImageCharts()
+                .cht("bvs")
+                .chbr("8")
+                .chs("400x300")
+                .chtt(name)
+                .chxl(barNames)
+                .chd(chartInfo)
+                .chxt("x,y")
+                .chxr($"1,0,{highestValue}");
+
+            using var ms = new MemoryStream(bar.toBuffer());
             var bitmap = new Bitmap(ms);
 
             return bitmap;
