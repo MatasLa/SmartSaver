@@ -20,7 +20,7 @@ namespace ePiggy.DataManagement
             foreach (var dataOffer in entrySuggestions)
             {
                 dt.Rows.Add(dataOffer.Entry.Id, dataOffer.Entry.Title, dataOffer.Entry.Amount,
-                    dataOffer.Entry.Date, dataOffer.Entry.IsMonthly, dataOffer.Entry.Importance, dataOffer.Amount);
+                    dataOffer.Entry.Date, dataOffer.Entry.Importance, dataOffer.Entry.IsMonthly, dataOffer.Amount);
             }
 
             return dt;

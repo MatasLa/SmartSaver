@@ -63,9 +63,9 @@ namespace ePiggy.DataManagement
             var savedAmount = 0M;
             var groupedByImportance = _dataFilter.GroupByImportance(entryList);
 
-            for(var i = (int)Importance.Unnecessary; i <= (int)Importance.High; i++)
+            for (var i = (int)Importance.Unnecessary; i > (int)Importance.Necessary; i--)
             {
-                var expenses = groupedByImportance[i].Entries;
+                var expenses = groupedByImportance[i - 1].Entries;
                 foreach (var entry in expenses)
                 {
                     decimal amountAfterSaving;
