@@ -5,6 +5,8 @@ namespace ePiggy.DataBase
 {
     public class DatabaseContext : DbContext
     {
+        private const string ConnectionString =
+            "Server=51.75.187.147;Database=SmartSaver;User Id=usern;Password=123456789;";
         public DbSet<User> Users { get; set; }
         public DbSet<Expenses> Expenses { get; set; }
         public DbSet<Incomes> Incomes { get; set; }
@@ -12,7 +14,7 @@ namespace ePiggy.DataBase
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=51.75.187.147;Database=SmartSaver;User Id=usern;Password=123456789;");
+            optionsBuilder.UseSqlServer(ConnectionString);
         }
     }
 }

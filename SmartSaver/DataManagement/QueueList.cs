@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ePiggy.utilities;
+﻿using ePiggy.utilities;
 
 namespace ePiggy.DataManagement
 {
@@ -55,12 +52,5 @@ namespace ePiggy.DataManagement
             _arr = _arr.RemoveAt(index);
             _nextIndex--;
         }
-
-        
-
-
-
-
-
     }
 }
