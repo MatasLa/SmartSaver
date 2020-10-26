@@ -16,16 +16,10 @@
         }
 
         public int ID
-        {
-            get;
-            set;
-        }
+        { get; set; }
 
         public decimal Amount
-        {
-            get;
-            set;
-        }
+        { get; set; }
     }
 
 }

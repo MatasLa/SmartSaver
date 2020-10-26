@@ -10,7 +10,6 @@ namespace ePiggy.DataBase.Models
         public decimal Price { get; set; }
         [StringLength(255)]
         public string Title { get; set; }
-        public int PlaceInQueue { get; set; }
 
     }
 
