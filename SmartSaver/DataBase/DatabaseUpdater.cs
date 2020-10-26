@@ -27,6 +27,7 @@ namespace ePiggy.DataBase
             db.SaveChanges();
             return income.Id;
         }
+
         public static int AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly,
             int importance)
         {
@@ -36,7 +37,6 @@ namespace ePiggy.DataBase
             db.SaveChanges();
             return expense.Id;
         }
-
 
         public static void RemoveGoal(int id)
         {
@@ -67,6 +67,7 @@ namespace ePiggy.DataBase
 				ExceptionHandler.Log(ex.ToString());
             }
         }
+
         public static void RemoveIncomes(List<DataEntry> entries)
         {
             var db = new DatabaseContext();
@@ -87,6 +88,7 @@ namespace ePiggy.DataBase
                 ExceptionHandler.Log(ex.ToString());
             }
         }
+
         public static void RemoveIncome(DataEntry dataEntry)
         {
             var db = new DatabaseContext();
@@ -101,6 +103,7 @@ namespace ePiggy.DataBase
 				ExceptionHandler.Log(ex.ToString());
             }
         }
+
         public static void RemoveExpenses(List<DataEntry> entries)
         {
             var db = new DatabaseContext();
@@ -121,6 +124,7 @@ namespace ePiggy.DataBase
                 ExceptionHandler.Log(ex.ToString());
             }
         }
+
         public static void RemoveExpense(DataEntry dataEntry)
         {
             var db = new DatabaseContext();
@@ -136,7 +140,6 @@ namespace ePiggy.DataBase
             }
         }
 
-        
         public static void RemoveExpense(int id)
         {
             var db = new DatabaseContext();
@@ -166,7 +169,6 @@ namespace ePiggy.DataBase
             return true;
         }
 
-        
         /*public static bool EditGoalPlaceInQueue(int id, int placeInQueue)
         {
             var db = new DatabaseContext();
@@ -179,19 +181,20 @@ namespace ePiggy.DataBase
             }
             return false;
         }*/
-         public static bool EditIncomeItem(int id, decimal value)
-         {
 
-             var db = new DatabaseContext();
-             var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-             if (temp == null)
-             {
-                 return false;
-             }
-             temp.Amount = value;
-             db.SaveChanges();
-             return true;
-         }
+        public static bool EditIncomeItem(int id, decimal value)
+        {
+
+            var db = new DatabaseContext();
+            var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Amount = value;
+            db.SaveChanges();
+            return true;
+        }
         
         public static bool EditIncomeItem(int id, string value)
 		{
@@ -232,18 +235,18 @@ namespace ePiggy.DataBase
             return true;
         }
         
-       public static bool EditIncomeItem(int id, int importance)
-       {
-           var db = new DatabaseContext();
-           var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-           if (temp == null)
-           {
-               return false;
-           }
-           temp.Importance = importance;
-           db.SaveChanges();
-           return true;
-       }
+        public static bool EditIncomeItem(int id, int importance)
+        {
+            var db = new DatabaseContext();
+            var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Importance = importance;
+            db.SaveChanges();
+            return true;
+        }
         
         public static bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
 		{
@@ -301,7 +304,6 @@ namespace ePiggy.DataBase
             db.SaveChanges();
             return true;
         }
-        
         
         public static bool EditExpensesItem(int id, bool isMonthly)
 		{
