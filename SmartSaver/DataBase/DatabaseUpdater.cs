@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ePiggy.DataBase.Models;
 using ePiggy.DataManagement;
@@ -66,8 +67,7 @@ namespace ePiggy.DataBase
 				ExceptionHandler.Log(ex.ToString());
             }
         }
-        
-        
+
         public static void RemoveIncome(DataEntry dataEntry)
         {
             var db = new DatabaseContext();
