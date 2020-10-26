@@ -17,11 +17,11 @@ namespace ePiggy.DataManagement
         {
             var dt = GenerateSuggestionTableHeaders();
 
-            foreach (var dataOffer in entrySuggestions)
+           /* foreach (var dataOffer in dataOffers)
             {
                 //dt.Rows.Add(dataOffer.Entry.Id, dataOffer.Entry.Title, dataOffer.Entry.Amount,
                 //    dataOffer.Entry.Date, dataOffer.Entry.IsMonthly, dataEntry.Entry.Importance, dataOffer.Amount);
-            }
+            }*/
 
             return dt;
         }

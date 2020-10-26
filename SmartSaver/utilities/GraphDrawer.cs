@@ -5,7 +5,7 @@ using ImageChartsLib;
 
 namespace ePiggy.Utilities
 {
-    class GraphDrawer
+    public class GraphDrawer
     {
         
         public static Bitmap DrawIncomesExpensesPieChart(decimal size1, decimal size2)

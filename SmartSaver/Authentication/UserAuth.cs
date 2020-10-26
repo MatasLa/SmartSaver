@@ -47,7 +47,11 @@ namespace ePiggy.Authentication
             {
                 return false;
             }
-            if (!HashingProcessor.AreEqual(pass, userInfo.Password, userInfo.Salt)) return false;
+
+            if (!HashingProcessor.AreEqual(pass, userInfo.Password, userInfo.Salt))
+            {
+                return false;
+            }
             Handler.UserId = userInfo.Id;
             return true;
         }

@@ -14,6 +14,8 @@ namespace ePiggy
 
         public DataFilter DataFilter { get; }
 
+        public DataTotalsCalculator DataTotalsCalculator { get; }
+
         public DataJson DataJson{ get; }
 
         public DataCalculations DataCalculations { get; }
@@ -30,6 +32,7 @@ namespace ePiggy
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
+            DataTotalsCalculator = new DataTotalsCalculator(Data, DataFilter);
             DataCalculations = new DataCalculations(Data);
             DataJson = new DataJson(Data);
             MonthlyUpdater = new MonthlyUpdater(DataFilter, Data);

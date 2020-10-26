@@ -26,23 +26,23 @@ namespace ePiggy.Forms.Reports
 
         private void ShowIncomesExpensesTotalPieChart()
         {
-            var income = _handler.DataFilter.GetTotaledIncome();
-            var expenses = _handler.DataFilter.GetTotaledExpenses();
+            var income = _handler.DataTotalsCalculator.GetTotaledIncome();
+            var expenses = _handler.DataTotalsCalculator.GetTotaledExpenses();
             pictureBoxTotal.Image = GraphDrawer.DrawIncomesExpensesPieChart(income, expenses);
         }
 
         private void ShowIncomesExpensesPreviousMonthPieChart()
         {
             var previousMonth = TimeManager.MoveToPreviousMonth(DateTime.Today);
-            var income = _handler.DataFilter.GetTotaledIncome(previousMonth);
-            var expenses = _handler.DataFilter.GetTotaledExpenses(previousMonth);
+            var income = _handler.DataTotalsCalculator.GetTotaledIncome(previousMonth);
+            var expenses = _handler.DataTotalsCalculator.GetTotaledExpenses(previousMonth);
             pictureBoxPrevious.Image = GraphDrawer.DrawIncomesExpensesPieChart(income, expenses);
         }
 
         private void ShowIncomesExpensesCurrentMonthPieChart()
         {
-            var income = _handler.DataFilter.GetTotaledIncome(DateTime.Today);
-            var expenses = _handler.DataFilter.GetTotaledExpenses(DateTime.Today);
+            var income = _handler.DataTotalsCalculator.GetTotaledIncome(DateTime.Today);
+            var expenses = _handler.DataTotalsCalculator.GetTotaledExpenses(DateTime.Today);
             pictureBoxCurrent.Image = GraphDrawer.DrawIncomesExpensesPieChart(income, expenses);
         }
     }
