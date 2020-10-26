@@ -67,22 +67,16 @@ namespace ePiggy.DataManagement
         }
 
         //WIP
-        public bool GetSuggestedExpensesOffers(Goal goal, SavingType savingType, List<EntrySuggestion> offerList)
+        public bool GetSuggestedExpensesOffers(List<DataEntry> entryList, Goal goal, SavingType savingType, List<EntrySuggestion> offerList)
         {
-            // we need to keep in mind that this method should take in a EntryList as a variable
             _savingType = savingType;
             var savedAmount = 0M;
             var dataFilter = new DataFilter(_data);
+            var groupedByImportance = dataFilter.GroupByImportance(entryList);
 
-            // for (var i = 2; i >= 5; i++) expression is always false, you probably meant i <=5 so I changed
-            // so I notice that you're going from the most important expenses to the least important, probably 
-            // you would want to go the other way around
-            // also these hardcoded numbers are bad, so I switched to Importance enum
-            for(var i = (int)Importance.Unnecessary; i >= (int)Importance.High; i++)
+            for(var i = (int)Importance.Unnecessary; i <= (int)Importance.High; i++)
             {
-                //Use groupjoin from filter once it's available
-
-                var expenses = dataFilter.GetExpenses((Importance)i);
+                var expenses = groupedByImportance[i].Entries;
                 foreach (var entry in expenses)
                 {
                     decimal amountAfterSaving;
