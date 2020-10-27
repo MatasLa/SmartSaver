@@ -33,7 +33,7 @@ namespace ePiggy
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
             DataTotalsCalculator = new DataTotalsCalculator(Data, DataFilter);
-            DataCalculations = new DataCalculations(Data);
+            DataCalculations = new DataCalculations(Data, DataFilter, DataTotalsCalculator);
             DataJson = new DataJson(Data);
             MonthlyUpdater = new MonthlyUpdater(DataFilter, Data);
 
