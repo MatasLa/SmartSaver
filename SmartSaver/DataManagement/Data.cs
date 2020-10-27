@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using ePiggy.DataBase;
 using ePiggy.Utilities;
@@ -77,7 +76,6 @@ namespace ePiggy.DataManagement
 
         public void RemoveIncome(int id)
         {
-            Debug.WriteLine("RemoveIncome(int id)");
             var income = Income.FirstOrDefault(x => x.Id == id);
             if (income == null) return;
             Income.Remove(income);
@@ -86,7 +84,6 @@ namespace ePiggy.DataManagement
 
         public void RemoveIncome(DataEntry dataEntry)
         {
-            Debug.WriteLine("RemoveIncome(DataEntry dataEntry)");
             Income.Remove(dataEntry);
             DatabaseUpdater.RemoveIncome(dataEntry);
         }
