@@ -7,7 +7,7 @@ using ePiggy.Utilities;
 
 namespace ePiggy.DataBase
 {
-    public class DatabaseUpdater
+    public static class DatabaseUpdater
     {
         public static int AddGoal(int userid, string title, decimal value)
         {
@@ -68,7 +68,7 @@ namespace ePiggy.DataBase
             }
         }
 
-        public static void RemoveIncomes(List<DataEntry> entries)
+        public static void RemoveIncomes(IEnumerable<DataEntry> entries)
         {
             var db = new DatabaseContext();
             var list = new List<Incomes>();
@@ -78,15 +78,8 @@ namespace ePiggy.DataBase
                 var index = db.Incomes.FirstOrDefault(x => x.Id == z.Id);
                 list.Add(index);
             }
-            try
-            {
-                db.Incomes.RemoveRange(list ?? throw new InvalidOperationException());
-                db.SaveChanges();
-            }
-            catch (InvalidOperationException ex)
-            {
-                ExceptionHandler.Log(ex.ToString());
-            }
+            db.Incomes.RemoveRange(list ?? throw new InvalidOperationException());
+            db.SaveChanges();
         }
 
         public static void RemoveIncome(DataEntry dataEntry)
@@ -104,7 +97,7 @@ namespace ePiggy.DataBase
             }
         }
 
-        public static void RemoveExpenses(List<DataEntry> entries)
+        public static void RemoveExpenses(IEnumerable<DataEntry> entries)
         {
             var db = new DatabaseContext();
             var list = new List<Expenses>();
@@ -114,15 +107,8 @@ namespace ePiggy.DataBase
                 var index = db.Expenses.FirstOrDefault(x => x.Id == z.Id);
                 list.Add(index);
             }
-            try
-            {
-                db.Expenses.RemoveRange(list ?? throw new InvalidOperationException());
-                db.SaveChanges();
-            }
-            catch (InvalidOperationException ex)
-            {
-                ExceptionHandler.Log(ex.ToString());
-            }
+            db.Expenses.RemoveRange(list);
+            db.SaveChanges();
         }
 
         public static void RemoveExpense(DataEntry dataEntry)
