@@ -70,8 +70,7 @@ namespace ePiggy.Forms.Reports
 
             foreach (var importance in from importance in Handler.ImportanceList
                                        let value = _handler.DataTotalsCalculator.GetTotaledExpenses(importance)
-                where value > 0
-                select importance)
+                                       where value > 0 select importance)
             {
                 valuesList.Add(_handler.DataTotalsCalculator.GetTotaledExpenses(importance));
                 namesList.Add(importance.ToString());
