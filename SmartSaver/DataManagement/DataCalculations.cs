@@ -79,7 +79,7 @@ namespace ePiggy.DataManagement
                     savedAmount += entry.Amount - amountAfterSaving;
                     if (goal.Price <= savedAmount)
                     {
-                        //return true; //Saved enough
+                        return true; //Saved enough
                     }
                 }               
             }
