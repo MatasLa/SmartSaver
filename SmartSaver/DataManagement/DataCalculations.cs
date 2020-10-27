@@ -28,7 +28,6 @@ namespace ePiggy.DataManagement
             _savingType = SavingType.Regular;
         }
 
-        
 
         public static int CalculateProgress(decimal saved, decimal target)
         {

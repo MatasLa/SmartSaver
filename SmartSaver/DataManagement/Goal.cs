@@ -5,7 +5,7 @@ using ePiggy.Utilities;
 
 namespace ePiggy.DataManagement
 {
-    public class Goal
+    public class Goal : IEquatable<Goal>, IComparable
     {
         private static readonly string ResourceDirectoryParsedGoal = Directory.GetParent(Environment.CurrentDirectory)
                                                                          .Parent?.Parent?.FullName +
@@ -68,6 +68,26 @@ namespace ePiggy.DataManagement
         {
             Title = itemName;
             Price = price;
+        }
+
+        public bool Equals(Goal other)
+        {
+            if (other is null)
+            {
+                return false;
+            }
+
+            return Price == other.Price;
+        }
+
+        public int CompareTo(object? obj)
+        {
+            return obj switch
+            {
+                null => 1,
+                Goal otherGoal => Price.CompareTo(otherGoal.Price),
+                _ => throw new ArgumentException("Object is not a Goal")
+            };
         }
     }
 }
