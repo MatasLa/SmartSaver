@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using ePiggy.Forms;
+using ePiggy.Forms.Auth;
 
 namespace ePiggy
 {
@@ -14,9 +15,9 @@ namespace ePiggy
             Application.SetCompatibleTextRenderingDefault(false);
 
             var handler = new Handler();
-            Application.Run(new FormMain(handler));
+            //Application.Run(new FormMain(handler));
 
-            //Application.Run(new FormLogIn(handler));
+            Application.Run(new FormLogIn(handler));
         }
     }
 }
