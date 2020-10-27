@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using ePiggy.Utilities;
 
@@ -9,7 +10,6 @@ namespace ePiggy.Forms.Reports
     public partial class FormIncomeVExpenses : Form
     {
         private readonly Handler _handler;
-        private Size _defaultSize = new Size(400, 400);
         public FormIncomeVExpenses(Handler handler)
         {
             InitializeComponent();
@@ -21,7 +21,6 @@ namespace ePiggy.Forms.Reports
 
         private void ShowCharts()
         {
-
             ShowIncomesExpensesPreviousMonthPieChart();
             ShowIncomesExpensesCurrentMonthPieChart();
             ShowIncomesExpensesTotalPieChart();
@@ -29,36 +28,46 @@ namespace ePiggy.Forms.Reports
 
         private void ShowIncomesExpensesTotalPieChart()
         {
-            var income = _handler.DataTotalsCalculator.GetTotaledIncome();
-            var expenses = _handler.DataTotalsCalculator.GetTotaledExpenses();
-            var postFix = "total";
-            var valuesList = new List<decimal> { income, expenses };
-            var namesList = new List<string> { "Income, " + postFix, "Expenses, " + postFix };
-            var colorsList = new List<string> { "85bb65", "eb5244" };
-            pictureBoxTotal.Image = GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, colorsList, _defaultSize);
+            var income = _handler.DataTotalsCalculator.GetTotaledIncomeUntilEndOfThisMonth();
+            var expense = _handler.DataTotalsCalculator.GetTotaledExpensesUntilEndOfThisMonth();
+            ShowIncomesExpenses(income, expense, pictureBoxTotal);
         }
 
         private void ShowIncomesExpensesPreviousMonthPieChart()
         {
             var previousMonth = TimeManager.MoveToPreviousMonth(DateTime.Today);
+            labelPrevious.Text = previousMonth.ToString("MMMM");
             var income = _handler.DataTotalsCalculator.GetTotaledIncome(previousMonth);
-            var expenses = _handler.DataTotalsCalculator.GetTotaledExpenses(previousMonth);
-            var postFix = previousMonth.ToString("MMMM");
-            var valuesList = new List<decimal> { income, expenses };
-            var namesList = new List<string> { "Income, " + postFix, "Expenses, " + postFix };
-            var colorsList = new List<string> { "85bb65", "eb5244" };
-            pictureBoxPrevious.Image = GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, colorsList, _defaultSize);
+            var expense = _handler.DataTotalsCalculator.GetTotaledExpenses(previousMonth);
+            ShowIncomesExpenses(income, expense, pictureBoxPrevious);
         }
 
         private void ShowIncomesExpensesCurrentMonthPieChart()
         {
+            labelCurrent.Text = DateTime.Today.ToString("MMMM");
             var income = _handler.DataTotalsCalculator.GetTotaledIncome(DateTime.Today);
-            var expenses = _handler.DataTotalsCalculator.GetTotaledExpenses(DateTime.Today);
-            var postFix = DateTime.Today.ToString("MMMM");
-            var valuesList = new List<decimal> { income, expenses };
-            var namesList = new List<string> { "Income, " + postFix, "Expenses, " + postFix };
-            var colorsList = new List<string> { "85bb65", "eb5244" };
-            pictureBoxCurrent.Image = GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, colorsList, _defaultSize);
+            var expense = _handler.DataTotalsCalculator.GetTotaledExpenses(DateTime.Today);
+            ShowIncomesExpenses(income, expense, pictureBoxCurrent);
+        }
+
+        private static void ShowIncomesExpenses(decimal income, decimal expenses, PictureBox pictureBox)
+        {
+            var valuesList = new List<decimal>();
+            var namesList = new List<string>();
+
+            if (income > 0)
+            {
+                valuesList.Add(income);
+                namesList.Add("Income");
+            }
+            if (expenses > 0)
+            {
+                valuesList.Add(expenses);
+                namesList.Add("Expenses");
+            }
+
+            pictureBox.Image =
+                GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, GraphDrawer.ColorsList, GraphDrawer.DefaultSize);
         }
     }
 }

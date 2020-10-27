@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using ePiggy.DataManagement;
+using ePiggy.Utilities;
 
 namespace ePiggy
 {
     public class Handler
     {
+
+        public static List<Importance> ImportanceList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
+
         public DateTime Time { get; set; }
 
         public Data Data { get; }
