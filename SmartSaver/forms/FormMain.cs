@@ -36,8 +36,6 @@ namespace ePiggy.Forms
             Handler.DataJson.WriteExpensesToFile();
         }
 
-        #region button event handlers
-
         private void ButtonFinances_Click(object sender, EventArgs e)
         {
             FormUtilities.ShowOrHideControl(panelFinancesSubMenu);
@@ -65,12 +63,12 @@ namespace ePiggy.Forms
 
         private void ButtonSpending_Click(object sender, EventArgs e)
         {
-            FormUtilities.OpenChildForm(ref _activeForm, new FormSpending(), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FormSpending(Handler), panelMain);
         }
 
         private void ButtonNetWorth_Click(object sender, EventArgs e)
         {
-            FormUtilities.OpenChildForm(ref _activeForm, new FormNetWorth(), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FormNetWorth(Handler), panelMain);
         }
 
         private void ButtonIncomeVExpenses_Click(object sender, EventArgs e)
@@ -97,9 +95,6 @@ namespace ePiggy.Forms
         {
             FormUtilities.CloseChildForm(ref _activeForm);
         }
-
-        #endregion
-
     }
 
 }
