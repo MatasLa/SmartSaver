@@ -54,6 +54,7 @@ namespace ePiggy.DataManagement
             for (var i = (int)Importance.Unnecessary; i > (int)Importance.Necessary; i--)
             {
                 var expenses = groupedByImportance[i - 1].Entries;
+                var ratio = (int) Importance.Unnecessary - i;
                 foreach (var entry in expenses)
                 {
                     decimal amountAfterSaving;
@@ -61,13 +62,13 @@ namespace ePiggy.DataManagement
                     switch (_savingType)
                     {
                         case SavingType.Minimal:
-                            amountAfterSaving = entry.Amount * SavingRatio * (i - 1) * MinimalSavingValue;
+                            amountAfterSaving = entry.Amount * SavingRatio * ratio * MinimalSavingValue;
                             break;
                         case SavingType.Regular:
-                            amountAfterSaving = entry.Amount * SavingRatio * (i - 1) * RegularSavingValue;
+                            amountAfterSaving = entry.Amount * SavingRatio * ratio * RegularSavingValue;
                             break;
                         case SavingType.Maximal:
-                            var maximalSaving = MaximalSavingValue * SavingRatio * (i - 1) >= 1;
+                            var maximalSaving = MaximalSavingValue * SavingRatio * ratio >= 1;
                             var temp = maximalSaving ? 1M : MaximalSavingValue;
                             amountAfterSaving = entry.Amount * temp;
                             break;
@@ -77,9 +78,9 @@ namespace ePiggy.DataManagement
                     AddToExpensesOfferList(entry, amountAfterSaving, entrySuggestions);
 
                     savedAmount += entry.Amount - amountAfterSaving;
-                    if(goal.Price <= savedAmount)
+                    if (goal.Price <= savedAmount)
                     {
-                        return true; //Saved enough
+                        //return true; //Saved enough
                     }
                 }               
             }

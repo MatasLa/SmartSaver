@@ -17,7 +17,7 @@ namespace ePiggy.DataManagement
         public QueueList<ImportanceGroup> GroupByImportance()//should return queue where least important are first
         { 
             var enumList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
-            enumList.Reverse();
+            //enumList.Reverse();
             var queue = new QueueList<ImportanceGroup>();
             
             var temp = enumList.GroupJoin(_data.Expenses,
@@ -39,7 +39,7 @@ namespace ePiggy.DataManagement
         public QueueList<ImportanceGroup> GroupByImportance(List<DataEntry> customList)//should return queue where least important are first
         {
             var enumList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
-            enumList.Reverse();
+            //enumList.Reverse();
             var queue = new QueueList<ImportanceGroup>();
 
             var temp = enumList.GroupJoin(customList,
