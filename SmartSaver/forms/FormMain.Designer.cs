@@ -33,9 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonLogOut = new System.Windows.Forms.Button();
-            this.buttonHelp = new System.Windows.Forms.Button();
             this.panelReportsSubMenu = new System.Windows.Forms.Panel();
-            this.buttonGoalReport = new System.Windows.Forms.Button();
             this.buttonIncomevExpenses = new System.Windows.Forms.Button();
             this.buttonNetWorth = new System.Windows.Forms.Button();
             this.buttonSpending = new System.Windows.Forms.Button();
@@ -65,7 +63,6 @@
             this.panelSideMenu.Controls.Add(this.label2);
             this.panelSideMenu.Controls.Add(this.label1);
             this.panelSideMenu.Controls.Add(this.buttonLogOut);
-            this.panelSideMenu.Controls.Add(this.buttonHelp);
             this.panelSideMenu.Controls.Add(this.panelReportsSubMenu);
             this.panelSideMenu.Controls.Add(this.buttonReports);
             this.panelSideMenu.Controls.Add(this.panelFinancesSubMenu);
@@ -108,7 +105,7 @@
             this.buttonLogOut.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLogOut.ForeColor = System.Drawing.Color.Azure;
-            this.buttonLogOut.Location = new System.Drawing.Point(0, 540);
+            this.buttonLogOut.Location = new System.Drawing.Point(0, 455);
             this.buttonLogOut.Name = "buttonLogOut";
             this.buttonLogOut.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.buttonLogOut.Size = new System.Drawing.Size(250, 45);
@@ -118,27 +115,9 @@
             this.buttonLogOut.UseVisualStyleBackColor = true;
             this.buttonLogOut.Click += new System.EventHandler(this.ButtonLogOut_Click);
             // 
-            // buttonHelp
-            // 
-            this.buttonHelp.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonHelp.FlatAppearance.BorderSize = 0;
-            this.buttonHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonHelp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonHelp.ForeColor = System.Drawing.Color.Azure;
-            this.buttonHelp.Location = new System.Drawing.Point(0, 495);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.buttonHelp.Size = new System.Drawing.Size(250, 45);
-            this.buttonHelp.TabIndex = 1;
-            this.buttonHelp.Text = "Help";
-            this.buttonHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonHelp.UseVisualStyleBackColor = true;
-            this.buttonHelp.Click += new System.EventHandler(this.ButtonHelp_Click);
-            // 
             // panelReportsSubMenu
             // 
             this.panelReportsSubMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
-            this.panelReportsSubMenu.Controls.Add(this.buttonGoalReport);
             this.panelReportsSubMenu.Controls.Add(this.buttonIncomevExpenses);
             this.panelReportsSubMenu.Controls.Add(this.buttonNetWorth);
             this.panelReportsSubMenu.Controls.Add(this.buttonSpending);
@@ -146,26 +125,8 @@
             this.panelReportsSubMenu.Location = new System.Drawing.Point(0, 335);
             this.panelReportsSubMenu.Margin = new System.Windows.Forms.Padding(0);
             this.panelReportsSubMenu.Name = "panelReportsSubMenu";
-            this.panelReportsSubMenu.Size = new System.Drawing.Size(250, 160);
+            this.panelReportsSubMenu.Size = new System.Drawing.Size(250, 120);
             this.panelReportsSubMenu.TabIndex = 2;
-            // 
-            // buttonGoalReport
-            // 
-            this.buttonGoalReport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(98)))), ((int)(((byte)(174)))));
-            this.buttonGoalReport.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonGoalReport.FlatAppearance.BorderSize = 0;
-            this.buttonGoalReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonGoalReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonGoalReport.ForeColor = System.Drawing.Color.Azure;
-            this.buttonGoalReport.Location = new System.Drawing.Point(0, 120);
-            this.buttonGoalReport.Name = "buttonGoalReport";
-            this.buttonGoalReport.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.buttonGoalReport.Size = new System.Drawing.Size(250, 40);
-            this.buttonGoalReport.TabIndex = 0;
-            this.buttonGoalReport.Text = "Goal Reports";
-            this.buttonGoalReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonGoalReport.UseVisualStyleBackColor = false;
-            this.buttonGoalReport.Click += new System.EventHandler(this.ButtonGoalReport_Click);
             // 
             // buttonIncomevExpenses
             // 
@@ -399,9 +360,7 @@
         private System.Windows.Forms.Button buttonIncome;
         private System.Windows.Forms.Button buttonFinances;
         private System.Windows.Forms.Button buttonLogOut;
-        private System.Windows.Forms.Button buttonHelp;
         private System.Windows.Forms.Panel panelReportsSubMenu;
-        private System.Windows.Forms.Button buttonGoalReport;
         private System.Windows.Forms.Button buttonIncomevExpenses;
         private System.Windows.Forms.Button buttonNetWorth;
         private System.Windows.Forms.Button buttonSpending;
