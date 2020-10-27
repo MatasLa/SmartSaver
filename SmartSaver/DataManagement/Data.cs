@@ -54,14 +54,13 @@ namespace ePiggy.DataManagement
         }
 
 
-		/*EXPENSES*/
+        /*EXPENSES*/
         public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
             var id = DatabaseUpdater.AddExpense(userid, value, title, date, isMonthly, importance);
             var newExpense = new DataEntry(id, userid, value, title, date, isMonthly, importance);
             Expenses.Add(newExpense);
         }
-
 
 		/*Methods for removal*/
 
@@ -74,7 +73,6 @@ namespace ePiggy.DataManagement
             GoalsList.Remove(goal);
             DatabaseUpdater.RemoveGoal(id);
         }
-
 
         public void RemoveIncome(int id)
         {
@@ -90,14 +88,12 @@ namespace ePiggy.DataManagement
             DatabaseUpdater.RemoveIncome(dataEntry);
         }
         
-
         public void RemoveExpense(DataEntry dataEntry)
         {
             Expenses.Remove(dataEntry);
             DatabaseUpdater.RemoveExpense(dataEntry);
         }
         
-
         public void RemoveExpense(int id)
         {
             var dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
@@ -106,30 +102,24 @@ namespace ePiggy.DataManagement
             DatabaseUpdater.RemoveExpense(id);
         }
         
-
 		public void RemoveIncomes(List<DataEntry> entries)
         {
-            foreach (var entry in entries)
-            {
-                RemoveIncome(entry.Id);
-            }
+            DatabaseUpdater.RemoveIncomes(entries);
+            Income.RemoveAll(l => entries.Contains(l));
         }
 
         public void RemoveIncomes(List<int> idList)
 		{
-			foreach (var id in idList)
+            foreach (var id in idList)
             {
                 RemoveIncome(id);
             }
 		}
 
-
         public void RemoveExpenses(List<DataEntry> entries)
         {
-            foreach (var entry in entries)
-            {
-                RemoveExpense(entry.Id);
-            }
+            DatabaseUpdater.RemoveExpenses(entries);
+            Expenses.RemoveAll(l => entries.Contains(l));
         }
 
         public void RemoveExpenses(List<int> idList)
@@ -177,7 +167,6 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditIncomeItem(id, value);
         }
 
-
         public bool EditIncomeItem(int id, string value)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
@@ -188,8 +177,6 @@ namespace ePiggy.DataManagement
             temp.Title = value;
             return DatabaseUpdater.EditIncomeItem(id, value);
         }
-
-
 
         public bool EditIncomeItem(int id, DateTime date)
         {
@@ -202,7 +189,6 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditIncomeItem(id, date);
         }
 
-
         public bool EditIncomeItem(int id, bool isMonthly)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
@@ -214,7 +200,6 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditIncomeItem(id, isMonthly);
         }
         
-
         public bool EditIncomeItem(int id, int importance)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
@@ -225,8 +210,7 @@ namespace ePiggy.DataManagement
             temp.Importance = importance;
             return DatabaseUpdater.EditIncomeItem(id, importance);
         }
-       
-
+        
         public bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
         {
             var temp = Income.FirstOrDefault(x => x.Id == id);
@@ -242,7 +226,6 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditIncomeItem(id, value, amount, date, isMonthly, importance);
         }
         
-
         public bool EditExpensesItem(int id, decimal value)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
@@ -254,7 +237,6 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditExpensesItem(id, value);
         }
         
-
         public bool EditExpensesItem(int id, string value)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
@@ -266,7 +248,6 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditExpensesItem(id, value);
         }
         
-
         public bool EditExpensesItem(int id, DateTime date)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
@@ -278,7 +259,6 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditExpensesItem(id, date);
         }
         
-
         public bool EditExpensesItem(int id, bool isMonthly)
         {
             var temp = Expenses.FirstOrDefault(x => x.Id == id);
@@ -316,7 +296,6 @@ namespace ePiggy.DataManagement
             return DatabaseUpdater.EditExpensesItem(id, value, amount, date, isMonthly, importance);
         }
 
-        
         public void ReadIncomeFromDb()
         {
             using var context = new DatabaseContext();
@@ -327,6 +306,7 @@ namespace ePiggy.DataManagement
                 Income.Add(newIncome);
             }
         }
+
         public void ReadExpensesFromDb()
         {
             using var context = new DatabaseContext();
@@ -348,6 +328,7 @@ namespace ePiggy.DataManagement
                 GoalsList.Add(newGoal);
             }
         }
+
 		public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
         {
             switch (entryType)
