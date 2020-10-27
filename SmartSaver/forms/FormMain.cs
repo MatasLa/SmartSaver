@@ -65,7 +65,7 @@ namespace ePiggy.Forms
 
         private void ButtonSpending_Click(object sender, EventArgs e)
         {
-            FormUtilities.OpenChildForm(ref _activeForm, new FormSpending(), panelMain);
+            FormUtilities.OpenChildForm(ref _activeForm, new FormSpending(Handler), panelMain);
         }
 
         private void ButtonNetWorth_Click(object sender, EventArgs e)

@@ -9,12 +9,11 @@ using ImageChartsLib;
 
 namespace ePiggy.Utilities
 {
-    public class GraphDrawer
+    public static class GraphDrawer
     {
         public static Bitmap DrawIncomesExpensesPieChart(decimal size1, decimal size2)
         {
-            NumberFormatInfo nfi = new NumberFormatInfo();
-            nfi.NumberDecimalSeparator = ".";
+            var nfi = new NumberFormatInfo {NumberDecimalSeparator = "."};
 
             var chartInfo = $"a:{size1.ToString(nfi)},{size2.ToString(nfi)}";
 
@@ -31,10 +30,9 @@ namespace ePiggy.Utilities
             return bitmap;
         }
 
-        public static Bitmap DrawMultipleVarPieChart(List<Decimal> valuesList, List<String> namesList, List<String> colorsList, Size size)
+        public static Bitmap DrawMultipleVarPieChart(IEnumerable<decimal> valuesList, IEnumerable<string> namesList, IEnumerable<string> colorsList, Size size)
         {
-            NumberFormatInfo nfi = new NumberFormatInfo();
-            nfi.NumberDecimalSeparator = ".";
+            var nfi = new NumberFormatInfo {NumberDecimalSeparator = "."};
 
             var values = string.Join(",", valuesList.Select(d => d.ToString(nfi)));
             var names = string.Join("|", namesList);
@@ -57,10 +55,9 @@ namespace ePiggy.Utilities
             return bitmap;
         }
 
-        public static Bitmap DrawMultipleVarBarChart(string name, List<Decimal> valuesList, List<String> namesList, int highestValue)
+        public static Bitmap DrawMultipleVarBarChart(string name, IEnumerable<decimal> valuesList, IEnumerable<string> namesList, int highestValue, Size size)
         {
-            NumberFormatInfo nfi = new NumberFormatInfo();
-            nfi.NumberDecimalSeparator = ".";
+            var nfi = new NumberFormatInfo {NumberDecimalSeparator = "."};
 
             var values = string.Join(",", valuesList.Select(d => d.ToString(nfi)));
             var names = string.Join("|", namesList);
@@ -68,10 +65,12 @@ namespace ePiggy.Utilities
             var chartInfo = $"a:{values}";
             var barNames = $"0:|{names}";
 
+            var chartSize = size.Height + "x" + size.Width;
+
             var bar = new ImageCharts()
                 .cht("bvs")
                 .chbr("8")
-                .chs("400x300")
+                .chs(chartSize)
                 .chtt(name)
                 .chxl(barNames)
                 .chd(chartInfo)
