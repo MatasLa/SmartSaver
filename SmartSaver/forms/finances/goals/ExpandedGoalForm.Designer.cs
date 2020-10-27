@@ -109,7 +109,9 @@
             this.dataGridView.GridColor = System.Drawing.Color.White;
             this.dataGridView.Location = new System.Drawing.Point(3, 3);
             this.dataGridView.Name = "dataGridView";
+            this.dataGridView.ReadOnly = true;
             this.tableLayoutPanel1.SetRowSpan(this.dataGridView, 4);
+            this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(968, 518);
             this.dataGridView.TabIndex = 3;
             this.dataGridView.Text = "dataGridView1";

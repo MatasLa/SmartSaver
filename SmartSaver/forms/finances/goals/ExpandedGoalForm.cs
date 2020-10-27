@@ -17,6 +17,9 @@ namespace ePiggy.Forms.Finances.Goals
         private decimal _saved;
         private int _progress;
 
+        private const string CanSave = "Can Save up for this goal";
+        private const string CannotSave = "Can't save up for this goal";
+
         public Goal Goal
         {
             get => _goal;
@@ -35,6 +38,7 @@ namespace ePiggy.Forms.Finances.Goals
             _handler = handler;
             _parentForm = parentForm;
 
+            SetComboBoxSelections();
             Init();
         }
 
@@ -50,7 +54,7 @@ namespace ePiggy.Forms.Finances.Goals
                 NumberFormatter.FormatCurrency(_saved) + @" of " + NumberFormatter.FormatCurrency(_target);
             progressBar.Value = _progress;
 
-            SetComboBoxSelections();
+            DisplayTable((SavingType)comboBoxSavingType.SelectedIndex);
         }
 
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
@@ -58,7 +62,7 @@ namespace ePiggy.Forms.Finances.Goals
         {
             var entrySuggestions = new List<EntrySuggestion>();
             var entries = _handler.DataFilter.GetExpensesUntilEndOfThisMonth();
-            _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, savingType, entrySuggestions);
+            labelCanSave.Text = _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, savingType, entrySuggestions) ? CanSave : CannotSave;
 
             dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(entrySuggestions);
 
