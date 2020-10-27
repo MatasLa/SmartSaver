@@ -41,7 +41,6 @@
             this.panelGoal4 = new System.Windows.Forms.Panel();
             this.buttonAddGoal5 = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.labelPlaceholder = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.panelGoal0.SuspendLayout();
@@ -49,7 +48,6 @@
             this.panelGoal2.SuspendLayout();
             this.panelGoal3.SuspendLayout();
             this.panelGoal4.SuspendLayout();
-            this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -197,24 +195,11 @@
             // 
             // panelMain
             // 
-            this.panelMain.Controls.Add(this.labelPlaceholder);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 275);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1393, 626);
             this.panelMain.TabIndex = 2;
-            // 
-            // labelPlaceholder
-            // 
-            this.labelPlaceholder.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelPlaceholder.AutoSize = true;
-            this.labelPlaceholder.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelPlaceholder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelPlaceholder.Location = new System.Drawing.Point(548, 298);
-            this.labelPlaceholder.Name = "labelPlaceholder";
-            this.labelPlaceholder.Size = new System.Drawing.Size(274, 39);
-            this.labelPlaceholder.TabIndex = 0;
-            this.labelPlaceholder.Text = "PLACEHOLDER";
             // 
             // GoalsForm
             // 
@@ -238,8 +223,6 @@
             this.panelGoal2.ResumeLayout(false);
             this.panelGoal3.ResumeLayout(false);
             this.panelGoal4.ResumeLayout(false);
-            this.panelMain.ResumeLayout(false);
-            this.panelMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -258,6 +241,5 @@
         private System.Windows.Forms.Button buttonAddGoal4;
         private System.Windows.Forms.Button buttonAddGoal5;
         private System.Windows.Forms.Panel panelMain;
-        private System.Windows.Forms.Label labelPlaceholder;
     }
 }

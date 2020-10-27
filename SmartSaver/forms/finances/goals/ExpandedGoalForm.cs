@@ -17,6 +17,9 @@ namespace ePiggy.Forms.Finances.Goals
         private decimal _saved;
         private int _progress;
 
+        private const string CanSave = "Can Save up for this goal";
+        private const string CannotSave = "Can't save up for this goal";
+
         public Goal Goal
         {
             get => _goal;
@@ -35,6 +38,7 @@ namespace ePiggy.Forms.Finances.Goals
             _handler = handler;
             _parentForm = parentForm;
 
+            SetComboBoxSelections();
             Init();
         }
 
@@ -50,21 +54,34 @@ namespace ePiggy.Forms.Finances.Goals
                 NumberFormatter.FormatCurrency(_saved) + @" of " + NumberFormatter.FormatCurrency(_target);
             progressBar.Value = _progress;
 
-            DisplayTable();
+            DisplayTable((SavingType)comboBoxSavingType.SelectedIndex);
         }
 
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
-        private void DisplayTable()
+        private void DisplayTable(SavingType savingType)
         {
             var entrySuggestions = new List<EntrySuggestion>();
             var entries = _handler.DataFilter.GetExpensesUntilEndOfThisMonth();
-            _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, SavingType.Regular, entrySuggestions);
+            labelCanSave.Text = _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, savingType, entrySuggestions) ? CanSave : CannotSave;
 
             dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(entrySuggestions);
 
             dataGridView.Columns["ID"].Visible = false;
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
             dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
+        }
+
+        private void SetComboBoxSelections()
+        {
+            object[] names = Enum.GetNames(typeof(SavingType));
+            comboBoxSavingType.Items.AddRange(names);
+            comboBoxSavingType.SelectedIndex = 1;
+        }
+
+        private void ComboBoxSelections_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var savingType = comboBoxSavingType.SelectedIndex;
+            DisplayTable((SavingType)savingType);
         }
     }
 }
