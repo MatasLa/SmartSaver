@@ -10,6 +10,8 @@ namespace ePiggy.Utilities
 {
     public static class GraphDrawer
     {
+        public static Size DefaultSize = new Size(400, 400);
+        public static readonly List<string> ColorsList = new List<string> { "009933", "ff3300", "ff9900", "669900", "0099cc" };
         private static readonly NumberFormatInfo nfi = new NumberFormatInfo { NumberDecimalSeparator = "." };
         public static Bitmap DrawIncomesExpensesPieChart(decimal size1, decimal size2)
         {

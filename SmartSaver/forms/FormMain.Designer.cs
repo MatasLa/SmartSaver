@@ -198,7 +198,7 @@
             this.buttonNetWorth.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.buttonNetWorth.Size = new System.Drawing.Size(250, 40);
             this.buttonNetWorth.TabIndex = 0;
-            this.buttonNetWorth.Text = "Net Worth";
+            this.buttonNetWorth.Text = "Balance";
             this.buttonNetWorth.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.buttonNetWorth.UseVisualStyleBackColor = false;
             this.buttonNetWorth.Click += new System.EventHandler(this.ButtonNetWorth_Click);

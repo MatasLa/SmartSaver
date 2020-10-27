@@ -14,6 +14,26 @@ namespace ePiggy.DataManagement
             _data = data;
         }
 
+        public DateTime FindOldestMonthWithEntry()
+        {
+            var incomes = _data.Income;
+            var expenses = _data.Expenses;
+
+            var oldest = TimeManager.OneMonthAhead;
+
+            foreach (var entry in incomes.Where(entry => entry.Date <= oldest))
+            {
+                oldest = entry.Date;
+            }
+
+            foreach (var entry in expenses.Where(entry => entry.Date <= oldest))
+            {
+                oldest = entry.Date;
+            }
+
+            return oldest;
+        }
+
         public QueueList<ImportanceGroup> GroupByImportance()//should return queue where least important are first
         { 
             var enumList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
