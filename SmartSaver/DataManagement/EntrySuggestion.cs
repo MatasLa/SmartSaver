@@ -5,12 +5,12 @@ namespace ePiggy.DataManagement
     public class EntrySuggestion : IEquatable<EntrySuggestion>, IComparable
     {
         public DataEntry Entry { get; set; }
-        public decimal SuggestedAmount { get; set; }
+        public decimal Amount { get; set; }
 
         public EntrySuggestion(DataEntry entry, decimal suggestedAmount)
         {
             Entry = entry;
-            SuggestedAmount = suggestedAmount;
+            Amount = suggestedAmount;
         }
 
         public bool Equals(EntrySuggestion other)
@@ -20,7 +20,7 @@ namespace ePiggy.DataManagement
                 return false;
             }
 
-            return Entry == other.Entry && SuggestedAmount == other.SuggestedAmount;
+            return Entry == other.Entry && Amount == other.Amount;
         }
 
         public int CompareTo(object? obj)
@@ -28,7 +28,7 @@ namespace ePiggy.DataManagement
             return obj switch
             {
                 null => 1,
-                EntrySuggestion otherEntrySuggestion => SuggestedAmount.CompareTo(otherEntrySuggestion.SuggestedAmount),
+                EntrySuggestion otherEntrySuggestion => Amount.CompareTo(otherEntrySuggestion.Amount),
                 _ => throw new ArgumentException("Object is not a EntrySuggestion")
             };
         }
