@@ -71,7 +71,7 @@ namespace ePiggy.DataBase
         public static void RemoveIncomes(List<DataEntry> entries)
         {
             var db = new DatabaseContext();
-            List<Incomes> list = new List<Incomes>();
+            var list = new List<Incomes>();
 
             foreach (var z in entries)
             {
@@ -107,7 +107,7 @@ namespace ePiggy.DataBase
         public static void RemoveExpenses(List<DataEntry> entries)
         {
             var db = new DatabaseContext();
-            List<Expenses> list = new List<Expenses>();
+            var list = new List<Expenses>();
 
             foreach (var z in entries)
             {
@@ -184,7 +184,6 @@ namespace ePiggy.DataBase
 
         public static bool EditIncomeItem(int id, decimal value)
         {
-
             var db = new DatabaseContext();
             var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
             if (temp == null)
