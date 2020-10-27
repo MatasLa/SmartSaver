@@ -40,7 +40,7 @@ namespace ePiggy.Forms.Reports
                 oldestMonth = TimeManager.MoveToNextMonth(oldestMonth);
             }
 
-            var size = new Size(600,999);
+            var size = new Size(999,600);
 
             pictureBoxBarGraph.Image =
                 GraphDrawer.DrawMultipleVarBarChart(name, valueList, namesList, (int)highestValue, size);
