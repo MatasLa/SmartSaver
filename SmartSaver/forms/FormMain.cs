@@ -76,16 +76,6 @@ namespace ePiggy.Forms
             FormUtilities.OpenChildForm(ref _activeForm, new FormIncomeVExpenses(Handler), panelMain);
         }
 
-        private void ButtonGoalReport_Click(object sender, EventArgs e)
-        {
-            FormUtilities.OpenChildForm(ref _activeForm, new FormGoalReports(), panelMain);
-        }
-
-        private void ButtonHelp_Click(object sender, EventArgs e)
-        {
-            FormUtilities.OpenChildForm(ref _activeForm, new FormHelp(), panelMain);
-        }
-
         private void ButtonLogOut_Click(object sender, EventArgs e)
         {
             FormUtilities.ChangeForm(this, new FormLogIn(Handler));
@@ -96,5 +86,4 @@ namespace ePiggy.Forms
             FormUtilities.CloseChildForm(ref _activeForm);
         }
     }
-
 }
