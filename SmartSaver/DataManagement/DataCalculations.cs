@@ -1,27 +1,34 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using ePiggy.Utilities;
 
 namespace ePiggy.DataManagement
 {
     public class DataCalculations
     {
-        private Data data;
-        public DataCalculations(Data data)
+        private readonly Data _data;
+        private readonly DataFilter _dataFilter;
+        private readonly DataTotalsCalculator _dataTotalsCalculator;
+
+        private SavingType _savingType;
+
+        //This might not be 1M in the future, that why we are keeping this
+        private const decimal SavingRatio = 1M;
+        private const decimal RegularSavingValue = 0.25M;
+        private const decimal MaximalSavingValue = 0.5M;
+        private const decimal MinimalSavingValue = 0.1M;
+
+        private List<EntrySuggestion> IncomeOffers { get; } = new List<EntrySuggestion>();
+        private List<EntrySuggestion> ExpensesOffers { get; } = new List<EntrySuggestion>();
+        public DataCalculations(Data data, DataFilter dataFilter, DataTotalsCalculator dataTotalsCalculator)
         {
-            this.data = data;
+            _data = data;
+            _dataFilter = dataFilter;
+            _dataTotalsCalculator = dataTotalsCalculator;
+            _savingType = SavingType.Regular;
         }
 
-        //Temporary hardcoded local parameters (should be taken from front-end later)
-        private SavingType SavingChoice;
-        private decimal regularSavingValue = 0.25M;
-        private decimal maximalSavingValue = 0.5M;
-        private decimal minimalSavingValue = 0.1M;
-        private decimal savingRatio = 1M;
-
-
-        public List<OfferData> IncomeOffers { get; } = new List<OfferData>();
-        public List<OfferData> ExpensesOffers { get; } = new List<OfferData>();
+        
 
         public static int CalculateProgress(decimal saved, decimal target)
         {
@@ -37,160 +44,153 @@ namespace ePiggy.DataManagement
             return progress > 100 ? 100 : progress;
         }
 
-        public decimal GetTotalIncome()
+        
+        public bool GetSuggestedExpensesOffers(List<DataEntry> entryList, Goal goal, SavingType savingType, List<EntrySuggestion> entrySuggestions)
         {
-            return data.Income.Sum(entry => entry.Amount);
+            _savingType = savingType;
+            var savedAmount = 0M;
+            var groupedByImportance = _dataFilter.GroupByImportance(entryList);
+
+            for (var i = (int)Importance.Unnecessary; i > (int)Importance.Necessary; i--)
+            {
+                var expenses = groupedByImportance[i - 1].Entries;
+                var ratio = (int) Importance.Unnecessary - i;
+                foreach (var entry in expenses)
+                {
+                    decimal amountAfterSaving;
+
+                    switch (_savingType)
+                    {
+                        case SavingType.Minimal:
+                            amountAfterSaving = entry.Amount * SavingRatio * ratio * MinimalSavingValue;
+                            break;
+                        case SavingType.Regular:
+                            amountAfterSaving = entry.Amount * SavingRatio * ratio * RegularSavingValue;
+                            break;
+                        case SavingType.Maximal:
+                            var maximalSaving = MaximalSavingValue * SavingRatio * ratio >= 1;
+                            var temp = maximalSaving ? 1M : MaximalSavingValue;
+                            amountAfterSaving = entry.Amount * temp;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    AddToExpensesOfferList(entry, amountAfterSaving, entrySuggestions);
+
+                    savedAmount += entry.Amount - amountAfterSaving;
+                    if (goal.Price <= savedAmount)
+                    {
+                        return true; //Saved enough
+                    }
+                }               
+            }
+            return false; //Didn't save enough
         }
 
-        public decimal GetTotalExpenses()
+        public bool CheckGoal(Goal goal, SavingType savingType)
         {
-            return data.Expenses.Sum(entry => entry.Amount);
-        }
-
-        public decimal CheckBalance()/*Checks even future data*/
-        {
-            return GetTotalIncome() - GetTotalExpenses();
-        }
-
-        public bool IsBalancePositive()/*Same thing in DataFilter but by Date "IsBalancePositiveByDate"*/
-        {
-            return CheckBalance() >= 0;
-        }
-
-        public bool CheckGoal(Goal goal)
-        {
-            if (IsBalancePositive())
+            _savingType = savingType;
+            if (_dataTotalsCalculator.GetBalance() >= 0)
             {
                 //Goal goal = new Goal();
-                if ((CheckBalance() - goal.Price) >= 0)
-                {
-                    return true;    //can already buy this month
-                }
-                else
-                {
-                    return SavingMoney(goal); //needs saving
-                }
+                return _dataTotalsCalculator.GetBalance() - goal.Price >= 0 || GenerallySavingMoney();
             }
-            else
-            {
-                return false;   //user already in debt(negative balance) without adding goal expenses
-            }
+
+            return false;   //user already in debt(negative balance) without adding goal expenses
         }
 
-        private bool SavingMoney(Goal goal)
+        private bool GenerallySavingMoney()
         {
-            decimal savedAmount = 0;
-            //Goal goal = new Goal();
-            decimal neededAmount = (goal.Price - CheckBalance());
-
-            while ((neededAmount - savedAmount) > 0) //while(can't afford goal)
-            {   //todo: improve saving
-                foreach (DataEntry data in data.Income)
-                {
-                    savedAmount += ChoosingImportance(data, savedAmount, EntryType.Income);
-                }
-                foreach (DataEntry data in data.Expenses)
-                {
-                    savedAmount += ChoosingImportance(data, savedAmount, EntryType.Expense);
-                }
-
+            foreach (var data in _data.Income)
+            {
+                ChoosingImportance(data, EntryType.Income);
             }
-            return true; // after having saved enough
+            foreach (var data in _data.Expenses)
+            {
+                ChoosingImportance(data, EntryType.Expense);
+            }
+            return true;
         }
 
-        private decimal ChoosingImportance(DataEntry data, decimal savedAmount, EntryType entryType)
+        private bool ChoosingImportance(DataEntry dataEntry, EntryType entryType)
         {
-            switch (data.Importance)
-            {
-                case (int)Importance.Necessary:
-                    return savedAmount; //importance of necessary - unchangable income
-
-                case (int)Importance.High:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio, entryType);
-
-                case (int)Importance.Medium:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 2, entryType);
-
-                case (int)Importance.Low:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 3, entryType);
-
-                case (int)Importance.Unnecessary:
-                    return ImportanceBasedCalculation(data, savedAmount, savingRatio * 4, entryType);
-
-                default:
-                    return savedAmount;
-
-            }
+            return dataEntry.Importance == (int)Importance.Necessary 
+                   || ImportanceBasedCalculation(dataEntry, SavingRatio * (dataEntry.Importance - 1), entryType);
         }
 
-        private decimal ImportanceBasedCalculation(DataEntry data, decimal savedAmount, decimal savingRatio, EntryType entryType)
+        // ImportanceBasedCalculation always returns true, doesn't really make sense for a method to always return true
+        private bool ImportanceBasedCalculation(DataEntry dataEntry, decimal importanceBasedSavingRatio, EntryType entryType)
         {
-            if (SavingChoice == SavingType.Minimal)
-            {
-                savedAmount += (data.Amount * (minimalSavingValue * savingRatio));
-                if (entryType == EntryType.Income)
-                {
-                    AddToIncomeOfferList(data.Id, data.Amount * (minimalSavingValue * savingRatio));
-                }
-                else if (entryType == EntryType.Expense)
-                {
-                    AddToExpensesOfferList(data.Id, data.Amount * (minimalSavingValue * savingRatio));
-                }
-                return savedAmount;
-            }
+              switch (_savingType)
+              {
+                  case SavingType.Minimal:
+                      switch (entryType)
+                      {
+                          case EntryType.Income:
+                              AddToIncomeOfferList(dataEntry, dataEntry.Amount * MinimalSavingValue * importanceBasedSavingRatio);
+                              break;
+                          case EntryType.Expense:
+                              AddToExpensesOfferList(dataEntry, dataEntry.Amount * MinimalSavingValue * importanceBasedSavingRatio);
+                              break;
+                          default:
+                              throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
+                      }
+                      return true;
+                  case SavingType.Maximal:
+                  {
+                      var maximalSaving = MaximalSavingValue * importanceBasedSavingRatio >= 1;
 
-            else if (SavingChoice == SavingType.Maximal) // change from string to enum
-            {
-                decimal temp;
+                      var temp = maximalSaving ? 1M : MaximalSavingValue;
 
-                bool maximalSaving = (maximalSavingValue * savingRatio) >= 1;
-
-                if (maximalSaving)
-                {
-                    temp = 1M; //Hardcoded 1, due to nature of maximal saving theory
-                }
-                else
-                {
-                    temp = maximalSavingValue;
-                }
-
-                savedAmount += (data.Amount * temp);
-                if (entryType == EntryType.Income)
-                {
-                    AddToIncomeOfferList(data.Id, data.Amount * temp);
-                }
-                else if (entryType == EntryType.Expense)
-                {
-                    AddToExpensesOfferList(data.Id, data.Amount * temp);
-                }
-                return savedAmount;
-            }
-
-            else if (SavingChoice == SavingType.Regular)
-            {
-                savedAmount += (data.Amount * (regularSavingValue * savingRatio));
-                if (entryType == EntryType.Income)
-                {
-                    AddToIncomeOfferList(data.Id, data.Amount * (regularSavingValue * savingRatio));
-                }
-                else if (entryType == EntryType.Expense)
-                {
-                    AddToExpensesOfferList(data.Id, data.Amount * (regularSavingValue * savingRatio));
-                }
-                return savedAmount;
-            }
-            return savedAmount;
+                      switch (entryType)
+                      {
+                          case EntryType.Income:
+                              AddToIncomeOfferList(dataEntry, dataEntry.Amount * temp);
+                              break;
+                          case EntryType.Expense:
+                              AddToExpensesOfferList(dataEntry, dataEntry.Amount * temp);
+                              break;
+                          default:
+                              throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
+                      }
+                      return true;
+                  }
+                  case SavingType.Regular:
+                      switch (entryType)
+                      {
+                          case EntryType.Income:
+                              AddToIncomeOfferList(dataEntry, dataEntry.Amount * RegularSavingValue * importanceBasedSavingRatio);
+                              break;
+                          case EntryType.Expense:
+                              AddToExpensesOfferList(dataEntry, dataEntry.Amount * RegularSavingValue * importanceBasedSavingRatio);
+                              break;
+                          default:
+                              throw new ArgumentOutOfRangeException(nameof(entryType), entryType, null);
+                      }
+                      break;
+                  default:
+                      throw new ArgumentOutOfRangeException();
+              }
+              return true;
         }
 
-        private void AddToIncomeOfferList(int id, decimal amount)
+
+        private void AddToIncomeOfferList(DataEntry entry, decimal amountAfterSaving)
         {
-            OfferData newIncomeOffers = new OfferData(id, amount);
-            IncomeOffers.Add(newIncomeOffers);
+            var newIncomeOffer = new EntrySuggestion(entry, amountAfterSaving);
+            IncomeOffers.Add(newIncomeOffer);
         }
-        private void AddToExpensesOfferList(int id, decimal amount)
+
+        private void AddToExpensesOfferList(DataEntry entry, decimal amountAfterSaving)
         {
-            OfferData newExpensesOffers = new OfferData(id, amount);
-            ExpensesOffers.Add(newExpensesOffers);
+            var newExpensesOffer = new EntrySuggestion(entry, amountAfterSaving);
+            ExpensesOffers.Add(newExpensesOffer);
+        }
+
+        private static void AddToExpensesOfferList(DataEntry entry, decimal amountAfterSaving, ICollection<EntrySuggestion> entrySuggestions)
+        {
+            var newExpensesOffer = new EntrySuggestion(entry, amountAfterSaving);
+            entrySuggestions.Add(newExpensesOffer);
         }
     }
 }
