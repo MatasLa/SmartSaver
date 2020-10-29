@@ -47,7 +47,7 @@ namespace ePiggy.DataManagement
         public bool GetSuggestedExpensesOffers(List<DataEntry> entryList, Goal goal, SavingType savingType, List<EntrySuggestion> entrySuggestions)
         {
             _savingType = savingType;
-            var savedAmount = 0M;
+            var savedAmount = _dataTotalsCalculator.GetBalanceUntilEndOfThisMonth();
             var groupedByImportance = _dataFilter.GroupByImportance(entryList);
 
             for (var i = (int)Importance.Unnecessary; i > (int)Importance.Necessary; i--)
@@ -188,7 +188,7 @@ namespace ePiggy.DataManagement
 
         private static void AddToExpensesOfferList(DataEntry entry, decimal amountAfterSaving, ICollection<EntrySuggestion> entrySuggestions)
         {
-            var newExpensesOffer = new EntrySuggestion(entry, amountAfterSaving);
+            var newExpensesOffer = new EntrySuggestion(entry, decimal.Round(amountAfterSaving,2));
             entrySuggestions.Add(newExpensesOffer);
         }
     }
