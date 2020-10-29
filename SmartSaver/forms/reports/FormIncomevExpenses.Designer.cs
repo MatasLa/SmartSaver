@@ -214,12 +214,12 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label labelPrevious;
-        private System.Windows.Forms.PictureBox pictureBoxPrevious;
+        private volatile System.Windows.Forms.PictureBox pictureBoxPrevious;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label labelCurrent;
-        private System.Windows.Forms.PictureBox pictureBoxCurrent;
+        private volatile System.Windows.Forms.PictureBox pictureBoxCurrent;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelTotal;
-        private System.Windows.Forms.PictureBox pictureBoxTotal;
+        private volatile System.Windows.Forms.PictureBox pictureBoxTotal;
     }
 }

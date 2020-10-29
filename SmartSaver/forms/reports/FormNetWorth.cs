@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using ePiggy.Utilities;
 
@@ -41,8 +42,12 @@ namespace ePiggy.Forms.Reports
                 oldestMonth = TimeManager.MoveToNextMonth(oldestMonth);
             }
 
-            pictureBoxBarGraph.Image =
-                GraphDrawer.DrawMultipleVarBarChart(name, valueList, namesList, (int)highestValue, _defaultSize);
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                var image = GraphDrawer.DrawMultipleVarBarChart(name, valueList, namesList, (int)highestValue, _defaultSize);
+                pictureBoxBarGraph.Image = image;
+            }).Start();
         }
     }
 }

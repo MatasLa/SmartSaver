@@ -1,4 +1,7 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
 using ePiggy.Forms.Finances.Budget;
 using ePiggy.Forms.Finances.Goals;
 
@@ -87,6 +90,16 @@ namespace ePiggy.Utilities
         {
             var strCurrency = NumberFormatter.FormatCurrency(value);
             label.Text = strCurrency;
+        }
+
+        public static void CreateAndDisplayPieChart(PictureBox pictureBox, List<decimal> valuesList, List<string> namesList, List<string> colorsList, Size size)
+        {
+            new Thread(() =>
+            {
+                Thread.CurrentThread.IsBackground = true;
+                var image = GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, colorsList, size);
+                pictureBox.Image = image;
+            }).Start();
         }
     }
 }

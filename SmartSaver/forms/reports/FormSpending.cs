@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using ePiggy.Utilities;
 
@@ -36,48 +37,28 @@ namespace ePiggy.Forms.Reports
         {
             var previousMonth = TimeManager.MoveToPreviousMonth(DateTime.Today);
             labelPrevious.Text = previousMonth.ToString("MMMM");
-            ShowSpending(previousMonth, pictureBoxPrevious);
+            ShowSpending(pictureBoxPrevious, previousMonth);
         }
 
         private void ShowSpendingCurrentMonth()
         {
             labelCurrent.Text = DateTime.Today.ToString("MMMM");
-            ShowSpending(DateTime.Today, pictureBoxCurrent);
+            ShowSpending(pictureBoxCurrent, DateTime.Today);
         }
 
-        private void ShowSpending(DateTime month, PictureBox pictureBox)
+        private void ShowSpending(PictureBox pictureBox, DateTime? month = null)
         {
             var valuesList = new List<decimal>();
             var namesList = new List<string>();
 
-            foreach (var importance in from importance in Handler.ImportanceList
-                let value = _handler.DataTotalsCalculator.GetTotaledExpenses(importance, month)
-                where value > 0 select importance)
+            foreach (var importance in Handler.ImportanceList)
             {
-                valuesList.Add(_handler.DataTotalsCalculator.GetTotaledExpenses(importance, month));
+                var value = month is null ? _handler.DataTotalsCalculator.GetTotaledExpenses(importance) : _handler.DataTotalsCalculator.GetTotaledExpenses(importance, (DateTime) month);
+                if (value <= 0) continue;
+                valuesList.Add(value);
                 namesList.Add(importance.ToString());
             }
-
-            pictureBox.Image =
-                GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, GraphDrawer.ColorsList, GraphDrawer.DefaultSize);
-        }
-
-
-        private void ShowSpending(PictureBox pictureBox)
-        {
-            var valuesList = new List<decimal>();
-            var namesList = new List<string>();
-
-            foreach (var importance in from importance in Handler.ImportanceList
-                                       let value = _handler.DataTotalsCalculator.GetTotaledExpenses(importance)
-                                       where value > 0 select importance)
-            {
-                valuesList.Add(_handler.DataTotalsCalculator.GetTotaledExpenses(importance));
-                namesList.Add(importance.ToString());
-            }
-
-            pictureBox.Image =
-                GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, GraphDrawer.ColorsList, GraphDrawer.DefaultSize);
+            FormUtilities.CreateAndDisplayPieChart(pictureBox, valuesList, namesList, GraphDrawer.DefaultColorsList, GraphDrawer.DefaultSize);
         }
 
     }

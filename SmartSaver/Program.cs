@@ -15,9 +15,9 @@ namespace ePiggy
             Application.SetCompatibleTextRenderingDefault(false);
 
             var handler = new Handler();
-            //Application.Run(new FormMain(handler));
+            Application.Run(new FormMain(handler));
 
-            Application.Run(new FormLogIn(handler));
+            //Application.Run(new FormLogIn(handler));
         }
     }
 }

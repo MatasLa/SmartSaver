@@ -65,9 +65,7 @@ namespace ePiggy.Forms.Reports
                 valuesList.Add(expenses);
                 namesList.Add("Expenses");
             }
-
-            pictureBox.Image =
-                GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, GraphDrawer.ColorsList, GraphDrawer.DefaultSize);
+            FormUtilities.CreateAndDisplayPieChart(pictureBox, valuesList, namesList, GraphDrawer.DefaultColorsList, GraphDrawer.DefaultSize);
         }
     }
 }

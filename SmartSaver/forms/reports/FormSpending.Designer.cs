@@ -233,9 +233,9 @@
         private System.Windows.Forms.PictureBox picture;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBoxPrevious;
-        private System.Windows.Forms.PictureBox pictureBoxCurrent;
-        private System.Windows.Forms.PictureBox pictureBoxTotal;
+        private volatile System.Windows.Forms.PictureBox pictureBoxPrevious;
+        private volatile System.Windows.Forms.PictureBox pictureBoxCurrent;
+        private volatile System.Windows.Forms.PictureBox pictureBoxTotal;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label labelPrevious;
