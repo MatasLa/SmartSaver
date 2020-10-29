@@ -48,7 +48,7 @@ namespace ePiggy.Forms.Finances.Goals
         {
             _target = Goal.Price;
             _saved = _handler.DataTotalsCalculator.GetBalancesUntilToday();
-            _progress = DataCalculations.CalculateProgress(_saved, _target);
+            _progress = SuggestionsCalculator.CalculateProgress(_saved, _target);
 
 
             labelTitle.Text = Goal.Title;
@@ -73,7 +73,7 @@ namespace ePiggy.Forms.Finances.Goals
                 var entries = _handler.DataFilter.GetExpensesUntilEndOfThisMonth();
                 labelCanSave.Text = _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, savingType, entrySuggestions) ? CanSave : CannotSave;
 
-                dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(entrySuggestions);
+                dataGridView.DataSource = DataTableConverter.GenerateSuggestionTable(entrySuggestions);
 
                 dataGridView.Columns["ID"].Visible = false;
                 dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";

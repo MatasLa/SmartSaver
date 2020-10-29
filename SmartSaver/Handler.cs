@@ -9,38 +9,33 @@ namespace ePiggy
 {
     public class Handler
     {
-
-        public static List<Importance> ImportanceList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
+        public static IEnumerable<Importance> ImportanceList { get; } = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
 
         public DateTime Time { get; set; }
 
         public Data Data { get; }
 
-        public DataTableConverter DataTableConverter { get; }
-
         public DataFilter DataFilter { get; }
 
         public DataTotalsCalculator DataTotalsCalculator { get; }
 
-        public DataJson DataJson{ get; }
+        public JSONWriter DataJson{ get; }
 
-        public DataCalculations DataCalculations { get; }
+        public SuggestionsCalculator DataCalculations { get; }
 
         public MonthlyUpdater MonthlyUpdater { get; }
 
-        public static HttpClient HttpClient = new HttpClient();
-        public static int UserId { get; set; }
+        public static HttpClient HttpClient { get; } = new HttpClient();
 
+        public static int UserId { get; set; }
 
         public Handler()
         {
-            HttpClient = new HttpClient();
             Data = new Data();
-            DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
             DataTotalsCalculator = new DataTotalsCalculator(Data, DataFilter);
-            DataCalculations = new DataCalculations(Data, DataFilter, DataTotalsCalculator);
-            DataJson = new DataJson(Data);
+            DataCalculations = new SuggestionsCalculator(Data, DataFilter, DataTotalsCalculator);
+            DataJson = new JSONWriter(Data);
             MonthlyUpdater = new MonthlyUpdater(DataFilter, Data);
 
             //Init();
@@ -74,6 +69,5 @@ namespace ePiggy
             Data.Expenses.Clear();
             Data.GoalsList.Clear();
         }
-        
     }
 }

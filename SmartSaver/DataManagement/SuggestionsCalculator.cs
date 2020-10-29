@@ -4,7 +4,7 @@ using ePiggy.Utilities;
 
 namespace ePiggy.DataManagement
 {
-    public class DataCalculations
+    public class SuggestionsCalculator
     {
         private readonly Data _data;
         private readonly DataFilter _dataFilter;
@@ -20,7 +20,7 @@ namespace ePiggy.DataManagement
 
         private List<EntrySuggestion> IncomeOffers { get; } = new List<EntrySuggestion>();
         private List<EntrySuggestion> ExpensesOffers { get; } = new List<EntrySuggestion>();
-        public DataCalculations(Data data, DataFilter dataFilter, DataTotalsCalculator dataTotalsCalculator)
+        public SuggestionsCalculator(Data data, DataFilter dataFilter, DataTotalsCalculator dataTotalsCalculator)
         {
             _data = data;
             _dataFilter = dataFilter;

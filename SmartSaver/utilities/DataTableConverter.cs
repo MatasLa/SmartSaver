@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using ePiggy.Utilities;
+using ePiggy.DataManagement;
 
-namespace ePiggy.DataManagement
+namespace ePiggy.Utilities
 {
-    public class DataTableConverter
+    public static class DataTableConverter
     {
-        private readonly Data _data;
-        public DataTableConverter(Data data)
-        {
-            _data = data;
-        }
-
-        public DataTable GenerateSuggestionTable(List<EntrySuggestion> entrySuggestions)
+        public static DataTable GenerateSuggestionTable(IEnumerable<EntrySuggestion> entrySuggestions)
         {
             var dt = GenerateSuggestionTableHeaders();
 
@@ -26,29 +20,18 @@ namespace ePiggy.DataManagement
             return dt;
         }
 
-        private DataTable GenerateSuggestionTableHeaders()
+        private static DataTable GenerateSuggestionTableHeaders()
         {
             var dt = GenerateEntryTableHeaders();
             dt.Columns.Add("Suggested Amount", typeof(decimal));
             return dt;
         }
 
-        public DataTable GenerateEntryTable(EntryType entryType)//All entries
-        {
-            var dt = GenerateEntryTableHeaders();
-            var dataEntries = entryType == EntryType.Expense ? _data.Expenses : _data.Income;
-            foreach (var data in dataEntries)
-            {
-                dt.Rows.Add(data.Id, data.Title, data.Amount, data.Date, data.Importance, data.IsMonthly);
-            }
-            return dt;
-        }
-
         /*Takes list from DataFilter and creates income or expenses DataTable, used to get DataTable of filtered List*/
-        public static DataTable GenerateEntryTable(List<DataEntry> customList)
+        public static DataTable GenerateEntryTable(IEnumerable<DataEntry> entryList)
         {
             var dt = GenerateEntryTableHeaders();
-            foreach (var dataEntry in customList)
+            foreach (var dataEntry in entryList)
             {
                 dt.Rows.Add(dataEntry.Id, dataEntry.Title, dataEntry.Amount, dataEntry.Date, dataEntry.Importance, dataEntry.IsMonthly);
             }

@@ -2,14 +2,14 @@
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using ePiggy.Utilities;
+using ePiggy.DataManagement;
 
-namespace ePiggy.DataManagement
+namespace ePiggy.Utilities
 {
-    public class DataJson
+    public class JSONWriter
     {
 		private readonly Data _data;
-		public DataJson(Data data)
+		public JSONWriter(Data data)
 		{
 			_data = data;
 		}

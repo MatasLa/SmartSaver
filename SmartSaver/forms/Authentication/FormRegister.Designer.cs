@@ -1,6 +1,6 @@
 ﻿using ePiggy.Forms.CustomControls;
 
-namespace ePiggy.Forms.Auth
+namespace ePiggy.Forms.Authentication
 {
     partial class FormRegister
     {

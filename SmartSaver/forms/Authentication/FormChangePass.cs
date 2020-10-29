@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using ePiggy.Authentication;
-using ePiggy.Forms;
 using ePiggy.Utilities;
 
-namespace ePiggy.Forms.Auth
+namespace ePiggy.Forms.Authentication
 {
     public partial class FormChangePass : Form
     {

@@ -1,6 +1,4 @@
-﻿using ePiggy.utilities;
-
-namespace ePiggy.DataManagement
+﻿namespace ePiggy.Utilities
 {
     public class QueueList<T>
     {

@@ -13,7 +13,6 @@ namespace ePiggy.Forms.Finances.Budget
     {
         private readonly Handler _handler;
         private readonly Data _data;
-        private readonly DataTableConverter _dataTableConverter;
         private readonly DataFilter _dataFilter;
         private readonly DataTotalsCalculator _dataTotalsCalculator;
         private DataTable _dataTable;
@@ -48,7 +47,6 @@ namespace ePiggy.Forms.Finances.Budget
             InitializeComponent();
             _handler = handler;
             _data = handler.Data;
-            _dataTableConverter = handler.DataTableConverter;
             _dataFilter = handler.DataFilter;
             _dataTotalsCalculator = handler.DataTotalsCalculator;
             _entryType = entryType;
@@ -300,7 +298,7 @@ namespace ePiggy.Forms.Finances.Budget
 
         private void GenerateAllTable()
         {
-            _dataTable = _dataTableConverter.GenerateEntryTable(EntryType);
+            _dataTable = DataTableConverter.GenerateEntryTable(EntryType == EntryType.Income ? _data.Income : _data.Expenses);
         }
 
         private void DisplayBalances()

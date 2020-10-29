@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using ePiggy.Forms;
-using ePiggy.Forms.Auth;
+using ePiggy.Forms.Authentication;
 
 namespace ePiggy.Utilities
 {

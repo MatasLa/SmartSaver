@@ -1,4 +1,4 @@
-﻿namespace ePiggy.Forms.Auth
+﻿namespace ePiggy.Forms.Authentication
 {
     partial class FormChangePass
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using ePiggy.Forms.Auth;
+using ePiggy.Forms.Authentication;
 using ePiggy.Forms.Finances.Budget;
 using ePiggy.Forms.Finances.Goals;
 using ePiggy.Forms.Reports;

@@ -3,11 +3,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using ePiggy.Authentication;
-using ePiggy.Forms;
 using ePiggy.Forms.CustomForms;
 using ePiggy.Utilities;
 
-namespace ePiggy.Forms.Auth
+namespace ePiggy.Forms.Authentication
 {
     public partial class FormLogIn : Form
 

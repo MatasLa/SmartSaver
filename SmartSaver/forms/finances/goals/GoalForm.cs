@@ -39,7 +39,7 @@ namespace ePiggy.Forms.Finances.Goals
         {
             _target = Goal.Price;
             _saved = _handler.DataTotalsCalculator.GetBalancesUntilToday();
-            _progress = DataCalculations.CalculateProgress(_saved, _target);
+            _progress = SuggestionsCalculator.CalculateProgress(_saved, _target);
 
             labelTitle.Text = Goal.Title;
             labelProgress.Text =
