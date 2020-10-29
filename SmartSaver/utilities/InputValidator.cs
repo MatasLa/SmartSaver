@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
-using ePiggy.Forms;
 using ePiggy.Forms.Authentication;
 
 namespace ePiggy.Utilities
@@ -12,16 +11,9 @@ namespace ePiggy.Utilities
 
         public static bool RegisterValidation(FormRegister form, string email, string pass, string passConfirm)
         {
-            if (!IsValidEmail(email))
-            {
-                form.ChangeErrorText(0);
-                return false;
-            }
-            if (!IsValidPassword(form, pass, passConfirm))
-            {
-                return false;
-            }
-            return true;
+            if (IsValidEmail(email)) return IsValidPassword(form, pass, passConfirm);
+            form.ChangeErrorText(0);
+            return false;
         }
 
         private static bool IsValidPassword(FormRegister form, string password, string confirmPass)
@@ -74,7 +66,7 @@ namespace ePiggy.Utilities
                                       RegexOptions.None, TimeSpan.FromMilliseconds(200));
 
                 // Examines the domain part of the email and normalizes it.
-                string DomainMapper(Match match)
+                static string DomainMapper(Match match)
                 {
                     // Use IdnMapping class to convert Unicode domain names.
                     var idn = new IdnMapping();
@@ -125,11 +117,7 @@ namespace ePiggy.Utilities
                 return false;
             }
 
-            if (symbols < 1)
-            {
-                return false;
-            }
-            return true;
+            return symbols >= 1;
         }
 
         public static bool IsCurrencyInputValid(string str)

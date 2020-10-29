@@ -8,7 +8,7 @@ namespace ePiggy.Utilities
 
         public static int DifferenceInMonths(DateTime laterTime, DateTime earlierTime)
         {
-            return ((laterTime.Year - earlierTime.Year) * 12) + laterTime.Month - earlierTime.Month;
+            return (laterTime.Year - earlierTime.Year) * 12 + laterTime.Month - earlierTime.Month;
         }
 
         public static DateTime GetBeginningOfMonth(DateTime dateTime)

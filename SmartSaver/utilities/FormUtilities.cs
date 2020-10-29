@@ -17,7 +17,6 @@ namespace ePiggy.Utilities
         {
             if (activeForm != null)
             {
-                //kazkaip noreciau sita pakeisti, kad butu platesnio naudojimo
                 if (IsSameFormAlreadyOpen(activeForm, childForm))
                 {
                     switch (activeForm)
