@@ -9,6 +9,7 @@ namespace ePiggy.Forms.Reports
 {
     public partial class FormNetWorth : Form
     {
+        private readonly Size _defaultSize =  new Size(999,600);
         private readonly Handler _handler;
         public FormNetWorth(Handler handler)
         {
@@ -40,10 +41,8 @@ namespace ePiggy.Forms.Reports
                 oldestMonth = TimeManager.MoveToNextMonth(oldestMonth);
             }
 
-            var size = new Size(999,600);
-
             pictureBoxBarGraph.Image =
-                GraphDrawer.DrawMultipleVarBarChart(name, valueList, namesList, (int)highestValue, size);
+                GraphDrawer.DrawMultipleVarBarChart(name, valueList, namesList, (int)highestValue, _defaultSize);
         }
     }
 }
