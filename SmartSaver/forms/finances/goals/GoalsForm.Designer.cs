@@ -41,7 +41,6 @@
             this.panelGoal4 = new System.Windows.Forms.Panel();
             this.buttonAddGoal5 = new System.Windows.Forms.Button();
             this.panelMain = new System.Windows.Forms.Panel();
-            this.labelPlaceholder = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.panelGoal0.SuspendLayout();
@@ -49,7 +48,6 @@
             this.panelGoal2.SuspendLayout();
             this.panelGoal3.SuspendLayout();
             this.panelGoal4.SuspendLayout();
-            this.panelMain.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -85,7 +83,7 @@
             this.flowLayoutPanel2.TabIndex = 0;
             this.flowLayoutPanel2.WrapContents = false;
             // 
-            // panelGoal1
+            // panelGoal0
             // 
             this.panelGoal0.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelGoal0.Controls.Add(this.buttonAddGoal1);
@@ -98,15 +96,16 @@
             // buttonAddGoal1
             // 
             this.buttonAddGoal1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddGoal1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddGoal1.Location = new System.Drawing.Point(110, 80);
             this.buttonAddGoal1.Name = "buttonAddGoal1";
             this.buttonAddGoal1.Size = new System.Drawing.Size(77, 73);
             this.buttonAddGoal1.TabIndex = 0;
-            this.buttonAddGoal1.Text = "+";
+            this.buttonAddGoal1.Text = "➕";
             this.buttonAddGoal1.UseVisualStyleBackColor = true;
             this.buttonAddGoal1.Click += new System.EventHandler(this.AddGoalButtonClick);
             // 
-            // panelGoal2
+            // panelGoal1
             // 
             this.panelGoal1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelGoal1.Controls.Add(this.buttonAddGoal2);
@@ -119,15 +118,16 @@
             // buttonAddGoal2
             // 
             this.buttonAddGoal2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddGoal2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddGoal2.Location = new System.Drawing.Point(112, 76);
             this.buttonAddGoal2.Name = "buttonAddGoal2";
             this.buttonAddGoal2.Size = new System.Drawing.Size(77, 73);
             this.buttonAddGoal2.TabIndex = 0;
-            this.buttonAddGoal2.Text = "+";
+            this.buttonAddGoal2.Text = "➕";
             this.buttonAddGoal2.UseVisualStyleBackColor = true;
             this.buttonAddGoal2.Click += new System.EventHandler(this.AddGoalButtonClick);
             // 
-            // panelGoal3
+            // panelGoal2
             // 
             this.panelGoal2.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelGoal2.Controls.Add(this.buttonAddGoal3);
@@ -140,15 +140,16 @@
             // buttonAddGoal3
             // 
             this.buttonAddGoal3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddGoal3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddGoal3.Location = new System.Drawing.Point(112, 76);
             this.buttonAddGoal3.Name = "buttonAddGoal3";
             this.buttonAddGoal3.Size = new System.Drawing.Size(77, 73);
             this.buttonAddGoal3.TabIndex = 0;
-            this.buttonAddGoal3.Text = "+";
+            this.buttonAddGoal3.Text = "➕";
             this.buttonAddGoal3.UseVisualStyleBackColor = true;
             this.buttonAddGoal3.Click += new System.EventHandler(this.AddGoalButtonClick);
             // 
-            // panelGoal4
+            // panelGoal3
             // 
             this.panelGoal3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelGoal3.Controls.Add(this.buttonAddGoal4);
@@ -161,15 +162,16 @@
             // buttonAddGoal4
             // 
             this.buttonAddGoal4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddGoal4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddGoal4.Location = new System.Drawing.Point(112, 76);
             this.buttonAddGoal4.Name = "buttonAddGoal4";
             this.buttonAddGoal4.Size = new System.Drawing.Size(77, 73);
             this.buttonAddGoal4.TabIndex = 0;
-            this.buttonAddGoal4.Text = "+";
+            this.buttonAddGoal4.Text = "➕";
             this.buttonAddGoal4.UseVisualStyleBackColor = true;
             this.buttonAddGoal4.Click += new System.EventHandler(this.AddGoalButtonClick);
             // 
-            // panelGoal5
+            // panelGoal4
             // 
             this.panelGoal4.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panelGoal4.Controls.Add(this.buttonAddGoal5);
@@ -182,38 +184,26 @@
             // buttonAddGoal5
             // 
             this.buttonAddGoal5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddGoal5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAddGoal5.Location = new System.Drawing.Point(112, 76);
             this.buttonAddGoal5.Name = "buttonAddGoal5";
             this.buttonAddGoal5.Size = new System.Drawing.Size(77, 73);
             this.buttonAddGoal5.TabIndex = 0;
-            this.buttonAddGoal5.Text = "+";
+            this.buttonAddGoal5.Text = "➕";
             this.buttonAddGoal5.UseVisualStyleBackColor = true;
             this.buttonAddGoal5.Click += new System.EventHandler(this.AddGoalButtonClick);
             // 
             // panelMain
             // 
-            this.panelMain.Controls.Add(this.labelPlaceholder);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 275);
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(1393, 626);
             this.panelMain.TabIndex = 2;
             // 
-            // labelPlaceholder
-            // 
-            this.labelPlaceholder.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelPlaceholder.AutoSize = true;
-            this.labelPlaceholder.Font = new System.Drawing.Font("Microsoft Sans Serif", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelPlaceholder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(109)))), ((int)(((byte)(193)))));
-            this.labelPlaceholder.Location = new System.Drawing.Point(548, 298);
-            this.labelPlaceholder.Name = "labelPlaceholder";
-            this.labelPlaceholder.Size = new System.Drawing.Size(348, 52);
-            this.labelPlaceholder.TabIndex = 0;
-            this.labelPlaceholder.Text = "PLACEHOLDER";
-            // 
             // GoalsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1393, 901);
@@ -233,8 +223,6 @@
             this.panelGoal2.ResumeLayout(false);
             this.panelGoal3.ResumeLayout(false);
             this.panelGoal4.ResumeLayout(false);
-            this.panelMain.ResumeLayout(false);
-            this.panelMain.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -253,6 +241,5 @@
         private System.Windows.Forms.Button buttonAddGoal4;
         private System.Windows.Forms.Button buttonAddGoal5;
         private System.Windows.Forms.Panel panelMain;
-        private System.Windows.Forms.Label labelPlaceholder;
     }
 }

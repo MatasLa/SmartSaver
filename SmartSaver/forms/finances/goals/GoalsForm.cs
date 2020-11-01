@@ -117,18 +117,7 @@ namespace ePiggy.Forms.Finances.Goals
 
         private void AddGoalButtonClick(object sender, EventArgs e)
         {
-            var goal = new Goal();
-            if (!OpenGoalDialog(goal)) return;
-            if (goal.Price == 0)
-            {
-                _handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
-            }
-            else
-            {
-                _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price, 0);
-            }
-            //_handler.Data.AddGoal(Handler.UserId, goal.Title, 0);
-            UpdateDisplay();
+            AddGoalWithDialog();
         }
 
         public void RemoveGoal(Goal goal)
@@ -136,10 +125,41 @@ namespace ePiggy.Forms.Finances.Goals
             _handler.Data.RemoveGoal(goal.Id);
         }
 
-        private bool OpenGoalDialog(Goal goal)
+        private void EditGoal(Goal goal)
         {
-            return new GoalDialogForm(goal, _handler).ShowDialog() == DialogResult.OK;
+            _handler.Data.EditGoal(goal.Id, goal.Title, goal.Price);
         }
-        
+
+        private void AddGoal(Goal goal)
+        {
+            if (goal.Price == 0)
+            {
+                _handler.Data.AddGoal(Handler.UserId, goal.Title);
+            }
+            else
+            {
+                _handler.Data.AddGoal(Handler.UserId, goal.Title, goal.Price);
+            }
+        }
+
+        private bool OpenGoalDialogForm(Goal goal, GoalDialogForm.Type type)
+        {
+            return new GoalDialogForm(goal, _handler, type).ShowDialog() == DialogResult.OK;
+        }
+
+        public void EditGoalWithDialog(Goal goal)
+        {
+            if (!OpenGoalDialogForm(goal, GoalDialogForm.Type.Edit)) return;
+            EditGoal(goal);
+            UpdateDisplay();
+        }
+
+        private void AddGoalWithDialog()
+        {
+            var goal = new Goal();
+            if (!OpenGoalDialogForm(goal, GoalDialogForm.Type.Add)) return;
+            AddGoal(goal);
+            UpdateDisplay();
+        }
     }
 }

@@ -15,6 +15,7 @@ namespace ePiggy.Forms.Finances.Budget
         private readonly Data _data;
         private readonly DataTableConverter _dataTableConverter;
         private readonly DataFilter _dataFilter;
+        private readonly DataTotalsCalculator _dataTotalsCalculator;
         private DataTable _dataTable;
 
         private readonly Image _selectedLessButton = new Bitmap(Properties.Resources.lessButtonSelected);
@@ -28,8 +29,9 @@ namespace ePiggy.Forms.Finances.Budget
         private const string AddExpensesButtonTitle = "Add Expense";
 
         private Form _activeForm;
-
         private EntryType _entryType;
+
+        private readonly List<Label> _importanceLabelList = new List<Label>();
 
         public EntryType EntryType
         {
@@ -48,7 +50,15 @@ namespace ePiggy.Forms.Finances.Budget
             _data = handler.Data;
             _dataTableConverter = handler.DataTableConverter;
             _dataFilter = handler.DataFilter;
+            _dataTotalsCalculator = handler.DataTotalsCalculator;
             _entryType = entryType;
+
+            _importanceLabelList.Add(labelValueNecessary);
+            _importanceLabelList.Add(labelValueHighImportance);
+            _importanceLabelList.Add(labelValueMediumImportance);
+            _importanceLabelList.Add(labelValueLowImportance);
+            _importanceLabelList.Add(labelValueUnnecessary);
+
             Init();
         }
 
@@ -84,6 +94,7 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 _data.AddExpense(Handler.UserId, entry.Amount, entry.Title, entry.Date, entry.IsMonthly, entry.Importance);
             }
+
             _handler.MonthlyUpdater.UpdateMonthlyEntries(Handler.UserId);
         }
 
@@ -97,6 +108,7 @@ namespace ePiggy.Forms.Finances.Budget
             {
                 _data.EditExpensesItem(entry.Id, entry.Title, entry.Amount, entry.Date, entry.IsMonthly, entry.Importance);
             }
+
             _handler.MonthlyUpdater.UpdateMonthlyEntries(Handler.UserId);
         }
 
@@ -264,81 +276,85 @@ namespace ePiggy.Forms.Finances.Budget
             DisplayDate();
             GenerateTable();
             DisplayTable();
-            DisplayBalance();
-            DisplayTotalBalance();
+            DisplayBalances();
         }
 
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private void DisplayTable()
         {
             dataGridView.DataSource = _dataTable;
-
-            if (!DataTableErrorCheck()) return;
             dataGridView.Columns["ID"].Visible = false;
-            dataGridView.Columns["Importance"].Visible = false;
             dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
             dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
         }
-
-
-        private bool DataTableErrorCheck()
-        {
-            if (dataGridView.Columns["ID"] is null)
-            {
-                ExceptionHandler.Log("Data Table Generation Error: NO ID COLUMN");
-                return false;
-            }
-            if (dataGridView.Columns["Importance"] is null)
-            {
-                ExceptionHandler.Log("Data Table Generation Error: NO IMPORTANCE COLUMN");
-                return false;
-            }
-            if (dataGridView.Columns["Amount"] is null)
-            {
-                ExceptionHandler.Log("Data Table Generation Error: NO AMOUNT COLUMN");
-                return false;
-            }
-            if (dataGridView.Columns["Date"] is null)
-            {
-                ExceptionHandler.Log("Data Table Generation Error: NO DATE COLUMN");
-                return false;
-            }
-
-            return true;
-        }
-
-
 
         private void GenerateTable()
         {
             _dataTable = EntryType switch
             {
-                EntryType.Income => _dataTableConverter.CustomTable(_dataFilter.GetIncome(_handler.Time)),
-                EntryType.Expense => _dataTableConverter.CustomTable(_dataFilter.GetExpenses(_handler.Time)),
+                EntryType.Income => DataTableConverter.GenerateEntryTable(_dataFilter.GetIncome(_handler.Time)),
+                EntryType.Expense => DataTableConverter.GenerateEntryTable(_dataFilter.GetExpenses(_handler.Time)),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
         private void GenerateAllTable()
         {
-            _dataTable = EntryType switch
-            {
-                EntryType.Income => _dataTableConverter.IncomeTable(),
-                EntryType.Expense => _dataTableConverter.ExpensesTable(),
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            _dataTable = _dataTableConverter.GenerateEntryTable(EntryType);
+        }
+
+        private void DisplayBalances()
+        {
+            DisplayBalance();
+            DisplayMonthlyTotal();
+            DisplayTotalBalance();
+            DisplayBalanceUntilToday();
+            DisplayBalanceUntilEndOfMonth();
+            DisplayImportance();
+        }
+
+        private void DisplayMonthlyTotal()
+        {
+            var value = EntryType == EntryType.Expense ? _dataTotalsCalculator.GetTotaledExpenses(_handler.Time) : _dataTotalsCalculator.GetTotaledIncome(_handler.Time);
+            FormUtilities.DisplayCurrency(labelValueMonths, value);
         }
 
         private void DisplayBalance()
         {
-            var balance = _dataFilter.GetBalance(_handler.Time);
-            FormUtilities.DisplayCurrencyTextWithColor(labelBalance, balance);
+            var balance = _dataTotalsCalculator.GetBalance(_handler.Time);
+            FormUtilities.DisplayCurrencyTextWithColor(labelValueMonthlyBalance, balance);
         }
 
         private void DisplayTotalBalance()
         {
-            var balance = _handler.DataFilter.GetBalance();
-            FormUtilities.DisplayCurrencyTextWithColor(labelTotalBalanceValue, balance);
+            var balance = _handler.DataTotalsCalculator.GetBalance();
+            FormUtilities.DisplayCurrencyTextWithColor(labelValueTotalBalance, balance);
+        }
+
+        private void DisplayBalanceUntilToday()
+        {
+            var balance = _handler.DataTotalsCalculator.GetBalancesUntilToday();
+            FormUtilities.DisplayCurrencyTextWithColor(labelValueBalanceUntilToday, balance);
+        }
+
+        private void DisplayBalanceUntilEndOfMonth()
+        {
+            var balance = _handler.DataTotalsCalculator.GetBalanceUntilEndOfThisMonth();
+            FormUtilities.DisplayCurrencyTextWithColor(labelValueBalanceEndOfMonth, balance);
+        }
+
+        private void DisplayImportance()
+        {
+            for (var i = 1; i <= 5; i++)
+            {
+                var value = EntryType switch
+                {
+                    EntryType.Income => _handler.DataTotalsCalculator.GetTotaledIncome((Importance)i, _handler.Time),
+                    EntryType.Expense => _handler.DataTotalsCalculator.GetTotaledExpenses((Importance)i, _handler.Time),
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+                FormUtilities.DisplayCurrency(_importanceLabelList[i - 1], value);
+            }
         }
 
         private void DisplayDate()
@@ -372,25 +388,25 @@ namespace ePiggy.Forms.Finances.Budget
 
         private void ButtonNextYear_Click(object sender, EventArgs e)
         {
-            _handler.Time = TimeManager.MoveToNextYear(_handler.Time);
+            _handler.Time = TimeManager.MoveToNextYearLimited(_handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonPreviousYear_Click(object sender, EventArgs e)
         {
-            _handler.Time = TimeManager.MoveToPreviousYear(_handler.Time);
+            _handler.Time = TimeManager.MoveToPreviousYearLimited(_handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonNextMonth_Click(object sender, EventArgs e)
         {
-            _handler.Time = TimeManager.MoveToNextMonth(_handler.Time);
+            _handler.Time = TimeManager.MoveToNextMonthLimited(_handler.Time);
             UpdateDisplay();
         }
 
         private void ButtonPreviousMonth_Click(object sender, EventArgs e)
         {
-            _handler.Time = TimeManager.MoveToPreviousMonth(_handler.Time);
+            _handler.Time = TimeManager.MoveToPreviousMonthLimited(_handler.Time);
             UpdateDisplay();
         }
         #endregion
@@ -438,6 +454,5 @@ namespace ePiggy.Forms.Finances.Budget
         }
 
         #endregion
-
     }
 }

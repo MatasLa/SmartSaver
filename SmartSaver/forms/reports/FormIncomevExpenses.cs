@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using ePiggy.Utilities;
 
@@ -18,7 +21,6 @@ namespace ePiggy.Forms.Reports
 
         private void ShowCharts()
         {
-
             ShowIncomesExpensesPreviousMonthPieChart();
             ShowIncomesExpensesCurrentMonthPieChart();
             ShowIncomesExpensesTotalPieChart();
@@ -26,24 +28,46 @@ namespace ePiggy.Forms.Reports
 
         private void ShowIncomesExpensesTotalPieChart()
         {
-            var income = _handler.DataFilter.GetTotaledIncome();
-            var expenses = _handler.DataFilter.GetTotaledExpenses();
-            pictureBoxTotal.Image = GraphDrawer.DrawIncomesExpensesPieChart(income, expenses);
+            var income = _handler.DataTotalsCalculator.GetTotaledIncomeUntilEndOfThisMonth();
+            var expense = _handler.DataTotalsCalculator.GetTotaledExpensesUntilEndOfThisMonth();
+            ShowIncomesExpenses(income, expense, pictureBoxTotal);
         }
 
         private void ShowIncomesExpensesPreviousMonthPieChart()
         {
             var previousMonth = TimeManager.MoveToPreviousMonth(DateTime.Today);
-            var income = _handler.DataFilter.GetTotaledIncome(previousMonth);
-            var expenses = _handler.DataFilter.GetTotaledExpenses(previousMonth);
-            pictureBoxPrevious.Image = GraphDrawer.DrawIncomesExpensesPieChart(income, expenses);
+            labelPrevious.Text = previousMonth.ToString("MMMM");
+            var income = _handler.DataTotalsCalculator.GetTotaledIncome(previousMonth);
+            var expense = _handler.DataTotalsCalculator.GetTotaledExpenses(previousMonth);
+            ShowIncomesExpenses(income, expense, pictureBoxPrevious);
         }
 
         private void ShowIncomesExpensesCurrentMonthPieChart()
         {
-            var income = _handler.DataFilter.GetTotaledIncome(DateTime.Today);
-            var expenses = _handler.DataFilter.GetTotaledExpenses(DateTime.Today);
-            pictureBoxCurrent.Image = GraphDrawer.DrawIncomesExpensesPieChart(income, expenses);
+            labelCurrent.Text = DateTime.Today.ToString("MMMM");
+            var income = _handler.DataTotalsCalculator.GetTotaledIncome(DateTime.Today);
+            var expense = _handler.DataTotalsCalculator.GetTotaledExpenses(DateTime.Today);
+            ShowIncomesExpenses(income, expense, pictureBoxCurrent);
+        }
+
+        private static void ShowIncomesExpenses(decimal income, decimal expenses, PictureBox pictureBox)
+        {
+            var valuesList = new List<decimal>();
+            var namesList = new List<string>();
+
+            if (income > 0)
+            {
+                valuesList.Add(income);
+                namesList.Add("Income");
+            }
+            if (expenses > 0)
+            {
+                valuesList.Add(expenses);
+                namesList.Add("Expenses");
+            }
+
+            pictureBox.Image =
+                GraphDrawer.DrawMultipleVarPieChart(valuesList, namesList, GraphDrawer.ColorsList, GraphDrawer.DefaultSize);
         }
     }
 }

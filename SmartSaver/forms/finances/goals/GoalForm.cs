@@ -32,47 +32,32 @@ namespace ePiggy.Forms.Finances.Goals
             _handler = handler;
             Goal = goal ?? throw new Exception("Given null goal");
 
-
             Init();
         }
 
         private void Init()
         {
             _target = Goal.Price;
-            _saved = _handler.DataFilter.GetBalance();
-            _progress = CalculateProgress(_saved, _target);
+            _saved = _handler.DataTotalsCalculator.GetBalancesUntilToday();
+            _progress = DataCalculations.CalculateProgress(_saved, _target);
 
             labelTitle.Text = Goal.Title;
             labelProgress.Text =
                 NumberFormatter.FormatCurrency(_saved) + @" of " + NumberFormatter.FormatCurrency(_target);
-            DisplayProgressBar();
-        }
-
-
-        private void DisplayProgressBar()
-        {
             progressBar.Value = _progress;
         }
 
         #region Calculation of progress bar
 
-        private static int CalculateProgress(decimal saved, decimal target)
-        {
-            if (saved < 0)
-            {
-                return 0;
-            }
-            if (target <= 0)
-            {
-                return 100;
-            }
-            var progress = (int)(saved * 100 / target);
-            return progress > 100 ? 100 : progress;
-        }
-
         #endregion
 
         #region Click Handling
+
+        private void ButtonEdit_Click(object sender, EventArgs e)
+        {
+            _parentForm.EditGoalWithDialog(Goal);
+            _parentForm.UpdateDisplay();
+        }
 
         private void ButtonRemoveGoal_Click(object sender, EventArgs e)
         {
@@ -82,9 +67,10 @@ namespace ePiggy.Forms.Finances.Goals
 
         private void GoalForm_Click(object sender, EventArgs e)
         {
-            _parentForm.DisplayExpandedGoal(_goal);
+            _parentForm.DisplayExpandedGoal(Goal);
         }
 
         #endregion
+
     }
 }

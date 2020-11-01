@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ePiggy.DataBase;
-using ePiggy.DataBase.Models;
 using ePiggy.Utilities;
 
 namespace ePiggy.DataManagement
@@ -17,30 +16,30 @@ namespace ePiggy.DataManagement
 
         /*Methods that creates new instance of class and adds to List*/
         /*GOALS*/
-        public bool AddGoal(int userid, string title, decimal value, int placeInQueue)//manual
+
+        /*for all add methods db method should be moved and shouldreturn int id*/
+        public bool AddGoal(int userid, string title, decimal value)//manual
         {
-            if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
-            var db = new DatabaseContext();
-            var goal = new Goals {UserId = userid, Title = title, Price = value, PlaceInQueue = placeInQueue};
-            db.Add(goal);
-            db.SaveChanges();
-            var id = goal.Id;
-            var newGoal = new Goal(title, value, placeInQueue) {Id = id};
+            if (GoalsList.Count >= 10)//if 10 entries already in, does not allow to add
+            {
+                return false;
+            }
+            var id = DatabaseUpdater.AddGoal(userid, title, value);
+            var newGoal = new Goal(title, value) {Id = id};
             GoalsList.Add(newGoal);
             return true;
         }
 
-        public bool AddGoal(int userid, string title, int placeInQueue)//parsing from internet
+        public bool AddGoal(int userid, string title)//parsing from internet
         {
-			if (GoalsList.Count >= 10) return false;//if 10 entries already in, does not allow to add
-            var newGoal = new Goal(title, placeInQueue);
+            if (GoalsList.Count >= 10)//if 10 entries already in, does not allow to add
+            {
+                return false;
+            }
+            var newGoal = new Goal(title);
             var price = newGoal.Price;
             var parsedTitle = newGoal.Title;
-			var db = new DatabaseContext();
-            var goal = new Goals { UserId = userid, Title = parsedTitle, Price = price, PlaceInQueue = placeInQueue };
-            db.Add(goal);
-            db.SaveChanges();
-            var id = goal.Id;
+            var id = DatabaseUpdater.AddGoal(userid, parsedTitle, price);
             newGoal.Id = id;
             GoalsList.Add(newGoal);
             return true;
@@ -49,177 +48,78 @@ namespace ePiggy.DataManagement
 		/*INCOMES*/
         public void AddIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
-            var db = new DatabaseContext();
-            var income = new Incomes { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
-            db.Add(income);
-            db.SaveChanges();
-            var id = income.Id;
+            var id = DatabaseUpdater.AddIncome(userid, value, title, date, isMonthly, importance);
             var newIncome = new DataEntry(id, userid, value, title, date, isMonthly, importance);
             Income.Add(newIncome);
         }
 
-    /*    public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
-        {
-            var dateUse = date;
-            var db = new DatabaseContext();
-            var rotations = isMonthly ? 12 : 1;
-            for (var i = 0; i < rotations; i++)
-            {
-                var income = new Incomes { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
-                db.Add(income);
-                db.SaveChanges();
-                var id = income.Id;
-                var newIncome = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
-                Income.Add(newIncome);
-                dateUse = dateUse.AddMonths(1);
-            }
-        }*/
 
-		/*EXPENSES*/
+        /*EXPENSES*/
         public void AddExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
         {
-            var db = new DatabaseContext();
-            var expense = new Expenses { UserId = userid, Amount = value, Date = date, IsMonthly = isMonthly, Title = title, Importance = importance };
-            db.Add(expense);
-            db.SaveChanges();
-            var id = expense.Id;
+            var id = DatabaseUpdater.AddExpense(userid, value, title, date, isMonthly, importance);
             var newExpense = new DataEntry(id, userid, value, title, date, isMonthly, importance);
             Expenses.Add(newExpense);
         }
 
-       /* public void AddMonthlyExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
-        {
-            var db = new DatabaseContext();
-            var dateUse = date;
-            var rotations = isMonthly ? 12 : 1;
-            for (var i = 0; i < rotations; i++)
-            {
-                var expense = new Expenses { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
-                db.Add(expense);
-                db.SaveChanges();
-                var id = expense.Id;
-                var newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
-                Expenses.Add(newExpense);
-                dateUse = dateUse.AddMonths(1);
-            }
-        }*/
-
 		/*Methods for removal*/
+
+        /*Methods that should be left here - normal, methods that are old and left only to copy code of db - commented*/
 
         public void RemoveGoal(int id)
         {
-            var db = new DatabaseContext();
-            try
-            {
-                var index = db.Goals.FirstOrDefault(x => x.Id == id);
-                db.Goals.Remove(index ?? throw new InvalidOperationException());
-                db.SaveChanges();
-			}
-            catch (InvalidOperationException ex)
-            {
-                ExceptionHandler.Log(ex.ToString());
-            }
             var goal = GoalsList.FirstOrDefault(x => x.Id == id);
+            if (goal == null) return;
             GoalsList.Remove(goal);
+            DatabaseUpdater.RemoveGoal(id);
         }
 
-       
-
-		public void RemoveIncome(int id)
+        public void RemoveIncome(int id)
         {
-            var db = new DatabaseContext();
-            try
-            {
-                var index = db.Incomes.FirstOrDefault(x => x.Id == id);
-                db.Incomes.Remove(index ?? throw new InvalidOperationException());
-                db.SaveChanges();
-            }
-            catch (InvalidOperationException ex)
-            {
-				ExceptionHandler.Log(ex.ToString());
-            }
-            var dataEntry = Income.FirstOrDefault(x => x.Id == id);
-            Income.Remove(dataEntry);
-		}
+            var income = Income.FirstOrDefault(x => x.Id == id);
+            if (income == null) return;
+            Income.Remove(income);
+            DatabaseUpdater.RemoveIncome(id);
+        }
 
         public void RemoveIncome(DataEntry dataEntry)
         {
-            var db = new DatabaseContext();
-            try
-            {
-                var index = db.Incomes.FirstOrDefault(x => x.Id == dataEntry.Id);
-                db.Incomes.Remove(index ?? throw new InvalidOperationException());
-                db.SaveChanges();
-            }
-            catch(InvalidOperationException ex)
-            {
-				ExceptionHandler.Log(ex.ToString());
-            }
-            
-
             Income.Remove(dataEntry);
+            DatabaseUpdater.RemoveIncome(dataEntry);
         }
-
+        
         public void RemoveExpense(DataEntry dataEntry)
         {
-            var db = new DatabaseContext();
-            try
-            {
-                var index = db.Expenses.FirstOrDefault(x => x.Id == dataEntry.Id);
-                db.Expenses.Remove(index ?? throw new InvalidOperationException());
-                db.SaveChanges();
-            }
-            catch (InvalidOperationException ex)
-            {
-                ExceptionHandler.Log(ex.ToString());
-            }
-            
-
             Expenses.Remove(dataEntry);
+            DatabaseUpdater.RemoveExpense(dataEntry);
         }
-
+        
         public void RemoveExpense(int id)
         {
-            var db = new DatabaseContext();
-            try
-            {
-                var index = db.Expenses.FirstOrDefault(x => x.Id == id);
-                db.Expenses.Remove(index ?? throw new InvalidOperationException());
-                db.SaveChanges();
-            }
-            catch (InvalidOperationException ex)
-            {
-                ExceptionHandler.Log(ex.ToString());
-            }
-            
-
             var dataEntry = Expenses.FirstOrDefault(x => x.Id == id);
+            if (dataEntry == null) return;
             Expenses.Remove(dataEntry);
+            DatabaseUpdater.RemoveExpense(id);
         }
-
+        
 		public void RemoveIncomes(List<DataEntry> entries)
         {
-            foreach (var entry in entries)
-            {
-                RemoveIncome(entry.Id);
-            }
+            DatabaseUpdater.RemoveIncomes(entries);
+            Income.RemoveAll(l => entries.Contains(l));
         }
 
         public void RemoveIncomes(List<int> idList)
 		{
-			foreach (var id in idList)
+            foreach (var id in idList)
             {
                 RemoveIncome(id);
             }
 		}
 
-
         public void RemoveExpenses(List<DataEntry> entries)
         {
-            foreach (var entry in entries)
-            {
-                RemoveExpense(entry.Id);
-            }
+            DatabaseUpdater.RemoveExpenses(entries);
+            Expenses.RemoveAll(l => entries.Contains(l));
         }
 
         public void RemoveExpenses(List<int> idList)
@@ -230,244 +130,172 @@ namespace ePiggy.DataManagement
             }
         }
 
-		/*Methods that allows to edit different parts of already existing entries*/
+        /*Methods that allows to edit different parts of already existing entries*/
         public bool EditGoal(int id, string title, decimal value)
         {
-            var db = new DatabaseContext();
-            var temp = db.Goals.FirstOrDefault(x => x.Id == id);
-            if (temp != null)
-            {
-                temp.Title = title;
-                temp.Price = value;
-                db.SaveChanges();
-                return true;
-            }
-            else
+            var temp = GoalsList.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
             {
                 return false;
             }
-		}
+            temp.Title = title;
+            temp.Price = value;
+            return DatabaseUpdater.EditGoal(id, title, value);
 
-        public bool EditGoalPlaceInQueue(int id, int placeInQueue)
+        }
+
+        /* public bool EditGoalPlaceInQueue(int id, int placeInQueue)
+         {
+             var temp = GoalsList.FirstOrDefault(x => x.Id == id);
+             if (temp == null)
+             {
+                 return false;
+             }
+             temp.PlaceInQueue = placeInQueue;
+             return DatabaseUpdate.EditGoalPlaceInQueue(id, placeInQueue);
+         }*/
+
+
+        public bool EditIncomeItem(int id, decimal value)
         {
-            var db = new DatabaseContext();
-            var temp = db.Goals.FirstOrDefault(x => x.Id == id);
-            if (temp != null)
-            {
-                temp.PlaceInQueue = placeInQueue;
-                db.SaveChanges();
-                return true;
-            }
-            else
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
             {
                 return false;
             }
-		}
-		public bool EditIncomeItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
-		{
+            temp.Amount = value;
+            return DatabaseUpdater.EditIncomeItem(id, value);
+        }
 
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Amount = value;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+        public bool EditIncomeItem(int id, string value)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            return DatabaseUpdater.EditIncomeItem(id, value);
+        }
 
-		public bool EditIncomeItem(int id, string value)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+        public bool EditIncomeItem(int id, DateTime date)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Date = date;
+            return DatabaseUpdater.EditIncomeItem(id, date);
+        }
 
-		public bool EditIncomeItem(int id, DateTime date)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Date = date;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
+        public bool EditIncomeItem(int id, bool isMonthly)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.IsMonthly = isMonthly;
+            return DatabaseUpdater.EditIncomeItem(id, isMonthly);
+        }
+        
+        public bool EditIncomeItem(int id, int importance)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Importance = importance;
+            return DatabaseUpdater.EditIncomeItem(id, importance);
+        }
+        
+        public bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
+        {
+            var temp = Income.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            temp.Amount = amount;
+            temp.Date = date;
+            temp.IsMonthly = isMonthly;
+            temp.Importance = importance;
+            return DatabaseUpdater.EditIncomeItem(id, value, amount, date, isMonthly, importance);
+        }
+        
+        public bool EditExpensesItem(int id, decimal value)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Amount = value;
+            return DatabaseUpdater.EditExpensesItem(id, value);
+        }
+        
+        public bool EditExpensesItem(int id, string value)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            return DatabaseUpdater.EditExpensesItem(id, value);
+        }
+        
+        public bool EditExpensesItem(int id, DateTime date)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Date = date;
+            return DatabaseUpdater.EditExpensesItem(id, date);
+        }
+        
+        public bool EditExpensesItem(int id, bool isMonthly)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.IsMonthly = isMonthly;
+            return DatabaseUpdater.EditExpensesItem(id, isMonthly);
+        }
+        
+        public bool EditExpensesItem(int id, int importance)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Importance = importance;
+            return DatabaseUpdater.EditExpensesItem(id, importance);
+        }
+        
+        public bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
+        {
+            var temp = Expenses.FirstOrDefault(x => x.Id == id);
+            if (temp == null)
+            {
+                return false;
+            }
+            temp.Title = value;
+            temp.Amount = amount;
+            temp.Date = date;
+            temp.IsMonthly = isMonthly;
+            temp.Importance = importance;
+            return DatabaseUpdater.EditExpensesItem(id, value, amount, date, isMonthly, importance);
+        }
 
-		public bool EditIncomeItem(int id, bool isMonthly)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-            var tempLocal = Income.FirstOrDefault(x => x.Id == id);
-            if (temp != null && tempLocal != null)
-			{
-				temp.IsMonthly = isMonthly;
-                tempLocal.IsMonthly = isMonthly;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public bool EditIncomeItem(int id, int importance)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Importance = importance;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public bool EditIncomeItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Incomes.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				temp.Amount = amount;
-				temp.Date = date;
-				temp.IsMonthly = isMonthly;
-				temp.Importance = importance;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public bool EditExpensesItem(int id, decimal value)/*Returns true if success(item found), and false if failure*/
-		{
-			var db = new DatabaseContext();
-			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Amount = value;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public bool EditExpensesItem(int id, string value)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-
-		}
-
-		public bool EditExpensesItem(int id, DateTime date)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Date = date;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public bool EditExpensesItem(int id, bool isMonthly)
-		{
-            var db = new DatabaseContext();
-			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-            var tempLocal = Expenses.FirstOrDefault(x => x.Id == id);
-            if (temp != null && tempLocal != null)
-			{
-				temp.IsMonthly = isMonthly;
-                tempLocal.IsMonthly = isMonthly;
-                db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public bool EditExpensesItem(int id, int importance)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Importance = importance;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-
-		public bool EditExpensesItem(int id, string value, decimal amount, DateTime date, bool isMonthly, int importance)
-		{
-			var db = new DatabaseContext();
-			var temp = db.Expenses.FirstOrDefault(x => x.Id == id);
-			if (temp != null)
-			{
-				temp.Title = value;
-				temp.Amount = amount;
-				temp.Date = date;
-				temp.IsMonthly = isMonthly;
-				temp.Importance = importance;
-				db.SaveChanges();
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
         public void ReadIncomeFromDb()
         {
             using var context = new DatabaseContext();
@@ -478,6 +306,7 @@ namespace ePiggy.DataManagement
                 Income.Add(newIncome);
             }
         }
+
         public void ReadExpensesFromDb()
         {
             using var context = new DatabaseContext();
@@ -495,10 +324,11 @@ namespace ePiggy.DataManagement
             var goals = context.Goals; // define query
             foreach (var goal in goals.Where(x => x.UserId == Handler.UserId)) // query executed and data obtained from database
             {
-                var newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price, goal.PlaceInQueue);
+                var newGoal = new Goal(goal.Id, goal.UserId, goal.Title, goal.Price);
                 GoalsList.Add(newGoal);
             }
         }
+
 		public bool GetDataEntryById(int id, out DataEntry dataEntry, EntryType entryType)
         {
             switch (entryType)
@@ -526,3 +356,43 @@ namespace ePiggy.DataManagement
 
 	}
 }
+
+
+
+/*Legacy methods, just in case*/
+/*
+ public void AddMonthlyIncome(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        {
+            var dateUse = date;
+            var db = new DatabaseContext();
+            var rotations = isMonthly ? 12 : 1;
+            for (var i = 0; i < rotations; i++)
+            {
+                var income = new Incomes { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
+                db.Add(income);
+                db.SaveChanges();
+                var id = income.Id;
+                var newIncome = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
+                Income.Add(newIncome);
+                dateUse = dateUse.AddMonths(1);
+            }
+        }
+
+ public void AddMonthlyExpense(int userid, decimal value, string title, DateTime date, bool isMonthly, int importance)
+        {
+            var db = new DatabaseContext();
+            var dateUse = date;
+            var rotations = isMonthly ? 12 : 1;
+            for (var i = 0; i < rotations; i++)
+            {
+                var expense = new Expenses { UserId = userid, Amount = value, Date = dateUse, IsMonthly = isMonthly, Title = title, Importance = importance };
+                db.Add(expense);
+                db.SaveChanges();
+                var id = expense.Id;
+                var newExpense = new DataEntry(id, userid, value, title, dateUse, isMonthly, importance);
+                Expenses.Add(newExpense);
+                dateUse = dateUse.AddMonths(1);
+            }
+        }
+
+*/

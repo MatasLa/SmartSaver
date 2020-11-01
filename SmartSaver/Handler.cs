@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using ePiggy.DataManagement;
+using ePiggy.Utilities;
 
 namespace ePiggy
 {
     public class Handler
     {
+
+        public static List<Importance> ImportanceList = Enum.GetValues(typeof(Importance)).Cast<Importance>().ToList();
+
         public DateTime Time { get; set; }
 
         public Data Data { get; }
@@ -13,6 +19,8 @@ namespace ePiggy
         public DataTableConverter DataTableConverter { get; }
 
         public DataFilter DataFilter { get; }
+
+        public DataTotalsCalculator DataTotalsCalculator { get; }
 
         public DataJson DataJson{ get; }
 
@@ -30,7 +38,8 @@ namespace ePiggy
             Data = new Data();
             DataTableConverter = new DataTableConverter(Data);
             DataFilter = new DataFilter(Data);
-            DataCalculations = new DataCalculations(Data);
+            DataTotalsCalculator = new DataTotalsCalculator(Data, DataFilter);
+            DataCalculations = new DataCalculations(Data, DataFilter, DataTotalsCalculator);
             DataJson = new DataJson(Data);
             MonthlyUpdater = new MonthlyUpdater(DataFilter, Data);
 

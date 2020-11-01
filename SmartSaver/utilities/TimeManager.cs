@@ -61,7 +61,6 @@ namespace ePiggy.Utilities
 
         }
 
-        #region Limited Moving
 
         public static DateTime ChangeYearLimited(DateTime dateTime, int newYear)
         {
@@ -100,6 +99,5 @@ namespace ePiggy.Utilities
         {
             return ChangeYearLimited(dateTime, dateTime.Year - 1);
         }
-        #endregion
     }
 }
