@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Windows.Forms;
 using ePiggy.DataManagement;
 using ePiggy.Utilities;
@@ -17,6 +18,7 @@ namespace ePiggy.Forms.Finances.Goals
         private decimal _saved;
         private int _progress;
 
+        private const string Saved = "Already saved up for this, congratulations!";
         private const string CanSave = "Can Save up for this goal";
         private const string CannotSave = "Can't save up for this goal";
 
@@ -60,21 +62,30 @@ namespace ePiggy.Forms.Finances.Goals
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private void DisplayTable(SavingType savingType)
         {
-            var entrySuggestions = new List<EntrySuggestion>();
-            var entries = _handler.DataFilter.GetExpensesUntilEndOfThisMonth();
-            labelCanSave.Text = _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, savingType, entrySuggestions) ? CanSave : CannotSave;
+            if (_progress >= 100)
+            {
+                labelCanSave.Text = Saved;
+                dataGridView.DataSource = null;
+            }
+            else
+            {
+                var entrySuggestions = new List<EntrySuggestion>();
+                var entries = _handler.DataFilter.GetExpensesUntilEndOfThisMonth();
+                labelCanSave.Text = _handler.DataCalculations.GetSuggestedExpensesOffers(entries, _goal, savingType, entrySuggestions) ? CanSave : CannotSave;
 
-            dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(entrySuggestions);
+                dataGridView.DataSource = _handler.DataTableConverter.GenerateSuggestionTable(entrySuggestions);
 
-            dataGridView.Columns["ID"].Visible = false;
-            dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
-            dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
+                dataGridView.Columns["ID"].Visible = false;
+                dataGridView.Columns["Amount"].DefaultCellStyle.Format = "c";
+                dataGridView.Columns["Date"].DefaultCellStyle.Format = "d";
+            }
         }
 
         private void SetComboBoxSelections()
         {
-            object[] names = Enum.GetNames(typeof(SavingType));
-            comboBoxSavingType.Items.AddRange(names);
+            var names = Enum.GetNames(typeof(SavingType));
+            var objects = names.Cast<object>().ToArray();
+            comboBoxSavingType.Items.AddRange(objects);
             comboBoxSavingType.SelectedIndex = 1;
         }
 
